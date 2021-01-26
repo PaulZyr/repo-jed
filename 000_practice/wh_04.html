@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework 4. Functions.</title>
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+</head>
+
+<body>
+<div class="heading">
+  <h1>Homework 4. Functions.</h1>
+  <!-- <p>Вам необходимо самостоятельно решить, для какого задания какой цикл лучше использовать: <kbd>WHILE</kbd> , <kbd>DO ... WHILE</kbd> или <kbd>FOR</kbd>.</p> -->
+  <div class="out">All results will be here after click match button.</div>
+</div>
+  <ol class="task-list">
+    <!-- Task 1 -->
+    <li>
+      <p>Написать функцию, которая принимает <u>2 числа</u> и возвращает <kbd>-1</kbd> - <kbd>если первое меньше, чем второе</kbd>; <kbd>1</kbd> - <kbd>если первое больше, чем второе</kbd>; и <kbd>0</kbd> – <kbd>если числа равны</kbd>.</p>
+      <button onclick="f1(7, 14)">button f1(7, 14)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1(a1, a2) {
+          if ( a1 == a2 ) return out.innerHTML = "Task #1 result is -<kbd> 0</kbd>"
+          if ( a1 > a2 ) return out.innerHTML =  "Task #1 result is -<kbd> 1</kbd>"
+          if ( a1 < a2 ) return out.innerHTML =  "Task #1 result is - <kbd>-1</kbd>"
+          // out.textContent =  "Task #1 result is - " + res
+        }
+        // f1(7, 7)
+        // f1(7, 14)
+        // f1(7, 4)
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Написать функцию, которая вычисляет <kbd>факториал числа</kbd> переданного ей.</p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          function factorial(n){
+            if (n==1){
+              return 1
+            } else {
+              return n*factorial(n-1)
+            }
+          }
+          var userNum = +prompt('Enter number for get his factorial.', 5) || 1
+          out.innerHTML =  `Task #2 result is - <kbd>${factorial(userNum)}</kbd>`
+        }
+        // f2()
+      </script>
+    </li>
+
+    <!-- Task 3 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает три отдельные цифры</u> и <kbd>превращает их в одно число</kbd>. <br>
+        Например: <u>цифры 1, 4, 9</u> превратятся в число <kbd>149</kbd>.</p>
+      <button onclick="f3(1,4,9)">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let n1 = +prompt('Enter any number.','1'),
+              n2 = +prompt('Enter any number.','4'),
+              n3 = +prompt('Enter any number.','9')
+
+          function glue(a1, a2, a3) {
+            let str = ''
+            for (let i = 0; i < arguments.length; i++) {
+              str += arguments[i]
+            }
+            out.innerHTML =  `Task #3 result is - <kbd>${str}</kbd>`
+          }
+          glue(n1, n2, n3)
+        }
+        // f3()
+      </script>
+    </li>
+
+    <!-- Task 4 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает длину и ширину</u> и <kbd>вычисляет площадь прямоугольника</kbd>. <br>
+        Если в функцию передали <u>1 параметр</u>, то она вычисляет <kbd>площадь квадрата</kbd></p>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4() {
+          let x = +prompt('Enter width of figure.','10'),
+              y = +prompt('Enter height of figure.','4')
+              console.log(x, y);
+
+          function square(a1, a2) {
+            console.log(a1, a2);
+            console.log(arguments.length);
+            if (arguments.length === 1) return out.innerHTML =  `Task #4 result is - <kbd>${a1*a1}</kbd>`
+            return out.innerHTML =  `Task #4 result is - <kbd>${a1*a2}</kbd>`
+          }
+          if (x === 0) return square(y)
+          if (y === 0) return square(x)
+          square(x, y)
+        }
+        // f4()
+      </script>
+    </li>
+    <!-- Task 5 -->
+    <li>
+      <p>Написать функцию, которая <u>проверяет</u>, является ли <kbd>совершенным число</kbd> переданное ей. <br>
+        <i>Совершенное число</i> – это число, равное сумме всех своих собственных делителей.</p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+    /*
+    Алгоритм
+    - аккумулируем все натуральные делители в переменной result
+    - сравнивам полученный результат с самим числом
+    - выводим ответ: если результат равен числу, значит это число совершенное
+    */
+        function f5() {
+          let num = +prompt('Enter num for check.', '6')
+
+          function isPerfect(num) {
+            let result = 0
+
+            for (let i = num/2; i >= 1; i--) {
+              if (num % i === 0) {
+                result += i
+                console.log(result)
+              }
+            }
+            // for (let i = 1; i <= num / 2; i++) {
+            //   if (num % i === 0) result += i
+            //   console.log(result)
+            // }
+
+            if (result === num) {
+              console.log('is Perfect')
+              return out.innerHTML =  `Task #5 result -  <kbd>${num}</kbd>  IS Perfect`
+            }
+            console.log('Not is Perfect')
+            return out.innerHTML =  `Task #5 result -  <kbd>${num}</kbd>  NOT is Perfect`
+          }
+
+          isPerfect(num)
+          // isPerfect(8128)
+          // isPerfect(7)
+        }
+        // f5()
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает минимальное и максимальное значения для диапазона</u>, и выводит только те числа из диапазона, которые являются <kbd>совершенными</kbd>. <br>
+        <i>Используйте написанную ранее функцию, чтобы узнавать, совершенное число или нет</i></p>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        // document.addEventListener("DOMContentLoaded", f6);
+
+        function f6() {
+          let min = +prompt('Enter left num.', '5'),
+              max = +prompt('Enter right num.', '10000'),
+              res = ""
+
+          //  var. 1 simple
+          // function isPerfectDiapason(min, max) {
+          //   let sum
+          //   for (min; min <= max; min++) {
+          //     sum = 0
+          //     // use decrement way
+          //     for (let divisor = min/2; divisor >= 1; divisor--){
+          //       if (min % divisor == 0) sum += divisor
+          //     }
+          //     // use increment way
+          //     // for (let divisor = 1; divisor < min; divisor++){
+          //     //   if (min % divisor == 0) sum += divisor
+          //     // }
+          //     if (sum == min) {
+          //       console.log( min )
+          //       if(res === ''){
+          //         res +=  min
+          //         continue
+          //       }
+          //       res += ", " + min
+          //     }
+          //     out.innerHTML =  `Task #6 result - <kbd>${res}</kbd>`
+          //   }
+          // }
+
+          // var. 2 using func isPerfect(n) as callback
+          function isPerfectDiapason(min, max) {
+            let sum
+            for (max; max >= min; max--) {
+              sum = isPerfect(max)
+              if (sum == max) {
+                console.log( max )
+                if(res === ''){
+                  res +=  max
+                  continue
+                }
+                res += ", " + max
+              }
+            }
+            out.innerHTML =  `Task #6 result - <kbd>${res}</kbd>`
+          }
+
+          function isPerfect(num) {
+            let result = 0
+            for (let i = num/2; i >= 1; i--) {
+              if (num % i === 0) result += i
+            }
+            if (result === num) {return num}
+            return
+          }
+
+          isPerfectDiapason(min, max)
+        }
+      </script>
+    </li>
+
+    <!-- Task 7 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает время (часы, минуты, секунды)</u> и выводит его на экран в формате <kbd>«чч:мм:сс»</kbd>. <br>
+        Если при вызове функции минуты и/или секунды не были переданы, то выводить их как <kbd>00</kbd>.</p>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7() {
+          let t = new Date(),
+              h = +prompt('Enter hours.', '5') || '0' /* || t.getHours()*/ ,
+              m = +prompt('Enter minutes.', '10') || '0' /* || t.getMinutes() */ ,
+              s = +prompt('Enter seconds.', '25') || '0' /* || t.getSeconds() */ ,
+              temp = ""
+
+          temp += h
+          if (temp < 10){ temp = "0" + temp;}
+          if (h === 24){ temp = "0";}
+          temp += ((m < 10) ? ":0" : ":") + m
+          temp += ((s < 10) ? ":0" : ":") + s
+          out.innerHTML = `Task #7. Your time is - <kbd>&laquo;${temp}&raquo;</kbd>`
+        }
+        // f7()
+      </script>
+    </li>
+
+    <!-- Task 8 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает часы, минуты и секунды</u> и возвращает <kbd>время в секундах</kbd>.</p>
+        <button onclick="f8()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+          'use strict'
+
+          function f8() {
+            let t = new Date(),
+                h = t.getHours() || 0 ,
+                m = t.getMinutes() || 0 ,
+                s = t.getSeconds() || 0
+
+            out.innerHTML = `Task #8. Your time in seconds is - <kbd>${h*3600 + m*60 + s}</kbd>`
+          }
+          // f8()
+        </script></>
+    </li>
+
+    <!-- Task 9 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает количество секунд</u>, <kbd>переводит их в часы, минуты и секунды</kbd> и возвращает <kbd>в виде строки «чч:мм:сс»</kbd></p>
+      <button onclick="f9()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        function f9() {
+          let timeInSec = +prompt('Enter seconds for convert to time in "hour: min: sec".', '60564'), //  57600210017
+              fullDays, getH, getM, getS
+
+          fullDays = Math.floor(timeInSec / 86400)
+          timeInSec %= 86400
+          getH = Math.floor(timeInSec / 3600),
+          getM = Math.floor((timeInSec - getH * 3600) / 60),
+          getS = Math.floor(timeInSec % 60)
+
+          if(getH < 10) getH = '0' + getH
+          if(getM < 10) getM = '0' + getM
+          if(getS < 10) getS = '0' + getS
+
+          out.innerHTML = `Task #9. Your seconds in time is - <kbd>${fullDays}</kbd> full days and <kbd>&laquo;${getH}:${getM}:${getS}&raquo;</kbd>`
+        }
+        // f9()
+      </script>
+    </li>
+
+    <!-- Task 10 -->
+    <li>
+      <p>Написать функцию, которая <u>считает разницу между датами</u>. <br>
+        Функция <u>принимает 6 параметров</u>, которые описывают 2 даты, и возвращает <kbd>результат в виде строки «чч:мм:сс»</kbd>. <br>
+        <i>При выполнении задания используйте функции из предыдущих 2-х заданий: сначала обе даты переведите в секунды, узнайте разницу в секундах, а потом разницу переведите обратно в «чч:мм:сс».</i> <br>
+        <a href="https://flaviocopes.com/javascript-dates/">More about Data object</a>
+      </p>
+      <button onclick="f10()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10() {
+          let t = new Date(),
+              d1 =  prompt('Enter first  number for days', '0'),
+              m1 =  prompt('Enter first  number for month', '0'),
+              y1 =  prompt('Enter first  number for full year', '2019'),
+              d2 = t.getDate() || +prompt('Enter second number for hours', ''),
+              m2 = t.getMonth() || +prompt('Enter second number for minutes', ''),
+              y2 = t.getFullYear() || +prompt('Enter second number for seconds', ''),
+              dateInSec1, dateInSec2
+
+          console.log(d1, m1, y1, ':', d2, m2, y2)
+
+          function dateToSec(day, month, fullYear) {
+            return new Date(fullYear, month, day)
+          }
+          dateInSec1 = dateToSec(d1, m1, y1)
+          console.log('dateInSec1', dateInSec1)
+          dateInSec2 = dateToSec(d2, m2, y2)  // current date from new Date()
+          console.log("dateInSec2",dateInSec2)
+
+          function secToDate(date1, date2){
+            let diff = (date2 - date1)/1000,
+                fullDays,
+                getH,
+                getM,
+                getS
+
+            console.log('secToDate')
+            if(date1 > date2) return out.innerText = 'date1 > date2'
+            fullDays = Math.floor(diff / 86400)
+            getH = Math.floor(diff / 3600),
+            diff %= 86400
+            getM = Math.floor((diff - Math.floor(diff / 3600) * 3600) / 60),
+            getS = Math.floor(diff % 60)
+
+            if(getH < 10) getH = '0' + getH
+            if(getM < 10) getM = '0' + getM
+            if(getS < 10) getS = '0' + getS
+            console.log('secToDate 2')
+            return  out.innerHTML = `Task #10. You difference in time is - <kbd>&laquo;${getH}:${getM}:${getS}&raquo;</kbd> It's <kbd>${fullDays}</kbd> full days.`
+          }
+          secToDate(dateInSec1, dateInSec2)
+
+          // variant with time(hh : mm : ss) only
+          // let t = new Date(),
+          //     h1 = +prompt('Enter first  number for hours', '1'),
+          //     m1 = +prompt('Enter first  number for minutes', '10'),
+          //     s1 = +prompt('Enter first  number for seconds', '15'),
+          //     h2 = t.getHours() || +prompt('Enter second number for hours', ''),
+          //     m2 = t.getMinutes() || +prompt('Enter second number for minutes', ''),
+          //     s2 = t.getSeconds() || +prompt('Enter second number for seconds', ''),
+          //     dateInSec1, dateInSec2
+          //
+          // console.log(h1, m1, s1, ':', h2, m2, s2)
+          //
+          // function dateToSec(h, m, s) {
+          //   return h*3600 + m*60 + s
+          // }1
+          // dateInSec1 = dateToSec(h1, m1, s1)
+          // dateInSec2 = dateToSec(h2, m2, s2)  // current date from new Date()
+          // console.log(dateInSec1, dateInSec2)
+          //
+          // function secToDate(date1, date2){
+          //   let timeInSec = date2 - date1,
+          //       fullDays,
+          //       getH,
+          //       getM,
+          //       getS
+          //
+          //   console.log('secToDate')
+          //   if(date1 > date2) return out.innerText = 'date1 > date2'
+          //   fullDays = Math.floor(timeInSec / 86400)
+          //   timeInSec %= 86400
+          //   getH = Math.floor(timeInSec / 3600),
+          //   getM = Math.floor((timeInSec - getH * 3600) / 60),
+          //   getS = Math.floor(timeInSec % 60)
+          //
+          //   if(getH < 10) getH = '0' + getH
+          //   if(getM < 10) getM = '0' + getM
+          //   if(getS < 10) getS = '0' + getS
+          //   console.log('secToDate 2')
+          //   return  out.innerHTML = `Task #10. You seconds in time is - <kbd>${fullDays}</kbd> full days and <kbd>&laquo;${getH}:${getM}:${getS}&raquo;</kbd>`
+          // }
+          // secToDate(dateInSec1, dateInSec2)
+        }
+        // f10()
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

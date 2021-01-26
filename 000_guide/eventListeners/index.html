@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Event Listeners</title>
+  <style media="screen">
+    div {
+      background-color: coral;
+      border: 1px solid;
+      padding: 50px;
+    }
+    body {    background-color: wheat; }
+  </style>
+</head>
+<body>
+  <h1>Event Listeners</h1>
+  <div id="myDiv">
+    <p id="myP">How much wood would a woodchuck chuck if a wood chuck could chuck wood?</p>
+  </div><br>
+
+  <div id="myDiv2">
+    <p id="myP2">A woodchuck would chuck as much wood as a woodchuck could chuck if a woodchuck could chuck wood.</p>
+  </div>
+
+  <script>
+    // 'use strict'
+    /* Event Listeners */
+
+    //Syntax: element.addEventListener(event, function, useCapture);
+
+    var myP    = document.getElementById("myP");
+    var myDiv  = document.getElementById("myDiv");
+    var myP2   = document.getElementById("myP2");
+    var myDiv2 = document.getElementById("myDiv2");
+
+    // multi event
+    myP.addEventListener("click", function() {myDiv.style.background = "lightblue"});
+
+    // one event only
+    // myP.onclick = function(){ myDiv.style.background = "lightblue" };
+
+    myP.addEventListener("click", changeText, false);
+
+    // only change all text - clear old % insert new
+    // function changeText() {
+    //   myP2.textContent = "According to a Cornell publication, the answer is ~700 pounds."
+    // };
+
+    // not clear old text & add new text
+    function changeText() {
+      myP2.textContent = myP2.textContent += `According to a Cornell publication, the answer is ~700 pounds.`
+      // event.stopPropagation();
+    };
+
+    // ########################################
+    // ## Is this code will be work? An how? ##
+    // ########################################
+    // function changeText() {
+    //   myP2.innerHTML = myP2.innerHTML += "According to a Cornell publication, the answer is ~700 pounds."
+    //   console.log("ready");
+    // };
+
+
+    // myDiv.addEventListener("click", changeText2, false);
+
+    // myDiv.addEventListener("mouseover", function() {myDiv2.style.background = "darkkhaki"});
+
+
+    // function changeText2() {myP2.textContent = myP2.textContent += "THE REAL ANSWER."};
+
+    // myP.removeEventListener("click", changeText, false);
+
+  </script>
+</body>
+</html>

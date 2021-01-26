@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Change box BG - style</title>
+  <style>
+    .box{display: inline-block;width: 100px;height: 100px;border: 2px solid #000;}
+    .red{background: #f00;}
+    .orange{background: orange;}
+    .yellow{background: yellow;}
+    .green{background: green;}
+    .l-blue{background: lightblue;}
+    .blue{background: blue;}
+    .violet{background: violet;}
+  </style>
+</head>
+<body>
+  <h1>Change BG on click using <mark>&nbsp;<small><code>.style = ''</code></small></mark></h1>
+  <div class="box " style='background-color:red;'></div>
+  <div class="box " style='background-color:orange;'></div>
+  <div class="box " style='background-color:yellow;'></div>
+  <div class="box " style='background-color:green;'></div>
+  <div class="box " style='background-color:lightblue;'></div>
+  <div class="box " style='background-color:blue;'></div>
+  <div class="box " style='background-color:violet;'></div>
+
+<!-- script -->
+<script>
+  function changeBG(){
+    // step 1 - get style.background from target & nextSubling elements to variables
+    var clr1 = this.style.backgroundColor;
+    var clr2 = this.nextElementSibling.style.backgroundColor;
+    // step 2 - change style property on both of elmnts
+    this.style.backgroundColor = clr2;
+    this.nextElementSibling.style.backgroundColor = clr1;
+  }
+  // Get elements and add listener
+  var  collection = document.getElementsByClassName('box');
+  for(var  i = 0; i < collection.length; i++ ){
+      collection[i].addEventListener('click', changeBG, false);
+  }
+</script>
+
+</body>
+</html>

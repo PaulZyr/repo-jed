@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 4. Functions.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Practice 4. Functions.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <ol class="task-list">
+  <!-- Task 1 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает 2 числа</u> и возвращает <kbd>меньшее</kbd> из них.</p>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let num1 = +prompt('Input number.', '7'),
+              num2 = +prompt('Input another number.', '17')
+          num1 < num2 ? out.innerHTML = num1 : out.innerHTML = num2
+        }
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Написать функцию, которая возводит <u>переданное число</u> <kbd>в указанную степень</kbd>.</p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          let num = +prompt('Input number', '7'),
+              pow = +prompt('Input pow', '3'),
+              res = 1
+
+          while (pow > 0) {
+            res *= num
+            pow--
+          }
+          out.innerHTML = res
+        }
+      </script>
+    </li>
+    <!-- Task 3 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает 2 числа и знак (+ - * /)</u>, считает и возвращает результат.</p>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let num1 = +prompt('Input number.', '7'),
+              num2 = +prompt('Input another number.', '2'),
+              symb = prompt('Input any one symbol - [ +, -, *, / ].', '+'),
+              res = 0
+
+          // res = eval(num1 + symb + num2)
+          // or use switch // if
+          switch (symb) {
+            case '+':
+              res = num1 + num2
+              break;
+            case '-':
+              res = num1 - num2
+              break;
+            case '*':
+              res = num1 * num2
+              break;
+            case '/':
+              res = num1 / num2
+              break;
+            default:
+              res = 'Wrong operator.'
+          }
+          out.textContent = 'Our result is - ' + res
+        }
+      </script>
+    </li>
+    <!-- Task 4 -->
+    <li>
+      <p>Написать функцию, которая проверяет, <kbd>является ли число простым</kbd>.<br>Простое число <u>делится без остатка</u> только <kbd>на себя</kbd> и <kbd>на единицу (1)</kbd>.</p>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4() {
+          let num = +prompt('Enter number for check prime or not".', '167')
+          if (num < 1) {return NaN;}
+          if (num === 1) {return num;}
+
+          let divisor = 2;
+
+          while (num % divisor !== 0) {
+            divisor = divisor + 1
+          }
+          if (num === divisor) {
+            return out.textContent = num + ' - is prime number'
+          } else {
+            return out.textContent = num + ' - is NOT prime number'
+          }
+        }
+      </script>
+    </li>
+    <!-- Task 5 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает число</u> и <kbd>выводит таблицу умножения</kbd> для этого числа. <br>Вызовите функцию <kbd>для всех чисел от 2 до 9</kbd>.</p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f5() {
+          out.textContent = ''
+          function mult(arg1) {
+            for (var i = 1; i < 9; i++) {
+              out.innerHTML += arg1 * i + ', '
+            }
+          }
+          mult(2)
+          out.innerHTML += '<br>'
+          mult(3)
+          out.innerHTML += '<br>'
+          mult(4)
+          out.innerHTML += '<br>'
+          mult(5)
+          out.innerHTML += '<br>'
+          mult(6)
+          out.innerHTML += '<br>'
+          mult(7)
+          out.innerHTML += '<br>'
+          mult(8)
+          out.innerHTML += '<br>'
+          mult(9)
+        }
+        // f5()
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      <p>Написать функцию, которая реализует работу оператора <kbd>%</kbd>. <br>Функция принимает 2 параметра и возвращает остаток от деления первого параметра на второй. <br>
+        В функции использовать только <u>+ - * /</u>, оператор <kbd>%</kbd> <b>не использовать</b>. </p>
+      <button onclick="f6(24, 2)">button - f6(24, 7)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f6(x1, x2) {
+          // variant 1
+          let y = Math.floor(x1 / x2)
+          console.log(y, "y")
+          let y1 = y * x2
+          console.log(y1, "y1");
+          out.textContent = x1 - y1
+          // variant 2 partial
+          // for (let i = 1; i <= x2; ++i) {
+          //   if (x2*i > x1) {
+          //     out.textContent = x1 - x2 * (i-1)
+          //     break
+          //   }
+          // }
+        }
+        // f6(27, 7)
+      </script>
+    </li>
+    <!-- Task 7 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает от 1 до 5 чисел</u> и возвращает их <kbd>сумму</kbd>.</p>
+      <button onclick="f7(1,2,2,1)">button - f7(1,2,2,1)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7(n1, n2, n3, n4, n5) {
+          for (var res = 0, i = 0; i < arguments.length; i++) {
+            res += arguments[i]
+          }
+          out.textContent = res + ' - it is result of f7()'
+        }
+        // f7(1,2,2,1,10)
+      </script>
+    </li>
+    <!-- Task 8 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает от 1 до 5 чисел</u> и возвращает <kbd>большее</kbd> из них.</p>
+      <button onclick="f8(1,22,2,77,10)">button - f8(1,22,2,77,10)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f8(n1, n2, n3, n4, n5) {
+          for (var res = arguments[0], i = 1; i < arguments.length; i++) {
+            if (res < arguments[i]) {
+              res = arguments[i]
+            }
+          }
+          out.textContent = res + ' - it is biggest from all f8()'
+        }
+        // f8(1,22,2,77,10)
+      </script>
+    </li>
+    <!-- Task 9 -->
+    <li>
+      <p>Написать функцию, которая <kbd>выводит все четные или нечетные числа</kbd>, в <u>указанном пользователем диапазоне</u>. <br>
+        Какие числа выводить, определяется третьим параметром типа <kbd>bool</kbd> (true – четные, false – нечетные).</p>
+      <button onclick="f9(3, 17, true)">button - f9(3, 17, true)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f9(start, end, flag) {
+          let odd = '', even = ''
+          out.textContent = ''
+          for (end; start < end+1; end--) {
+            if (end%2) {
+              if(start < end) odd += end + ', '
+              if(start == end) odd += end
+            } else {
+              if(start < end-1) even += end + ', '
+              console.log(even);
+              if(start == end-1) even += end
+              console.log(even);
+            }
+          }
+          flag ? out.textContent = even : out.textContent = odd
+        }
+        // f9(3, 17, true)
+        // f9(7, 17, false)
+      </script>
+    </li>
+    <!-- Task 10 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает дату (день, месяц, год)</u> и возвращает <kbd>дату следующего дня</kbd> в виде строки <kbd>«дд.мм.гггг»</kbd>. <br>
+        Проверку на високосный год желательно написать отдельной функцией.</p>
+      <button onclick="f10(28, 2, 1980)">button - f10(28, 2, 1980)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10(day, month, year) {
+          if(month > 12 || month <= 0 || day > 31 || day <= 0) return out.textContent = "Missing data."
+          leapChek(day, month, year)
+          // if( ((year % 100 !== 0) && (year % 4 === 0) || year % 400 === 0 ) && month === 2 && day === 28 ) return out.textContent = `Next date is -  ${day + 1} / ${month} / ${year}`
+          if( !((year % 100 !== 0) && (year % 4 === 0) || year % 400 === 0 ) && month === 2 && day === 28 ) return out.textContent = `Next date is -  01 / ${month + 1} / ${year}`
+
+          if( month === 12 && day === 31 ) return out.textContent = `Next date is - 01 / 01 / ${year+1}`
+          if( month === 12 && day === 30 ) return out.textContent = `Next date is - ${day + 1} / ${month} / ${year}`
+
+          if( (month === 4 || month === 6 || month === 9 || month === 11 ) && day === 30)  return out.textContent = `Next date is - 01 / ${month + 1} / ${year}`
+          if( (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 ) && day === 31)  return out.textContent = `Next date is - 01 / ${month + 1} / ${year}`
+          return out.textContent = `Next date is - ${day + 1} / ${month} / ${year}`
+        }
+
+        function leapChek(dayForCheck, monthForCheck, yearForCheck) {
+          if( ((yearForCheck % 100 !== 0) && (yearForCheck % 4 === 0) || yearForCheck % 400 === 0 ) && monthForCheck === 2 && dayForCheck === 28 ) return out.textContent = `Next date is -  ${dayForCheck + 1} / ${monthForCheck} / ${yearForCheck}`
+          // return ( (yearForCheck % 100 !== 0) && (yearForCheck % 4 === 0) || yearForCheck % 400 === 0 ) ? out.textContent = yearForCheck + " - Leap year" : out.textContent = yearForCheck +" - Not leap year "
+        }
+        // f10(28, 2, 1982)
+      </script>
+    </li>
+  </ol>
+
+
+</body>
+
+</html>

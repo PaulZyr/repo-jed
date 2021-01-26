@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Progress Bar width & linear-gradient</title>
+
+  <style>
+    *{box-sizing: border-box;}
+    body {font: 18px/2 Roboto, Arial, sans-serif;}
+    [class*='progress_bar'],
+    [id^='progress_bar'] {
+      margin: 50px auto;
+      text-align: center;
+      width: 80%;
+      line-height: 1.667;
+      border: 3px solid rgb(95, 8, 167);
+      background: linear-gradient(90deg, #f00 10%, transparent 10%);
+      min-height: 36px;
+      color: #f00;
+    }
+
+    [id^='progress_info'] {
+      width: 5%;
+      min-height: 15px;
+      background: #3c6;
+      float: left;
+      display: block;
+    }
+
+    [id|='progress_info-'] {
+      float: none;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- variant 1 -->
+  <h1>Progress Bar width</h1>
+  <div class="progress_bar_1">
+    <span id="progress_info"></span>
+  </div>
+
+  <!-- variant 2 -->
+  <h1>Progress Bar linear-gradient</h1>
+  <div id="progress_bar_2">
+    <b>10%</b>
+  </div>
+
+  <!-- variant 3 -->
+  <h1>Progress Bar width from center</h1>
+  <div id="progress_bar_3">
+    <span id="progress_info--c" style="width: 9%;"></span>
+  </div>
+
+  <script>
+  // browser-sync start --server --files "*.html, */*.html, *.js, */*.js, *.css"
+  "use strict"
+
+  // Your code here
+
+  </script>
+</body>
+
+</html>

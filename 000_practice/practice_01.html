@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice</title>
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+</head>
+
+<body>
+<div class="heading">
+  <h1>Practice 1. Переменные.</h1>
+  <div class="out">All results will be here after click match button.</div>
+</div>
+
+  <ol class="task-list">
+    <!-- Task 1 -->
+    <li>
+      Запросите у пользователя число, возведите это число в 3-ю степень и выведите на экран. <br>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+
+      <script>
+      'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let num = prompt('Input number', '7')
+          return out.textContent = num * num * num
+        }
+      </script>
+    </li>
+
+      <!-- Task 2 -->
+    <li>
+      Запросите у пользователя 2 числа и выведите среднее арифметическое этих чисел. <br>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+
+      <script>
+        'use strict'
+
+        function f2() {
+          let num1 = +prompt('Input number', '7'),
+              num2 = +prompt('Input number', '17')
+          return out.textContent = 'Averege = ' + (num1 + num2) / 2
+        }
+      </script>
+    </li>
+
+      <!-- Task 3 -->
+    <li>
+      Запросите у пользователя длину стороны квадрата и выведите площадь такого квадрата. <br>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+
+      <script>
+        'use strict'
+
+        function f3() {
+          let num = prompt('Input length side of squere', '7')
+          return out.textContent = 'Sq. area = ' + num * num
+        }
+      </script>
+    </li>
+
+    <!-- Task 4 -->
+    <li>
+      Реализуйте конвертор из километров в мили (пользователь вводит километры, программа выводит мили). <br><kbd>1 км = 0,621371 миль</kbd>. Это значение укажите в коде как константу <br>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+
+      <script>
+        'use strict'
+
+        function f4() {
+          const x = 0.621371
+          let km = prompt('Input kilometers', '10')
+          return out.textContent = km + 'km to mile = ' + km * x
+        }
+      </script>
+    </li>
+
+    <!-- Task 5 -->
+    <li>
+      Реализуйте калькулятор. Пользователь вводит два числа, а программа выводит результаты действий <b><kbd>+ - * /</kbd></b> c этими числами.<br>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f5() {
+          let num1 = +prompt('Input number.', '7'),
+            num2 = +prompt('Input number.', '17'),
+            sum = num1 + num2,
+            dif = num1 - num2,
+            mult = num1 * num2,
+            division = num1 / num2
+          return out.textContent = 'Sum = ' + sum + ', Dif = ' + dif + ', Mult = ' + mult + ', Division = ' + division
+        }
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      Пользователь вводит значения <kbd>a</kbd> и <kbd>b</kbd> для формулы <kbd>a * x + b = 0</kbd>, а программа считает и выводит значение <kbd>X</kbd>.<br>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f6() {
+          let a = +prompt('Input number for "a".', '7'),
+            b = +prompt('Input number for "b".', '21')
+            return out.textContent = -b / a
+        }
+      </script>
+    </li>
+    <!-- Task 7 -->
+    <li>
+      Запросите у пользователя текущее время (часы и минуты) и выведите, сколько часов и минут осталось до следующего дня<br>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7() {
+          let h = +prompt('Input number.', '7'),
+              m = +prompt('Input number.', '17')
+          return out.textContent = 'The next day will begin in ' + (24 - h) + ' hours and ' + (60 - m) + 'minutes!'
+        }
+      </script>
+    </li>
+    <!-- Task 8 -->
+    <li>
+      Запросите у пользователя трехзначное число и выведите вторую цифру этого числа. Для решения задачи используйте оператор <kbd>%</kbd> (остаток от деления).<br>
+      <button onclick="f8()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f8() {
+          let num = +prompt('Type 3 numeral.', '176')
+          return out.textContent = num = parseInt(num/10)%10
+        }
+      </script>
+    </li>
+    <!-- Task 9 -->
+    <li>
+      Запросите у пользователя пятизначное число и переместите последнюю цифру в начало (из числа 12345 должно получиться число 51234). <br>
+      <button onclick="f9()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        function f9() {
+          let num = +prompt('Type 5 numeral.', '12345'), last
+          last = num%10
+          num = parseInt(num/10)
+          return out.textContent = last + '' + num
+        }
+      </script>
+    </li>
+    <!-- Task 10 -->
+    <li>
+      Зарплата работника составляет $250 + 10% от продаж. Запросите общую сумму продаж за месяц и посчитайте зарплату<br>
+      <button onclick="f10()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10() {
+          const rateEmployee = 250
+          let sumMonth = prompt('Type total sales for the month.', '176 500'), res
+          sumMonth = Number.parseInt(sumMonth.replace(' ', ''), 10) || Number.parseInt(sumMonth.replace(/\s/g, ''), 10)
+
+          res = rateEmployee + sumMonth*0.1
+          console.log(res, typeof res)
+
+          res = res.toString()
+          console.log(res, typeof res)
+
+          res = res.split("")
+          console.log(res, typeof res)
+
+          res.splice(2, 0, ' ')
+          console.log(res+"", typeof res)
+
+          return out.innerHTML = 'Employee salary is <u>' + res.join('') + '</u> USD in this month.'
+        }
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

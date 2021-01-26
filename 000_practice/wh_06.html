@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://habr.com/ru/post/337030/">
+  <meta name="url" content="https://habr.com/ru/post/275813/">
+  <meta name="url" content="https://www.youtube.com/watch?v=4_HkJN8qto4&feature=youtu.be">
+  <meta name="url" content="http://www.forum.softweb.ru/showthread.php?t=14813">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Homework 6. Objects.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Homework 6. Objects.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <ol class="task-list">
+  <!-- Task 1 -->
+    <li>
+      <p>Создать объект, описывающий автомобиль (производитель, модель, год выпуска, средняя скорость), и следующие функции для работы с этим объектом.</p>
+      <ol>
+        <li><button onclick="car.carInfo()">Функция для вывода на экран информации об автомобиле.</button></li>
+        <li><button onclick="car.carTimeForDistance()">Функция для подсчета необходимого времени для преодоления переданного расстояния со средней скоростью.</button> <br>
+          <u>Учтите, что через каждые 4 часа дороги водителю необходимо делать перерыв на 1 час.</u></li>
+      </ol>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        let car = {
+          brand : 'Audi',
+          model : 'A6',
+          yearOfRelease : 2017,
+          averageSpeed : '70 km/h',
+          carInfo : function () {
+            let info = ''
+            for (var key in car) {
+              if((typeof car[key]) !== "function"){
+                console.log(key, ':', this[key]);
+                info += `${key} : ${this[key]}; <br>`
+              }
+            }
+            out.innerHTML = `Task #1_1.<br><kbd>${info}</kbd>`
+            out.querySelector('kbd').style.display = 'block'
+          },
+          carTimeForDistance : function () {
+            console.log('tfd')
+            let distanceInMeters = +prompt("Enter way distance.", '1000')*1000,
+            timeInSec = 0, speedInMeterToSecond, addRestTime, getH, getM, getS
+
+            speedInMeterToSecond = parseInt(this.averageSpeed) * 1000 / 3600
+            timeInSec = parseInt(distanceInMeters / speedInMeterToSecond) // sec for full distance without rest
+            addRestTime = parseInt(timeInSec / (3600*4)) * 3600
+            timeInSec += addRestTime
+            console.log(timeInSec, addRestTime);
+            getH = Math.floor(timeInSec / 3600)
+            getM = Math.floor((timeInSec - getH * 3600) / 60)
+            getS = Math.floor(timeInSec % 60)
+            out.innerHTML = `Task #1_2. <br> Distance will be covered in <kbd>&laquo;${getH} hour ${getM} min ${getS} sec&raquo;</kbd>`
+          }
+        }
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Создать объект, хранящий в себе отдельно <u>числитель и знаменатель дроби</u>, и <kbd>следующие функции для работы с этим объектом</kbd> .</p>
+      <ol>
+        <li><button onclick="fractionsObj.addition()">Функция сложения 2-х объектов-дробей.</button></li>
+        <li><button onclick="fractionsObj.subtraction()">Функция вычитания 2-х объектов-дробей.</button></li>
+        <li><button onclick="fractionsObj.multiply()">Функция умножения 2-х объектов-дробей.</button></li>
+        <li><button onclick="fractionsObj.division()">Функция деления 2-х объектов-дробей.</button></li>
+        <li><button onclick="fractionsObj.shortening()">Функция сокращения объекта-дроби.</button></li>
+      </ol>
+      <hr>
+      <button onclick="fractionsObj.newData()">add new numerator and denominator</button> ||
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        let fractionsObj = {
+          numerator : 5,
+          denominator : 15,
+          newData : function () {
+            this.numerator = +prompt('Enter numerator!', '56')
+            this.denominator = +prompt('Enter denominator!', '48')
+          },
+          addition : function () {
+            console.log('addition')
+            out.innerHTML = out.innerHTML = `Task #2_1. <br> <kbd>${this.numerator/this.denominator + this.numerator/this.denominator}</kbd>`
+          },
+          subtraction : function () {
+            console.log('subtraction')
+            out.innerHTML = out.innerHTML = `Task #2_2. <br> <kbd>${this.numerator/this.denominator - this.numerator/this.denominator}</kbd>`
+          },
+          multiply : function () {
+            console.log('multiply')
+            out.innerHTML = out.innerHTML = `Task #2_3. <br> <kbd>${(this.numerator/this.denominator) * (this.numerator/this.denominator)}</kbd>`
+          },
+          division : function () {
+            console.log('division')
+            out.innerHTML = out.innerHTML = `Task #2_4. <br> <kbd>${(this.numerator/this.denominator) / (this.numerator/this.denominator)}</kbd>`
+          },
+          shortening : function () {
+            console.log('shortening')
+            function nod(max, min) {
+              if( max === min) return max
+              if( !min){  // base case
+                return max
+              } else {  // recursive case
+                return nod(min, max % min)
+              }
+            }
+            out.innerHTML = `Task #2_5. <br> Numerator <kbd>${this.numerator}</kbd> shorted to <kbd>${this.numerator/nod(this.numerator, this.denominator)}</kbd> and denominator <kbd>${this.denominator}</kbd> to <kbd>${this.denominator / nod(this.numerator, this.denominator)}</kbd>`
+          },
+        }
+      </script>
+    </li>
+    <!-- Task 3 -->
+    <li>
+      <p>Создать объект, описывающий <u>время (часы, минуты, секунды)</u>, и следующие функции для работы с этим объектом.</p>
+      <ol>
+        <li><button onclick="timeObj.showTime()">Функция вывода времени на экран.</button></li>
+        <li><button onclick="timeObj.changeS()">Функция изменения времени на переданное количество секунд</li>
+        <li><button onclick="timeObj.changeM()">Функция изменения времени на переданное количество минут.</li>
+        <li><button onclick="timeObj.changeH()">Функция изменения времени на переданное количество часов.</li>
+      </ol>
+      <p>Учесть, что в последних 3-х функциях, при изменении одной части времени, может измениться и другая. Например: если ко времени <kbd>«20:30:45» добавить 30 секунд</kbd>, то должно получиться <kbd>«20:31:15»</kbd>, а не <del>«20:30:75»</del>.</p>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+          let timeObj = {
+            hours : 15,
+            minutes : 45,
+            seconds : 35,
+            showTime : function () {
+              console.log('showTime')
+              out.innerHTML = `Task #3_1 Time from timeObj is - <kbd>&laquo;${this.hours}:${this.minutes}:${this.seconds}&raquo;</kbd>`
+            },
+            changeH : function (diffHours) {
+              console.log('changeH', diffHours)
+              if (diffHours === undefined) {
+                diffHours = +prompt("Input how change hours(positive or negative)", "30")
+              }
+
+              // if (this.hours + diffHours >= 24) {
+              //   this.hours = (this.hours + diffHours) // % 24
+              //   return this.showTime()
+              // }
+              // if (this.hours + diffHours < 0) {
+              //   this.hours = (this.hours + diffHours) // % 24
+              //   return this.showTime()
+              // }
+              this.hours = this.hours + diffHours
+              return this.showTime()
+            },
+            changeM : function (diffMin) {
+              console.log('---changeM---')
+              if (diffMin === undefined) {
+                diffMin = +prompt("Input how change minutes(positive or negative)", "30")
+              }
+
+              if(diffMin === 0 || diffMin === '') {
+                return this.showTime()
+              }
+              if( this.minutes + diffMin >= 60 ) {
+                    console.log('Add Minutes')
+                let diffHours = parseInt((this.minutes + diffMin) / 60)
+                    console.log(diffHours, ' - diffHours')
+                this.minutes = ((this.minutes + diffMin) % 60)
+                    console.log(this.minutes, ' - this.minutes')
+                return this.changeH(diffHours)
+                // return this.showTime()
+              }
+              if( this.minutes + diffMin < 0 ) {
+                    console.log('Minus Minutes')
+                let diffHours = parseInt((this.minutes - diffMin) / 60 )
+                    console.log(diffHours, ' - diffHours')
+                this.minutes = 60 + (this.minutes + diffMin) % 60
+                    console.log(this.minutes, ' - this.minutes')
+                return this.changeH(diffHours)
+                // return this.showTime()
+              }
+              this.minutes = this.minutes + diffMin
+              return this.showTime()
+            },
+            changeS : function () {
+              console.log('---changeS---')
+              let diffSec = +prompt("Input how change seconds(positive or negative)", "-70")
+
+              if(diffSec === 0 || diffSec === '') {
+                return this.showTime()
+              }
+              if( this.seconds + diffSec >= 60 ) {
+                    console.log('Add Seconds')
+                let diffMin = parseInt((this.seconds + diffSec) / 60)
+                    console.log(diffMin, ' - diffMin')
+                this.seconds = ((this.seconds + diffSec) % 60)
+                    console.log(this.seconds, ' - this.seconds')
+                return this.changeM(diffMin)
+                // return this.showTime()
+              }
+              if( this.seconds + diffSec < 0 ) {
+                    console.log('Minus Seconds')
+                let diffMin = parseInt((this.seconds + diffSec) / 60)
+                    console.log(diffMin, ' - diffMin')
+                if(diffMin === -0 ) diffMin = -1
+                    console.log(diffMin, ' - diffMin')
+                this.seconds = 60 - (-(this.seconds + diffSec) % 60)
+                if(this.seconds < 10) this.seconds = '0' + this.seconds 
+                    console.log(this.seconds, ' - this.seconds')
+                return this.changeM(diffMin)
+                // return this.showTime()
+              }
+              this.seconds = this.seconds + diffSec
+              return this.showTime()
+            }
+          }
+          // out.innerHTML = `Task #3 result is - <kbd>${maxDigit(n)}</kbd>`
+        // window.onload = function (){
+          // f3()
+        // }
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

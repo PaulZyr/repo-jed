@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Progress Bar width & linear-gradient</title>
+
+  <style>
+    *{box-sizing: border-box;}
+    body {font: 18px/2 Roboto, Arial, sans-serif;}
+    [class*='progress_bar'],
+    [id^='progress_bar'] {
+      margin: 50px auto;
+      text-align: center;
+      width: 80%;
+      line-height: 1.667;
+      border: 3px solid rgb(95, 8, 167);
+      background: linear-gradient(90deg, #f00 10%, transparent 10%);
+      min-height: 36px;
+      color: #f00;
+    }
+
+    [id^='progress_info'] {
+      width: 30%;
+      min-height: 15px;
+      background: #3c6;
+      float: left;
+      display: block;
+    }
+
+    [id|='progress_info-'] {
+      float: none;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- variant 1 -->
+  <h1>Progress Bar width</h1>
+  <div class="progress_bar_1">
+    <span id="progress_info"></span>
+  </div>
+
+  <!-- variant 2 -->
+  <h1>Progress Bar linear-gradient</h1>
+  <div id="progress_bar_2">
+    <b>10%</b>
+  </div>
+
+  <!-- variant 3 -->
+  <h1>Progress Bar width from center</h1>
+  <div id="progress_bar_3">
+    <span id="progress_info--c" style="width: 19%;"></span>
+  </div>
+
+  <script>
+  "use strict"
+
+// browser-sync start --server --files "*.html, */*.html, *.js, */*.js, *.css"
+
+// **************
+// using width
+// **************
+let parEl = document.querySelector(".progress_bar_1");  // get holder elem
+let targEl = document.getElementById("progress_info");  // get inset elem
+// var progress_w = 0;
+let parWidth = parEl.offsetWidth;  // return width as Number
+let targWidth = targEl.offsetWidth;  // return width as Number
+console.log(targWidth + ' - targWidth', parWidth + ' - parWidth');
+
+let parWidth2 = parseInt(getComputedStyle(parEl).width);  // return width as String. So we must need parseInt.
+let targWidth2 = parseInt(getComputedStyle(targEl).width);  // return width as String. So we must need parseInt.
+console.log(targWidth2 + ' - targWidth2', parWidth2 + ' - parWidth2');
+
+let progress_w = ((targWidth/parWidth)*100).toFixed(0);  // return String because using .toString()
+// or using Math
+let progress_w2 = Math.round((targWidth/parWidth)*100);  // return Number
+
+console.log(parWidth, targWidth, (targWidth/parWidth*100).toFixed(0), progress_w);
+console.log(typeof parWidth, typeof targWidth, typeof (targWidth/parWidth*100).toFixed(0), typeof progress_w);
+
+console.log(parWidth2, targWidth2, Math.round(targWidth2/parWidth2*100), progress_w2);
+console.log(typeof parWidth2, typeof targWidth2, typeof Math.round(targWidth2/parWidth2*100), typeof progress_w2);
+
+
+// console.log('1 - '+progress_w);
+// console.log('2 - '+progress_w);
+var id_w = setInterval(function(){
+  if(progress_w === 98){
+    clearInterval(id_w);
+  } else {
+    progress_w++;
+    targEl.style.width =  `${progress_w}%`;
+    // console.log(progress_w);
+  }
+}, 90);
+
+// **************
+// using gradient
+// **************
+var bar = document.getElementById("progress_bar_2");
+bar.style.background = 'none';
+// console.dir(bar);
+var progress = 10;
+var bg = `linear-gradient(90deg, #3c6 ${progress}%, transparent ${progress}%);`; // string interpolation!!!
+// using babeljs.io
+// var bg = "linear-gradient(90deg, #3c6 " + progress + "%, transparent " + progress + "%);";
+var id = setInterval(function(){
+  if(progress === 99){
+    clearInterval(id);
+  } else {
+    progress++;
+    bar.style.background = `linear-gradient(90deg, #3c6 ${progress}%, transparent ${progress}%)`;
+    bar.querySelector('b').innerHTML = `${progress}%`;
+    // console.log(progress);
+  }
+}, 90);
+// !! for remember
+getComputedStyle(bar);
+// console.log(getComputedStyle(bar));
+
+// **************
+// using width
+// **************
+var bar_w_c = document.getElementById("progress_info--c");
+var prgrs_b_3 = document.getElementById("progress_bar_3");
+prgrs_b_3.style.background = 'gold';
+var bar_w_c_progress = parseInt(bar_w_c.style.getPropertyValue('width'));
+// var bar_w_c_progress2 = Math.floor(parseInt(getComputedStyle(bar_w_c).width)/10);
+console.log('3 - '+bar_w_c_progress);
+// console.log('4 - '+bar_w_c_progress2);
+var id_w_c = setInterval(function(){
+  if(bar_w_c_progress === 90){
+    bar_w_c_progress = 1;
+    // clearInterval(id_w_c);
+  } else {
+    bar_w_c_progress++;
+    bar_w_c.style.width =  `${bar_w_c_progress}%`;
+    bar_w_c.innerHTML = bar_w_c_progress;
+  }
+}, 40);
+
+  </script>
+</body>
+
+</html>

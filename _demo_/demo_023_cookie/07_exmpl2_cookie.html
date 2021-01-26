@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form>
+      <input id="red" type="radio" name="color" value="#df5454" /> <label for="red">RED</label> <br>
+      <input id="blue" type="radio" name="color" value="#5494de" /> <label for="blue">BLUE</label> <br>
+      <button id="saveButton" type="button">Применить и сохранить в cookie</button>
+  </form>
+
+  <script>
+    'use strict'
+    window.addEventListener("load", function() {
+
+      var savedColor = findCookieValue("page-color");
+      if (savedColor) {
+        document.body.style.backgroundColor = savedColor;
+      }
+
+      document.getElementById("saveButton").addEventListener("click", function() {
+        var selectedColor = getCheckedRadioId("color")
+        document.cookie = "page-color=" + encodeURIComponent(selectedColor) + ";max-age=" + (60 * 60);
+        document.body.style.backgroundColor = selectedColor;
+      });
+
+      function getCheckedRadioId(name) {
+        var elements = document.getElementsByName(name);
+
+        for (var i = 0, len = elements.length; i < len; ++i)
+          if (elements[i].checked) return elements[i].value;
+      }
+
+      function findCookieValue(cookieName) {
+        var allcookies = document.cookie;
+        var pos = allcookies.indexOf(cookieName + "=");
+
+        // Если cookie с указанным именем найден, извлечь его значения.
+        if (pos != -1) {
+          var start = pos + cookieName.length + 1;
+          var end = allcookies.indexOf(";", start);
+
+          if (end == -1) end = allcookies.length;
+
+          var value = allcookies.substring(start, end);
+          value = decodeURIComponent(value);
+          return value;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

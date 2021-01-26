@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>chessboard</title>
+</head>
+
+<body>
+  <h1>chessboard</h1>
+  <script>
+    let size = 8;
+    let board = "";
+
+    // variant 1
+    // for (let y = 0; y < size; y++) {
+    //   for (let x = 0; x < size; x++) {
+    //     if ((x + y) % 2 == 0) {
+    //       board += " ";
+    //     } else {
+    //       board += "X";
+    //     }
+    //   }
+    //   board += "\n";
+    // }
+    // variant 2
+    for (let y = 0; y <= size; y++) {
+      for (let x = 0; x <= size; x++) {
+        if (y % 2 == x % 2){
+          board += "\u2B1B";
+        } else {
+          board += "\u2B1C";
+        }
+      }
+      board += '\n'
+    }
+
+    console.log(board);
+  </script>
+</body>
+
+</html>

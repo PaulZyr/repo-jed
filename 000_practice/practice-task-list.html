@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://coursehunters.net/course/sovremennyy-javascript-s-samogo-nachala">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Practice - Task list</title>
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <!--Import bootstrap.css-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="jumbotron col-sm-6 offset-sm-3 py-3">
+
+        <h1 class="display-4 text-capitalize">Task list</h1>
+
+        <div class="card bg-warning mt-3">
+          <form id="form1">
+            <div class="card-header">
+              <label class="card-title" for="inp-add">New task</label>
+              <input id="inp-add" type="text" class="form-control form-control-sm" placeholder="New task" value="100 sit-ups">
+              <button id="btn-add" class="btn btn-primary btn-sm text-uppercase mt-2">add task</button>
+            </div>
+            <div class="card-body">
+              <h3 class="cart-title">Tasks</h3>
+              <label class="card-title" for="inp-filter">Filtering task</label>
+              <input id="inp-filter" type="text" class="form-control form-control-sm mb-2" placeholder="Filter task" data-value="100">
+              <ul class="list-group">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                  Task 1
+                  <button class="btn btn-danger btn-sm"><i class="far fa-times-circle fa-lg"></i></button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                  Task 1
+                  <button class="btn btn-danger btn-sm"><i class="far fa-times-circle fa-lg"></i></button>
+                </li> -->
+              </ul>
+              <button id="btn-clear" class="btn btn-danger btn-sm text-uppercase mt-3">clear all tasks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    'use strict'
+
+    const form = document.querySelector('#form1')
+    const inpAdd = document.querySelector('#inp-add')
+    const btnAdd = document.querySelector('#btn-add')
+    const inpFilter = document.querySelector('#inp-filter')
+    const btnClr = document.querySelector('#btn-clear')
+    const listGr = document.querySelector('.list-group')
+
+    loadEventListeners()
+    // load all event listeners
+    function loadEventListeners() {
+      // DOM load Event
+      // Step 3 LocalStorage
+      document.addEventListener('DOMContentLoaded', getTasks)
+      // Add task Events
+      btnAdd.addEventListener('click', addTask)
+      // Remove task Events
+      listGr.addEventListener('click', rmTask)
+      // Clear task Events
+      btnClr.addEventListener('click', clrTasks)
+      // Filter task Events
+      inpFilter.addEventListener('keyup', fltrTask)
+    }
+
+    // getTasks from LocalStorage
+    // Step 4
+    function getTasks() {
+      let tasks;
+      if(localStorage.getItem('tasks') === null){
+        tasks = [];
+      } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+      }
+
+      // Each task from LocalStorage insert in UL
+      // Step 5
+      tasks.forEach( function (task) {
+        // createElement li
+        const li = document.createElement('li')
+        // add class
+        li.className = 'list-group-item d-flex justify-content-between align-items-center p-2'
+        // create textNode & append li
+        li.append(document.createTextNode(task))
+        // create new btn-del el
+        const btnDel = document.createElement('button')
+        // add class
+        btnDel.className = "btn btn-danger btn-sm"
+        // add icon
+        btnDel.innerHTML = '<i class="far fa-times-circle fa-lg"></i>'
+        li.append(btnDel)
+        // li uppend ul
+        listGr.append(li)
+              // clear input field
+              inpAdd.value = ''
+      })
+    }
+
+    // addTask
+    function addTask(e) {
+      if (inpAdd.value === '') { return void 0 }
+
+      // createElement li
+      const li = document.createElement('li')
+      // add class
+      li.className = 'list-group-item d-flex justify-content-between align-items-center p-2'
+      // create textNode & append li
+      li.append(document.createTextNode(inpAdd.value))
+      // create new btn-del el
+      const btnDel = document.createElement('button')
+      // add class
+      btnDel.className = "btn btn-danger btn-sm"
+      // add icon
+      btnDel.innerHTML = '<i class="far fa-times-circle fa-lg"></i>'
+      li.append(btnDel)
+      // li uppend ul
+      listGr.append(li)
+
+      // Store Task in LocalStorage // Step1
+      storeTasklnLocalStorage(inpAdd.value)
+
+      // clear input field
+      inpAdd.value = ''
+
+      e.preventDefault()
+    }
+
+    // Remove task
+    function rmTask(e) {
+      console.log(e.target);
+      // console.log(e.target.parentElement);
+      e.preventDefault()
+      if (e.target.classList.contains('btn-danger') || e.target.matches('.list-group-item .far')) {
+        if (confirm('Are your sure?')) {
+          e.target.closest('li').remove()
+          // e.target.parentElement.remove()
+
+          // Remove task from LocalStorage
+          // Step 6
+          // find mistake in row below, why it won work correctly
+          removeTaskFromLocalStorage(e.target.parentElement)
+        }
+      }
+    }
+
+    // Remove from Local Stor
+    // Step 7
+    function removeTaskFromLocalStorage(taskItem) {
+      console.log(taskItem);
+      let tasks;
+      if(localStorage.getItem('tasks') === null){
+        tasks = [];
+      } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+      }
+
+      tasks.forEach(function (task, index) {
+        console.log(taskItem.textContent, task, index);
+        if (taskItem.textContent === task) {
+          tasks.splice(index, 1)
+        }
+      })
+      localStorage.setItem('tasks', JSON.stringify(tasks))
+    }
+
+    // Clear tasks
+    function clrTasks(e) {
+      e.preventDefault()
+      // listGr.innerHTML = ''
+
+      // more fast
+      while (listGr.firstChild) {
+        listGr.removeChild(listGr.firstChild)
+      }
+      // httpS://jsperf.com/innerhtml-vs-removechild
+
+      // clear our LocalStorage
+      // Step 8
+      clrTasksFromLocalStorage()
+    }
+
+    // Step 9
+    function clrTasksFromLocalStorage() {
+      localStorage.clear()
+    }
+
+    // Filter tasks
+    function fltrTask(e) {
+      e.preventDefault()
+      const txt = e.target.value.toLowerCase()
+      console.log(txt);
+      document.querySelectorAll('.list-group-item').forEach(
+        function (el) {
+          const item = el.firstChild.textContent
+          if (item.toLowerCase().indexOf(txt) !== -1 ) {
+            el.style.display = 'block'
+          } else {
+            el.style.setProperty('display', 'none', 'important')
+          }
+        }
+      )
+    }
+
+    // Store Task
+    // Step 2 create & put value in LokalStorage
+    function storeTasklnLocalStorage(task) {
+      let tasks;
+      if(localStorage.getItem('tasks') === null){
+        tasks = [];
+      } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+      }
+      tasks.push(task);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+  </script>
+</body>
+</html>

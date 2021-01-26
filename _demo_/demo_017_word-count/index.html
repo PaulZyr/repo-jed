@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <title>Word Count</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container jumbotron py-3 mt-3">
+    <h1 class="display-4">Word Count</h1>
+    <textarea class="form-control mb-3" data-character-count placeholder="Type some text here"></textarea>
+    <p class="alert alert-info">You've written <strong><span id="word-count">0</span> words</strong> and <strong><span id="character-count">0</span> characters</strong>.</p>
+  </div>
+
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <script>
+    //
+    // Variables
+    //
+    let words = document.querySelector('#word-count');
+    let characters = document.querySelector('#character-count');
+
+
+    //
+    // Methods
+    // let inputHandler = function(event) {
+    function inputHandler(event) {
+      // Make sure input is our textarea
+      if (!event.target.matches('[data-character-count]')) return;
+
+      // Get the word count
+      let wordCount = event.target.value.split(/[\n\r\s]+/g).filter(function(word) {
+        return word.length > 0;
+      });
+
+      // Update the DOM
+      words.textContent = wordCount.length;
+      characters.textContent = event.target.value.length;
+    };
+
+    //
+    // Inits and Event Listeners
+    //
+    document.addEventListener('input', inputHandler, false);
+  </script>
+
+</body>
+
+</html>

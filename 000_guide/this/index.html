@@ -1,0 +1,128 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<title>This</title>
+<body>
+  <h1>This <small>(pres - <kbd>Ctrl + Shift + J</kbd>)</small></h1>
+  <a href="https://tproger.ru/translations/javascript-this-keyword/">О ключевом слове «this» языка JavaScript: особенности использования с пояснениями</a>
+  <script>
+    // you don't now js
+    // step 1
+    // console.log(this);
+    // console.dir(this);
+    // console.info('console.dir("console.dir() - "+this) return > '+this, '\n&\nconsole.log("console.log() - "+this) return > '+this);
+
+    // step 2
+    // function city() {
+    //   return this.name.toUpperCase();
+    //   console.log( 'It\'s city.call - ' + this.name.toUpperCase());
+    // }
+    // // city();
+    //
+    // function cityHi() {
+    //   var hi = "Hi from " + city.call(this);
+    //   console.log(hi);
+    // }
+    // // cityHi();
+    // let city1 = {name: 'Tokio'};
+    // let city2 = {name: 'London'};
+    //
+    // city.call(city1);  // TOKIO
+    // city.call(city2);  // LONDON
+    //
+    // cityHi.call(city1);  // TOKIO
+    // cityHi.call(city2);  // LONDON
+
+
+
+    // step 3 like step 2 but anothe sintax
+    let town1 = {'name': 'Tokio - 2'};
+    let town2 = {'name': 'London - 2'};
+    function town(context) {
+      return context.name.toUpperCase();
+      // console.log( 'It\'s town - ' + context.name.toUpperCase());
+    }
+    // town();
+
+    function townHi(context) {
+      var hi = "Hi from " + town(context);
+      console.log(hi);
+    }
+    // townHi();
+
+    town(town1);  // 'It\'s town - TOKIO - 2'
+    town(town2);  // 'It\'s town - LONDON - 2'
+
+    townHi(town1);  // "Hi from TOKIO - 2
+    townHi(town2);  // "Hi from LONDON - 2
+
+    // step 4 Missing undestanding
+
+    //  1 - this point to current Scope
+    // function doSome(arg) {console.log(arg);}
+    // let mis1 = function (x){
+    //   let y1 = doSome(x);
+    //   let y2 = doSome(this.x);  // try get x usin this it's not working
+    // }
+    // mis1(11);
+
+    // 2- this point to func which be in progress
+    // let mis2 = function (x) {
+    //   let y = doSome(x);
+    //   this(y)
+    // }
+    // mis2(2);
+
+    // Example not working
+    // function fc(num) {
+    //   console.log("fc: " + num);
+    //   this.count++
+    // }
+    // fc.count = 0;
+    //
+    // for (var i = 0; i < 10; i++) {
+    //   if (i>5) {
+    //     fc(i);
+    //   }
+    // }
+    // console.log(fc.count);  // ????
+
+    // Example  working
+    function fc2(num) {
+      console.log("fc2: " + num);
+      fc2Data.count++;
+      // or
+      fc2.count++;
+    }
+    let fc2Data = {count: 0};
+    // or
+    fc2.count = 0;
+
+    for (var i = 0; i < 10; i++) {
+      if (i>5) {
+        fc2(i);
+      }
+    }
+    console.log(fc2Data.count);  // 4
+    // or
+    console.log(fc2.count);  // 4
+
+
+    // step 5
+    function f1() {
+      console.log(this);
+    }
+    // f1();
+
+    // step 6
+    // step 7
+  </script>
+
+  <script>
+  // freeCodeCamp
+  "use strict"
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://habr.com/ru/post/337030/">
+  <meta name="url" content="https://habr.com/ru/post/275813/">
+  <meta name="url" content="https://www.youtube.com/watch?v=4_HkJN8qto4&feature=youtu.be">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 5. Recursion.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Practice 5. Recursion.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <h2>* Во всех заданиях обязательно использовать рекурсию. <br><a href="http://pythontutor.com/javascript.html#mode=display">Визуализация процесса тут.</a></h2>
+  <ol class="task-list">
+  <!-- Task 1 -->
+    <li>
+      <p>Написать функцию <kbd>вычисляющую факториал заданного числа</kbd>.</p>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="#">Visualize</a>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let num = +prompt('Enter num for get his factorial.', '5')
+
+          function factorial(argN) {
+            if(argN == 1){  // base case
+              return 1
+            } else {  // recursive case
+              return argN * factorial(argN - 1)  // пока n != 1 сводить вычисление factorial(argN) к factorial(argN - 1)
+            }
+          }
+          out.innerHTML = `Task #1 result is -  <kbd>${factorial(num)}</kbd>`
+        }
+        // window.onload = function () {
+        //   f1()
+        // }
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Написать функцию, которая выводит все <kbd>числа из заданного пользователем диапазона в прямом порядке</kbd>. <br>
+        И еще одну функцию – для вывода <kbd>в обратном порядке</kbd></p>
+      <button onclick="f2_1()">numMinToMax(n1, n2)</button>
+      <button onclick="f2_2()">numMaxToMin(n1, n2)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="#">Visualize</a>
+      <script>
+        'use strict'
+        function f2_1() {
+          console.log('2_1')
+          let n1 = +prompt('Enter first number', '11'),
+              n2 = +prompt('Enter second number', '4'),
+              res = ''
+
+          if(n1 > n2){
+            let t = n1
+            n1 = n2
+            n2 = t
+          }
+          function numMinToMax(min, max) {
+            console.log('start numMinToMax() recursively - ', max, min);
+            if( min === max ){  // base case
+              return res += min
+            } else {  // recursive case
+              console.log('else - ', max, min)
+              res += min + ', '
+              return numMinToMax(min+1, max)
+            }
+          }
+          out.innerHTML = `Task #2 result is -  <kbd>${numMinToMax(n1, n2)}</kbd>`
+        }
+
+        function f2_2() {
+          console.log('2_2')
+          let n1 = +prompt('Enter first number', '11'),
+              n2 = +prompt('Enter second number', '4'),
+              res = ''
+
+          if(n1 > n2){
+            let t = n1
+            n1 = n2
+            n2 = t
+          }
+          function numMaxToMin(min, max) {
+            console.log('start numMinToMax() recursively - ', max, min);
+            if( min === max ){  // base case
+              return res += max
+            } else {  // recursive case
+              console.log('else - ', max, min)
+              res += max + ', '
+              return numMaxToMin(min, max-1)
+            }
+          }
+          out.innerHTML = `Task #2 result is -  <kbd>${numMaxToMin(n1, n2)}</kbd>`
+        }
+      </script>
+    </li>
+    <!-- Task 3 -->
+    <li>
+      <p>Написать функцию, которая <kbd> выводит переданное ей число задом наперед</kbd>. <br>
+      Например: число 1234 вывести как 4321.</p>
+      <button onclick="f3()">reverse(xxxx)</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="#">Visualize</a>
+      <script>
+        'use strict'
+
+        function f3() {
+          let n = +prompt('Enter num', '1073') || 10739
+
+          function reverse(argN, r = 0) {
+            if( !argN ){
+              return r
+            } else {
+              r = r*10 + argN % 10
+              console.log('argN & r on next step of recursion\n',argN, r);
+              return reverse(Math.floor(argN/10), r)
+            }
+          }
+          out.innerHTML = `Task #3 result is - <kbd>${reverse(n)}</kbd>`
+        }
+      </script>
+    </li>
+    <!-- Task 4 -->
+    <li>
+      <p>Написать функцию, которая считает <kbd>сумму цифр</kbd> числа. <br>
+        Например: число 1357, сумма <kbd>1 + 3 + 5 + 7 = 16</kbd>.</p>
+
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="#">Visualize</a>
+      <script>
+        'use strict'
+
+        function f4() {
+          let n = +prompt('Enter num', '456977') || 82387
+
+          function sumOfDigitInNumber(argN, s = 0) {
+            if (argN < 10){
+              return s += argN // base case
+            } else {
+              return s = argN % 10 + sumOfDigitInNumber(Math.floor(argN / 10), s)
+            }
+          }
+          out.innerHTML = `Task #4 result is -  <kbd>number ${sumOfDigitInNumber(n)}</kbd>`
+        }
+      </script>
+    </li>
+    <!-- Task 5 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает число</u> и выводит <kbd>соответствующее количество вложенных пар круглых скобок</kbd>. <br>
+        Например: число 4 – <kbd>(((())))</kbd>.</p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=var%20res%20%3D%20'-'%0Afunction%20roundBrackets%28argN%29%20%7B%0A%20%20if%28%20argN%20%3D%3D%3D%200%20%29%20%7B%0A%20%20%20%20return%20res%0A%20%20%7D%0A%20%20res%20%3D%20'%28'%2B%20res%20%2B%20'%29'%0A%20%20return%20roundBrackets%28argN%20-%201%29%0A%7D%0AroundBrackets%284%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+        function f5() {
+          let n = +prompt('Enter count of ()','7'),
+              res = '-'
+          function roundBrackets(argN) {
+            if( !argN ) {
+              console.log('base case')
+              return res
+            }
+            res = '('+ res + ')'
+            return roundBrackets(argN - 1)
+          }
+          out.innerHTML = `Task #5 result is - <kbd>${roundBrackets(n)}</kbd>`
+        }
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      <p>Написать функцию, ...</p>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="#">Visualize</a>
+      <script>
+        'use strict'
+
+        // function f6() {
+        //   console.log(6)
+        //   let  n = +prompt("Input order number for get fibonachi number.","7")
+        //
+        //   function fibo(argN) {
+        //
+        //   }
+        //   out.innerHTML = `Task #6 result is - <kbd>${fibo(n)}</kbd>`
+        // }
+        // window.onload = function () {
+        //   f6()
+        // }
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

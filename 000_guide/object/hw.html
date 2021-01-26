@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Homework Object</title>
+</head>
+
+<body>
+  <h1>Homework Object</h1>
+  <h2>#1 Мини-задача на синтаксис объектов.</h2>
+  Напишите код, по строке на каждое действие. <br>
+  1 - Создайте пустой объект <kbd>person</kbd>. <br>
+  2 - Добавьте свойство <kbd>name</kbd> со значением <b> Elon</b>. <br>
+  3 - Добавьте свойство <kbd>surname</kbd> со значением <b>Musk</b>. <br>
+  4 - Поменяйте значение <kbd>name</kbd> на <b>Elon Reeve</b>. <br>
+  5 - Добавьте свойство <kbd>company 1 & company 2 & born</kbd> со значением <b>X-Space, Tesla Motors & 1971</b><br>
+  6 - Удалите свойство <kbd>born</kbd> из объекта.
+  <script hidden>
+    console.groupCollapsed('#1 Mini task');
+    let person = {};
+    console.log('Step 1(create) :\n', person);
+
+    person.Name = 'Elon';
+    console.log('Step 2(add name):\n', person);
+
+    person.Surname = 'Musk';
+    console.log('Step 3(add surname):\n', person);
+
+    person.Name = 'Elon Reeve';
+    console.log('Step 4(change name):\n', person);
+
+    person['company 1'] = 'X-Space';
+    person['company 2'] = 'Tesla Motors';
+    person.born = '1971';
+    console.log('Step 5(add company & born):\n', person);
+
+    delete(person.born);
+    console.log('Step 6(delete born):\n', person);
+    console.groupEnd();
+  </script>
+
+  <h2>#2 Напишите код, чтобы перечислить ключи объекта <kbd>person</kbd> созданного в задаче #1</h2>
+
+  <script>
+    console.groupCollapsed('#2 Object"s keys list.');
+      console.log('variant A - .keys\n', Object.keys(person));
+
+      console.log('variant B - for ... in');
+      let keys = [], i = 0;
+      for (let key in person) {
+        keys[i++] = key;
+      };
+      console.log(keys);
+      document.write('<b>Result : </b>' + keys.join(', '));
+    console.groupEnd();
+  </script>
+
+  <h2>#3 Напишите программу для удаления свойства <kbd>company 2</kbd> & <kbd>company 1</kbd> из объекта.</h2>
+  <b> Также распечатайте объект до и после удаления свойства. Используя <kbd>console.table()</kbd> or <kbd>.write()</kbd></b><br><br>
+  <table border='1' style="margin-bottom: 14px;">
+    <tr>
+      <th>console.table() For Chrome <br>!!! WARNING - Firefox return only last console.table() !!!</th>
+      <th>.write()</th>
+    </tr>
+    <tr>
+      <td>
+        <img src="../img/object01.png" alt="object01" style="max-width: 95%;">
+      </td>
+      <td style="vertical-align: top;">
+        <pre>  Variant A. <br>Name, Surname, company 1, company 2 <br>Name,Surname,company 1<hr>  Variant B. <br>Name, Surname, company 1<br>Name, Surname </pre>
+      </td>
+    </tr>
+  </table>
+  <script>
+    console.groupCollapsed('#3.1 Delete property simple (Variant A).');
+
+    console.info('Before delete property');
+    console.table(person);
+    document.write('<b>Result: </b> <br>Variant A. <br>' + Object.keys(person) + '<br>');
+
+    delete person['company 2'];
+
+    console.info('After delete property');
+    console.table(person);
+    document.write(Object.keys(person) + '<hr>Variant B. <br>');
+
+    console.groupEnd();
+
+    console.groupCollapsed('#3.2 Delete property with function. (Variant B).');
+    console.log('Before delete property');
+
+    function remvoveProp(object, property) {
+      console.table(person);
+      document.write(Object.keys(object) + '<br>');
+
+      delete object[property];
+
+      console.log('After delete property');
+      console.table(person);
+      document.write(Object.keys(object));
+    }
+    remvoveProp(person, 'company 1');
+    console.groupEnd();
+  </script>
+
+  <h2>#4 Напишите программу, чтобы получить длину объекта</h2>
+  <script>
+    console.groupCollapsed('#4 Size of object. (Variant A[<IE8], B, C).');
+      person.objInside = {'Name': 'Bob', 'Surname': 'Lee'};
+      Object.defineProperty(person, 'Name', {
+        // enumerable: false,
+        // writable : false,
+        configurable: false
+      });
+      function funcObjSize(obj) {
+        let osize = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+              osize++
+            };
+        }
+        return osize;
+      }
+      console.log('Variant A(<IE8). \nSize of the person object : ' + funcObjSize(person));
+      console.log('Variant B. \nSize of the person.objInside object : ' + Object.keys(person.objInside).length);
+      console.log('Variant C. \nSize of the person object : ' + Object.values(person).length);
+      document.write('<b>Result: </b> Size of the <kbd>person</kbd> object : ' + Object.keys(person.objInside).length);
+    console.groupEnd();
+  </script>
+
+  <h2>#5 Напишите программу, чтобы отобразить статус чтения (то есть название книги, имя автора и статус чтения) следующих книг.</h2>
+  Use <kbd>&amp;#128213;</kbd> for get  &#128213; icon and <kbd>&amp;#128214;</kbd> for &#128214;.
+  <pre>
+  let library = [
+    {
+      'author': 'David Flanagan (Flenagan)',
+      'title': 'JavaScript: The Definitive Guide: Activate Your Web Pages(6th edition)',
+      'readingStatus': true
+    },
+    {
+      author: 'Marijn Haverbeke',
+      title: 'Eloquent JavaScript(3rd edition)',
+      readingStatus: true
+    },
+    {
+      author: 'Kyle Simpson',
+      title: 'You Don’t Know JS',
+      readingStatus: false
+    }
+  ];
+    </pre>
+  <script>
+    console.groupCollapsed('#5 Library');
+      let library = [
+         {
+           'author': 'David Flanagan (Flenagan)',
+           'title': 'JavaScript: The Definitive Guide: Activate Your Web Pages(6th edition)',
+           'readingStatus': true
+         },
+         {
+           author: 'Marijn Haverbeke',
+           title: 'Eloquent JavaScript(3rd edition)',
+           readingStatus: true
+         },
+         {
+           author: 'Kyle Simpson',
+           title: 'You Don’t Know JS',
+           readingStatus: false
+      }];
+      document.write('<b>Result: </b>')
+      for(let i = 0; i < library.length; i++){
+        let status = '&#128213; not yet';
+        (library[i].readingStatus) ? status = `&#128214; already` : status;
+        console.log(`You have ${status} read \'${library[i].title}\', written by ${library[i].author}.`)
+        document.write(`<br>You have ${status} read \'${library[i].title}\', written by ${library[i].author}.`)
+      }
+    console.groupEnd();
+  </script>
+
+  <h2>#6 Напишите программу JavaScript для расчета площади и периметра круга.</h2>
+  <b>Примечание.</b> Создайте два метода расчета площади и периметра. Радиус круга будет предоставлен пользователем. <br>
+  <b>площадь</b> - <kbd>return Math.PI * circle.radius * circle.radius;</kbd> <br>
+  <b>периметр</b> - <kbd>return 2*Math.PI*circle.radius;</kbd> <br><br>
+  <b>Result:</b><br>
+  <button type="button" onclick="funSq(circle)">get square</button>
+  <b id="sq">Circle square = <span></span></b> <br><br>
+  <button type="button" onclick="funPrm(circle)">get perimeter</button>
+  <b id="prm">Circle perimeter = <span></span></b><br><br>
+  <script>
+    console.groupCollapsed('#6 Square & Perimeter');
+      var circle = {
+        'radius': 7,
+        'sq': function (){
+          return Math.PI * this.radius * this.radius;
+        },
+        'perimeter': function (){
+          return 2*Math.PI*this.radius;
+        }
+      }
+
+      function inputRadius(par){
+        par.radius = parseInt(prompt('Enter radius: ','7'))
+      }
+
+      function funSq(par) {
+        inputRadius(par);
+        console.log('radius = ' + par.radius + '\nsquare = PI*r*r = ' + par.sq());
+        return document.querySelector('b#sq span').textContent = par.sq();
+      };
+
+      function funPrm(par) {
+        inputRadius(par);
+        console.log('radius = ' + par.radius + '\nperimeter = 2*PI*r = ' + par.perimeter());
+        return document.querySelector('b#prm span').textContent = par.perimeter();
+      };
+      console.log('radius = ' + circle.radius + '\nsquare = PI*r*r = ' + circle.sq(), '\nperimeter = 2*PI*r = ' + circle.perimeter());
+    console.groupEnd();
+  </script>
+
+</body>
+
+</html>

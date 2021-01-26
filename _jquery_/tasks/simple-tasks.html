@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tasks</title>
+  <!-- <link rel="stylesheet" href=""> -->
+  <style>
+    .code{
+      background-color:#fffDBD;
+      margin:10px;
+      padding:5px 15px;
+    }
+    h2{border-top: 1px dotted #000; font-family: Arial;}
+    kbd{background: #000;color: #fffdbd;padding: 4px;border-radius: 4px;}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="code" data-task='01'>
+    <h2> Task 1 - Отключить возможность правого клика на изображении c <kbd>id="img1"</kbd></h2>
+    <img src="https://picsum.photos/150/150/?random" alt="https://picsum.photos">
+    <img src="https://picsum.photos/150/150/?random?" alt="https://picsum.photos" id="img1">
+    <script>
+      'use strict'
+
+      $("#img1").on('contextmenu', function(){
+        console.log(11);
+        return false
+      })
+    </script>
+  </div>
+  <div class="code" data-task='02'>
+    <h2> Task 2 - изображению задать прозрачность, при наведении указателя мыши прозрачность установить <kbd>.99</kbd>, при уходе вернуть исходное значение.</h2>
+    <img id="img2" src="https://picsum.photos/150/150/???" alt="https://picsum.photos">
+    <script>
+      'use strict'
+
+      let img = $("#img2")
+      img.css('opacity', 0.5)
+      img.on('mouseover', function() {
+        img.css('opacity', 0.99)
+      })
+      img.mouseout(function() {
+        img.css('opacity', 0.4)
+      })
+    </script>
+  </div>
+  <div class="code" data-task='03'>
+    <h2> Task 3 - Реализовать следующее поведение. При клике на <kbd>сheckbox "Choose all messages"</kbd> все другие checkbox становятся активными или не активными</h2>
+    <label for="all"><input type="checkbox" name="all" id="all"> Choose all messages</label><hr>
+    <label for="l1"><input type="checkbox" name="l2" id="l1" checked> Message 1</label><br>
+    <label for="l2"><input type="checkbox" name="l2" id="l2"> Message 2</label><br>
+    <label for="l3"><input type="checkbox" name="l3" id="l3"> Message 3</label><br>
+    <label for="l4"><input type="checkbox" name="l4" id="l4"> Message 4</label><br>
+    <label for="l5"><input type="checkbox" name="l5" id="l5"> Message 5</label>
+    <script>
+      $('#all').on('click', function () {
+        $('input[type="checkbox"]').prop('checked', $('#all').is(':checked'))
+      })
+    </script>
+  </div>
+  <div class="code" data-task='04'>
+    <h2> Task 4 - Реализовать появление с анимацией элемента при клике на кнопку(анимировать можно ширину, высоту, фон, рамки и т.д.)</h2>
+    <style>
+      #box1{width: 550px;height: 50px;border: 1px solid red;background: #ccc;}
+    </style>
+    <button type="button" id="btn1">Click me</button>
+    <div id="box1" hidden></div>
+    <script>
+      $('#btn1').on('click', function () {
+        if ($('#box1').is(':hidden')) {
+          $('#box1').prop('hidden', false)
+          $('#box1').animate({"width": "90px", "height": "60px", "border-width": "5px"}, 4000, function () {
+            $('#box1').css('background', 'pink')
+          })
+        }
+      })
+    </script>
+  </div>
+  <div class="code" data-task='05'>
+    <h2> Task 5 - Реализовать на тексте эффект <kbd id="blink">BlinkText</kbd>(<span class="inOut">fadeIn, fadeOut</span>)</h2>
+    <style>
+      #box1{width: 550px;height: 50px;border: 1px solid red;background: #ccc;}
+    </style>
+    <script>
+      function blinkText() {
+        $('#blink').fadeOut(500).fadeIn(500)
+        setTimeout(blinkText, 500)
+      }
+      blinkText()
+      // another
+      function myAn(){
+      	$('.inOut').fadeOut(1000).fadeIn(1000)
+      	setTimeout(myAn, 2000)
+      }
+      // var with setTimeout
+      myAn()
+      // var with setInterval
+      // setInterval(myAn, 2000)
+    </script>
+  </div>
+  <div class="code" data-task='06'>
+    <h2> Task 6 - Сгенерировать список из массива <kbd>petsArr =['Dog', 'Cat', 'Parrot', 'Horse', 'Hamster']</kbd></h2>
+    <h4>Pets</h4>
+    <ol id="pets-list" style="margin-top: auto;"></ol>
+    <script>
+      'use strict'
+      let petsList = $('#pets-list')
+      let petsArr =['Dog', 'Cat', 'Parrot', 'Horse', 'Hamster']
+      $.each(petsArr, function (index, value) {
+        petsList.append($('<li>' + value + '</li>'))
+      })
+    </script>
+  </div>
+  <div class="code" data-task='07'>
+    <h2> Task 7 - Сделать кнопку не активной после нажатия. Параграф должен приобрести ссответствующий вид.</h2>
+    <p id="par7">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident nisi sunt ullam voluptate sit excepturi cumque error reiciendis ut modi quo optio suscipit, vel id voluptatum maiores dolorum, exercitationem unde?</p>
+    <button data-btn="bold">To bold</button>
+    <button data-btn="italic">To italic</button>
+    <button data-btn="underline">To underline</button>
+    <script>
+      'use strict'
+
+      $('button[data-btn]').on('click', function(){
+        let todo = $(this).attr('data-btn')
+        let par = $('#par7')
+        console.log(typeof todo);
+        if (todo === 'bold') par.css('font-weight', 'bold')
+        if (todo === 'italic') par.css('font-style', 'italic')
+        if (todo === 'underline') par.css('text-decoration', 'underline')
+        $(this).prop('disabled', true)
+      })
+    </script>
+  </div>
+  <div class="code" data-task='08'>
+    <h2> Task 8 - Сделать мигающий блок.</h2>
+    <div id="box8" style="width:200px; height:50px;"></div>
+    <script>
+      'use strict'
+
+      let i = 0
+      function blinkBox() {
+        let color = (i%2 === 0) ? 'gold' : 'silver'
+        $('#box8').css('background', color)
+        setTimeout(blinkBox, 700)
+        i++
+      }
+      blinkBox()
+    </script>
+  </div>
+  <div class="code" data-task='09'>
+    <h2> Task 9 - Определение координат мыши(относительно документа и относительно целевого элемента). Привяжите <kbd>&lt;img src="https://picsum.photos/64/64/?random" alt="ddd"&gt;</kbd> к курсору чтоб она перемещалась вмсте с ним. </h2>
+    <div id="task9-holder">
+      <img src="https://picsum.photos/64/64/?random" alt="https://picsum.photos">
+      <p id="mouse-coord" style="background: gold;"></p>
+    </div>
+    <style>
+      #task9-holder{position: relative;height: 300px;background: gold;}
+      #task9-holder img{position: absolute; top: 50px;}
+    </style>
+    <script>
+      'use strict'
+
+        $('#task9-holder').on('mousemove', function (ev) {
+          let offset = $(this).offset()
+          let relativeX = (ev.pageX - offset.left);
+          let relativeY = (ev.pageY - offset.top);
+          $('#mouse-coord').html('document X axis: ' + ev.pageX + '<br>document  Y axis: ' + ev.pageY + '<br>el X axis: ' + relativeX + '<br>el Y axis: ' + relativeY)
+
+          $('#task9-holder img').css({'left': relativeX, 'top': relativeY})
+        })
+    </script>
+  </div>
+  <div class="code" data-task='10'>
+    <h2>Task 10 - Добавляем элемент динамически</h2>
+    <p>Добавить кнопку средствами <i>jQuery</i>. После клика на кнопку меняется текст ниже на произвольный.</p>
+    <div id="task10-holder" style="background: gold;padding:10px 20px;">
+      <p id="task10-res">Result write here</p>
+    </div>
+    <script>
+      'use strict'
+      let newBtn = $('<button>click me</button>')
+      newBtn.attr('id', 'btnClick').appendTo('#task10-holder')
+      $('#btnClick').on('click', function(){
+        $('#task10-res').html('New text!!')
+      })
+    </script>
+  </div>
+  <div class="code bg-info" data-task='11'>
+    <h2>Task 11 - Переключение css тем страницы/блока</h2>
+    <fieldset id="task-11">
+      <link rel="stylesheet" href="">
+      <legend>Change theme</legend>
+      <button class="btn btn-warning" data-theme=''>Default theme</button>
+      <button class="btn btn-warning" data-theme='https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css'>Sketchy theme</button>
+      <button class="btn btn-warning" data-theme='https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/united/bootstrap.min.css'>United theme</button>
+      <button class="btn btn-warning" data-theme='https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/solar/bootstrap.min.css'>Solar theme</button>
+      <button class="btn btn-warning" data-theme='https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css'>Minty theme</button>
+      <hr>
+      <label for="chngTheme"></label>
+      <select name="chngTheme" id="chngTheme">
+        <option value = "">Default</option>
+        <option value = 'https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css'>Sketchy theme</option>
+        <option value = 'https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/united/bootstrap.min.css'>United theme</option>
+        <option value = 'https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/solar/bootstrap.min.css'>Solar theme</option>
+        <option value = 'https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css'>Minty theme</option>
+      </select>
+    </fieldset>
+    <script>
+      'use strict'
+      // btns
+      $('#task-11 button').on('click', function (e) {
+        e.preventDefault()
+        console.log(1, $('#task-12 link[href]'));
+        $('#task-11 link, #task-12 link').attr('href', $(this).attr('data-theme'))
+        // $('#task-12 link').attr('href', $(this).attr('data-theme'))
+      })
+      // select
+      $('#task-11 select').change(function (e) {
+        e.preventDefault()
+        $('#task-11 link, #task-12 link').attr('href', $(this).prop('value'))
+      })
+    </script>
+  </div>
+
+  <div class="code" data-task='12'>
+    <h2>Task 12 - Запрограммировать чтоб <kbd>"Total ammount"</kbd> увеличивался или уменьшался при выборе(снятии) <kbd>checkbox</kbd>. Связать их оформление с предыдущей задачей, т.е. при изменениеи темы изменяется и вид checkbox-ов</h2>
+    <style>
+      link[href*='sketchy'] ~ label{margin: 0 15px;}
+    </style>
+    <fieldset id="task-12" style="background: gold;padding:10px 30px;">
+      <link rel="stylesheet" href="">
+      <legend><b><mark>Ticked total coast</mark></b></legend>
+      <label for="tsk12-chck1"> <input type="checkbox" name="task12" id="tsk12-chck1" value='10' class="form-control" checked> Bus ($10)</label>
+      <label for="tsk12-chck2"> <input type="checkbox" name="task12" id="tsk12-chck2" value='17' class="form-control"> Taxi ($17)</label>
+      <label for="tsk12-chck3"> <input type="checkbox" name="task12" id="tsk12-chck3" value='8' class="form-control"> Train ($8)</label>
+      <label for="tsk12-chck4"> <input type="checkbox" name="task12" id="tsk12-chck4" value='25' class="form-control"> Plane ($25)</label>
+      <p class="tsk12-res">Total ammount: $0</p>
+    </fieldset>
+    <script>
+      'use strict'
+      $('#task-12 :checkbox').attr('checked', false)
+      $('#task-12 :checkbox').on('click', function(){
+        let ammount = 0
+        $('#task-12 :checkbox:checked').each(function () {
+          let val = $(this).prop('value')*1
+          ammount = ammount + val
+        })
+        $('.tsk12-res').html("Total ammount: <b>$" + ammount +'</b>')
+      })
+    </script>
+  </div>
+
+  <div class="code" data-task='13'>
+    <h2>Task 13 - Запрограммировать слайдшоу Использовать <kbd>.fadeOut() & .fadeIn()</kbd></h2>
+    <style>
+    #slideshow{
+      width: 458px;
+      height: 354px;
+      margin: 10px auto;
+      border: 2px solid gold;
+      position: relative;
+    }
+    .pic{
+      position: absolute;
+      left: 0;top: 0;
+    }
+    </style>
+    <div id="slideshow">
+      <img  class="pic" alt="descr" src="https://picsum.photos/458/354">
+      <img  class="pic" alt="descr" src="https://picsum.photos/458/354/?">
+      <img  class="pic" alt="descr" src="https://picsum.photos/458/354/?????">
+      <img  class="pic" alt="descr" src="https://picsum.photos/458/354/???">
+      <img  class="pic" alt="descr" src="https://picsum.photos/458/354/??">
+    </div>
+    <script>
+      'use strict'
+      $('.pic').hide()
+      $('.pic:first').fadeIn(1000)
+      $('.pic').on('click', function () {
+        $(this).fadeOut(1000)
+        let next = ($(this).next().length ? $(this).next() : $('.pic:first'))
+        next.fadeIn(2500)
+      })
+    </script>
+  </div>
+  <div class="code" data-task='14'>
+    <h2>Task 14 - Refresh Content without Reloading the Page</h2>
+    <div id="refr"></div>
+    <script>
+      'use strict'
+      $(document).ready(function () {
+        refresh()
+      })
+      let j = 0
+      let tsk14Arr = []
+      tsk14Arr[0] = 'Мы учимся, увы, для школы, а не для жизни.'
+      tsk14Arr[1] = 'Сделай шаг вперед — и ты поймешь, что многое не так страшно как раз потому, что больше всего пугает.'
+      tsk14Arr[2] = 'Лучше иметь не деньги, а власть над теми, у кого они есть.'
+      tsk14Arr[3] = 'Сильнее всех — владеющий собою.'
+      tsk14Arr[4] = 'Работай с умом, а не до ночи.'
+      tsk14Arr[5] = 'Eсли хочешь подчинить себе все, подчини себя разуму.'
+      tsk14Arr[6] = 'Пока есть возможность, живите весело!'
+      tsk14Arr[7] = 'Человеку свойственно ошибаться.'
+      function refresh() {
+        let rndmQuote = Math.floor(Math.random() * tsk14Arr.length)
+        $('#refr').html('New content by timeout: <b>' + tsk14Arr[rndmQuote] + '</b>') // j
+        setTimeout(refresh, 3500)
+        // j += 10
+      }
+    </script>
+  </div>
+</body>
+</html>

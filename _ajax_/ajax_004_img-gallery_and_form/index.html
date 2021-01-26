@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="url" content="https://www.youtube.com/watch?v=IyCnbyWZkRU&list=WL&t=0s&index=28">
+    <title>Img-gallery jQuery AJAX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container jumbotron text-center">
+      <div class="card bg-info text-white mb-3">
+        <img class="card-img-top img-fluid" src="https://picsum.photos/1200/400?image=10" alt="capture1">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some caption content.</p>
+        </div>
+      </div>
+
+      <div class="btn-group my-4" role="group">
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-outline-primary">Primary</button>
+        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+        <button type="button" class="btn btn-outline-success">Success</button>
+        <button type="button" class="btn btn-outline-danger">Danger</button>
+        <button type="button" class="btn btn-outline-warning">Warning</button>
+        <button type="button" class="btn btn-outline-info">Info</button>
+        <button type="button" class="btn btn-link">Link</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+      </div>
+
+      <form id="comments" class="text-left" method="post" action="comment.html">
+        <h2 class="bg-info text-white-50 px-3 pb-2 pt-1 rounded text-center font-weight-bold">New comment</h2>
+
+        <div class="alert alert-danger" role="alert" style="display: none;">
+          <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div>
+
+        <div class="form-group">
+          <label for="Username">Username</label>
+          <input type="text" class="form-control" id="Username" name="user" placeholder="Bob Li Svager">
+        </div>
+        <div class="form-group">
+          <label for="Comment">Comment</label>
+          <textarea class="form-control" id="Comment" rows="3" name="text"></textarea>
+        </div>
+        <input type="submit" class="btn btn-info mb-2" value="Submit comment">
+      </form>
+
+        <!-- list group -->
+        <ul class="list-group my-3 text-left">
+          <li class="list-group-item">
+            <div class="media ">
+              <img src="https://picsum.photos/100/100?image=1010" class="mr-4" alt="...">
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="media  my-4">
+              <img src="https://picsum.photos/100/100?image=1" class="mr-4" alt="...">
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </li>
+        </ul>
+
+      <div id="loading" style="display: none;">
+        We are sending your comment <br>
+        <div class="spinner-border text-info mt-2" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+
+      <div id="results" class="alert alert-info" role="alert" style="display: none;">      </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        console.log('ready');
+        let pictures,
+            btns     =  $('button'),
+            title    =  $('.card-title'),
+            caption  =  $('.card-text'),
+            image    =  $('.card-img-top'),
+            error    =  $('.alert-danger'),
+            form     =  $('form'),
+            loading  =  $('#loading'),
+            comments =  $('.list-group')
+            // console.log($pictures, btns, title, caption, image);
+            // console.log(error, form, loading, comments);
+
+////////////////////////////////////
+////   Data from JSON & forms   ////
+////////////////////////////////////
+
+        $.ajaxSetup({
+          error: function() {
+            error.show();
+          }
+        })
+
+        form.submit(function(e) {
+          e.preventDefault();
+          // form.hide();
+          console.log('return before AJAX ' + form.serialize());
+          $.ajax({
+            type: 'POST',
+            url : form.attr('action'),
+            data: form.serialize(),
+            beforeSend: function() {
+              console.log("beforeSend");
+              // console.log(data);  //  fucking data
+              loading.show();
+            },
+            complete: function() {
+              console.log("complete");
+              // console.log(data); //  fucking data
+              loading.hide();
+            },
+            success : function() {
+              console.log("success");
+              comments.append(data);
+            }
+          })
+          return false;
+        })
+
+
+        $.get('pictures.json', function(data) {
+            pictures = data;
+        })
+        // console.log($pictures, $btns, $title, $caption, $image);
+
+        btns.click(function () {
+          console.log(pictures, 1);
+          let index = btns.index(this);
+          let picture = pictures[index].picture;
+
+          caption.text(picture.caption);
+          image.attr('src',  picture.source);
+          title.text('Gallery - ' + picture.caption);
+          return false;
+        })
+
+        function showValues() {
+      	  var str = $("form").serialize();
+          console.log('showValues return ' + str);
+      	  $("#results").show().text( str );
+      	}
+        $('input[type="submit"]').on('click', showValues);
+
+      });
+    </script>
+  </body>
+</html>

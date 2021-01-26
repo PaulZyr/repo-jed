@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Timer</title>
+  </head>
+  <body>
+    <h1>Timer</h1>
+    <div id="timer">timer</div>
+
+    <script>
+      let ourPlace = document.getElementById('timer');
+      let ourTimer = new Timer(7, ourPlace);
+
+      // function constructor
+      function Timer(startSec, timerPlace) {
+        this.sec = startSec;
+        this.place = timerPlace;
+        this.step = function(){
+          this.sec--;
+          this.place.textContent = this.sec;
+          console.log(this);  // this console return correct object
+        };
+      }
+
+      let c = ourTimer.sec;  // How much step we have
+
+      //  run method .step from function constructor
+      let startTimer = function() {
+        console.log(this); // this console return window object
+        c--;
+        ourTimer.step();
+        //  condition for stop ourTimer when we need, using clearInterval function
+        if (c == 0) {
+          clearInterval(id);
+        }
+      }
+      // iteration wit setInterval
+      let id = setInterval(startTimer, 1000);
+
+    </script>
+  </body>
+</html>

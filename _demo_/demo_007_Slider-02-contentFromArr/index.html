@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Slider-2</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+  <style>
+    #slider h2,
+    #slider p {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 15px;
+    }
+
+    #slider p {
+      top: 40%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  </style>
+  <h1 class="text-center">Slider - 2</h1>
+  <div class="container">
+    <div class="jumbotron mt-3">
+
+        <section id="slider" index="" class="text-center">
+          <figure class="embed-responsive embed-responsive-16by9">
+            <img id="slider_img"  class="embed-responsive-item" data-class="img-responsive mw-100" src="http://bipbap.ru/wp-content/uploads/2017/09/Cool-High-Resolution-Wallpaper-1920x1080.jpg" alt="">
+            <figcaption>
+              <h2 id="slider_title" class="text-uppercase text-truncate text-nowrap">Title</h2>
+              <p  id="slider_descr" class="text-justify text-monospace">descr</p>
+            </figcaption>
+          </figure>
+          <div class="text-capitalize" >
+            <a href="#" id="prev" class="btn btn-primary" onclick="prev()">prev</a>
+            <a href="#" id="next" class="btn btn-primary" onclick="next()">next</a>
+          </div>
+        </section>
+
+    </div>
+
+  </div>
+<div class="container mb-5">
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action list-group-item-info mb-1">
+      <a href="https://hackerthemes.com/bootstrap-cheatsheet/">bootstrap-cheatsheet</a>
+    </li>
+    <li class="list-group-item list-group-item-action list-group-item-info mb-1">
+      <a href="https://getbootstrap.com/docs/4.1/utilities/embed/#example">embed/#example</a>
+    </li>
+    <li class="list-group-item list-group-item-action list-group-item-info">
+      <a href="https://auralinna.blog/post/2018/crop-and-resize-images-with-css">crop-and-resize-images-with-css</a>
+    </li>
+  </ul>
+</div>
+
+  <script>
+    var slider = [
+      [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla repudiandae, nesciunt.",
+        "https://images.pexels.com/photos/60006/spring-tree-flowers-meadow-60006.jpeg?cs=srgb&dl=nature-flowers-sun-60006.jpg&fm=jpg",
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae similique dignissimos deserunt? Aliquid rem ullam consectetur vitae incidunt quasi commodi."
+      ],
+      [
+        "title - 2",
+        "http://bipbap.ru/wp-content/uploads/2017/09/Cool-High-Resolution-Wallpaper-1920x1080.jpg",
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae similique dignissimos deserunt? Aliquid rem ullam consectetur vitae incidunt quasi commodi."
+      ],
+      [
+        "title &mdash; 3",
+        "http://longwallpapers.com/Desktop-Wallpaper/beautiful-nature-wallpapers-mobile-For-Desktop-Wallpaper.jpg",
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae similique dignissimos deserunt? Aliquid rem ullam consectetur vitae incidunt quasi commodi."
+      ],
+      [
+        "title 4",
+        "http://bipbap.ru/wp-content/uploads/2017/09/Cool-High-Resolution-Wallpaper-1920x1080.jpg",
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae similique dignissimos deserunt? Aliquid rem ullam consectetur vitae incidunt quasi commodi."
+      ],
+      [
+        "title 5",
+        "http://www.grand-pava.net.ua/wp-content/uploads/2017/08/full-hd-sea-nature-free-download.jpg",
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae similique dignissimos deserunt? Aliquid rem ullam consectetur vitae incidunt quasi commodi."
+      ]
+    ];
+    var sliderElement = document.getElementById('slider');
+    // var sliderTitle   = document.getElementById('slider_title').innerHTML = slider[0][0];
+    // var sliderImg     = document.getElementById('slider_img').src = slider[0][1];
+    // var sliderDescr   = document.getElementById('slider_descr').innerHTML = slider[0][2];
+    // var index         = document.getElementById('slider').setAttribute('index', 0);
+    // console.log(sliderElement);
+    // console.log(sliderTitle);
+    // console.log(sliderImg);
+    // console.log(sliderDescr);
+    // console.log(index);
+
+    function setImg(y) {
+
+      const sliderTitle = document.getElementById('slider_title');
+      const sliderImg = document.getElementById('slider_img');
+      const sliderDescr = document.getElementById('slider_descr');
+      const index = document.getElementById('slider').setAttribute('index', y);
+
+      sliderTitle.innerHTML = slider[y][0];
+      console.log(slider[y][0]);
+
+      sliderImg.src = slider[y][1];
+      sliderDescr.innerHTML = slider[y][2];
+      sliderElement.setAttribute('index', y);
+    }
+
+    setImg(0);
+
+    function prev() {
+      var index = parseInt(sliderElement.getAttribute('index'));
+      console.log(index);
+
+      if (index > 0) {
+        index--;
+        setImg(index);
+      } else {
+        index = slider.length;
+        index--;
+        setImg(index);
+        console.log(index + " - else prev");
+      }
+    }
+
+    function next() {
+      var index = parseInt(sliderElement.getAttribute('index'));
+
+      if (index >= 0 && index != slider.length - 1) {
+        index++;
+        setImg(index);
+      } else {
+        index = 0;
+        // index--;
+        setImg(index);
+        console.log(index + "- else next");
+      }
+    }
+  </script>
+</body>
+
+</html>

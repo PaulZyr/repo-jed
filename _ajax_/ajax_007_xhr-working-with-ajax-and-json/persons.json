@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Bob Lee",
+    "company": "HP",
+    "phone": "111-777-4444"
+  },
+  {
+    "id": 2,
+    "name": "Ilon Mask",
+    "company": "X-Space",
+    "phone": "111-888-4444"
+  },
+  {
+    "id": 3,
+    "name": "Morgan Freman",
+    "company": "Hollywood",
+    "phone": "555-777-8888"
+  }
+]

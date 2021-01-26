@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Call</title>
+  <style>
+    .boxes {
+      font-size: 2em;
+      line-height: 3;
+      text-align: center;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #3c6;
+      display: inline-block;
+    }
+
+    .active {
+      background: #63c;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="boxes">
+    <div class="box b1">01</div>
+    <!-- second -->
+    <div class="box b2">02</div>
+    <div class="box b3">03</div>
+    <div class="box b4">04</div>
+    <div class="box b5">05</div>
+    <div class="box b6">06</div>
+    <div class="box b7">07</div>
+  </div>
+
+  <script>
+    // window.onload = function(){
+    // var box = document.querySelector('.boxes .box');
+
+    // 1
+    // box.onclick = function () {
+    //   console.log(1); // 1
+    // }
+
+    // 2
+    // box.onclick = function () {
+    //   console.log(1); // 1
+    // }
+    // activeBox();
+
+    // 3
+    // box.onclick = activeBox; // => ссылка на функцию
+    // activeBox(); // => вызов функции
+
+    // 4
+    // box.onclick = activeBox; // => ссылка на функцию
+    // 4.1
+    // activeBox(); // this.classList is undefined => не существует у глобального объекта
+
+    //  5
+    // box.onclick = function (){
+    //   this.classList.toggle('active');
+    // }
+
+    //  6 => замыкание
+    // 6.1
+    // box.onclick = activeBox;
+    // 6.2 !!! Remember comment function below outside the window.onload function
+    // function activeBox(){
+    //   console.log(box);
+    // }
+
+    // } // end window.onload
+
+    // 2, 3
+    // function activeBox(){
+    //   console.log(this); // 2 => window; 3 => element
+    // }
+
+    // 4
+    // function activeBox(){
+    //   this.classList.toggle('active');
+    // }
+
+    // 5
+    // ...
+
+    // 6 => замыкание
+    // 6.1
+    // function activeBox(){
+    //   console.log(box); // box is not defined
+    // }
+    // 6.2 => replace this func inside the main function
+    // function activeBox(){
+    //   console.log(box);
+    // }
+
+
+    // ############################
+    // If we have much elements
+    // ############################
+    var boxes = document.querySelectorAll('.boxes .box');
+    for (var i = 0; i < boxes.length; i++) {
+      boxes[i].onclick = activeBox;
+    }
+
+    function activeBox(ev) {
+      console.error('--- \nstart activeBox');
+      // working
+      console.log('click');
+      console.log(ev);
+      console.log(this);
+      // not working
+      // console.log('click - ' + this.currentTarget.className);
+      // console.log('click - ' + boxes[i].currentTarget.className);
+      // not working
+      // boxes[i].classList.toggle('active');
+      // working
+      this.classList.toggle('active');
+      // ev.target.classList.toggle('active');
+      console.error('end activeBox \n---');
+    }
+
+    // setInterval(activeBox, 1500); // глобальный контекст - window === не работает
+
+
+    // setInterval( function() {
+    //   var rand = mtRand(0, boxes.length-1);
+    //   // boxes[rand];
+    //   // console.log(activeBox.call(boxes[rand]));
+    //   // console.log(boxes[rand]);
+    //   console.log(rand+1);
+    //   activeBox.call(boxes[rand]);
+    // }, 2000);
+
+    let count = 0;
+    function randBox() {
+      console.info('start setInterval');
+
+      count++;
+      console.log(count);
+      if (count == 1) {
+        // STOP randBox func with own interval
+        clearInterval(myInt)
+      }
+
+      // GET random number from min to max boxes.length-1
+      let rand = mtRand(0, boxes.length - 1);
+
+      console.log('its num of box - ' + (rand + 1));
+      console.log('get random boxes elem for use correct context  - ' + boxes[rand].tagName + ' with classes ' + boxes[rand].classList);
+
+      let self = this;
+      console.log(this);
+      console.log(self);
+
+      activeBox.call(boxes[rand]);
+
+      console.info('end setInterval current step');
+    }
+
+    // START randBox func with own interval
+    var myInt = setInterval(randBox, 2000);
+
+
+    // func for random number from min to max value
+    function mtRand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1));
+    }
+  </script>
+</body>
+
+</html>

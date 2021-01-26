@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>a&b 2</title>
+</head>
+<body>
+<h1>Age</h1>
+  <script>
+    var flag = confirm("Are you agre input your age?");
+    do {
+      if(flag === false) break;
+      var age = prompt('Your age?', '');
+      age = Number(age);
+
+      if (Number.isNaN(age) === false && age != '' ) {
+        if (age < 18) {
+          alert('You are young.');
+          flag = false;
+        } else {
+          alert('You are elder.');
+          flag = false;
+        }
+      } else {
+        alert('Incorrect data! Try again.');
+      }
+    } while (flag);
+
+    // var age = prompt('Input your age below.','20');
+    // age = Number(age);
+    // if (Number.isNaN(age) === false) {
+    //   if (age < 18) {
+    //     alert('You are young.');
+    //   } else {
+    //     alert('You are elder.');
+    //   }
+    // } else {
+    //   alert('Incorrect data! Try again.');
+    // }
+  </script>
+</body>
+</html>

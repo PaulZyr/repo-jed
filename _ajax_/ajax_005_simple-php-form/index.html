@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="url" content="http://w3.org.ua/jquery/jquery-metod-serialize-dlya-obrabotki-form/">
+  <meta name="url" content="https://www.w3schools.com/jquery/ajax_serialize.asp">
+  <title>jQuery AJAX simple form</title>
+</head>
+
+<body>
+  <h1>jQuery AJAX simple form</h1>
+
+  <form>
+    <input type="text" name="fio" value="Bob Li">
+    <input type="text" name="age" value="30">
+    <button>Push</button>
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('button').on('click', fGo); //событие на клик кнопки
+    });
+
+    function fGo(e) {
+      e.preventDefault(); //отключаем стандартную реакцию браузера
+      console.log($('form').serialize()); //в консоли смотрим внешний вид строки
+      $.post(
+        "1.php", // куда отправляем запрос
+        $('form').serialize(), // сама строка
+        ifSuccess // функция которая обрабатывает ответ сервера
+      );
+    }
+
+    function ifSuccess(data) {
+      console.log(data); // ответ выводим в консоль
+    }
+  </script>
+</body>
+
+</html>

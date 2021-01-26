@@ -1,0 +1,374 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="http://jsraccoon.ru/fn-array-methods">
+  <title>array</title>
+  <link rel="stylesheet" href="/css/links.css">
+</head>
+
+<body>
+  <h1>Array homework</h1>
+  <h2>#1 Получить последний элемент массива.</h2>
+  Есть массив <var>country</var>.Сколько в нем элементов – не знаем, но можем прочитать из <kbd>country.length</kbd>. <br>
+  Напишите код для получения последнего элемента <var>country</var>.
+  <script>
+    console.groupCollapsed('#1 Get last element from array');
+      let country = ['Poland', 'Germany', 'England', 'Canada', 'Japain'];
+      console.log('Array length is - ' + country.length + '. \nIt\'s - ' + country.join(', '));
+      console.log(country.pop() + ' - is last element in country array.');
+    console.groupEnd();
+  </script>
+
+  <h2>#2 Добавить новый элемент в массив</h2>
+  Есть массив <var>country</var>. Напишите код для добавления в его конец значения <b>«Ukraine»</b>.</div>
+  <script>
+    console.groupCollapsed('#2 Add New Element in array.');
+      console.log('Array length before push() - ' + country.length);
+      country.push('Ukraine');
+      console.log('Array length again is ' + country.length + '.\nArray items now is - ' + country.join(', '));
+    console.groupEnd();
+  </script>
+
+  <h2>#3 Создание массива</h2>
+  Задача из 5 шагов-строк:
+  <ol>
+    <li>Создайте массив <kbd>language</kbd> с элементами <b>«Java», «Javascript»</b>.</li>
+    <li>Добавьте в конец значение <b>«Pyton»</b></li>
+    <li>Замените предпоследнее значение с конца на <b>«PHP»</b>. <br>
+      Код замены предпоследнего значения должен работать для массивов любой длины.
+    </li>
+    <li>Удалите первое значение массива и выведите его <kbd>console</kbd>.</li>
+    <li>Добавьте в начало значения <b>«C#»</b> и <b> «C++»</b>.</li>
+  </ol>
+
+  Массив в результате каждого шага:
+  <pre>  Java, Javascript <br>  Java, Javascript, Pyton <br>  Java, PHP, Pyton <br>  PHP, Pyton <br>  C#, C++, PHP, Pyton</pre>
+  <script>
+    console.groupCollapsed('#3 Create array with 5 steps.');
+      // step 1
+      let language = ['Java', 'Javascript'];
+      console.log('Step 1 - ' + language.join(', '));
+      // step 2
+      language.push('Pyton');
+      console.log('Step 2 - ' + language.join(', '));
+      // step 3
+      language.splice(-2, 1, 'PHP');
+      console.log('Step 3 - ' + language.join(', '));
+      // step 4
+      let shft = language.shift(0);
+      console.log('Step 4 - ' + language.join(', '));
+      // step 5
+      language.splice(0, 0, 'C#', 'C++');
+      console.log('Step 5 - ' + language.join(', '));
+    console.groupEnd();
+  </script>
+
+  <h2>#4 Напишите программу для вывода <kbd>console.info</kbd> случайного значения из массива <var>country</var>: </h2>
+  <kbd>let country = ['Poland', 'Germany', 'England', 'Canada', 'Japain'];</kbd> <br><br>
+  <b>P.S. Код для генерации случайного целого от <sup>min</sup> to <sup>max</sup> включительно:</b>
+  <pre><mark>  <kbd>var rand = min + Math.floor(Math.random() * (max + 1 - min));</kbd>  </mark></pre>
+  <script>
+    console.groupCollapsed('#4 Random country from array');
+      let min = 0;
+      let max = country.length-1;
+      var rand = min + Math.floor(Math.random() * (max + 1 - min));
+      console.info('Randome country from array is - ' + country[rand]);
+    console.groupEnd();
+  </script>
+
+  <h2>#5 Создайте калькулятор для введённых значений</h2>
+  <b>Напишите код, который:</b> <br>
+  1 - Запрашивает по очереди значения при помощи <kbd>prompt</kbd> и сохраняет их в массиве. <br>
+  2 - Заканчивает ввод, как только посетитель введёт пустую строку, не число или нажмёт «Отмена». <br>
+  3 - При этом ноль(0) не должен заканчивать ввод, это разрешённое число. <br>
+  4 - Выводит сумму всех значений массива.
+  <script>
+    console.groupCollapsed('#5 Calculator, two decision.');
+    console.log(' Uncomment for look how work.');
+      let arrSum = [];
+      let flag = true;
+      let res = 0, n;
+      // do {
+      //   n = parseInt(prompt('Input number for summary numbers.', '0'));
+      //   if (Number.isNaN(n) ) {
+      //     flag = false;
+      //     for (var i = 0; i < arrSum.length; i++) {
+      //       res = res + arrSum[i]
+      //     }
+      //   } else {
+      //     arrSum.push(n);
+      //   }
+      // } while (flag);
+
+      //  another variant
+      let arrSum2=[];
+      let res2 = 0, n2;
+      // do{
+      //   n2 = parseInt(prompt('Input number for summary numbers.', '10'));  // return number integer or NaN
+      //   if (!Number.isNaN(n2)) {
+      //     arrSum2[arrSum2.length] = n2;
+      //   }
+      // } while(!Number.isNaN(n2));
+      // for (var i = 0; i < arrSum2.length; i++) {
+      //   res2 += arrSum2[i];
+      // }
+      // // Results all
+      // console.log('#5 - sum res = ' + res, '\n#5 - sum res2 = ' + res2);
+    console.groupEnd();
+  </script>
+
+
+  <h2>#6 Поиск в массиве.</h2>
+  Создайте функцию <kbd>findInArr( arrSearch, value )</kbd>, которая ищет в массиве <kbd>arrSearch</kbd> значение <kbd>value</kbd> и возвращает его номер, если найдено, или -1, если не найдено. <br>
+  <b>Например:</b>
+  <kbd>
+    <pre>
+  arrSearch = ["test", 2, 1.5, false];
+  findInArr( arrSearch, value ) {
+    ...
+  };
+  findInArr( arrSearch, "test" ); // 0
+  findInArr( arrSearch, 2 );      // 1
+  findInArr( arrSearch, 1.5 );    // 2
+  findInArr( arrSearch, 0 );      // -1
+  </pre>
+  </kbd>
+  <script>
+    console.groupCollapsed('#6 Search in array');
+      let arrSearch = ["test", 2, 1.5, false];
+      function findInArr(arrayForSearch, findValue){
+        for (var i = 0; i < arrayForSearch.length; i++) {
+          if (arrayForSearch[i] === findValue) {
+            console.log(i);
+            return 1;
+          }
+        }
+        console.log(-1);
+        return -1;
+      }
+      findInArr(arrSearch, "test"); // 0
+      findInArr(arrSearch, 2);      // 1
+      findInArr(arrSearch, 1.5);    // 2
+      findInArr(arrSearch, 0);      // -1
+    console.groupEnd();
+  </script>
+
+  <h2>#7 Напишите функцию JavaScript, чтобы проверить, является ли ​<b>«ourParameter»</b> массивом или нет</h2>
+  <pre>
+  function ownIsArray(ourParameter) {
+    ...
+  };
+  console.log(ownIsArray('some resource'));
+  console.log(ownIsArray([1, 2, 4, 0]));
+  </pre>
+  <script>
+    // console.group('#7 Own function ownIsArray');
+    console.groupCollapsed('#7 Own isArray function');
+      function ownIsArray(arg) {
+        // decision 1
+        return Object.prototype.toString.call(arg) === '[object Array]';
+
+        // decision 2
+        // return arg.constructor === Array;
+
+        // decision 3
+        // return arg instanceof Array;
+
+        // decision 4
+        // return Array.isArray(arg);
+      }
+      console.info(ownIsArray('some resource'));
+      console.info(ownIsArray([1, 2, 4, 0]));
+    console.groupEnd();
+  </script>
+
+  <h2>#8 Напишите функцию JavaScript для клонирования массива.</h2>
+  <pre>
+  function cloneArray(ownParam) {
+    ...
+  };
+  console.log(cloneArray([1, 2, 4, 0]));
+  console.log(cloneArray([1, 2, [4, 0]]));
+  </pre>
+  <script>
+    console.groupCollapsed('#8 Own cloneArray function');
+      function cloneArray(arg){
+        console.log('This is the old array ', arg);
+        // decision 1
+        // let cAr = arg.slice(0);
+        // cAr.unshift("white", "black");  //Add text to verify the difference between old and new Array
+        // return cAr;
+
+        // decision 2
+        // let cAr = Object.assign([], arg);
+        // cAr.unshift("white", "black");
+        // return cAr;
+
+        // decision 3
+        let cAr = Array.from(arg);
+        cAr.unshift("white", "black");
+        return cAr;
+      }
+      console.log('This is the new array ', cloneArray([1, 2, 4, 0]));
+      console.log('This is the new array ', cloneArray([1, 2, [4, 0]]));
+      function cloneArray2(arg) {
+        console.log('This is the old array ', arg);
+      	let cloneArr = [];
+      	arg.forEach(function (num) {
+      		cloneArr.push(num);
+      	});
+        cloneArr.push("purple", "black");
+      	return cloneArr;
+      };
+      console.log('This is the new array ', cloneArray2([1, 2, 4, 0]));
+      console.log('This is the new array ', cloneArray2([1, 2, [4, 0]]));
+    console.groupEnd();
+  </script>
+
+  <h2>#9 Напишите функцию JavaScript, чтобы получить первые элементы массива.</h2>
+  Передача параметра 'n' вернет первые 'n' элементов массива.
+  <pre>
+  function first(array, n) {
+    if (...) return ... ;
+    if (...) return ... ;
+    if (...) return ... ;
+    return  ... ;
+  };
+  console.log( first( [7, 9, 0, -2]) );       // 7
+  console.log( first( [], 3) );               // []
+  console.log( first( [7, 9, 0, -2], 3) );    // [7, 9, 0]
+  console.log( first( [7, 9, 0, -2], 6) );    // [7, 9, 0, -2]
+  console.log( first( [7, 9, 0, -2], -3) );   // []
+  </pre>
+  <script>
+    console.groupCollapsed('#9  Function for get "n" first elements from array');
+      function first(array, n) {
+        if (array == null) return console.log('Array is null return - ' + void 0 );
+        if (n == null) return array[0];
+        if (n < 0) return [];
+        return array.slice(0, n);
+      };
+      console.log(first( [7, 9, 0, -2]) );           // 7
+      console.log(first( [], 3) );                   // []
+      console.log(first( [7, 9, 0, -2], 3) );        // [7, 9, 0]
+      console.log(first( [7, 9, 0, -2], 6) );        // [7, 9, 0, -2]
+      console.log(first( [7, 9, 0, -2], -3) );       // []
+      console.log(first( null ) );                   // undefined
+    console.groupEnd();
+  </script>
+
+  <h2>#10 Напишите функцию JavaScript, чтобы получить последние элементы массива.</h2>
+  Передача параметра 'n' вернет последние 'n' элементов массива.
+  <pre>
+  function last(array, n) {
+    if (...) return ... ;
+    if (...) return ... ;
+    return array.slice(Math.max(array.length - n, 0));
+  };
+  console.log( last( null ));            //  undefined
+  console.log( last([7, 9, 0, -2]));     // -2
+  console.log( last([7, 9, 0, -2],3));   // ​[9,0,-2]
+  console.log( last([7, 9, 0, -2],6));   // ​[7,9,0,-2]
+  </pre>
+  <script>
+    console.groupCollapsed('#10 Function for get "n" last elements from array');
+      function last(array, n) {
+        if (array == null) return void 0;
+        if (n == null) return array[array.length - 1];
+        return array.slice(Math.max(array.length - n, 0));
+      };
+
+      console.log( last( null ));              //  undefined
+      console.log( last( [7, 9, 0, -2]));      //  -2
+      console.log( last( [7, 9, 0, -2],3));    //  [9, 0, -2]
+      console.log( last( [7, 9, 0, -2],6));    //  [7, 9, 0, -2]
+    console.groupEnd();
+  </script>
+
+  <h2>#11 Напишите простую программу JavaScript, для объединения элементо массива <var>country</var> в строку. <kbd> (.toString, .join​)</kbd></h2>
+  <kbd>let country = ['Poland', 'Germany', 'England', 'Canada', 'Japain'];</kbd>
+
+  <script>
+    console.groupCollapsed('#11 Array to String function');
+      console.info('#11 Array to String function');
+      console.log(country.toString());
+      console.log(country.join(' * '));
+    console.groupEnd();
+  </script>
+
+  <h2>#12 Напишите на JavaScript программу, которая принимает число в качестве входных данных и вставляет тире (-) между каждыми двумя четными числами.</h2>
+  <b>Например</b>, если вы принимаете <kbd>025468855</kbd>, вывод должен быть <kbd>0254-6-8-855</kbd> !!! (0 считаем нечетным числом). <br><br>
+  <button type="button" onclick="dashesBetwenEven()">run dashesBetwenEven</button>
+  <br><br><br>
+
+  <script>
+    console.groupCollapsed('#12 Insert dashes (-) between even numbers');
+
+    function dashesBetwenEven() {
+      let str = prompt('Insert numbers', '025468855');
+      let result = [str[0]];
+
+      for (let x = 1; x < str.length; x++) {
+        if ((str[x - 1] % 2 === 0) && (str[x] % 2 === 0) && (parseInt(str[x - 1]) !== 0) && (parseInt(str[x]) !== 0)) {
+          result.push('-', str[x]);
+        } else {
+          result.push(str[x]);
+        }
+      }
+      console.log(result.join(''));
+    }
+    console.groupEnd();
+  </script>
+
+  <h2>#13 Создайте функцию, которая считает длину массива и возвращает ее в виде числа.</h2>
+  Массив в функцию передается как аргумент. Если аргумент не задан – выводится сообщение об ошибке.
+  <script>
+    console.group('#13');
+      let lAr = [1, 'c', 1, 2, , 3]
+      let lObj = {
+        a: 1,
+        b: 2
+      }
+
+      function myLeng(par) {
+        // console.log(arguments);
+        // return (arguments !== -1 ) ? console.log(arguments.length) : console.log('Error')
+        // return (arguments !== -1 ) ? arguments.length : 'Error'
+        return (arguments.length === 0 || !(par.constructor === Array)) ? 'Error' : console.log(par.length);
+      }
+      myLeng(lAr)
+      console.log(myLeng(lObj), myLeng(''), myLeng());
+      myLeng(lObj)
+      myLeng('')
+      myLeng()
+    console.groupEnd();
+
+    console.group("#14 Example how work splice.");
+      var myFish = ['angel', 'clown', 'mandarin', 'surgeon'];
+      console.info(myFish)
+      console.warn("After myFish.splice(2, 0, 'drum')")
+      var removed = myFish.splice(2, 0, 'drum');("This is %cMy stylish message", "color: yellow; font-style: italic; background-color: blue; padding: 2px;");
+      console.log("%c Removed " + removed.length + ' elements. \n%c And myFish now is: \n< ' + myFish.join(' >< ') + '> \n\n')  //, 'color: #A60000; background:#008500; font-size:20px;', 'color: #008500; background:#A60000; font-size:20px;' )
+
+      console.warn("After myFish.splice(3, 1). ")
+      removed = myFish.splice(3, 1);
+      console.log("Removed " + removed + ' element. \nAnd myFish now is: \n< ' + myFish.join(' >< ') + ' >\n\n')
+
+      console.warn("After myFish.splice(2, 1, 'trumpet').")
+      removed = myFish.splice(2, 1, 'trumpet');
+      console.log("Removed " + removed + ' element. \nAnd myFish now is: \n< ' + myFish.join(' >< ') + ' >\n\n')
+
+      console.warn("After myFish.splice(0, 2, 'parrot', 'anemone', 'blue').")
+      removed = myFish.splice(0, 2, 'parrot', 'anemone', 'blue');
+      console.log("Removed " + removed + ' element. \nAnd myFish now is: \n< ' + myFish.join(' >< ') + ' >\n\n')
+
+      console.warn("After myFish.splice(myFish.length - 3, 2). ");
+      removed = myFish.splice(myFish.length - 3, 2);
+      console.log("Removed " + removed + ' element. \nAnd myFish now is: \n< ' + myFish.join(' >< ') + ' >\n\n')
+    console.groupEnd();
+  </script>
+
+</body>
+
+</html>

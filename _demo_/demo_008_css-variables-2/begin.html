@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom CSS Variables Theming UI and JS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.4/tailwind.min.css">
+</head>
+<body>
+  <h2>Custom CSS Variables Theming UI with <span class='hl'>JS</span></h2>
+
+  <div class="absolute bg-white left-0 p-4 right-0 text-grey">
+    <div class="flex items-center">
+      <div class="flex flex-wrap mr-8 items-center justify-between">
+        <h3 class="font-bold text-sm mr-3">Default Theme Switcher</h3>
+        <div class="flex">
+          <span class="cursor-pointer w-10 h-10 inline-block rounded-full mr-4" data-bg-color="#b84130" data-color="#ffffff" style="background-color: #b84130">&nbsp;</span>
+          <span class="cursor-pointer w-10 h-10 inline-block rounded-full mr-4" data-bg-color="#363d98" data-color="#ffffff" style="background-color: #363d98">&nbsp;</span>
+          <span class="cursor-pointer w-10 h-10 inline-block rounded-full" data-bg-color="#FFD5CD" data-color="#333333" style="background-color: #FFD5CD">&nbsp;</span>
+        </div>
+      </div>
+      <h3 class="font-bold mr-4 text-sm">Dynamic Color</h3>
+      <div class="flex items-center">
+        <div class="flex items-center mr-3">
+          <label class="text-sm mr-2">Background:</label>
+          <input class="cursor-pointer h-10 outline-none rounded-full w-10 input-color-picker" type="color" data-id="bg-color" name="Background">
+        </div>
+        <div class="flex items-center">
+          <label class="text-sm mr-2">Color:</label>
+          <input class="cursor-pointer h-10 outline-none rounded-full w-10 input-color-picker" type="color" data-id="color" name="Color">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero h-screen">
+  	<div class="h-full flex justify-center items-center">
+  			<h1 class="text-5xl font-bold">This is main title</h1>
+  	</div>
+  </section>
+
+  <style>
+    :root {
+      --primary-bg-color: #400080;
+      --primary-color: #ffffff;
+    }
+
+    *:before, *:after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero {
+      background: var(--primary-bg-color);
+      color: var(--primary-color);
+      transition: all 0.16s ease-in-out;
+    }
+  </style>
+
+  <script>
+    'use strict';
+
+    // your code here
+
+  </script>
+
+</body>
+</html>

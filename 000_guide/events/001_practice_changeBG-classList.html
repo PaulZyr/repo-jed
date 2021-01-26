@@ -1,0 +1,48 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Change box BG</title>
+  <style>
+    .box{display: inline-block;width: 100px;height: 100px;border: 2px solid #000;}
+    .box:focus{outline: 2px solid gold}
+    .red{background: #f00;}
+    .orange{background: orange;}
+    .yellow{background: yellow;}
+    .green{background: green;}
+    .l-blue{background: gold;}
+    .blue{background: blue;}
+    .violet{background: violet;}
+  </style>
+</head>
+<body>
+  <h1>Change BG on click using <mark>&nbsp;<small><code>.classList & .remove() & .add()</code></small></mark></h1>
+  <div class="box red"></div>
+  <div class="box orange"></div>
+  <div class="box yellow"></div>
+  <div class="box green"></div>
+  <div class="box l-blue"></div>
+  <div class="box blue"></div>
+  <div class="box violet"></div>
+
+<!-- script -->
+<script>
+  function changeBG(){
+    // step 1 - get elm classes
+    var curCls = this.classList[1];
+    var nxtCls = this.nextElementSibling.classList[1];
+    // step 2 - remove and add classes on target elmnt
+    this.classList.remove(curCls);
+    this.classList.add(nxtCls);
+    // step 3 - remove and add classes on nextSubling elmnt
+    this.nextElementSibling.classList.remove(nxtCls);
+    this.nextElementSibling.classList.add(curCls);
+  }
+  var  collection = document.getElementsByClassName('box');
+  // console.log(collection);
+  for(var  i = 0; i < collection.length; i++ ){
+      collection[i].addEventListener('click', changeBG, false);
+  }
+</script>
+
+</body>
+</html>

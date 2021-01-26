@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Slider-2clear</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+  <style>
+    .sliders{
+      position: relative;
+      height: 300px;
+      background: #ccc;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 50px;
+      line-height: 300px;
+    }
+    .slide {
+      position: absolute;
+      left: 10px;right: 10px;bottom: 15px;top: 15px;
+      opacity: 0;
+      transition: all 1s linear;
+    }
+    .active{
+      opacity: 1;z-index: 2;
+    }
+  </style>
+  <h1 class="text-center">Slider - 2 clear</h1>
+  <div class="container">
+    <div class="jumbotron mt-3">
+
+        <section id="slider-wrap" class="text-center">
+          <ul class="sliders mb-3 rounded">
+            <li class="slide alert-primary active ">slide 1</li>
+            <li class="slide alert-secondary">slide 2</li>
+            <li class="slide alert-success">slide 3</li>
+            <!-- <li class="slide alert-info" style="background-image: url(https://picsum.photos/1000/300/?random)">slide 4</li> -->
+            <li class="slide alert-info">slide 4</li>
+            <li class="slide alert-danger">slide 5</li>
+          </ul>
+
+          <div class="btn-line text-capitalize" >
+            <a href="#" id="frst" class="btn btn-primary">first</a>
+            <a href="#" id="prev" class="btn btn-primary">prev</a>
+            <a href="#" id="next" class="btn btn-primary">next</a>
+            <a href="#" id="last" class="btn btn-primary">last</a>
+          </div>
+
+        </section>
+
+    </div>
+
+  </div>
+
+
+  <script>
+    const $ = document;
+    let sliders = $.querySelector('.sliders');
+    let slides = $.querySelectorAll('.slide');
+    let btnLine = $.querySelector('.btn-line');
+    let btnFrst = $.getElementById('frst');
+    let btnPrev = $.getElementById('prev');
+    let btnNext = $.getElementById('next');
+    let btnLast = $.getElementById('last');
+    // console.log(sliders, slides, btnLine);
+
+    // remove class active if not on first element
+
+    slides.forEach(function(el) {
+      // console.log(el);
+      el.classList.remove('active');
+      // console.log(el);
+    });
+
+    // add class active on element in array wich we need
+    // and create active variable
+    slides[0].classList.add('active');
+    let active = $.querySelector('.active');
+
+    if ( sliders.firstElementChild === active) {
+      // if you use <button> you must add disabled as attribute
+
+      // .disabled = 'true'
+      // btnFrst.disabled = 'true';
+      // btnPrev.disabled = 'true';
+
+      // .setAttribute('disabled', '')
+      // btnFrst.setAttribute('disabled', '');
+      // btnPrev.setAttribute('disabled', '');
+
+      // if you use <a> you must add disabled as class 
+      btnFrst.classList.add('disabled');
+      btnPrev.classList.add('disabled');
+    }
+
+    if ( sliders.lastElementChild === active) {
+      btnNext.classList.add('disabled');
+      btnLast.classList.add('disabled');
+    }
+
+    // addEventListener on btns wrapper
+    btnLine.addEventListener('click', function(el) {
+      // console.log(el.currentTarget ,'\n',el.target, typeof el.target.getAttribute('id'));
+      // console.log(el);
+
+      // btnNext code below
+      // if (el.target.getAttribute('id') === 'next' ) {
+      if (el.target.matches('#next') ) {
+
+        if ( sliders.firstElementChild === active) {
+          btnFrst.classList.remove('disabled');
+          btnPrev.classList.remove('disabled');
+        }
+
+        active.classList.remove('active')
+        active = active.nextElementSibling;
+        active.classList.add('active')
+
+        if ( sliders.lastElementChild === active) {
+          btnNext.classList.add('disabled');
+          btnLast.classList.add('disabled');
+        }
+      }
+
+      // btnPrev code below
+      if (el.target.matches('#prev') ) {
+
+        if ( sliders.lastElementChild === active) {
+          btnNext.classList.remove('disabled');
+          btnLast.classList.remove('disabled');
+        }
+
+        active.classList.remove('active')
+        active = active.previousElementSibling;
+        active.classList.add('active')
+
+        if ( sliders.firstElementChild === active) {
+          btnFrst.classList.add('disabled');
+          btnPrev.classList.add('disabled');
+        }
+      }
+
+      // btnFrst code below
+      if (el.target.matches('#frst') ) {
+
+        if ( sliders.lastElementChild === active) {
+          btnNext.classList.remove('disabled');
+          btnLast.classList.remove('disabled');
+        }
+
+        active.classList.remove('active')
+        active = sliders.firstElementChild;
+        active.classList.add('active')
+
+        if ( sliders.firstElementChild === active) {
+          btnFrst.classList.add('disabled');
+          btnPrev.classList.add('disabled');
+        }
+      }
+
+      // btnLast code below
+      if (el.target.matches('#last') ) {
+
+        if ( sliders.firstElementChild === active) {
+          btnFrst.classList.remove('disabled');
+          btnPrev.classList.remove('disabled');
+        }
+
+        active.classList.remove('active')
+        active = sliders.lastElementChild;
+        active.classList.add('active')
+
+        if ( sliders.lastElementChild === active) {
+          btnNext.classList.add('disabled');
+          btnLast.classList.add('disabled');
+        }
+      }
+
+
+    })
+
+  </script>
+</body>
+
+</html>

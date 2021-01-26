@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form validation</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container jumbotron">
+    <form>
+      <h1>Form validation</h1>
+      <div class="form-group row mt-4">
+        <label for="inputName" class="col-sm-2 col-form-label">User name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputName" placeholder="Name">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPhone" class="col-sm-2 col-form-label">Phone number</label>
+        <div class="col-sm-10">
+          <input type="tel" class="form-control" id="inputPhone" placeholder="Phone">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script>
+    'use strict'
+
+    // Check Name
+    $('#inputName').blur(function() {
+      // Убираем все классы с поля «Ваше имя»
+      $('#inputName').removeClass();
+      // Определяем длину значения поля
+      var nameLngth = $('#inputName').val().length;
+      // Если значение меньше или равно 1 символу, то выводим предупреждение
+      if (nameLngth <= 1) {
+        $('#inputName').addClass('form-control is-invalid');
+        //$(this).next().text('Введите пожалуйста ваше имя');
+      } else {
+        // Здесь мы пишем что должно быть, если все введено верно
+        $('#inputName').addClass('form-control is-valid');
+        //$(this).next().text('');
+      }
+    });
+
+     // Функция срабатывает по событию .blur
+     $('#inputEmail').blur(function checkMail(){
+       // Убираем все классы с поля «Ваш e-mail»
+       $('#inputEmail').removeClass();
+       // Берем значение поля «Ваш e-mail»
+       var emailV = $('#inputEmail').val();
+       // Задаем регулярное выражение которое проверит наш e-mail
+       var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,6})+$/;
+       // Проверяем верно ли введен e-mail
+       if (filter.test(emailV)) {
+         $('#inputEmail').addClass('form-control is-valid');
+         $(this).next().text('');
+       } else {
+         // Здесь мы пишем что должно быть, если e-mail введен неверно
+         $('#inputEmail').addClass('form-control is-invalid');
+         $(this).next().text('Введите пожалуйста правильно ваш e-mail');
+       }
+     });
+
+    // Check Phone
+    // Функция срабатывает по событию .blur
+    $('#inputPhone').blur(function(){
+      // Убираем все классы с поля «Ваш номер телефона»
+      $('#inputPhone').removeClass();
+      // Берем значение поля «Ваш номер телефона»
+      var phoneV = $('#inputPhone').val();
+      // Определяемдлину значения поля
+      var phoneLngth = phoneV.length;
+      // Проверяем чтобы в поле были только цифры
+      if( /[^0-9]/.test(phoneV) ) {
+        $('#inputPhone').addClass('form-control is-invalid');
+        $(this).next().text('Номер телефона должен содержать только цифры');
+      } else if (phoneLngth <= 5) {
+      // Проверяем чтобы длина номера телефона была не меньше 6 символов
+        $('#inputPhone').addClass('form-control is-invalid');
+        $(this).after('<p>Введите пожалуйста ваш номер телефона</p>')//.text('Введите пожалуйста ваш номер телефона');
+      } else {
+      // Здесь мы пишем что должно быть, если все введено верно
+      $('#inputPhone').addClass('form-control is-valid');
+      $(this).next().text('');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://html5book.ru/css3-filtry/">
+  <meta name="url" content="https://html5css.ru/jsref/dom_obj_event.php">
+  <meta name="url" content="https://stackoverflow.com/questions/18544890/onchange-event-on-input-type-range-is-not-triggering-in-firefox-while-dragging">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>JS Demo css style filtering</title>
+</head>
+
+<body>
+
+  <div class="container jumbotron my-4 py-4">
+    <h1 class="text-center mb-3 display-4">Filter generator</h1>
+    <div class="row">
+      <div class="col-sm-7 col-md-8">
+        <img src="https://picsum.photos/800/800/?image=777" alt="" id="image" class="border border-info rounded img-fluid mb-3">
+
+        <div class="custom-file form-control-sm input mb-2">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Выберите картинку</label>
+        </div>
+        <p>или введите URL картинки ниже</p>
+
+        <input class="form-control form-control-sm" id="img-url" type="text" placeholder="Введите URL картинки" value="https://picsum.photos/800/800/?image=678">
+      </div>
+      <div class="col-sm-5 col-md-4">
+        <div class="alert alert-light">
+
+            <div class="form-group">
+              <label for="blur">Размытие (blur)</label>
+              <input type="range" class="custom-range" min="0" max="10" value="0" id="blur" disabled>
+
+              <label for="brightness">Яркость (brightness)</label>
+              <input type="range" class="custom-range" min="50" max="200" value="100" id="brightness">
+
+              <label for="contrast">Контраст (contrast)</label>
+              <input type="range" class="custom-range" min="50" max="200" value="100" id="contrast">
+
+              <label for="grayscale">Оттенки серого (grayscale)</label>
+              <input type="range" class="custom-range" min="0" max="100" value="0" id="grayscale">
+
+              <label for="saturate">Насыщенность (saturate)</label>
+              <input type="range" class="custom-range" min="0" max="200" value="100" id="saturate">
+
+              <label for="sepia">Сепия (sepia)</label>
+              <input type="range" class="custom-range" min="0" max="100" value="0" id="sepia">
+
+              <button class="btn btn-warning w-100 mt-4" id="reset" disabled>Сбросить</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    'use strict'
+    // your variables
+
+    // object with default value
+
+    // func for update changes
+    // function updateFilterValue()
+
+    // func for reset changes
+    // function resetFilterValue()
+
+    // func for change ims's url
+    // function updateImageUrl()
+
+    // addEventListeners - input for updateFilterValue()
+
+    // addEventListeners for IE11 - change  updateFilterValue()
+
+    // addEventListener for click for resetFilterValue()
+
+    // addEventListener for change for updateImageUrl()
+
+  </script>
+</body>
+
+</html>

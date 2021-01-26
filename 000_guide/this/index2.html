@@ -1,0 +1,71 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>This 2 MLS</title>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+</head>
+
+<body>
+  <h1>This 2</h1>
+  <button class='button'>Button</button>
+
+  <script>
+    // window.hello = 'hello';
+    // console.log(this.hello);
+
+    // var helloWorld = function () {
+    //   console.log(this);
+    // };
+
+    // helloWorld();
+
+    // var human = {
+    //   name: 'Alexa',
+    //   getName: function () {
+    //     console.log('getName', this.name);
+    //   }
+    // };
+
+    // human.getName();
+
+    // var Mail = function () {
+    //   this.letter  ='This is my letter';
+    //   console.log(this);
+    // };
+
+    // Mail.prototype.getLetter = function () {
+    //   console.log(this);
+    // };
+
+    // var mail = new Mail();
+    // mail.getLetter();
+
+    // $('.button').click(human.getName.bind(human));
+
+    var sport = {
+      tournament: 'The Master',
+      players: [{
+          name: 'Wood',
+          age: 37
+        },
+        {
+          name: 'Mike',
+          age: 43
+        }
+      ],
+      show: function() {
+        console.log(this);
+        var self = this;
+        this.players.forEach(function(person) {
+          console.log(person.name + ' is playing ' + self.tournament);
+        });
+      }
+    };
+
+
+    sport.show();
+  </script>
+</body>
+
+</html>

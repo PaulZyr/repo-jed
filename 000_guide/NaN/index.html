@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>a&b 2</title>
+</head>
+<body>
+<h1>Age</h1>
+  <script>
+    var s='ss', n=22, bt=true, bf=false, o={}, a=[], u=undefined, nl=null; nn=NaN;
+    
+    console.group('isNaN');
+      console.log('str is - ' + isNaN(s));
+      console.log('num is - ' + isNaN(n));
+      console.log('true is - ' + isNaN(bt));
+      console.log('false is - ' + isNaN(bf));
+      console.log('obj is - ' + isNaN(o));
+      console.log('arr is - ' + isNaN(a));
+      console.log('undef is - ' + isNaN(u));
+      console.log('null is - ' + isNaN(nl));
+      console.log('NaN is - ' + isNaN(nn));
+    console.groupEnd('isNaN');
+
+    console.group('Number.isNaN');
+      console.log('str is - ' +  Number.isNaN(s));
+      console.log('num is - ' +  Number.isNaN(n));
+      console.log('true is - ' +  Number.isNaN(bt));
+      console.log('false is - ' +  Number.isNaN(bf));
+      console.log('obj is - ' +  Number.isNaN(o));
+      console.log('arr is - ' +  Number.isNaN(a));
+      console.log('undef is - ' +  Number.isNaN(u));
+      console.log('null is - ' +  Number.isNaN(nl));
+      console.log('NaN is - ' +  Number.isNaN(nn));
+    console.groupEnd('Number.isNaN');
+
+  </script>
+</body>
+</html>

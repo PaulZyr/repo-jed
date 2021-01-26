@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Array HW7</title>
+  </head>
+  <body>
+    <h1>Array HW7</h1>
+    <b>Напишите	на	JavaScript код,	и	в	нём:</b>
+    <ul>
+      <li>
+        Заполните	массив	таким		образом:	в	первый	элемент	запишите	'x', во второй	'xx',	в	третий	'xxx'	и	так	далее.
+      </li>
+      <li>
+        Создайте функцию	arrayFill,	которая	будет	заполнять	массив	заданными
+        значениями.	Первым	параметром	функция	принимает	значение,	которым
+        заполнять	массив,	а	вторым	- сколько	элементов	должно	быть	в	массиве.
+        <kbd>Пример:  arrayFill('x',  5)  сделает  массив  ['x',  'x',  'x',  'x',  'x']</kbd>.
+      </li>
+      <li>
+        Когда	создан	массив с	числами,	узнайте	сколько элементов	с	начала массива	нужно сложить, чтобы	в	сумме	получилось	больше	10-ти.
+      </li>
+    </ul>
+
+    <script>
+      // point 1
+      let arrX = ['x','xx','xxx','xxxx'];
+
+      // point 2
+      function arrayFill (par1, par2){
+        let res = [];
+        let z = '';
+        for(let i = 1; i <= par2; ++i){
+          console.log(i);
+          z += par1;
+          res.push(z);
+        };
+        return res;
+      }
+      console.log(arrayFill ('z', 5));
+
+      // point 3
+      let numArr = [1, 2, 3, 4, 5, 6, 7];
+      function hm(par){
+        let sum = 0;
+        let i = 0;
+        for (let = i; sum <= 10; i++) {
+          sum += par[i];
+          // console.log(sum);
+        }
+        return i;
+      }
+      console.log(hm(numArr));
+    </script>
+  </body>
+</html>

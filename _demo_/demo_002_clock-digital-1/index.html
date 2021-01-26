@@ -1,0 +1,80 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clock electr. format</title>
+  <style>
+    body{text-align: center;}
+    #clock, #demo{
+      width: 300px;
+      min-height: 46px;
+      border: 2px solid red;
+      margin: 10px auto ;
+      font: bold 24px/2 "Courier New", Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Digital Clock A.M. & P.M.</h1>
+  <div id="clock">00:00:00 P.M.</div>
+  <button onclick="myStopFunction()">Stop time</button>
+  <button onclick="myStartFunction()">Start time again</button>
+
+  <h1>Digital Clock .toLocaleTimeString()</h1>
+  <div id="demo">00:00:00 P.M.</div>
+  <button onclick="myStopFunction2()">Stop time</button>
+  <button onclick="myClock2()">Start time again</button>
+  <script>
+    "use strict"
+
+    var i = '';
+    function JSClock() {
+      var time = new Date();
+      var hour = time.getHours();
+      var minute = time.getMinutes();
+      var second = time.getSeconds();
+      // console.log(time, hour, minute, second);
+      var temp = "" + ((hour > 12) ? hour - 12 : hour);
+      if (temp < 10){ temp = "0" + temp;}
+      // if (hour == 0){ temp = "12";} // why this writed?
+      temp += ((minute < 10) ? ":0" : ":") + minute;
+      temp += ((second < 10) ? ":0" : ":") + second;
+      temp += (hour >= 12) ? " P.M." : " A.M.";
+
+      var clock = document.getElementById("clock");
+      clock.innerHTML = temp;
+      //setTimeout(console.log(i++), 5000)
+
+      return temp;
+    }
+    // setInterval(JSClock, 1000);
+    var myClock = setInterval(JSClock, 1000);
+
+    function myStartFunction() {
+        myClock = setInterval(JSClock, 1000);
+    }
+
+    function myStopFunction() {
+        // clearInterval(JSClock());
+        clearInterval(myClock);
+    }
+
+    // another variant
+    function myTimer() {
+      var d = new Date();
+      var t = d.toLocaleTimeString() + " +2(Kyiv)";
+      document.getElementById("demo").innerHTML = t;
+    }
+    var myClock2 = setInterval(myTimer, 1000);
+    var myClock2 = function myStartFunction2() {
+        myClock2 = setInterval(myTimer, 1000);
+        console.log(myClock2);
+    }
+    function myStopFunction2() {
+        clearInterval(myClock2);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- browser-sync start --server --files "*.html, **/*.html, *.js, */*.js, *.css, */*css" -->
+  <meta charset="UTF-8">
+  <title>Содержание</title>
+  <style>
+    body {font-family: Verdana;line-height: 1.75;margin: 0;}
+    .page{position: relative;}
+    .wrap {display: flex; flex-wrap: wrap;padding: 17px;}
+    a{display: inline-block;padding: 0 4px;text-decoration: none;}
+    a:focus,a:hover,
+    *:target{background: #ff0;}
+    h2{margin: 0 0 10px;font-size: 20px;white-space: nowrap;}
+    ul{padding:0 10px 7px 20px; outline: 2px dotted gold; margin: 0 5px 10px; flex: 200px 1 1;}
+    li{display: flex; justify-content: space-between;}
+    li:not(:first-child){border-top: 1px solid red;}
+    li:first-child{list-style: none;text-align: center;}
+    li:first-child a{text-decoration: none;text-transform: uppercase;}
+    a[href$='begin.html']:not(:hover){color: #f00;text-decoration: none;}
+    a[href$='begin.html']:before{content: '['}
+    a[href$='begin.html']:after{content: ']'}
+    p{margin-top: 0;text-align: center;}
+    [hidden]{display: none;}
+    .bar{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      background:rgba(255, 215, 0, 0.7);position: sticky;top: -52px;z-index: 2;
+    }
+    .bar a{padding: 0;}
+    .q1{text-align: right;}
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a href="https://codewars.com/r/b2qsAg" target="blank"><img src="https://www.codewars.com/users/MOgorodnik/badges/large" alt=""></a>
+    <q class="q1">Скажи мне — и я забуду, покажи мне — и я запомню, дай мне сделать — и я пойму. <br> <b>&mdash; Конфуций</b></q>
+  </div>
+  <div class="page">
+  <p>Use command in IDE's terminal - <kbd>browser-sync start --server --files "*.html, */*.html, *.js, */*.js, *.css, */*.css"</kbd> for create sever and auto reload page when save changes <br> ! ! ! You must have installed <a href="http://nodejs.org/"><b>Nodejs</b></a> and <a href="https://www.browsersync.io/"><b>browsersync</b></a> ! ! !<br>
+  <big><mark style="letter-spacing: 1px;"><i>For quick navigation press -> <kbd>Alt+accesskey</kbd>(Chrome) || <kbd>Alt+Shift+accesskey</kbd>(Mozilla)</i></mark></big></p>
+  <div class="wrap">
+    <ul class="main-list">
+      <li><a accesskey="1" href="#main" id="main"><h2>Main list <small>(accs-key - 1)</small></h2></a></li>
+      <li><a href="000_practice/index.html">Practices all</a></li>
+      <li><a href="https://www.javascripttutorial.net/">javascripttutorial.net</a></li>
+      <li><a href="https://www.tutorialsteacher.com/">tutorialsteacher.com</a></li>
+      <li><a href="https://www.javatpoint.com">javatpoint.com</a></li>
+      <li><a href="https://webplatform.github.io/docs/tutorials">webplatform.github.io/</a></li>
+      <li><a href="https://www.codewars.com/kata/571ec274b1c8d4a61c0000c8/train/javascript?collection=javascript-basics-2">Practices codewars javascript-basics-2</a></li>
+      <li><a href="https://tproger.ru/digest/competitive-programming-practice/">28 cайтов, на которых можно порешать задачи по программированию</a></li>
+      <li><a href="https://smartprogress.do/goal/328251/?lang=ru">Решить 100 задачек по JS на codewars</a></li>
+      <li><a href="https://www.codewars.com/collections/training-js-series-for-javascript-beginner-myjinxin2015">Training JS series - for javascript beginner - myjinxin2015</a></li>
+      <li><a href="000_guide/001_intagration/index.html">Intagration <small>подключение к странице</small></a></li>
+      <li><a href="000_guide/002_comments/index.html">Comments <small>комментарии</small></a></li>
+      <li>
+        <a href="000_guide/003_var-scope-hoisting/index.html">
+          Variables <small>(Переменные)</small>. <br>Scope <small>(Область видимости)</small>. <br>Hoisting <small>(Всплытие)</small>.
+        </a>
+      </li>
+      <li hidden><a href="000_guide/004_operators/index.html">004 - operators <small>(waiting)</small></a></li>
+      <li hidden><a href="000_guide/005_datatype_changes/index.html">005 - datatype changes <small>(waiting)</small></a></li>
+      <li hidden><a href="000_guide/006_help_functions/index.html">006 - functions: parseInt, parsefloat, isNaN, isFinite <small>(waiting)</small></a></li>
+      <li><a href="000_guide/string_methods/index.html">String and methods</a></li>
+      <li><a href="000_guide/scope/index.html">Scope</a></li>
+      <li><a href="000_guide/closure/index.html">Closure</a></li>
+      <li><a href="000_guide/object/index.html">{Object}</a></li>
+      <li><a href="000_guide/array/index.html">[Array] </a></li>
+      <li><a href="000_guide/func-constructor/index.html">Function constructor</a></li>
+      <li><a href="000_guide/constructor/index.html">constructor</a></li>
+      <li><a href="000_guide/prototype/index.html">prototype</a></li>
+      <li><a href="000_guide/proto/index.html">__proto__</a></li>
+      <!-- <li><a href="000_guide/this/index.html">This</a></li> -->
+      <li>
+        <a href="000_guide/this/index.html">This 1</a>
+        <a href="000_guide/this/index2.html">this 2</a>
+        <a href="000_guide/this/index3.html">this 3</a>
+        <a href="000_guide/this/index4.html">this 4</a>
+      </li>
+      <li><a href="000_guide/007_ifelse/index.html">If ... else <small>(waiting)</small></a></li>
+      <li><a href="000_guide/008_loops/index.html">For, while, do ... while <small>(waiting)</small></a></li>
+      <li><a href="000_guide/009_loops/index.html">Switch (case, default), break, continue <small>(waiting)</small></a></li>
+      <li><a href="000_guide/010_apply_call_bind/index.html">010_apply_call_bind</a></li>
+      <!-- <li><a href="000_guide/info_classList/index.html">info_classList</a></li> -->
+      <li><a href="000_guide/DOM-navigation-1/index.html">DOM-navigation-1</a></li>
+      <li><a href="000_guide/DOM-navigation-2/index.html">DOM-navigation-2</a></li>
+      <li><a href="000_guide/DOM-navigation-myGetElementsByTagName/index.html">DOM-navigation-myGetElementsByTagName</a></li>
+      <li><a href="000_guide/events/index.html">events</a></li>
+      <li><a href="000_guide/eventListeners/index.html">eventListeners 1</a></li>
+      <li><a href="000_guide/addEventListener/index.html">eventListeners 2</a></li>
+      <li><a href="000_guide/json/index.html">JSON</a></li>
+      <!-- <li>
+        <a href="000_guide/callback/index.html">callback</a>
+        <a href="000_guide/callback/begin.html">begin</a>
+      </li> -->
+      <li><a href="000_guide/bom/index.html">BOM</a></li>
+      <!-- <li>
+        <a href="smallestDivider/index.html">smallestDivider</a>
+        <a href="smallestDivider/begin.html">begin</a>
+      </li> -->
+    </ul>
+    <ul class="games-list">
+      <li><a accesskey="2" href="#game" id="game"><h2>Games list (2)</h2></a></li>
+      <li><a href="_games_/game_treasureOfDragons/index.html">Treasure of dragons</a></li>
+      <li><a href="_games_/game_mario/index.html">Hero-1</a></li>
+      <li><a href="_games_/game_guessNumber/index.html">guess Number</a></li>
+      <li><a href="_games_/game_guessColor/index.html">guess Color</a></li>
+      <li><a href="_games_/game_findFace/index.html">Matching Face Game</a></li>
+      <li><a href="_games_/game_canvas-01/index.html">Canvas</a></li>
+      <li><a href="_games_/game_canvas-02_catch-ork/index.html">Canvas game Catch-ork</a></li>
+      <li><a href="_games_/game_mapOfTreasures/index.html">Find of Treasures</a></li>
+      <li><a href="https://www.briankoponen.com/html5-javascript-game-tutorial/">html5-javascript-game-tutorial</a></li>
+      <li><a href="_games_/game_/index.html">...</a></li>
+    </ul>
+    <ul class="simple-demo-list">
+      <li><a accesskey="3" href="#demo" id="demo"><h2>Simple Demos list (3)</h2></a></li>
+      <!-- <li>
+        <a href="_demo_/demo_001/index.html">First demonstration(intro)</a>
+        <a href="_demo_/demo_001/begin.html">begin</a>
+      </li> -->
+      <li>
+        <a href="_demo_/demo_002_clock-digital-1/index.html">Digital Clock 1</a>
+        <a href="_demo_/demo_002_clock-digital-1/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_002_clock-digital-2/index.html">Digital Clock 2</a>
+        <a href="_demo_/demo_002_clock-digital-2/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_002_clock-analog-1/index.html">Analog Clock 1</a>
+        <a href="_demo_/demo_002_clock-analog-1/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_003_timer_001/index.html">Timer_001</a>
+        <!-- <a href="_demo_/demo_003_timer_001/begin.html">begin</a> -->
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_004_BG-setInterval-style/index.html">BG_setInterval_style</a>
+        <a href="_demo_/demo_004_BG-setInterval-style/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_005_ProgressBar-1/index.html">ProgressBar-1</a>
+        <a href="_demo_/demo_005_ProgressBar-1/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_005_ProgressBar-2_width-vs-linear-gradient/index.html">ProgressBar-2_width_vs_linear-gradient</a>
+        <a href="_demo_/demo_005_ProgressBar-2_width-vs-linear-gradient/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_005_ProgressBar-3_slider/index.html">ProgressBar-3 & Slider</a>
+        <a href="_demo_/demo_005_ProgressBar-3_slider/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_005_ProgressBar-4_slider-requestAnimationFrame/index.html">ProgressBar-4 & Slider requestAnimationFrame</a>
+        <a href="_demo_/demo_005_ProgressBar-4_slider-requestAnimationFrame/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_006_Tooltip-1/index.html">Tooltip-1</a>
+        <a href="_demo_/demo_006_Tooltip-1/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_007_Slider-01_bs01_prev-next/index.html">Slider-01_bs01_prev-next</a>
+        <a href="_demo_/demo_007_Slider-01_bs01_prev-next/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_007_Slider-01_bs02_fromdata/index.html">Slider-01_bs02_fromdata</a>
+        <a href="_demo_/demo_007_Slider-01_bs02_fromdata/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_007_Slider-02-contentFromArr/index.html">Slider-02-contentFromArr</a>
+        <a href="_demo_/demo_007_Slider-02-contentFromArr/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_007_Slider-03-chngImgOnHover/index.html">Slider-03-chngImgOnHover</a>
+        <a href="_demo_/demo_007_Slider-03-chngImgOnHover/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_007_Slider-04-className-setInterval-fade/index.html">Slider-04-className-setInterval-fade</a>
+        <a href="_demo_/demo_007_Slider-04-className-setInterval-fade/begin.html">begin</a>
+      </li>
+      <li style="display: none;">
+        <a href="/index.html">Slider-xx</a>
+        <a href="/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_008_css-variables-1/index.html">CSS Variables - 1</a>
+        <a href="_demo_/demo_008_css-variables-1/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_008_css-variables-2/index.html">Custom CSS Variables Theming UI</a>
+        <a href="_demo_/demo_008_css-variables-2/begin.html">begin</a>
+      </li>
+      <li><hr></li>
+      <li>
+        <a href="_demo_/demo_009_tabs-01_bs-01/index.html">Tabs bs 01</a>
+        <a href="_demo_/demo_009_tabs-01_bs-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_009_tabs-01_bs-02/index.html">Tabs bs 02</a>
+        <a href="_demo_/demo_009_tabs-01_bs-02/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_009_tabs-02_clr-01/index.html">Tabs clr 01</a>
+        <a href="_demo_/demo_009_tabs-02_clr-01/begin.html">begin</a>
+      </li>
+      <li>
+        <hr><mark>MODAL</mark><hr>
+        <br>
+      </li>
+      <details>564</details>
+      <li>
+        <a href="_demo_/demo_010_modal-01_bs-01/index.html">Modal 01</a>
+        <a href="_demo_/demo_010_modal-01_bs-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_010_modal-01_bs-02/index.html">Modal 02</a>
+        <a href="_demo_/demo_010_modal-01_bs-02/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_010_modal_materialize-01/index.html">Modal Materialize 01</a>
+        <a href="_demo_/demo_010_modal_materialize-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_011_SlideOnScroll-01/index.html">Slide On Scroll</a>
+        <a href="_demo_/demo_011_SlideOnScroll-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_012_StickyNav-01/index.html">Sticky Nav</a>
+        <a href="_demo_/demo_012_StickyNav-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_013_Video-01/index.html">Video-01</a>
+        <a href="_demo_/demo_013_Video-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_014_stickyTitle_01/index.html">Sticky Title 1</a>
+        <a href="_demo_/demo_014_stickyTitle_01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_015_gallery-image-01/index.html">Gallery Image bs_01</a>
+        <a href="_demo_/demo_015_gallery-image-01/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_016_style-filter/index.html">Image css style filtering</a>
+        <a href="_demo_/demo_016_style-filter/begin.html">begin</a>
+      </li>
+      </li>
+      <li>
+        <a href="_demo_/demo_017_word-count/index.html">Word count</a>
+        <a href="_demo_/demo_017_word-count/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_018_localstorage-01_mz/index.html">Local(Session)Storage simple</a>
+        <a href="_demo_/demo_018_localstorage-01_mz/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_020_randome-quote/index.html">Randome qoute</a>
+        <a href="_demo_/demo_020_randome-quote/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_019_weather-app/index.html">Weather App</a>
+        <a href="_demo_/demo_019_weather-app/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_021_range-with-number/index.html">Range with number</a>
+        <a href="_demo_/demo_021_range-with-number/begin.html">begin</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_022_forms/index.html">Forms</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_023_cookie/index.html">Cookie</a>
+      </li>
+      <li>
+        <a href="_demo_/demo_00/index.html">...</a>
+        <a href="_demo_/demo_00/begin.html">begin</a>
+      </li>
+    </ul>
+    <style>
+      .www-list li:not(:first-child) a:before{content: '[www] ';font-size: 12px;}
+    </style>
+    <ul class="www-list" >
+      <li><a accesskey="4" href="#www" id="www"><h2>WWW list (4)</h2></a></li>
+      <li><a href="https://www.ecma-international.org/ecma-262/9.0/index.html">ecma-262</a></li>
+      <li><a href="https://picsum.photos/">picsum.photos</a></li>
+      <li><a href="https://placeimg.com/">placeimg.com/</a></li>
+      <li><a href="https://es6console.com/">es6console.com/</a></li>
+      <li><a href="https://babeljs.io/">babeljs.io</a></li>
+      <li><a href="https://exploringjs.com/es6/ch_oop-besides-classes.html">https://exploringjs.com/es6/ch_oop-besides-classes.html</a></li>
+      <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+      <li><a href="https://hackerthemes.com/bootstrap-cheatsheet/">Bootstrap-cheatsheet</a></li>
+      <li><a href="http://aeonian.in/json-slider/index.html" target="blank">aeonian.in/json-slider/</a></li>
+      <li><a href="https://medium.com/front-end-weekly/stop-array-foreach-and-start-using-filter-map-some-reduce-functions-298b4dabfa09">stop-array-foreach-and-start-using-filter-map-some-reduce-functions</a></li>
+      <li><a href="https://getinstance.info/articles/javascript/call-apply-and-bind-functions/">call-apply-and-bind-functions</a></li>
+      <li><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array/forEach</a></li>
+      <li><a href="https://medium.com/front-end-weekly/javascript-event-loop-explained-4cd26af121d4">Medium - JavaScript Event Loop Explained</a></li>
+      <li><a href="http://latentflip.com/loupe/">JavaScript Event Loop Explained</a></li>
+      <li><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">JavaScript Event Loop Explained youtube</a></li>
+      <li><a href="http://youmightnotneedjquery.com/">You might not need jQuery</a></li>
+      <li><a href="https://github.com/nefe/You-Dont-Need-jQuery/blob/master/README-ru.md">You-Dont-Need-jQuery</a></li>
+      <li><a href="http://perfectionkills.com/the-poor-misunderstood-innerText/">The poor, misunderstood innerText</a></li>
+      <li><a href="https://www.sitepoint.com/jquery-ajax-error-handling-function/">jQuery Ajax Error Handling Function</a></li>
+      <li><a href="https://habr.com/ru/company/mailru/blog/269465/">У нас проблемы с промисами</a></li>
+      <li><a href="site_00/index.html">...</a></li>
+      <li><a href="https://habr.com/ru/company/ruvds/blog/340508/">Как работает JS цикл из 19-ти статей [Up level]</a></li>
+      <li><a href="https://medium.com/nuances-of-programming/9-%D1%83%D0%B1%D0%B8%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-javascript-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%BE%D0%B2-%D0%B2-2019-%D0%B3%D0%BE%D0%B4%D1%83-e45113436731">9 убийственных приемов для JavaScript разработчиков в 2019 году</a></li>
+      <li><a href="http://jem-space.ru/these-javascript-methods-will-boost-your-skills-in-just-a-few-minutes/">Повышаем скилы с помощью методов JavaScript за пару минут</a></li>
+      <li><a href="site_00/index.html">...</a></li>
+      <li><a href="https://itnext.io/the-definitive-guide-to-callbacks-in-javascript-44a39c065292">*** !!! Callbacks: The Definitive Guide</a></li>
+      <li><a href="https://habr.com/en/company/ruvds/blog/441566/">12 концепций JavaScript, о которых нужно знать</a></li>
+      <li><a href="https://medium.com/@stasonmars/5-%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2-%D0%BA%D0%B0%D0%BA-%D0%BB%D1%83%D1%87%D1%88%D0%B5-%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8-%D0%B2-javascript-236b31ecf299">5 советов как лучше писать условные конструкции в JavaScript</a></li>
+      <li><a href="https://medium.freecodecamp.org/es5-to-esnext-heres-every-feature-added-to-javascript-since-2015-d0c255e13c6e">!!! *** ES5 to ESNext — here’s every feature added to JavaScript since 2015</a></li>
+      <li><a href="https://blog.logrocket.com/css-selectors-level-4-b5da36bcd54c">CSS selectors <mark>level 4</mark></a></li>
+      <li><a href="https://medium.com/@ABatickaya/100daysofcode-7584c0ddfc1a">Краткий план по изучению фронтенда, или #100ДнейКода</a></li>
+      <li><a href="https://areknawo.com/dom-performance-case-study/">DOM performance case study</a></li>
+      <li><a href="https://habr.com/ru/company/ruvds/blog/436884/" title="https://medium.freecodecamp.org/how-to-master-async-await-with-this-real-world-example-19107e7558ad" cite='https://medium.freecodecamp.org/how-to-master-async-await-with-this-real-world-example-19107e7558ad'>Осваиваем async/await на реальном примере Конвертер валют</a></li>
+      <li><a href="https://medium.com/devschacht/how-to-handle-monetary-values-in-javascript-bb0706840f0e">Как работать с денежными значениями в JavaScript</a></li>
+      <li><a href="https://tproger.ru/translations/javascript-cheatsheet/">Шпаргалка по современному JavaScript</a></li>
+      <li><a href="https://medium.com/@alexmaisiura/tips-and-tricks-that-you-may-need-to-know-when-you-work-in-javascript-q-a-799ce3c4b4d2">Советы и рекомендации, которые могут вам понадобиться при работе с JavaScript (вопросы и ответы)</a></li>
+      <li><a href="https://habr.com/ru/company/ruvds/blog/346022/">JavaScript: 12 вопросов и ответов</a></li>
+      <li><a href="http://www.codeblocq.com/2016/05/Two-Ways-of-Creating-an-Animation-Loop-in-JavaScript/">Two-Ways-of-Creating-an-Animation-Loop-in-JavaScript</a></li>
+      <li><a href="https://html5.by/blog/what-is-requestanimationframe/">what is requestAnimationFrame</a></li>
+      <li><a href="https://www.os-templates.com/premium-website-templates/insight">premium-website-templates</a></li>
+      <li><a href="http://www.schillmania.com/content/projects/javascript-animation-1/">schillmania.com</a></li>
+      <li><a href="https://habr.com/ru/post/312880/">Математика в JavaScript</a></li>
+      <li><a href="https://habr.com/ru/post/240349/">Выразительный JavaScript: Функции</a></li>
+      <li><a href="http://www.asquare.net/javascript/tests/KeyCode.html">JavaScript Event KeyCode Test Page</a></li>
+      <li><a href="https://css-tricks.com/snippets/javascript/javascript-keycodes/">KeyboardEvent Value (keyCodes, metaKey, etc)</a></li>
+      <li><a href="#">...</a></li>
+    </ul>
+    <script>
+    // console.log("%cCourseHunter!","font-weight:bold;font-size:50px;color:red;text-shadow:3px 3px 0 rgb(217,31,38),6px 6px 0 rgb(226,91,14),9px 9px 0 rgb(245,221,8),12px 12px 0 rgb(5,148,68),15px 15px 0 rgb(2,135,206),18px 18px 0 rgb(4,77,145),21px 21px 0 rgb(42,21,113)")
+      console.log(`%c   MOgorodnik!`, `font-weight:bold;font-size:40px; line-height:1.5;color:purple;
+      text-shadow: -2px -2px 0 rgb(255,255,255),
+                   2px 2px 0 rgb(255,255,255),
+                   4px 4px 0 rgb(255,0,0),
+                   -6px -6px 0 rgb(226,91,14),
+                   -9px -9px 0 rgb(245,221,8),
+                   -1px 1px 0 rgb(255,255,255),1px 1px 0 rgb(255,255,255),
+                   18px 18px 0 rgb(42,21,113)`, `Linkedin`, );
+      let lnk = document.querySelectorAll(".www-list a");
+      // lnk.forEach(function (i) {console.log(i);i.setAttribute('target', 'blank') });
+      // or using loop for
+      // for (var i = 0; i < lnk.length; i++) {
+      //   lnk[i].setAttribute('target', 'blank')
+      // }
+    </script>
+    <ul class="ajax-list" ahidden>
+      <li><a accesskey="5" href="#ajax" id="ajax"><h2>AJAX list (5)</h2></a></li>
+      <li><a href="_ajax_/ajax_001_get-ip/index.html" 1hidden >ajax 1</a></li>
+      <li><a href="_ajax_/ajax_002/index.html" 1hidden >ajax 2</a></li>
+      <li><a href="_ajax_/ajax_003/index.html" 1hidden >ajax 3</a></li>
+      <li><a href="_ajax_/ajax_004_img-gallery/index.html">img-gallery</a></li>
+      <li><a href="_ajax_/ajax_004_img-gallery_and_form/index.html">img-gallery_and_form</a></li>
+      <li><a href="_ajax_/ajax_006_xhr-obj-methods-and-working-with-text/index.html">ajax sandbox-1</a></li>
+      <li><a href="_ajax_/ajax_007_xhr-working-with-ajax-and-json/index.html">ajax and JSON</a></li>
+      <li><a href="_ajax_/ajax_008_data-from-an-external-api/index.html">data-from-an-external-api</a></li>
+      <li><a href="_ajax_/ajax_00/index.html">ajax 3 <sub>in progress</sub></a></li>
+    </ul>
+    <ul class="sites-list" hidden>
+      <li><a accesskey="6" href="#site" id="site"><h2>sites list (6)</h2></a></li>
+      <li><a href="_sites_/site1/index.html">site 1</a></li>
+      <li><a href="_sites_/site2/index.html">site 2</a></li>
+    </ul>
+  </div>  <!-- // wrap -->
+</div>  <!-- // page -->
+
+</body>
+
+</html>

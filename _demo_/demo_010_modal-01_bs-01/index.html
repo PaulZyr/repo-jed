@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modal 01</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    #modal{
+      color: #fff;
+      display: none;
+      width: 50%;
+      margin: auto;
+      padding: 17px;
+      background: #c36;
+      border-radius: 170px;
+      font-size: 2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mb-5">
+    <h1 class="mb-3">Modal 01</h1>
+    <button id="btn-show" class="btn btn-primary">Show </button>
+    <button id="btn-hide" class="btn btn-warning">Hide </button>
+  </div>
+
+  <div id="modal">Hi. I am a Modal!</div>
+
+  <script>
+    'use strict';
+    let btnShow = document.getElementById('btn-show');
+    let btnHide = document.getElementById('btn-hide');
+    let modal = document.getElementById('modal');
+modal.style.display = 'block';
+    function showModal() {
+      modal.style.display = 'block';
+      modal.style.border = '7px solid';
+      modal.style.boxShadow = ' 7px 7px 7px 7px #f00, inset  0px 0px 7px 7px #999';
+    }
+    function hideModal() {
+      modal.style.display = 'none';
+    }
+    btnShow.addEventListener('click', showModal);
+    btnHide.addEventListener('click', hideModal);
+  </script>
+
+
+</body>
+</html>

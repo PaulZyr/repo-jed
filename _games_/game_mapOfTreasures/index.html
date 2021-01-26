@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body style="text-align: center;">
+    <h1 id="heading">Map of treasures</h1>
+    <div class="map-wrap" style="display: inline-block; position:relative; border: 4px dashed red; overflow: hidden;border-radius:20px; box-shadow: 0 0 10px 0 #000;">
+        <img src="https://i.pinimg.com/originals/45/5a/24/455a241ca863008a9fe8bc0bb0512cab.jpg" alt="" id="map" style="width:400px; height:400px; display: block;">
+    </div>
+    <br><br>
+    <mark id="distance">distance</mark>
+    <p id="log">log</p>
+    <p id="cc">Cursor coordinates</p>
+    
+    <hr>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script>
+    let logg = document.getElementById('log')
+    let getRandNum = function(size){
+        return Math.floor(Math.random() * size)
+    }
+    
+    let getDistance = function(event, target){
+        let diffX = event.offsetX - target.x;
+        let diffY = event.offsetY - target.y;
+        return Math.sqrt((diffX * diffX) + (diffY * diffY))
+    }
+    
+    let getDistanceHint = function(dist){
+        if(dist < 10){
+        return "You will burn yourselfe!"
+        } else if(dist < 20){
+        return "Very hot!"
+        } else if(dist < 40){
+        return 'Hot!'
+        } else if(dist < 80){
+        return 'Warm!'
+        } else if(dist < 160){
+        return 'Cold!'
+        } else if(dist < 320){
+        return 'Very cold!'
+        } else {
+        return 'You will freeze!!!'
+        }
+    }
+    // creating Variables
+    let w = 400;
+    let h = 400;
+    let clicks = 0;
+    // Random position of treasures
+    let myTarget = {
+        'x' : getRandNum(w),
+        'y' : getRandNum(h),
+    }
+    
+    $('#map').click( function(event){
+        clicks++;
+        let distance = getDistance(event, myTarget);
+        let distanceHint = getDistanceHint(distance);
+        $('#distance').text(distanceHint)
+        if(distance < 8){
+        logg.innerText = `Treasure found! Made by clicks: ${clicks}`
+        }
+    })
+    
+    let node = document.createElement('span')
+    node.setAttribute('style', `position: absolute; width: 40px; height: 40px; background: rgba(255, 0,0,0.3); left: ${myTarget.x}px; top: ${myTarget.y}px; margin: -20px; pointer-events: none; border-radius:50%;`);
+    $('.map-wrap').append(node)
+
+    logg.innerText = `Cordinates of treasures: X = ${myTarget.x}, Y = ${myTarget.y} `
+
+    $('.map-wrap').mousemove( function(ev){
+        $('#cc').text(`X = ${ev.offsetX}: Y = ${ev.offsetY}`)
+    })
+    
+    </script>
+</body>
+</html>

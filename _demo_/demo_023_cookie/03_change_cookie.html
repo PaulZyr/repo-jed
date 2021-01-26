@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Change. Set & Get cookie</title>
+</head>
+<body>
+  <h1>Change. Set & Get cookie</h1>
+  <button onclick="setCookie()">Set cookie</button>
+  <button onclick="getCookie()">Get cookie</button><br>
+  <button onclick="changeCookie()">Change cookie</button>
+  <button onclick="deleteCookie()">Delete cookie</button>
+  <script>
+    'use strict'
+    function setCookie() {
+      console.log(1)
+      // cookie будет хранится браузером на проятжении 12 сек
+      document.cookie = "greet=Hello; max-age=12000;"
+    }
+
+    function getCookie() {
+      console.log(2)
+      alert(document.cookie)
+    }
+
+    function changeCookie() {
+      console.log(3)
+      document.cookie = "greet=Aloha; max-age=10000;"
+    }
+
+    function deleteCookie() {
+      console.log(4)
+      document.cookie = "greet=Aloha; max-age=0;"
+    }
+  </script>
+</body>
+</html>

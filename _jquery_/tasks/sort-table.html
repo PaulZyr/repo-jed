@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sort table</title>
+  <style>
+    .clickable{
+      cursor:pointer;
+      background:purple;color: #ccc;
+    }
+    td,th{
+      padding: 7px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sort table</h1>
+  <hr>
+  <table border="1">
+    <thead>
+      <tr>
+        <th class="num">Id</th>
+        <th class="txt">Name</th>
+        <th class="num">Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>103</td>
+        <td>Hannah</td>
+        <td>285</td>
+      </tr>
+      <tr>
+        <td>126</td>
+        <td>Aaron</td>
+        <td>590</td>
+      </tr>
+      <tr>
+        <td>83</td>
+        <td>Sarah</td>
+        <td>387</td>
+      </tr>
+      <tr>
+        <td>114</td>
+        <td>Aidan</td>
+        <td>403</td>
+      </tr>
+      <tr>
+        <td>99</td>
+        <td>Rose</td>
+        <td>545</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    'use strict'
+
+    $(document).ready(function () {
+
+      $("th").each(function(column){
+        // hover events
+        $(this).hover(function(){
+          $(this).data("type",  $(this).attr("class"));
+          $(this).addClass("clickable")
+        }, function(){
+          $(this).removeClass("clickable")
+        })
+
+        // click events
+        $(this).click(function(){
+          let type = $(this).data("type");
+          let records = $("table").find('tbody> tr')
+          records.sort(function (x, y) {
+            let val1 = $(x).children('td').eq(column).text()
+            let val2 = $(y).children('td').eq(column).text()
+            if (type === 'num') {
+              val1 *= 1
+              val2 *= 1
+            }
+            return ( val1 < val2 ) ? -1 : ( (val1 > val2) ? 1 : 0 )
+          })
+
+          $.each(records, function (index, row){
+            $("tbody").append(row)
+          })
+        })
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice 10</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center my-3 display-4">Practice 11</h1>
+    <!-- Task 1 -->
+    <div class="card mb-3 bg-light">
+      <h2 class="card-header bg-info text-light">Task 1</h2>
+      <div class="card-body text-center">
+        <h5 class="card-title">Создать html-страницу для генерации случайных чисел. <br>
+          На странице должна быть кнопка, при нажатии на которую <br>
+          случайное целое число от 0 до 100 выводится в div</h5>
+        <div class="card-text ">Random number: </div>
+        <div class="display-4 mb-2 target-task-1">00</div>
+        <a href="#!" class="btn btn-primary btn-task-1" onclick="task_1()">Generate random number</a>
+      </div>
+      <script>
+        const $ = document;
+        'use strict'
+        function task_1() {
+          let btnTask1 = $.querySelector('.btn-task-1')
+          let targetTask1 = $.querySelector('.target-task-1')
+          let randTask1 = Math.floor(Math.random()*101)
+          console.log(btnTask1, targetTask1, randTask1);
+          targetTask1.textContent = randTask1
+        }
+      </script>
+    </div>
+
+    <!-- Task 2 -->
+    <div class="card mb-3 bg-light">
+      <h2 class="card-header bg-info text-light">Task 2</h2>
+      <div class="card-body text-center">
+        <h5 class="card-title">Создать html-страницу с div, который занимает всю ширину и высоту экрана. При движении мышкой внутри этого div, выводить текущие координаты мышки. При клике кнопкой мыши туда же, выводить, какой именно кнопкой был совершен клик (правой или левой).</h5>
+        <div class="mb-2 target-task-2 bg-warning" style="height: 200px; font-size: 30px; line-height: 200px;">
+          <span class="res"></span>
+        </div>
+      </div>
+      <script>
+        'use strict'
+        const div = $.querySelector('.target-task-2')
+        let res = $.querySelector('.target-task-2 .res')
+        // let xEl = $.querySelector('.coord-x span')
+        // let yEl = $.querySelector('.coord-y span')
+        div.addEventListener('mousemove', task_2, false)
+        div.addEventListener('click', task_2_1, false)
+        div.addEventListener('contextmenu', task_2_1, false)
+        div.addEventListener('mousedown', task_2_1, false)
+        // console.log(div, xEl, yEl);
+        function task_2(ev) {
+          res.textContent = `X = ${ev.clientX} : Y = ${ev.clientY} `
+          // xEl.textContent = ev.clientX
+          // yEl.textContent = ev.clientY
+          // console.log(ev);
+        }
+        function task_2_1(ev) {
+          if (ev.which == 1) return res.textContent = `${event.which} is returned. Left mousebutton is pressed! `
+          if (ev.which == 2) {
+            console.log(ev.which);
+            ev.preventDefault();
+            res.textContent = `${event.which} is returned. Middle mousebutton is pressed! `
+            return false
+          }
+          if (ev.which == 3) {
+            ev.preventDefault();
+            res.textContent = `${event.which} is returned. Right mousebutton is pressed!`
+            return false
+          }
+        }
+      </script>
+    </div>
+
+    <!-- Task 3 -->
+    <div class="card mb-3 bg-light">
+      <h2 class="card-header bg-info text-light">Task 3</h2>
+      <div class="card-body text-center">
+        <h5 class="card-title">Создать html-страницу, на которой будет кнопка и текст. При нажатии на кнопку, текст должен скрываться. При повторном нажатии – текст должен снова отображаться. </h5>
+        <a href="#!" class="btn btn-primary btn-task-3" onclick="task_3()">Hide / Show Text</a>
+        <style>
+          .target-task-3{
+            overflow: hidden;
+            min-height: 100px;
+            height: auto;
+            transition: all 500ms linear;
+          }
+          .hide{min-height: 0;height: 0;padding: 0;transition: all 500ms linear;}
+        </style>
+        <div class="card-text alert alert-primary mt-3 target-task-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit iste modi quasi perferendis, voluptas amet fugit nobis fugiat ex, tempora atque voluptates necessitatibus expedita corrupti officia, minus magni eius sapiente.</div>
+      </div>
+      <script>
+        'use strict'
+        function task_3() {
+          let btnTask3 = $.querySelector('.btn-task-3')
+          let randTask3 = $.querySelector('.target-task-3')
+          console.log(btnTask3 , randTask3);
+          randTask3.classList.toggle("hide")
+        }
+      </script>
+    </div>
+
+    <!-- Task 4 -->
+    <div class="card mb-3 bg-light">
+      <h2 class="card-header bg-info text-light">Task 4</h2>
+      <div class="card-body text-center">
+        <h5 class="card-title">Создать html-страницу со вкладками. <br>
+          С левой стороны страницы отображается несколько вкладок,по которым можно переключаться.
+          У каждой вкладки есть свое содержимое, но в один момент времени отображается содержимое только активной вкладки.</h5>
+        <div class="row" id="myTabContent">
+          <div class="col-3 pr-0">
+            <div class="btn-group-vertical w-100 p-1">
+              <button type="button" class="btn btn-warning text-right bg-info text-white" data-tab-order="1">Left</button>
+              <button type="button" class="btn btn-warning text-right" data-tab-order="2">Middle</button>
+              <button type="button" class="btn btn-warning text-right" data-tab-order="3">Right</button>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="tab-content text-left p-3 border border-info rounded h-100 bg-white">
+              <div class="tab-pane fade show active" id="home"    data-tab-order="1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni corporis praesentium minus veritatis. Voluptate, praesentium, animi aliquam accusamus vero a illo labore aliquid, at nesciunt quia eius tempora reprehenderit sunt.</div>
+              <div class="tab-pane fade text-center"             id="profile" data-tab-order="2">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
+              <div class="tab-pane fade text-right"             id="contact" data-tab-order="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis assumenda sequi hic, ut. Dolor earum, ipsum tempore blanditiis doloremque quae similique quo libero, rem vel qui consectetur dolorem. Officiis, id.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        'use strict'
+        let btnsBoxTask5 = $.querySelector('.btn-group-vertical')
+        btnsBoxTask5.addEventListener('mouseover', task_4)
+        // let btns = $.querySelectorAll('.btn-group-vertical .btn')
+        // console.log(btns);
+        function task_4(el) {
+          // let btns = $.querySelectorAll('.btn-group-vertical .btn')
+          // let tabs = $.querySelectorAll('#myTabContent .tab-pane')
+          // console.log(el, el.target, tabs);
+          let targetBtn = el.target
+
+          if (targetBtn.classList.contains('bg-info')) return console.log("same");
+
+          if (targetBtn.classList.contains('btn')) {
+            // change tab-pane
+            let order = targetBtn.dataset.tabOrder
+            let oldTab = $.querySelector('#myTabContent .active')
+            let newTab = $.querySelector('#myTabContent .tab-pane[data-tab-order = "'+ order +'"]')
+            oldTab.classList.remove('show', "active")
+            newTab.classList.add('show', "active")
+
+            // change btn
+            let oldBtn = $.querySelector('#myTabContent .bg-info')
+            let newBtn = $.querySelector('#myTabContent [data-tab-order = "'+ order +'"]')
+            oldBtn.classList.remove('bg-info', 'text-white')
+            newBtn.classList.add("bg-info", 'text-white')
+          }
+        }
+      </script>
+    </div>
+
+    <!-- Task 5 -->
+    <div class="card mb-3 bg-light" id="task_5">
+      <h2 class="card-header bg-info text-light">Task 5</h2>
+        <h5 class="card-title text-center px-5 py-3">Создать html-страницу со списком новостей. <br>
+          Возле каждой новости должна быть кнопка <button class="btn btn-danger btn-sm" disabled>Remove</button> , при нажатии на которую
+          соответствующая новость исчезает.</h5>
+      <div class="card-deck p-3">
+        <div class="card">
+          <h5 class="card-head p-3 bg-info text-white"><button class="btn btn-danger btn-sm float-right">Remove</button> Card ipsum dolor sit amet. </h5>
+          <div class="card-body">
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <h5 class="card-head p-3 bg-info text-white"><button class="btn btn-danger btn-sm float-right">Remove</button> Card title </h5>
+          <div class="card-body">
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text"><small class="text-muted">Last updated 30 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <h5 class="card-head p-3 bg-info text-white"><button class="btn btn-danger btn-sm float-right">Remove</button> Card title </h5>
+          <div class="card-body">
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text"><small class="text-muted">Last updated 55 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        'use strict'
+        function task_5() {
+          let elCardDeck = $.querySelector('#task_5 .card-deck')
+
+          // console.log(elCardDeck.parentNode, elCardDeck)
+
+          let clone = elCardDeck.cloneNode(true)
+
+          elCardDeck.addEventListener('click', removeCard, false)
+
+          function removeCard(ev){
+            if (!ev.target.classList.contains("btn-danger")) return;
+            ev.stopImmediatePropagation()
+            // console.log(this)
+            // console.log(event.currentTarget);
+            // console.log(event)
+            // console.log(event.target);
+            event.target.parentNode.parentNode.remove()
+            if(elCardDeck.children.length === 0){
+              setTimeout(function () {
+                let elCardDeckParent = elCardDeck.parentNode
+                elCardDeck.remove()
+                elCardDeckParent.append(clone)
+                task_5()
+              }, 5000)
+            }
+          }
+
+        }
+        task_5()
+      </script>
+    </div>
+
+    <!-- Task 6 -->
+    <div class="card mb-3 bg-light" id="task_6">
+      <h2 class="card-header bg-info text-light">Task 6 - progressbar</h2>
+      <h5 class="card-title text-center px-5 py-3">Создать html-страницу с progressbar и кнопкой, при нажатии на которую заполненность progressbar увеличивается на <span class="badge badge-info">5%</span>. </h5>
+      <div class="col-6 offset-3 text-center">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width: 85%"></div>
+        </div>
+        <button class="btn btn-info my-3">+5%</button>
+      </div>
+      <script>
+        'use strict'
+        let task6_Bar = $.querySelector('#task_6 .progress-bar')
+        let task6_BtnPlus = $.querySelector('#task_6 .btn')
+        let progress = parseInt(task6_Bar.style.width)
+        console.log(task6_Bar, task6_BtnPlus)
+
+        task6_BtnPlus.addEventListener('click', prgrsPlus_5, false)
+
+        function prgrsPlus_5() {
+          if(progress < 100 ){
+            progress += 5
+            task6_Bar.style.width = progress+"%"
+            console.log( progress);
+          }
+          if(progress === 100 ){
+            task6_Bar.style.width = '10%'
+            progress = parseInt(task6_Bar.style.width)
+          }
+
+        }
+        // prgrsPlus_5()
+      </script>
+    </div>
+
+    <!-- Task 7 -->
+    <div class="card mb-3 bg-light" id="task_7">
+      <h2 class="card-header bg-info text-light">Task 7 - nodeList &amp; HTMLCollection</h2>
+      <ul id="myList">
+        <li class="item">lorem</li>
+        <li class="item">lorem</li>
+        <li class="item">lorem</li>
+      </ul>
+      <script>
+        'use strict'
+
+          // nodeList has Array methods like forEach / map / reduce /
+          let els2 = $.querySelectorAll('.item')
+
+          // HTMLCollection without some Array methods. Only index, length
+          let els1 = $.getElementsByClassName('item')
+          let els3 = $.getElementById('myList').getElementsByTagName('li')
+
+          // console.log(els1.length, els2.length, els3.length)
+          let counter = 0
+          els2.forEach(function(item) {
+            counter++
+            item.innerHTML = counter +' - new item';
+          })
+      </script>
+    </div>
+  </div>
+
+</body>
+</html>

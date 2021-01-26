@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    input1{
+      float: left;
+      width: 216px;
+      margin-right: -335px;
+      margin-left: 120px;
+    }
+  </style>
+</head>
+<body>
+    <form 1hidden>
+      <fieldset>
+        <p><label>
+          User name
+          <input id="name" type="text" placeholder="Name" value="Bob Li "></label>
+        </p>
+        <p><label>
+          User surname
+          <input id="surname" type="text" placeholder="Surname" value="Swager"></label>
+        </p>
+        <p><label>
+          Email:
+          <input id="email" type="email" placeholder="Email" value="bobLi@i.ua"></label>
+        </p>
+        <label for="msg">
+          Type your message! <br>
+          <textarea id="msg" name="msg" rows="8" cols="40" placeholder="Your message here!">Text of message from Bob.</textarea>
+        </label>
+        <br>
+        <button id="btn-submit" type="submit" value="SUBMIT">SUBMIT</button>
+        <!-- <input id="btn-submit" type="submit" value="SUBMIT"> -->
+      </fieldset>
+    </form>
+    <ul class="list">
+      <li>
+        <p class="user">Name Surname</p>
+        <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti culpa rerum.</p>
+      </li>
+    </ul>
+    <form action="#">
+      <input id='sendI' type="text" placeholder="some" autofocus>
+      <br>
+      <button id='sendB' type="submit">send</button>
+    </form>
+
+
+    <script>
+      'use strict'
+      // const fName = document.querySelector('#name')
+      const fName = document.querySelector('#name')
+      const sName = document.querySelector('#surname')
+      const email = document.querySelector('#email')
+      const msg = document.querySelector('#msg')
+      const btnSubmit = document.querySelector('#btn-submit')
+      const list = document.querySelector('.list')
+      // console.log(fName, sName, email, msg, btnSubmit, list);
+
+      // document.forms[0].addEventListener('submit', send)
+      btnSubmit.addEventListener('click', send)
+      function send(event) {
+        console.log(event)
+        event.preventDefault()
+        const fNameVal = fName.value.trim()
+        const sNameVal = sName.value.trim()
+        const emailVal = email.value.trim()
+        const msgVal = msg.value.trim()
+        console.log(fNameVal,sNameVal,emailVal,msgVal);
+      }
+
+
+      // let sendI = sendI;
+      // let sendB = sendB;
+      console.log("1\n",sendB,"\n", sendI)
+
+
+      let fun1 = function (evt) {
+        evt.preventDefault();
+        alert("fun1");
+        console.log(evt);
+      }
+      sendB.addEventListener('click', fun1)
+      setTimeout(function(){console.log(22)}, 3000)
+
+
+    </script>
+  </body>
+</html>

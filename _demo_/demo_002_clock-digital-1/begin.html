@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clock electr. format</title>
+  <style>
+    body{text-align: center;}
+    #clock, #demo{
+      width: 300px;
+      min-height: 46px;
+      border: 2px solid red;
+      margin: 10px auto ;
+      font: bold 24px/2 "Courier New", Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Digital Clock A.M. & P.M.</h1>
+  <div id="clock">00:00:00 P.M.</div>
+  <button onclick="myStopFunction()">Stop time</button>
+  <button onclick="myStartFunction()">Start time again</button>
+
+  <h1>Digital Clock .toLocaleTimeString()</h1>
+  <div id="demo">00:00:00 +2(Kyiv)</div>
+  <button onclick="myStopFunction2()">Stop time</button>
+  <button onclick="myStartFunction2()">Start time again</button>
+
+  <script>
+    "use strict"
+
+    // Your code here
+
+  </script>
+</body>
+</html>

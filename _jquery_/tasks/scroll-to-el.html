@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scroll to required element</title>
+  <style>
+    #box{
+      width: 360px;
+      height: 400px;
+      border: 7px groove #000;
+      overflow-y: auto;
+      margin: auto;
+      padding: 10px;
+    }
+    #targetEl{background: #ccc;}
+  </style>
+</head>
+<body>
+  <h1>Scroll to required element</h1>
+  <div id="box">
+    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing.</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus tempora eveniet ad sed, nostrum magni perspiciatis eum quibusdam dolorum nisi eaque quos sapiente deleniti soluta animi accusamus officia! Deserunt, amet.</p>
+    <h2 id="targetEl">Ullam assumenda doloremque quasi blanditiis dignissimos vitae.</h2>
+    <p>Tenetur voluptatem modi iure necessitatibus commodi eius blanditiis vel sit, enim nobis possimus facilis in mollitia repellendus facere placeat cum quasi molestias, est laboriosam veritatis. Incidunt perferendis nobis numquam illo.</p>
+    <h2>Sapiente a velit, voluptas, facere voluptatibus laborum.</h2>
+    <p>Unde, excepturi reiciendis. Asperiores similique atque sapiente? Unde voluptate tempora voluptatibus officia fuga eius sint, voluptates voluptatum distinctio. Incidunt laudantium, magni libero sapiente, ad mollitia doloribus id. Culpa, dicta dolores.</p>
+    <h2>Dolorem praesentium dolores, maxime cumque quod vel.</h2>
+    <p>Repellendus sed molestiae dolorem beatae, necessitatibus molestias cumque odio quo fugiat voluptatum nemo optio alias earum hic, magni officiis, quas vitae obcaecati. Soluta amet autem, quo tempore maiores illo asperiores?</p>
+    <h2>Dolorem praesentium dolores, maxime cumque quod vel.</h2>
+    <p>Repellendus sed molestiae dolorem beatae, necessitatibus molestias cumque odio quo fugiat voluptatum nemo optio alias earum hic, magni officiis, quas vitae obcaecati. Soluta amet autem, quo tempore maiores illo asperiores?</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    'use strict'
+    $(document).ready(function () {
+      let box = $('#box')
+      console.log(box.offset().top);
+      // box.scrollTop($('#targetEl').offset().top - box.offset().top)
+      box.animate({
+        'scrollTop': $('#targetEl').offset().top - box.offset().top
+      }, 1000)
+    })
+  </script>
+</body>
+</html>

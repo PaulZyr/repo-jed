@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Навигация и свойства элементов формы</title>
+</head>
+<body>
+  <h1>Навигация и свойства элементов формы</h1>
+  <form name="first">
+    <label for="txt1">label 1</label>
+    <input id ="txt1" name ="txt1" type="text">
+  </form>
+  <hr>
+  <form name="second">
+    <label>
+      label 2
+      <input type="text">
+    </label>
+  </form>
+  <script>
+    'use strict'
+    // get forms
+    console.log(document.forms);
+    console.log(document.forms.first);
+    console.log(document.forms[1]);
+  </script>
+  <hr>
+  <!-- document.forms[2] -->
+  <form>
+    <div>
+      <div>
+        <div>
+          <input type="radio" name="gender" value="male">
+          <input type="radio" name="gender" value="female">
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- document.forms[3] -->
+  <form>
+    <fieldset name="fldset">
+      <legend>fieldset</legend>
+      <input name="text" type="text" value="1"> <br>
+      <textarea name="area1" ></textarea>
+    </fieldset>
+    <input name="text" type="text" value="2">
+  </form>
+  <script>
+    'use strict'
+    // get form elements
+    let first = document.forms[0];
+    let el1 = first.elements.txt1
+    let el2 = first.elements[0]
+    console.log('***');
+    console.log(el1, el2);
+    console.log(document.forms[2].elements.gender);
+    console.log(document.forms[3].elements.text);
+    console.log(document.forms[3].fldset.elements.text);
+    //  Ссылка на форму element.form
+    console.log(document.forms[0].txt1.form === document.forms[0]);
+    document.forms[3].fldset.elements.text.value = 'new val'
+    document.forms[3].fldset.elements.area1.value = 'new val area'
+    document.forms[2].elements.gender[0].checked = true
+
+  </script>
+<br>
+<br>
+<!-- document.forms[4] -->
+  <form>
+    <select name="city" id="city">
+      <option value="Kiev">Kiev</option>
+      <option value="Bar">Bar</option>
+      <option value="Chop">Chop</option>
+    </select>
+    <hr>
+    <select name="cars" id="cars" multiple>
+      <option value="kia">Kia</option>
+      <option value="honda" selected>Honda</option>
+      <option value="tesla" selected>Tesla</option>
+    </select>
+  </form>
+  <script>
+    'use strict'
+    document.forms[4].elements.city.selectedIndex = 2
+    console.log(document.forms[4].elements.cars.options);
+    console.log(document.forms[4].elements.cars.options[0].selected)
+    // document.forms[4].elements.cars.selectedIndex = -1
+  </script>
+</body>
+</html>

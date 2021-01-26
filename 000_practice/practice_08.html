@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="http://wm-school.ru/js/string_exercises.php">
+  <meta name="url" content="https://medium.com/webbdev/js-2b0820b3788f"> <!-- 5 типовых задач на собеседованиях по JavaScript -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 8.  Строки.</title>
+  <style>
+    ol.task-list li:nth-child(10){
+      background: #d69191;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Practice 8.  Строки.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <ol class="task-list">
+  <!-- Task 1 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает 2 строки и сравнивает их длину</u>. <br>
+        Функция возвращает: <br>
+        <kbd>1</kbd>, если в первой строке больше символов, чем во второй; <br>
+        <kbd>-1</kbd> – если во второй больше символов, чем в первой; <br>
+        <kbd>0</kbd> – если строки одинаковой длины.</p>
+      <button onclick="f1(s1, s2)">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+        let s1 = 'Hello world!',
+            s2 = 'I am a student.'
+
+        function f1(arg1, arg2) {
+          if (arg1.length > arg2.length) {
+            console.log(1);
+          } else if (arg1.length < arg2.length) {
+            console.log(-1);
+          } else {
+            console.log(0);
+          }
+        }
+        // f1(s1, s2)
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Написать функцию, которая переводит <kbd>в верхний регистр первый символ</kbd> переданной строки.</p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          let str = prompt('Enter text in lowercase format.', 'yorem ipsum dolor sit amet, cons adipisicing.')
+          let res = str.charAt(0).toUpperCase() + str.slice(1)
+          out.innerText = res
+        }
+        // f2()
+      </script>
+    </li>
+    <!-- Task 3 -->
+    <li>
+      <p>Написать функцию, которая <kbd>считает количество гласных букв</kbd> в переданной строке. </p>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let str = prompt('Enter text in lowercase format.', 'Lorem DOLOR amet. Cons!..')
+          const vowels = ['a', 'e', 'i', 'o', 'u']
+          let count = 0
+
+          // for(let char of str.toLowerCase()){
+          //   if(vowels.includes(char)) {
+          //     count++
+          //   }
+          // }
+          // out.innerText = count
+
+          const matches = str.match(/[aeiou]/gi)
+          out.innerText = 'Количество гласных букв - ' + (matches ? matches.length : 0)
+        }
+        // f3()
+      </script>
+    </li>
+    <!-- Task 4 -->
+    <li>
+      <p>Написать функцию для проверки спама в переданной строке. <br>
+        Функция возвращает <kbd>true</kbd>, если строка содержит спам. <br>
+        Спамом считать следующие слова: <kbd>100% бесплатно, увеличение продаж, только сегодня, не удаляйте, ххх</kbd>. <br>
+        Функция должна быть <kbd>нечувствительна к регистру</kbd></p>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4(argStr) {
+          let re = /(100% бесплатно|увеличение продаж|только сегодня|не удаляйте|xxx)/gi
+          if (argStr === undefined) {
+            argStr = prompt('Enter your string.', '100% бесплатно Lorem ipsum xxx dolor.')
+          }
+          console.log('argStr.match(re)', argStr.match(re))
+          if (argStr.match(re)) {
+            out.innerHTML = 'Warning!! <br> This message has SPAM.'
+          } else {
+            out.innerText = 'Message without spam.'
+          }
+        }
+      </script>
+    </li>
+    <!-- Task 5 -->
+    <li>
+      <p>Написать функцию сокращения строки. Функция принимает строку и ее максимальную длину. <br>
+        Если длина строки больше, чем максимальная, то <kbd>необходимо отбросить лишние символы, добавив вместо них троеточие</kbd>. <br>
+        Например: <kbd>truncate(“Hello, world!”, 8)</kbd> должна вернуть <kbd>“Hello...”</kbd>.</p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f5() {
+          let str = prompt('Enter any text.', 'Lorem DOLOR amet. Cons!..')
+          let len = +prompt('Enter max length of text.', 7)
+
+          out.innerHTML = str.length > len ? str.substring(0, len) + '&hellip;' : str
+        }
+        // f5()
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      <p>Написать функцию, которая проверяет, <kbd>является ли палиндромом</kbd> переданная строка. <br>
+        <b>Палиндром</b> — это слово или фраза, которые одинаково читаются по буквам или по словам как слева направо, так и справа налево, при этом полностью сохраняя свой смысл.
+      </p>
+      <!-- https://www.stijit.com/javascript/string-palindrome -->
+      <button onclick="isPalindrome()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function isPalindrome() {
+          let str = prompt('Enter text for check palindrome].', 'Lorem')
+          // let strLen = str.length;
+          // let result = '';
+          // for (var i = 0; i < strLen; i++) {
+          //   if (str[i] === str[strLen - 1 - i]) { //Сравниваем все элементы от начала строки со всеми элементами с конца строки
+          //     result = 'yes';
+          //   } else {
+          //     result = 'no';
+          //     return out.innerText = result;
+          //   }
+          // }
+          // out.innerText =  result;
+
+          // Secondd variant: use array methods
+          // Разбиваем строку посимвольно  и превращаем ее в массив с помощью .split(''),
+          // потом применяем к нему метод .reverse() и
+          // собираем все символы в строку с помощью .join('')
+          var strReverse = str.split('').reverse().join('')
+
+          if (strReverse == str) {
+            return out.innerText = 'yes';
+          } else {
+            return out.innerText = 'no';
+          }
+        }
+        // isPalindrome()
+
+        // // Not only single word can be palindrome, so function for check paragraph is palindrome
+        // function isPal(value){
+        //   var palArr = value.split('')
+        //   var reverseVal=''
+        //
+        //   for(var i=0; i<palArr.length; i++){
+        //     if(palArr[i]===' ') palArr.splice(i,1)
+        //   }
+        //
+        //   var inputValue = palArr.join('').toLowerCase()
+        //   reverseVal = palArr.reverse().join('').toLowerCase()
+        //   if(inputValue.indexOf(reverseVal)!=-1) return true
+        //   else return false;
+        // }
+        // console.log(isPal('Anna')); // true
+        // console.log(isPal('А роза упала на лапу Азора')); //true
+        // console.log(isPal('Jhon')); //false
+        // console.log(isPal('12321')); //true
+        // console.log(isPal('123212')); //false
+
+        // Else we can try cut space like Task 12 using .replace() and RegExp
+        // ...
+      </script>
+    </li>
+    <!-- Task 7 -->
+    <li>
+      <p>Написать функцию, которая <kbd>считает количество слов</kbd> в предложении.</p>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <!-- /http://qaru.site/questions/136703/counting-words-in-string -->
+      <!-- http://qaru.site/questions/136704/count-number-of-words-in-string-using-javascript -->
+      <script>
+        'use strict'
+
+        function f7() {
+          let str = prompt('Enter any text.', 'Lorem DOLOR amet. Cons!..')
+          var m = str.match(/[^\s]+/g)
+          console.log(m);
+          out.innerText = m ? m.length : 0
+        }
+      </script>
+    </li>
+    <!-- Task 8 -->
+    <li>
+      <p>Написать функцию, которая возвращает <kbd>самое длинное слово</kbd> из предложения.</p>
+      <button onclick="f8()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <!-- http://qaru.site/questions/605223/javascript-find-longest-word-in-a-string -->
+      <!-- https://www.freecodecamp.org/news/three-ways-to-find-the-longest-word-in-a-string-in-javascript-a2fb04c9757c/ -->
+      <script>
+        'use strict'
+
+        function f8(argStr) {
+          if (argStr === undefined) {
+            argStr = prompt('Enter your string.', 'The quick brown fox jumpeeeed over the lazy dog')
+          }
+
+          let strSplit = argStr.split(' ');
+          let longestWord = 0;
+          for(var i = 0; i < strSplit.length; i++){
+            if(strSplit[i].length > longestWord){
+        	    longestWord = strSplit[i].length;
+             }
+          }
+          out.innerHTML = `In paragraph - '<u>The quick brown fox jumpeeeed over the lazy dog'</u> length of longest word is  <kbd>${longestWord}</kbd> `
+        }
+        // f8()
+      </script>
+    </li>
+    <!-- Task 9 -->
+    <li>
+      <p>Написать функцию, которая считает <kbd>среднюю длину слова</kbd> в предложении.</p>
+      <button onclick="f9()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f9(argStr) {
+          // var argStr = 'The quick brown fox jumpeeeede over the lazy dog'
+          if (argStr === undefined) {
+            argStr = prompt('Enter your string.', 'The quick brown fox jumpeeeedy over the lazy dog')
+          }
+
+          let strSplit = argStr.split(' ')
+          let min = strSplit[0].length
+          let max = 0
+          let lettersSum = 0
+          strSplit.forEach(function(el){
+            lettersSum += el.length
+          })
+          console.log(strSplit, min, max , lettersSum);
+
+          // for (let i = 0; i < strSplit.length; i++) {
+          //   let len = strSplit[i].length
+          //   if (len < min) min = len
+          //   if (len > max) max = len
+          // }
+          // console.log(min, max)
+          out.innerHTML = `Averege length of word in paragraph = <kbd>${(lettersSum / strSplit.length).toFixed(2)}</kbd>`
+        }
+        // f9()
+      </script>
+    </li>
+    <!-- Task 10 -->
+    <li>
+      <p>Написать функцию, которая <u>принимает строку и символ</u> и выводит <kbd>индексы</kbd>, по которым находится этот символ в строке. <br>
+        Также вывести, <kbd>сколько раз встречается этот символ в строке</kbd>. </p>
+      <button onclick="f10()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10(argStr, char) {
+          console.log(10)
+          const re = new RegExp(char, 'gi')
+          var argStr = 'The tquick to brown fox jumpeeeede over the lazy dog lorem'
+          if (argStr === undefined) {
+            argStr = prompt('Enter your string.', 'The quick brown fox jumpeeeedy over the lazy dog')
+          }
+
+          console.log(argStr, re)
+          // let m = argStr.search(re)
+          // console.log(m);
+          let start = 0, count = 0, it = 0, newStr, step = 0
+          // do {
+          //   // out.innerHTML += `<br>Char (${char}) finded in ${newStr.search(re) + dif} index `
+          //   // console.log('start', start);
+          //   dif =
+          //   newStr = argStr.slice(start)
+          //   // console.log('start++', start);
+          //   console.log('argStr.slice', argStr.slice(start+1).search(re)) // 35
+          //
+          //   count++ // 0 / 1
+          //   // console.log('count', count);
+          // } while (newStr.search(re) !== -1 && count < 15)
+
+          newStr = argStr.slice(0)
+          console.log(newStr);
+
+          // while (newStr.search(re) !== -1 && count < 15){
+          //   it = newStr.search(re)
+          //   step += it
+          //   out.innerHTML += `<br>Char (${char}) finded in ${step} index `
+          //   newStr = newStr.slice(it+1)
+          //   console.log(it, count++, newStr, step)
+          // }
+
+// in progress
+          // out.innerHTML += `<hr> We finde ${count} - char '${char}' in string.`
+          // do {
+          //   out.innerHTML += `<br>Char (${char}) finded in ${argStr.indexOf(char, start)} index `
+          //   start = argStr.indexOf(char, start) + 1
+          //   count++
+          // } while (argStr.indexOf(char, start) !== -1);
+          // out.innerHTML += `<hr> We finde ${count} - char '${char}' in string.`
+
+          Array.prototype.forEach.call(argStr, function(el, it){
+            // console.log(el)
+            // if (argStr[it] === char) {
+            // // if (argStr.search(re)) {
+            //   out.innerHTML += `<br>Char (${char}) finded in ${argStr.search(re)} index `
+            // }
+            // argStr.search(re)
+            // let m = argStr.search(re)
+            // console.log(m);
+          })
+        }
+        f10(null, 'T')
+      </script>
+    </li>
+    <!-- Task 11 -->
+    <li>
+      Реализуйте и экспортируйте по умолчанию функцию <kbd>invertCase</kbd>, которая меняет в строке регистр каждой буквы на противоположный.
+      <pre>
+        invertCase('Hello, World!'); // hELLO, wORLD!
+        invertCase('I loVe JS');     // i LOvE js
+      </pre>
+      <button onclick="inv()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        function inv() {
+          const arg = prompt('Enter any text!', 'Hello, mY fRiendS!')
+          let ns = ''
+          for (var i = 0; i < arg.length; i++) {
+            if(arg[i].toLowerCase() === arg[i]){
+              ns += arg[i].toUpperCase()
+            } else {
+              ns += arg[i].toLowerCase()
+            }
+          }
+          out.textContent = ns
+          console.log(ns);
+        }
+        // inv('Hello, mY fRiendS!')
+      </script>
+    </li>
+
+    <!-- Task 12 -->
+    <li>
+      <p>Написать функцию, которая <kbd>считает количество заглавных, прописных букв, цифр и знаков</kbd> в переданной строке. </p>
+      <button onclick="f12()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f12() {
+          let str = prompt('Enter text in lowercase format.', 'Lorem ipsum - DOLOR amet. Cons!..')
+          let res = 0
+
+          //  First variant use FOR loop
+          // for (let i = 0; i < str.length; i++) {
+          //   let char = str.charAt(i)
+          //
+          //   if (char === char.toLowerCase() && char !== ' ') res++
+          // }
+
+          //  Second variant use .MATCH()
+          var all_letters = str.length,
+            nums = 0,
+            upper = 0,
+            lower = 0,
+            upper = 0,
+            lower = 0,
+            digits = 0,
+            symbols = 0,
+            char;
+
+          var upper_match = /[A-ZА-ЯЁ]/g,
+            lower_match = /[a-zа-яё]/g,
+            number_match = /\d/g;
+
+          var upperStr = str.replace(upper_match, ''),
+              upper = str.length - upperStr.length,
+              lowerStr = upperStr.replace(lower_match, ''),
+              lower = upperStr.length - lowerStr.length,
+              numsStr = lowerStr.replace(number_match, ''),
+              nums = lowerStr.length - numsStr.length,
+              symbols = all_letters - lower - upper - nums;
+
+            console.log('upperStr - ',upperStr)
+            console.log('upper - ',upper)
+            console.log('lowerStr - ',lowerStr)
+            console.log('lower - ',lower)
+            console.log('numsStr - ',numsStr)
+            console.log('nums - ',nums)
+            console.log('symbols - ',symbols)
+          out.innerText = res
+        }
+        // f12()
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

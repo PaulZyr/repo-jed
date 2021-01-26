@@ -1,0 +1,36 @@
+  html {    line-height: 1.77; font-family: Verdana,sans-serif;}
+
+  [href]:after {
+    font-size: 9px;
+    vertical-align: super;
+    font-weight: bold;
+    background: #ff0;
+  }
+  .links{counter-reset: lnk;list-style: none outside;;}
+  .links a:before{
+    counter-increment: lnk;
+    content: '#'counter(lnk) ' ' ;
+    text-decoration: inherit;
+    font-weight: bold;
+  }
+  .links a{text-decoration: none;}
+  .links a:hover,
+  .links a:focus {background: #ff0; transform: scale(1.1, 1.2); transform-origin: left;text-indent: 0.7rem;}
+
+  .links [href^="http://"],
+  .links [href^="https://"] {display: block;}
+  .links [href^="http://"]:after,
+  .links [href^="https://"]:after {
+    content: '[www] ';
+    font-size: 9px;
+  }
+  .links [href=""]:after,
+  .links [href="#"]:after{content: '#empty ';}
+
+  .links [href^="https://developer.mozilla.org"]:after {content: ' #MDN';}
+
+  .links [href^="https://learn.javascript.ru"]:after {content: ' #lrn.js';}
+
+  .links [href^="https://habr.com/ru"]:after {content: ' #habr';}
+
+  .links [href^="https://htmlacademy.ru"]:after {content: ' #htmlacademy';}

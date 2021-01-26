@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://tproger.ru/translations/javascript-this-keyword/">
+  <meta name="url" content="https://javascriptforwp.com/this-introduction/">
+  <meta name="url" content="http://javascript.ru/tutorial/object/thiskeyword">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>This 4</title>
+</head>
+<body>
+  <h1>This 4</h1>
+  <script>
+    // Ключевое слово this в JavaScript является источником многих недоразумений.
+    // Он зависит от контекста и изменяется в зависимости от того, когда и где он вызывается.
+    // logs the window
+    console.log('global', this);
+
+    var logThis = function () {
+    	// also logs the window
+    	console.log('logThis', this);
+    };
+    logThis();
+
+    var LogThis = function () {
+    	// logs the LogThis() constructor
+    	console.log('LogThis', this);
+    };
+    new LogThis();
+
+    var myLibrary = {
+    	logThis: function () {
+    		// logs the myLibrary object
+    		console.log('myLibrary.logThis', this);
+    	},
+    	logThis2: () => {
+    		// logs the window
+    		// `this` doesn't change its binding in fat arrow functions
+    		console.log('myLibrary.logThis2', this);
+    	}
+    };
+    myLibrary.logThis();
+    myLibrary.logThis2();
+
+    // Некоторые разработчики любят this и используют его везде, где они могут.
+    // Для меня почти всегда есть какая-то другая переменная, которую вы можете использовать, это более ясно.
+    var logThis = function () {
+    	// The log the same thing, but with the second option,
+    	// it's immediately obvious what will be logged
+    	console.log(this);
+    	console.log(window);
+    };
+    logThis();
+
+    var myLibrary = {
+    	logThis: function () {
+    		// Same here. They both log the same thing.
+    		// The second choice is much more obvious
+    		console.log(this);
+    		console.log(myLibrary);
+    	}
+    };
+    myLibrary.logThis();
+    // В обоих приведенных выше примерах использование именованной переменной
+    // вместо this делает гораздо более понятным, что вы на самом деле делаете.
+    // Есть одна ситуация, когда я использую this, и думаю, что это имеет смысл сделать.
+    // С помощью шаблона конструктора можно создать несколько экземпляров конструктора,
+    // каждый со своими свойствами и значениями
+    // Ключевое слово this представляет текущий экземпляр и является лучшим выбором
+    // для точного использования уникальных свойств и значений этого экземпляра.
+
+    var sayHi = function (greeting) {
+    	this.greeting = greeting;
+    };
+
+    sayHi.prototype.greet = function () {
+    	alert(this.greeting);
+    };
+
+    var hi = new sayHi('Hi there!');
+    var aloha = new sayHi('Aloha');
+
+    hi.greet();
+
+  </script>
+
+</body>
+</html>

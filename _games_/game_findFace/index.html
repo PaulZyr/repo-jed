@@ -1,0 +1,99 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Matching Face Game</title>
+  <style>
+    body {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    img {
+      position: absolute;
+    }
+
+    div[id*='Side'] {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      display: inline-block;
+      border: 1px solid black;
+      background-color: darkkhaki;
+    }
+
+    #rightSide {
+      border: 0;
+    }
+
+  </style>
+</head>
+
+<body id="theBody" onload="generateFaces()">
+  <h1>Matching Face Game!</h1>
+  <h3>Click on the extra smiling face on the left.</h3>
+  <div id="leftSide"></div>
+  <div id="rightSide"></div>
+
+  <script>
+    var numberOfFaces = 3;
+
+    var theLeftSide = document.getElementById("leftSide"); // create var for find & operation above "leftSide"
+    var theRightSide = document.getElementById("rightSide"); // create var for find & operation above "rightSide"
+    // var theBody = document.getElementsByTagName("body")[0]; // create var for find & operation above "body"
+    function generateFaces() {
+      num = 0;
+      while (num < numberOfFaces) {
+        var pos_x = Math.round(Math.random() * 400); // get random X position for each new image
+        var pos_y = Math.round(Math.random() * 400); // get random Y position for each new image
+
+        var this_face = document.createElement("img"); // create new image in parent's Node
+        // this_face.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png"; // get src for new image
+        // this_face.src = "http://fotosticker.ru/addon_images/cat06-thumb.png"; // get src for new image
+        this_face.src = "https://img.icons8.com/office/40/000000/happy.png"; // get src for new image
+
+        this_face.style.top = pos_x + "px"; // change style - write created earlier random X position
+        this_face.style.left = pos_y + "px"; // change style - write created earlier random Y position
+
+        leftSide.appendChild(this_face); // insert new image as Node
+
+        num++;
+      }
+
+      var leftSideImages = theLeftSide.cloneNode(true); // create var for cloning parents(leftSide) + children(img)
+      leftSideImages.removeChild(leftSideImages.lastChild); // remove last children(img) from cloning var "leftSideImages"
+      document.getElementById("rightSide").appendChild(leftSideImages); // insert previously cloned parent node("leftSideImages"), with children(img) without last children
+
+      theLeftSide.lastChild.onclick = function nextLevel(event) { // event Listener for click on last img in "leftSide"
+
+        // remove all child nodes in "theLeftSide"
+        while (theLeftSide.firstChild) {
+          theLeftSide.removeChild(theLeftSide.firstChild);
+        }
+
+        // remove all child nodes in "theRightSide"
+        while (theRightSide.firstChild) {
+          theRightSide.removeChild(theRightSide.firstChild);
+        }
+        event.stopPropagation(); // for control that click be work only on last img in "leftSide"
+
+        numberOfFaces += 1; // increase numberOfFaces
+
+        generateFaces(); // restart function again
+      };
+
+      theLeftSide.onclick = function gameOver() { // event Listener for click on "leftSide" area NOT on last img in "leftSide"
+
+        alert("Game Over!");
+
+        theLeftSide.onclick = null; // nothing will happen when the user clicks anywhere in the theLeftSide
+
+        theLeftSide.lastChild.onclick = null; // nothing will happen when the user clicks on the extra face. If this line missing we get else plus 5 faces, even if game over already.
+
+      };
+
+    }
+  </script>
+</body>
+
+</html>

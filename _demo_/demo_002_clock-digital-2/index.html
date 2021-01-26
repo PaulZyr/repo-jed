@@ -1,0 +1,74 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clock electr. format</title>
+  <style>
+    body{text-align: center;}
+    #clock, #demo{
+      width: 300px;
+      min-height: 46px;
+      border: 2px solid red;
+      margin: 10px auto ;
+      font: bold 24px/2 "Courier New", Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Digital Clock A.M. & P.M.</h1>
+  <div id="clock">00:00:00 P.M.</div>
+  <button id='stop'>Stop time</button>
+  <button id='play'>Start time again</button>
+  <br><br>
+  <button id='toggle'>STOP</button>
+
+  <script>
+    "use strict"
+    var btnPlay = document.getElementById('play');
+    var btnStop = document.getElementById('stop');
+    var btnToggle = document.getElementById('toggle');
+    console.log(btnPlay, btnStop, btnToggle);
+    function JSClock() {
+      var time = new Date();
+      var hour = time.getHours();
+      var minute = time.getMinutes();
+      var second = time.getSeconds();
+      var temp = "" + ((hour > 12) ? hour - 12 : hour);
+      if (temp < 10){ temp = "0" + temp;}
+      // if (hour == 0){ temp = "12";} // why this writed?
+      temp += ((minute < 10) ? ":0" : ":") + minute;
+      temp += ((second < 10) ? ":0" : ":") + second;
+      temp += (hour >= 12) ? " P.M." : " A.M.";
+
+      var clock = document.getElementById("clock");
+      clock.innerHTML = temp;
+      console.log(clock);
+      return temp;
+    }
+    var myClock = setInterval(JSClock, 1000);
+    btnStop.addEventListener('click', function () {
+      console.log('stop');
+      clearInterval(myClock);
+    })
+    btnPlay.addEventListener('click', function () {
+      console.log('play');
+      myClock = setInterval(JSClock, 1000);
+    })
+
+    var stop = btnToggle.innerHTML.toUpperCase();
+    console.log(stop);
+    btnToggle.addEventListener('click', function() {
+      (btnToggle.innerHTML.toUpperCase() == 'STOP') ? (
+        btnToggle.innerHTML = 'Play'.toUpperCase(),
+        clearInterval(myClock)
+      ) : (
+        btnToggle.innerHTML = 'Stop'.toUpperCase(),
+        myClock = setInterval(JSClock, 1000)
+      );
+    })
+
+  </script>
+</body>
+
+</html>

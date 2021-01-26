@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ClassList info</title>
+</head>
+<body>
+    <div id="myDiv">Lorem, ipsum dolor sit amet consectetur adipisicing.</div>
+    <button id="add" onclick="add()">add</button>
+    <button id="rem" onclick="rem()">remove</button>
+    <button id="tgl" onclick="tgl()">toggle</button>
+    <script>
+    let myDiv = document.querySelector('#myDiv');
+    let btnAdd = document.querySelector('#add');
+    let btnRem = document.querySelector('#rem');
+    let btnTgl = document.querySelector('#tgl');
+
+    function add() {
+        myDiv.classList.add('myclass');
+    }
+    function rem() {
+        myDiv.classList.remove('myclass');
+    }
+    function tgl() {
+        myDiv.classList.toggle('toggle');
+    }
+    
+    </script>
+
+</body>
+</html>

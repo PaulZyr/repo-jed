@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs 02</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    .sliders-wrap{  position: relative;}
+    .slide{
+      text-align: center;
+      list-style: none;
+      position: absolute;
+      opacity: 0;
+    }
+    a:hover{  cursor: pointer;}
+    .active{  opacity: 1;}
+    .active-slide{  opacity: 1;}
+  </style>
+</head>
+<body>
+  <h1>Tabs 02</h1>
+  <div class="nav nav-tabs">
+    <!--
+    <a href="" class="nav-link active" data-target="0">First</a>
+    <a href="" class="nav-link" data-target="1">Second</a>
+    <a href="" class="nav-link" data-target="2">Third</a>
+    -->
+  </div>
+  <div class="sliders-wrap">
+    <ul class="sliders">
+      <li class="slide">
+        <h2 data-title="What?">Slide 1</h2>
+        <img src="https://picsum.photos/1000/700/?random" alt="">
+      </li>
+      <li class="slide">
+        <h2 data-title="Where?">Slide 2</h2>
+        <img src="https://picsum.photos/1000/701/?random" alt="">
+      </li>
+      <li class="slide active-slide">
+        <h2 data-title="When?">Slide 3</h2>
+        <img src="https://picsum.photos/1000/699/?random" alt="">
+      </li>
+    </ul>
+  </div>
+
+
+
+
+  <script>
+    'use strict';
+    let $=document;
+    let list=$.querySelector('.sliders');
+    let btn=$.querySelector('.nav-tabs');
+    let btnPrev=$.createElement('a');
+    btnPrev.innerHTML='prev';
+    btnPrev.className='nav-link btn-prev';
+    btn.appendChild(btnPrev);
+
+    for(let i=0;i<list.children.length;++i)
+    {
+        var tmp=$.createElement('a');
+        tmp.className='nav-link current';
+        tmp.innerHTML=list.children[i].children[0].dataset.title;
+        tmp.dataset.index=i;
+        btn.appendChild(tmp);
+    }
+
+    let linkList;
+    setTimeout(function(){linkList=$.querySelectorAll('.current');},20);
+
+    tmp.classList.add('active');
+
+    var btnNext=$.createElement('a');
+    btnNext.innerHTML='next';
+    btnNext.className='nav-link btn-next';
+    btn.appendChild(btnNext);
+
+    btn.addEventListener('click',function(e)
+    {
+        if(e.target.classList.contains('btn-next'))
+        {
+            if($.querySelector('.active-slide').nextElementSibling===null)
+            {
+                $.querySelector('.active').classList.remove('active');
+                linkList[0].classList.add('active');
+                $.querySelector('.active-slide').classList.remove('active-slide');
+                list.firstElementChild.classList.add('active-slide');
+            }
+            else
+            {
+                var n=$.querySelector('.active-slide');
+                var na=$.querySelector('.active');
+                na.nextElementSibling.classList.add('active');
+                na.classList.remove('active');
+                n.nextElementSibling.classList.add('active-slide');
+                n.classList.remove('active-slide');
+            }
+        }
+        else if(e.target.classList.contains('btn-prev'))
+        {
+            if($.querySelector('.active-slide').previousElementSibling===null)
+            {
+                $.querySelector('.active').classList.remove('active');
+                linkList[linkList.length-1].classList.add('active');
+                $.querySelector('.active-slide').classList.remove('active-slide');
+                list.lastElementChild.classList.add('active-slide');
+            }
+            else
+            {
+                var p=$.querySelector('.active-slide');
+                var pa=$.querySelector('.active');
+                pa.previousElementSibling.classList.add('active');
+                pa.classList.remove('active');
+                p.previousElementSibling.classList.add('active-slide');
+                p.classList.remove('active-slide');
+            }
+        }
+        else if(e.target.classList.contains('current'))
+        {
+            $.querySelector('.active').classList.remove('active');
+            $.querySelector('.active-slide').classList.remove('active-slide');
+            list.children[e.target.dataset.index].classList.add('active-slide');
+            linkList[e.target.dataset.index].classList.add('active');
+        }
+    });
+  </script>
+
+
+</body>
+</html>

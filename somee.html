@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+<body>
+  <template id="btnTemplate">
+  <div class="btnWrapper">
+    <button type="button"></button>
+  </div>
+</template>
+  <script>
+      var template = document.querySelector('#btnTemplate').content;
+      console.log(template);
+      var urls = [
+        'https://api.github.com/users/o0',
+        'https://api.github.com/users/zeckson',
+        'https://api.github.com/users/fyvfyv'
+      ];
+      // var urls = 'https://api.github.com/users/o0';
+
+      // function downloadData(url) {
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.open('GET', url, false)
+      //   xhr.onload = drawButton;
+      //   xhr.send();
+      // }
+
+      urls.forEach(function(url) {
+        // downloadData(url);
+        var xhr = new XMLHttpRequest();
+        console.log(xhr);
+        xhr.open('GET', url, false)
+        xhr.onload = drawButton;
+        xhr.send();
+      });
+
+      function onClick(evt, data) {
+        console.log(evt);
+        //evt.preventDefault();
+        document.body.insertAdjacentHTML('beforeEnd', '<p>' + 'ID: '+ evt.id + '\nName: ' + data + '</p>');
+      }
+
+      function drawButton(event) {
+        // if (event.xhr.status === 200 && xhr.readyState === 4) {
+          var data =
+            {
+              id: 123,
+              name: "bob",
+              login: '465'
+            }
+          var btnFragment = template.cloneNode(true);
+          console.log(data);
+
+          var btn = btnFragment.querySelector('button');
+          btn.addEventListener('click', function (event) {
+            onClick(event.target, data.name)
+          });
+          btn.textContent = data.login;
+          btn.setAttribute('id', data.id);
+
+          document.body.appendChild(btn);
+
+        // }
+      }
+
+  </script>
+  <style>
+    .btnWrapper {
+  padding: 15px;
+  margin: 5px;
+  border: 1px solid tomato;
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+
+  background-color: tomato;
+  border: 1px solid tomato;
+  border-radius: 2px;
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ad1a00;
+  border-color: #ad1a00;
+  color: #fff;
+  transition-duration: 0.3s;
+}
+
+  </style>
+</body>
+</html>

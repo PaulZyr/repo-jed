@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Tooltip-1</title>
+  <style>
+    body {
+      font: 20px/2 Roboto, Arial, sans-serif;
+    }
+
+    #box {
+      width: 100px;
+      height: 30px;
+      margin: 10px auto;
+      border: 2px dashed #fc6;
+    }
+
+    #main,
+    #div,
+    #p {
+      padding: 10px;
+    }
+
+    #main {
+      width: 200px;
+      margin: auto;
+      background: #ff0;
+    }
+
+    #div {
+      background: #f00;
+    }
+
+    #p {
+      background: #ccc;
+    }
+
+    mark {
+      position: relative;
+    }
+
+    span.ttip {
+      border: 2px solid #f00;
+      border-radius: 10px;
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      padding: 0 5px;
+      background: #ccc;
+    }
+
+    span.ttip:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 0;
+      height: 0;
+      top: 100%;
+      margin: 0 0 0 -5px;
+      border-width: 5px 5px 0;
+      border-style: solid;
+      border-color: #f00 transparent transparent transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+
+  <main id="main">
+    <div id="div">
+      <p id="p">pp</p>
+    </div>
+  </main>
+
+  <div id="block" style="border: 1px solid green; padding: 25px  10px; position: relative;">
+    <p>Lorem <span class="ttip">dsdsd</span>
+      <mark data-hint="one">ipsum</mark> dolor sit amet
+      <mark data-hint="two">consectetur</mark> adipisicing elit.
+      <mark data-hint="three">Magni</mark>, nulla est. Qui
+      <mark data-hint="four">perspiciatis</mark> maxime delectus, libero quasi
+      <mark data-hint="five">impedit</mark> aliquam tempora.</p>
+  </div>
+
+  <script>
+    "use strict"
+
+// browser-sync start --server --files "*.html, */*.html, *.js, */*.js, *.css"
+// click
+// dblclick
+// mousedown
+// mouseup
+// mouseenter
+// mouseleav
+// mouseover
+// mouseout
+// contextmenu
+// mousemove
+
+box.addEventListener('click', function(){
+  console.log('click');
+});
+box.addEventListener('dblclick', function(){
+  console.log('dbclick');
+});
+box.addEventListener('mousedown', function(){
+  console.log('mousedown');
+});
+box.addEventListener('mouseup', function(){
+  console.log('mouseup');
+});
+box.addEventListener('mouseenter', function(){
+  console.log('mouseenter');
+});
+box.addEventListener('mouseleave', function(){
+  console.log('mouseleave');
+});
+box.addEventListener('mouseover', function(){
+  console.log('mouseover');
+});
+box.addEventListener('mouseout', function(){
+  console.log('mouseout');
+});
+box.addEventListener('contextmenu', function(){
+  console.log('contextmenu');
+  alert('You right-clicked inside the div!');
+});
+box.addEventListener('mousemove', function(){
+  console.log('mousemove');
+});
+// vsplitie, 3 arguments
+main.addEventListener('click', function( e ){
+  console.log('main');
+  console.log(e.currentTarget)
+  console.log(e.target)
+}, true);
+
+div.addEventListener('click', function( e ){
+  console.log('div');
+  console.log(e.currentTarget)
+  console.log(e.target)
+}, true);
+
+p.addEventListener('click', function( e ){
+  console.log('p');
+  console.log(e.currentTarget)
+  console.log(e.target)
+}, true);
+// main.addEventListener('click', function( e ){
+//   console.log('main');
+//   console.log(e.target)
+// }, false);
+
+// div.addEventListener('click', function( e ){
+//   console.log('div');
+//   console.log(e.target)
+// }, false);
+
+// p.addEventListener('click', function( e ){
+//   console.log('p');
+//   console.log(e.target)
+// }, false);
+
+// optimization
+block.addEventListener('mousemove', function( ev ){
+  // if(ev.target.matches("mark")){
+  if(ev.target.matches("[data-hint]")){
+    // console.log( ev.target.innerHTML );
+    // console.log( ev.target.dataset.hint );
+    var hint = document.createElement('span');
+    hint.innerHTML = ev.target.dataset.hint;
+    hint.className = 'ttip';
+    ev.target.appendChild(hint);
+    ev.target.addEventListener('mouseleave', function scope(){
+      ev.target.removeChild(hint);
+      ev.target.removeEventListener('mouseleave', scope )
+    })
+  }
+})
+  </script>
+</body>
+
+</html>

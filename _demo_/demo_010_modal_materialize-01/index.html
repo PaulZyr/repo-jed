@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="container" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modal Materialize</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    :root {
+      --red: #f00;
+      --blue: hsla(240, 50%, 50%, 1);
+      --white: hsl(240, 100%, 100%, 1);
+    }
+
+    html {
+      background: #000;
+      color: var(--white);
+    }
+
+    body {
+      position: relative;
+    }
+
+    html.container p {
+      background: var(--red);
+      color: var(--white);
+      padding: 7px;
+    }
+
+    svg {
+      width: 100px;
+      height: 100px;
+      transform: rotate(27deg);
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-name: tiktak;
+    }
+
+    @keyframes tiktak {
+      0% {
+        transform: rotate(27deg);
+        opacity: 1;
+      }
+
+      25% {
+        transform: rotate(54deg);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: rotate(27deg);
+        opacity: 1;
+      }
+
+      75% {
+        transform: rotate(0deg);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: rotate(27deg);
+        opacity: 1;
+      }
+    }
+
+    /* modal */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      background: var(--white);
+      color: #000;
+      padding: 17px;
+      transform: translate(-50%, -50%);
+      z-index: 1001;
+      margin: auto;
+      border-radius: 7px;
+      box-shadow: 0 0 10px #000, 7px -7px 5px #bbb;
+      /* 	display: none; */
+      /* display: block; */
+    }
+
+    .modal-shadowing {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.5);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: none;
+    }
+
+    .modal-shadowing.show {
+      z-index: 1000;
+      display: block;
+    }
+    button:focus{outline: 2px solid blue;}
+  </style>
+</head>
+
+<body>
+  <h1>Modal Materialize</h1>
+  <div class="card-panel">
+    <p>Lorem ipsum dolor sit amet.</p>
+    <div class="center">
+      <button class="btn btn-large open-modal" data-modal-for='modal-1' tabindex="1">Open modal 1</button>
+      <button class="btn btn-large open-modal" data-modal-for='modal-2' tabindex="2">Open modal 2</button>
+      <button class="btn btn-large open-modal" data-modal-for='modal-3' tabindex="3">Open modal 3</button>
+      <br><br>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+        <g>
+          <title>background</title>
+          <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+        </g>
+        <g>
+          <title>Hand pointer</title>
+          <path id="svg_1" d="m446.937,360.598l-21.123,-39.657c-5.226,-9.797 -17.397,-13.51 -27.202,-8.288l-1.763,0.937c-3.169,-25.073 8.091,-55.672 -1.983,-73.96l-46.898,-85.132c-1.521,-2.755 -3.658,-5.033 -6.157,-6.851c-8.699,-8.423 -23.044,-10.28 -35.29,-3.531c-2.048,1.122 -3.876,2.449 -5.561,3.891c-8.659,-8.756 -23.26,-10.759 -35.709,-3.906c-6.406,3.534 -11.045,8.868 -13.775,14.81c-0.35,0.07 -0.7,0.145 -1.057,0.219l-1.389,-2.509c-7.308,-13.269 -25.165,-17.448 -39.89,-9.332c-9.729,5.359 -15.534,14.733 -16.34,24.303c-0.169,0.036 -0.346,0.076 -0.521,0.115l-26.598,-49.215c4.681,-8.321 7.35,-17.869 7.35,-28.017c0,-32.165 -26.766,-58.333 -59.667,-58.333s-59.667,26.167 -59.667,58.332c0,18.958 9.477,36.8 25.35,47.726c9.94,6.842 21.615,10.496 33.795,10.598c8.919,16.505 17.32,32.05 25.882,47.891c0.22,0.47 0.422,0.945 0.676,1.406c1.646,2.993 3.126,5.679 4.459,8.094c6.074,11.243 12.293,22.746 18.898,34.969l0.192,-0.104c4.724,8.598 13.152,23.919 28.596,51.953c0,0 -57.87,14.669 -82.033,27.975c-52.687,29.033 -26.438,63.83 -15.233,64.689c95.239,-39.039 116.045,-31.486 156.024,-0.686c0.512,0.389 1.176,1.066 1.956,1.96c-7.942,5.814 -10.672,16.666 -5.912,25.601l21.129,39.655c5.224,9.808 17.396,13.515 27.195,8.293l143.977,-76.697c9.795,-5.218 13.513,-17.397 8.289,-27.199zm-357.684,-233.225c-10.993,-7.566 -17.556,-19.865 -17.556,-32.899c0,-22.24 18.692,-40.333 41.667,-40.333s41.667,18.093 41.667,40.333c0,2.42 -0.234,4.788 -0.658,7.092l-5.033,-9.313c-9.719,-17.975 -29.581,-26.063 -44.378,-18.076c-14.805,7.982 -18.927,29.022 -9.213,46.988c2.25,4.163 4.445,8.226 6.604,12.221c-4.667,-1.232 -9.089,-3.252 -13.1,-6.013zm327.421,241.398c-7.784,4.296 -17.579,1.469 -21.877,-6.319c-4.295,-7.783 -1.465,-17.58 6.32,-21.876c7.785,-4.292 17.578,-1.468 21.876,6.318c4.297,7.788 1.465,17.58 -6.319,21.877z" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate delectus fugit vero tenetur doloremque sunt facilis quisquam distinctio minus, magni deleniti, aliquam autem alias omnis, voluptate incidunt natus odit sequi!</p>
+  <p>Totam quod itaque, animi ipsam quo voluptas aspernatur! Soluta dolorem perferendis veniam magni in illum officiis id! Molestiae expedita, autem nam, consequuntur commodi consectetur dolorem at porro fuga nesciunt ducimus?</p>
+  <p>Mollitia corrupti ab quia culpa quis inventore quam dignissimos sint ipsum id tempora cum quae voluptatibus laudantium maiores ea rem consectetur, unde quod praesentium fugit similique. Nulla esse quisquam animi?</p>
+  <p>Totam pariatur libero qui optio fugit doloremque nostrum laboriosam quaerat porro magni quidem error repellendus placeat ad odit sapiente praesentium commodi, provident rerum iste cum quisquam sit eos adipisci! Quam?</p>
+  <p>Esse quaerat dolorem possimus veniam consequuntur. Esse rerum, asperiores dolor neque deserunt eius necessitatibus assumenda ad molestias natus quod repellat quisquam veritatis modi iure amet aliquid a mollitia, officiis cumque.</p>
+  <p>Illum, reiciendis voluptas provident eligendi ea amet fugiat incidunt dicta minus debitis dolores ratione enim voluptatem rem aliquam tempora, possimus asperiores maiores ipsam nihil excepturi deleniti sapiente placeat repudiandae? Iste?</p>
+  <p>Neque porro saepe asperiores, aspernatur culpa, cum excepturi veniam vel dolorem soluta reiciendis. Dolor, repellat magni ex consequuntur tempore soluta. Optio, placeat rerum. Cumque ratione tempora debitis maiores, sunt doloribus.</p>
+  <p>Quisquam, nobis animi aliquid nisi praesentium repellat quibusdam odit mollitia esse iusto libero velit ad dolorum temporibus aspernatur doloribus. Iste expedita assumenda magni sapiente explicabo architecto, voluptates veniam facere itaque!</p>
+  <p>Illum ad fugiat doloremque aliquid, assumenda eos error quam molestiae fugit earum at consequuntur aut ex nostrum. Ipsa, voluptatem, repellat tempore commodi hic ea dolore, qui omnis iusto enim similique?</p>
+  <p>Voluptatem, aut. Tempore, quas ullam reiciendis deserunt hic aliquid ipsam nam culpa ducimus, aut esse voluptatibus amet unde praesentium itaque odit laudantium natus quasi saepe dolor tempora quaerat? Exercitationem, quod.</p>
+
+  <div class="modal" data-modal-id='modal-1'>
+    <button class="btn-modal-close btn-floating red" tabindex="4">X</button>
+    <h2>modal 1</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae obcaecati molestias quam.</p>
+  </div>
+  <div class="modal" data-modal-id='modal-2'>
+    <button class="btn-modal-close btn-floating red" tabindex="5">XX</button>
+    <h2>modal 2</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae obcaecati molestias quam.</p>
+  </div>
+  <div class="modal" data-modal-id='modal-3'>
+    <button class="btn-modal-close btn-floating red" tabindex="6">XX</button>
+    <h2>modal 2</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae obcaecati molestias quam.</p>
+  </div>
+  <div class="modal-shadowing"></div>
+
+
+
+
+  <script>
+    'use strict';
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Content is loaded')
+      let btnsModalOpen = document.querySelectorAll('.open-modal');
+      let modalShadowing = document.querySelector('.modal-shadowing');
+      // console.log(btnsModalOpen, modalShadowing);
+      let modalBox;
+
+      let closeModal = function(ev){
+        console.log(this, ev);
+        document.documentElement.removeAttribute('style');
+      	modalShadowing.classList.remove('show');
+        if (ev.target.matches('.btn-modal-close')) {
+        	this.closest('.modal').style.setProperty('display', 'none');
+          return;
+        }
+        modalBox.style.setProperty('display', 'none');
+      }
+
+      let openModal = function (ev){
+        console.log('openModal function started');
+        if (ev.target.classList.contains('open-modal')) {
+          document.documentElement.style.overflow = 'hidden';
+
+          let trgt = ev.target.dataset.modalFor; // 'modal-1'
+        	modalBox = document.querySelector('[data-modal-id = ' + trgt +']');
+        	modalShadowing.classList.add('show');
+          // modalBox.style.setProperty('display', 'block');
+          modalBox.setAttribute('style', 'display:block');
+        	// modalBox.style.display = 'block';
+
+        	let btnModalClose = modalBox.querySelector('.btn-modal-close');
+        	btnModalClose.addEventListener('click', closeModal);
+        	modalShadowing.addEventListener('click', closeModal);
+        } else {
+          console.log('else - openModal function ended')
+          return;
+        }
+        console.log('openModal function ended');
+      }
+
+      document.addEventListener('click', openModal)
+    });
+  </script>
+
+
+</body>
+
+</html>

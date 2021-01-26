@@ -1,0 +1,116 @@
+[
+  {
+    "_id": "5c1a3b00c3669487a736c136",
+    "index": 0,
+    "guid": "1a4acaa0-efe2-4000-af23-d89f45f4accd",
+    "isActive": false,
+    "balance": "$3,537.75",
+    "picture": "http://placehold.it/32x32",
+    "age": 21,
+    "eyeColor": "green",
+    "name": {
+      "first": "Pennington",
+      "last": "Daniel"
+    },
+    "company": "FARMAGE",
+    "email": "pennington.daniel@farmage.me",
+    "phone": "+1 (885) 569-2641",
+    "address": "804 Shale Street, Lorraine, Iowa, 509",
+    "about": "Esse quis minim ut veniam et aute sint voluptate. Culpa irure pariatur aliqua ullamco excepteur incididunt incididunt et. Tempor amet Lorem ea nisi anim et laboris tempor sit ullamco ullamco anim deserunt. Eu consequat laboris duis mollit velit veniam culpa. Veniam id veniam consectetur nisi amet velit tempor mollit. Dolor irure et eu labore ut fugiat. Sint dolor cillum amet Lorem nostrud excepteur quis excepteur eiusmod nostrud culpa.",
+    "registered": "Monday, December 1, 2014 3:48 PM",
+    "latitude": "57.110315",
+    "longitude": "74.998943",
+    "tags": [
+      "veniam",
+      "aute",
+      "anim",
+      "ullamco",
+      "culpa"
+    ],
+    "range": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Christian Hutchinson"
+      },
+      {
+        "id": 1,
+        "name": "Davis Richmond"
+      },
+      {
+        "id": 2,
+        "name": "Vega Vinson"
+      }
+    ],
+    "greeting": "Hello, Pennington! You have 10 unread messages.",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "_id": "5c1a3b00414a71416ad4a1fa",
+    "index": 1,
+    "guid": "85a4c54d-0f75-421b-b6bd-35f2765fa254",
+    "isActive": false,
+    "balance": "$1,353.18",
+    "picture": "http://placehold.it/32x32",
+    "age": 38,
+    "eyeColor": "green",
+    "name": {
+      "first": "Mae",
+      "last": "Tucker"
+    },
+    "company": "COMTOURS",
+    "email": "mae.tucker@comtours.tv",
+    "phone": "+1 (804) 420-3498",
+    "address": "522 Vandervoort Place, Nash, Mississippi, 7586",
+    "about": "Dolore enim nulla nulla adipisicing ex laboris enim quis pariatur in qui occaecat aute eu. Adipisicing labore aliqua proident sit do commodo mollit. Cupidatat sit fugiat nostrud fugiat irure sunt est sint nisi elit tempor minim. In magna laboris fugiat proident. Labore dolore velit amet velit id ea quis.",
+    "registered": "Saturday, June 4, 2016 2:40 AM",
+    "latitude": "81.864639",
+    "longitude": "-96.01333",
+    "tags": [
+      "esse",
+      "ut",
+      "sunt",
+      "dolore",
+      "elit"
+    ],
+    "range": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Imelda Wynn"
+      },
+      {
+        "id": 1,
+        "name": "Beard Lamb"
+      },
+      {
+        "id": 2,
+        "name": "Elva Duke"
+      }
+    ],
+    "greeting": "Hello, Mae! You have 9 unread messages.",
+    "favoriteFruit": "apple"
+    }
+]

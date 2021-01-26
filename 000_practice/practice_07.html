@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 7.  Array.</title>
+</head>
+<body>
+  <div class="heading">
+    <h1>Practice 7.  Array.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <ol class="task-list">
+    <!-- Task 1 -->
+    <li>
+      <p>Создать <u>массив из 10 случайных чисел</u> и написать несколько функций для работы с ним.</p>
+      <mark>Создаем массив, заполняем его динамически рандомными числами и выводим</mark> <br>
+      <button onclick="newArrGen()" >Generate new Array</button> <br>
+      <mark>Функция принимает массив и выводит</mark> <br>
+      <button onclick="showEvenFromArr(array1)" >showEven</button>
+      <button onclick="arrElemSum(array1)" >arrElemSum</button>
+      <button onclick="arrMaxElem(array1)" >arrMaxElem</button>
+      <button onclick="arrAddElem(array1, 2, '777')" >arrAddElem</button>
+      <button onclick="arrDelElem(array1, 2)" >arrDelElem</button> <br>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+        let array1 = [],
+            array2 = []
+
+      	// 1.1
+      	function newArrGen() {
+          array1.length = 0
+          array2.length = 0
+      	  for (let i = array1.length, num; i < 10; i++) {
+            num = Math.floor(Math.random() * 10)
+            array1[i] = num
+          }
+          for (let i = array2.length, num; i < 5; i++) {
+            num = Math.floor(Math.random() * 10)
+            array2[i] = num
+          }
+          console.log(array1)
+          console.log("*******")
+          console.log(array2)
+          out.innerHTML = ' array1 = [ ' + array1.join(', ') + ' ]<hr> array2 = [ ' + array2.join(', ') + ' ]'
+        }
+        newArrGen()
+        // 1.2
+        function showEvenFromArr(argArr) {
+          for (let i = 0; i < array1.length; i++) {
+            if (array1[i] % 2 === 0) console.log(array1[i])
+          }
+        }
+        // 1.3
+        function arrElemSum(argArr) {
+          let sum = 0
+          for (let i = array1.length - 1; i >= 0; i--) {
+          sum = sum + array1[i]
+          }
+          console.log(sum)
+        }
+        // 1.4
+        function arrMaxElem(argArr) {
+          let max = array1[0]
+          for (let i = 0; i < array1.length; ++i) {
+            if (array1[i] > max) {
+              max = array1[i];
+            }
+          }
+          console.log(max)
+        }
+        // 1.5
+        function arrAddElem(argArr, argIndex, argNewElement) {
+          // console.log(1)
+          argArr.splice(argIndex, 0, argNewElement)
+          console.log(array1)
+        }
+        // 1.6
+        function arrDelElem(argArr, argIndex) {
+          // console.log(1)
+          argArr.splice(argIndex, 1)
+          console.log(array1)
+        }
+      </script>
+		</li>
+  <!-- Task 2 -->
+    <li>
+			<p>Создать <u>массив из 5 случайных чисел</u> и для работы с ним написать функции принимающие 2 массива и </p>
+      <mark> возвращающие новый массив в котором собраны элементы двух массивов </mark> <br>
+			<button onclick="uniqueEltsFromBoth(array1, array2)">без повторений</button>
+			<button onclick="sameEltsFromBoth(array1, array2)">общие для обоих массивов элементы</button> <br>
+			<button onclick="unicEltsFromFirst(array1, array2)"> собраны элементы первого массива, которых нет во втором массиве</button> <br>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+          // 2.1
+          //  https://jsperf.com/merge-two-arrays-keeping-only-unique-values
+          function uniqueEltsFromBoth(argArr1, argArr2) {
+          	let mergeArray = argArr1.concat(argArr2),
+                arrayUnique = []
+
+            // var with FOR loop
+          	for (var i = 0; i < mergeArray.length; i++) {
+              for (var j = i + 1; j < mergeArray.length; ++j) {
+                if (mergeArray[i] === mergeArray[j])
+                  mergeArray.splice(j--, 1);
+              }
+          	}
+            arrayUnique = mergeArray
+
+            // -------
+            // var with WHILE loop
+            // -------
+            // let len = mergeArray.length
+            //
+            // while (len--) {
+            //   var itm = mergeArray[len]
+            //   if (arrayUnique.indexOf(itm) === -1) {
+            //     arrayUnique.unshift(itm) // or you can use .push(itm)
+            //   }
+            // }
+
+            // -------
+            // var with ES6 (SPRED operator and Set)
+            // -------
+            // arrayUnique = [...new Set([...argArr1 ,...argArr2])]
+
+            // -------
+            // var with .FILTER()
+            // BUT with duplicated elements in first Array
+            // -------
+            // arrayUnique = argArr1.concat(argArr2.filter(function(i) {
+            //   return argArr1.indexOf(i) == -1;
+            // }))
+
+          	console.log(arrayUnique)
+          	out.innerHTML += '<hr> arrayUnique =  [ ' + arrayUnique.join(', ') + ' ]'
+          }
+
+          // 2.2
+          function sameEltsFromBoth(argArr1, argArr2) {
+            console.log(2)
+            let arraySame = []
+            // First step: remove duplicate from argArr1
+            argArr1 = [...new Set(argArr1)]
+            console.log(argArr1);
+
+            // Second step: filling arraySame
+            // var with FOR loop
+            for (var i = 0; i < argArr1.length; i++) {
+              for (var j = 0; j < argArr2.length; ++j) {
+                if (argArr1[i] === argArr2[j])
+                  arraySame.push(argArr1[i])
+              }
+            }
+          	out.innerHTML += '<hr> arraySame =  [ ' + arraySame.join(', ') + ' ]'
+          }
+
+          // 2.3
+          function unicEltsFromFirst(argArr1, argArr2) {
+            console.log(3)
+            let array1Unique = []
+            // -------
+            // First variant(simple): when we not need duplicated elements
+            // -------
+            // // First step: remove duplicate from argArr1
+            // argArr1 = [...new Set(argArr1)]
+            // argArr2 = [...new Set(argArr2)]
+            //
+            // // Second step: filling array1Unique
+            // for (var i = 0; i < argArr1.length; i++) {
+            //   console.log('for 1', argArr1)
+            //   for (var j = 0; j < argArr2.length; ++j) {
+            //     if (argArr1[i] === argArr2[j])
+            //       argArr1.splice(i, 1)
+            //   }
+            // }
+          	// out.innerHTML += '<hr> array1Unique =  [ ' + argArr1.join(', ') + ' ]'
+
+            // -------
+            //  Second variant: when we have duplicated elements
+            //  Example:
+            //  array1 = [ 2, 3, 2, 8, 6, 7 ]
+            //  array2 = [ 6, 3, 0 ]
+            //  => array1Unique = [2, 2, 8, 7]
+            // -------
+            for (var i = 0; i < argArr1.length; i++) {
+              var j = 0, flag = 0
+              while( j < argArr2.length) {
+                if (argArr1[i] === argArr2[j]){
+                  flag = 1
+                  break
+                }
+                j++
+              }
+              if (flag === 0) {
+                array1Unique.push(argArr1[i])
+              }
+            }
+            out.innerHTML += '<hr> array1Unique =  [ ' + array1Unique.join(', ') + ' ]'
+          }
+      </script>
+		</li>
+  <!-- Task 3 -->
+    <li>
+			<p>Создать массив фруктов и отсортировать его по алфавиту. <br>
+        <mark>Написать следующие функции.</mark> <br>
+        1. Вывод на экран с помощью document.write() в виде списка (с помощью тегов ul и li). <br>
+        2. Поиск фрукта в массиве.<br>
+        Функция принимает название фрукта и возвращает индекс найденного элемента или -1,
+        если не найден. Поиск должен быть нерегистрозависимым.</p>
+			<button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          console.log(3);
+        }
+        f3()
+      </script>
+		</li>
+	</ol>
+</body>
+</html>

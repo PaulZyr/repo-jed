@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://stackoverflow.com/questions/18544890/onchange-event-on-input-type-range-is-not-triggering-in-firefox-while-dragging">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Range with number</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .range-holder{position: relative;width:100%;}
+    .range-bage{
+      position: absolute;
+      width: 40px;height: 40px; border: 2px solid red;
+      left: 0;
+      transform: translate(-50%, -40px);
+      opacity: 0.87;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2 jumbotron p-3">
+        <h1 class="display-4">Range with number</h1>
+        <hr>
+        <form>
+          <div class="aaform-group py-4">
+            <div class="range-holder">
+              <mark class="range-bage"></mark>
+              <input type="range" class="form-control-range custom-range num" name="num" min='0' max='100' value="0">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    let myInp = document.querySelector('input[type="range"]')
+    let myBage = document.querySelector('.range-bage')
+    let myRangeHolder = document.querySelector('.range-holder')
+    console.log(myInp, myBage, myRangeHolder);
+    myBage.style.left = '0'
+
+    // myInp.oninput = function() {
+    //   console.log(this.value);
+    //   myBage.style.top = this.value
+    // }
+    function newVal(){
+      console.log(this.value);
+      myBage.style.left = this.value+ '%';
+      myBage.style.textAlign = 'center';
+      myBage.style.lineHeight = '30px';
+      myBage.style.fontWeight = '900';
+      myBage.innerText = this.value
+    }
+    myInp.addEventListener('input', newVal)
+    myInp.addEventListener('change', newVal)
+
+  </script>
+</body>
+</html>

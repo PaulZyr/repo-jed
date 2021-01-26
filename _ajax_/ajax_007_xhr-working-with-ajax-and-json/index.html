@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <button id="button1" class="btn btn-info">GET PERSON</button>
+    <button id="button2" class="btn btn-info">GET PERSONs</button>
+    <br><br>
+    <h1>PERSON</h1>
+    <div id="person"></div>
+    <h1>PERSONs</h1>
+    <div id="persons"></div>
+  </div>
+  <script>
+    document.getElementById('button1').addEventListener('click', loadPerson)
+    document.getElementById('button2').addEventListener('click', loadPersons)
+
+    // Load single person info
+    function loadPerson(e) {
+      // create XHR Object
+      const xhr = new XMLHttpRequest()
+
+      // OPEN
+      xhr.open('GET', 'person.json', true)
+
+      xhr.onload = function () {
+        if (this.status === 200) {
+          console.log(this.responseText);
+
+          const person = JSON.parse(this.responseText)
+
+          const output = `
+            <ul>
+              <li><b>ID:</b> <i>${person.id}</i></li>
+              <li><b>Name:</b> <i>${person.name}</i></li>
+              <li><b>Company:</b> <i>${person.company}</i></li>
+              <li><b>Phone:</b> <i>${person.phone}</i></li>
+            </ul>
+          `;
+          document.getElementById('person').innerHTML = output
+        }
+      }
+
+      xhr.send()
+
+      // Optional - Used for spinners/loaders
+      // xhr.onprogress = function(){
+      //   console.log('READYSTATE', xhr.readyState)
+      // }
+      xhr.onerror = function(){
+        console.log('Error request ')
+      }
+
+      // Load all persons info
+    }
+    function loadPersons(e) {
+      // create XHR Object
+      const xhr = new XMLHttpRequest()
+
+      // OPEN
+      xhr.open('GET', 'persons.json', true)
+
+      xhr.onload = function () {
+        if (this.status === 200) {
+          console.log(this.responseText);
+
+          const persons = JSON.parse(this.responseText)
+
+          let output = '';
+
+          persons.forEach(function (person) {
+            output += `
+              <ul>
+                <li><b>ID:</b> <i>${person.id}</i></li>
+                <li><b>Name:</b> <i>${person.name}</i></li>
+                <li><b>Company:</b> <i>${person.company}</i></li>
+                <li><b>Phone:</b> <i>${person.phone}</i></li>
+              </ul>
+            `;
+          });
+
+          document.getElementById('persons').innerHTML = output
+        }
+      }
+
+      xhr.send()
+
+      xhr.onerror = function(){
+        console.log('Error request ')
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Metrics. Scroll.</title>
+    <style>
+        html,body{margin: 0;}
+        .wrap{width: 70%;margin: auto; background: #09f;padding: 10px;}
+        .box{width: 50%; height: 100px;margin: 10px auto; background: #6c3; font-size: 30px; line-height: 3.3;text-align: center;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing.</h1>
+        <h2>Lorem ipsum dolor sit amet, consectetur adipisicing.</h2>
+        <div class="item">
+            <h1>Lorem ipsum dolor sit amet, consectetur adipisicing.</h1>
+            <div class="box">box</div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore nisi quia veniam odio veritatis incidunt, quas ea aliquam, facilis nihil. Perspiciatis inventore pariatur reprehenderit accusantium rerum perferendis quaerat consequatur consequuntur.</p>
+            <p>Aut earum, inventore, ipsa hic ipsum repellendus harum quam sunt iste excepturi. Sint similique repellat sed placeat, soluta! Provident optio ratione, neque molestias labore mollitia sed delectus alias voluptatibus nam.</p>
+            <p>Provident reiciendis necessitatibus quisquam expedita molestiae aut delectus assumenda iure, consectetur omnis fugit animi dicta iste explicabo repellendus adipisci repellat porro error corporis maiores. Autem laudantium nam, quis corporis iste?</p>
+        </div>
+        <div class="item">
+            <h1>Eveniet vitae obcaecati, rem, sit adipisci deserunt.</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quibusdam libero magnam assumenda, perspiciatis porro voluptates harum autem amet eos eius id aperiam numquam dolorem rerum voluptatibus obcaecati aliquam consectetur!</p>
+            <p>Explicabo consequuntur in officia laudantium quasi sunt excepturi quidem provident, accusamus, maxime qui, quam eos repellendus! Consequuntur, necessitatibus. Ex distinctio voluptate dolorum repudiandae eius inventore molestiae fugit, quidem maxime dignissimos.</p>
+            <p>Quis, aperiam. Aliquam asperiores explicabo, ullam dignissimos nihil id, totam, tempore, perferendis temporibus ab dolores nam. Doloremque accusantium, autem facilis illo quia recusandae obcaecati ex suscipit quibusdam deserunt tempore, at.</p>
+        </div>
+        <div class="item">
+            <h1>Doloremque beatae suscipit consequatur sequi. Atque, quae!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe dolor repellendus ex ad debitis fugit nisi doloribus. Animi quae eos voluptates nesciunt aspernatur quia provident natus soluta explicabo quam. Consequatur!</p>
+            <p>Eveniet illo odit, quas numquam. Delectus cumque voluptas non odit officiis illum in magnam id, porro accusantium at, consequuntur provident veniam laudantium optio unde nisi sequi! Nulla ab, harum hic?</p>
+            <p>Dolorem qui assumenda quo iusto, itaque quos voluptatem eaque quaerat quae doloribus aspernatur necessitatibus dolorum obcaecati id velit, vel unde nulla rerum ipsam porro reiciendis sed incidunt minima. Doloribus, itaque?</p>
+        </div>
+    </div>
+    <script>
+    const ht = document.documentElement;
+    const bd = document.body;
+    const wp = document.querySelector('.wrap');
+    const bx = document.querySelector('.box');
+    const tt = document.querySelectorAll('.item h1');
+    console.log(ht, bd, wp, bx, tt);
+    
+    let scrollObj = {
+        'w.Height' : window.innerHeight,
+        'ht.scrollHeight' : ht.scrollHeight,
+        'bd.scrollHeight' : bd.scrollHeight,
+        'wp.scrollHeight' : wp.scrollHeight,
+        'bx.scrollHeight' : bx.scrollHeight,
+        'tt.scrollHeight' : tt.scrollHeight,
+    }
+    console.table(scrollObj)
+    
+    </script>
+</body>
+</html>

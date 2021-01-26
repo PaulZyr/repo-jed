@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="http://u4ilka.kcbux.ru/Script/script-001.html">
+  <meta name="url" content="https://www.toptal.com/software/definitive-guide-to-datetime-manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Date simple task</title>
+</head>
+<body>
+  <h1>Date simple tasks</h1>
+  <h3>#1. Написать скрипт отображающий текущий год </h3>
+  <p><b>Result: </b> Now is a <b>2019</b>!</p>
+  <div id="task1"></div>
+  <script>
+    let d1 = new Date()
+    year1 = d1.getFullYear()
+    console.log(year1);
+    document.querySelector('#task1').innerHTML = 'Now is a <b>' + year1 + '</b>!'
+  </script>
+  <hr>
+  <h3>#2. Написать скрипт отображающий текущую дату</h3>
+  <p><b>Result - variant #1: </b> Now is a <b>02.03.2019 г.</b>!</p>
+  <p><b>Result - variant #2: </b> Now is a <b>02.Матрта.2019 г.</b>!</p>
+  <p><b>Result - variant #3: <center>2 марта 2019 года<br>(Суббота)</center></p>
+    <hr>
+  <div id="task2-1"></div>
+  <div id="task2-2"></div>
+  <div id="task2-3"></div>
+  <script>
+    // var #1
+    let date2 = new Date()
+    let d2 = date2.getDate()
+    let day2 = (d2 < 10) ? '0' + d2 : d2
+    let m2 = date2.getMonth() + 1
+    let month2 = (m2 < 10) ? '0' + m2 : m2
+    let yy2 = date2.getYear()
+    let year2 = (yy2 < 1000) ? yy2 + 1900 : yy2
+    document.querySelector('#task2-1').innerHTML = 'Now is a <b>' + day2 + "." + month2 + "." + year2 + " г." + '</b>!'
+
+    // var #2
+    function makeArray() {
+      for (i = 0; i < makeArray.arguments.length; i++) {
+        this[i + 1] = makeArray.arguments[i]
+      }
+    }
+    let monthsArr = new makeArray('Января','Февраля','Матрта', 'Апреля','Мая','Июня','Июля','Августа','Сентября', 'Октября','Ноября','Декабря')
+    let date22 = new Date()
+    let day22 = date22.getDate()
+    let month22 = date22.getMonth() + 1
+    let yy22 = date22.getYear()
+    let year22 = (yy22 < 1000) ? yy22 + 1900 : yy22
+    document.querySelector('#task2-2').innerHTML = 'Now is a <b>' + day22 + " " + monthsArr[month22] + " " + year22 + " г." + '</b>!'
+    // document.write(day22 + " " + months22[month22] + " " + year22)
+
+    // var #3
+    var months=new Array(13)
+    months[1]="января"
+    months[2]="февраля"
+    months[3]="марта"
+    months[4]="апреля"
+    months[5]="мая"
+    months[6]="июня"
+    months[7]="июля"
+    months[8]="августа"
+    months[9]="сентября"
+    months[10]="октября"
+    months[11]="ноября"
+    months[12]="декабря"
+    var time=new Date()
+    var thismonth=months[time.getMonth() + 1]
+    var date=time.getDate()
+    var thisyear=time.getYear()
+    var day=time.getDay() + 1
+    if (thisyear < 2000) thisyear=thisyear + 1900
+    if(day==1) DayofWeek="Воскресенье"
+    if(day==2) DayofWeek="Понедельник"
+    if(day==3) DayofWeek="Вторник"
+    if(day==4) DayofWeek="Среда"
+    if(day==5) DayofWeek="Четверг"
+    if(day==6) DayofWeek="Пятница"
+    if(day==7) DayofWeek="Суббота"
+    document.querySelector('#task2-3').innerHTML = "<center>"+ date + " " + thismonth + " " + thisyear + " "+ "года" + "<br>(" + DayofWeek + ")<\/center>"
+  </script>
+  <hr>
+  <h3>#3. Написать скрипт отображающий cколько дней сайту.</h3>
+  <p><b>Result : </b> Этому сайту <b>xxxx-й</b> день!</p>
+  <div id="task3"></div>
+  <script>
+    let d30 = new Date('May 28, 2008')
+    let d31 = new Date()
+    let d3t = (d31.getTime() - d30.getTime()) / (1000*60*60*24)
+    document.querySelector('#task3').innerHTML = 'Этому сайту <b>' + Math.round(d3t) + '-й </b> день'
+  </script>
+</body>
+</html>

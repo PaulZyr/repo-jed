@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JSON</title>
+  <style media="screen">
+    pre{background: #ccc;padding: 7px;}
+  </style>
+</head>
+<body>
+  <h1>JSON</h1>
+  <p>Объект JSON, доступный во всех современных браузерах, имеет два очень полезных метода <kbd>parse</kbd> и <kbd>stringify</kbd></p>
+  <p><kbd>JSON.parse ()</kbd> принимает строку JSON и преобразует ее в объект JavaScript. </p>
+  <p><kbd>JSON.stringify ()</kbd> принимает объект JavaScript и преобразует его в строку JSON.</p>
+  <pre>
+  const myObj = {
+    name: 'Skip',
+    age: 2,
+    favoriteFood: 'Steak'
+  };
+
+  const myObjStr = JSON.stringify(myObj);
+
+  console.log(myObjStr);
+  // "{"name":"Skip","age":2,"favoriteFood":"Steak"}"
+
+  console.log(JSON.parse(myObjStr));
+  // Object {name:"Skip",age:2,favoriteFood:"Steak"}
+  </pre>
+  <p>И хотя методы обычно используются на объектах, они также могут использоваться на массивах </p>
+  <pre>
+    const myArr = ['bacon', 'letuce', 'tomatoes'];
+
+    const myArrStr = JSON.stringify(myArr);
+
+    console.log(myArrStr);
+    // "["bacon","letuce","tomatoes"]"
+
+    console.log(JSON.parse(myArrStr));
+    // ["bacon","letuce","tomatoes"]
+  </pre>
+  <h2>JSON.parse ()</h2>
+  <p>JSON.parse () может принять второй аргумент для функции <kbd>reviver</kbd>, которая может преобразовать значения объекта до их возвращения.</p>
+  <pre>
+    const user = {
+      name: 'John',
+      email: 'john@awesome.com',
+      plan: 'Pro'
+    };
+
+    const userStr = JSON.stringify(user);
+
+    JSON.parse(userStr, (key, value) => {
+      if (typeof value === 'string') {
+        return value.toUpperCase();
+      }
+      return value;
+    });
+  </pre>
+  <h2>JSON.stringify()</h2>
+  <p> JSON.stringify() может принимать два дополнительных аргумента, первый из которых является функцией замены, а второй-строковым или числовым значением для использования в качестве пробела в возвращаемой строке. </p>
+  <p>Функция replacer может использоваться для фильтрации значений, так как любое значение, возвращаемое как undefined, будет отсутствовать в возвращаемой строке </p>
+  <pre>
+    const user = {
+      id: 229,
+      name: 'John',
+      email: 'john@awesome.com'
+    };
+
+    function replacer(key, value) {
+      console.log(typeof value);
+      if (key === 'email') {
+        return undefined;
+      }
+      return value;
+    }
+
+    const userStr = JSON.stringify(user, replacer);
+    // "{"id":229,"name":"John"}"
+  </pre>
+  <p>И пример с аргументом <kbd>space</kbd> </p>
+  <pre>
+    const user = {
+      name: 'John',
+      email: 'john@awesome.com',
+      plan: 'Pro'
+    };
+
+    const userStr = JSON.stringify(user, null, '...');
+    // "{
+    // ..."name": "John",
+    // ..."email": "john@awesome.com",
+    // ..."plan": "Pro"
+    // }"
+  </pre>
+</body>
+</html>

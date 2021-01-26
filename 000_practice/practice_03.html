@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 3. Циклы.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Practice 3. Циклы.</h1>
+    <p>Для вывода данных используйте alert(), console.log(), .innerHTML или document.write(). <br>Для ввода данных используйте prompt() и confirm().</p>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <h2>Задания, в которых необходимо использовать <i>WHILE</i>.</h2>
+  <ol class="task-list">
+    <li>
+      <p>Вывести <kbd>&pound;</kbd> (&amp;pound;) столько раз, сколько указал пользователь.</p>
+      <button onclick="while1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function while1() {
+          let num = +prompt('Input how much "#" write.', '7'),
+              res = ""
+          while (num !== 0) {
+            res = res + '&pound; '
+            num--
+          }
+          return out.innerHTML = res
+        }
+      </script>
+    </li>
+    <li>
+      <p>Пользователь ввел число, на экран вывести все числа <kbd>от введенного до 0</kbd>.</p>
+      <button onclick="while2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function while2() {
+          let num = +prompt('Input number', '7'),
+              res = ''
+
+          while (num >= 0) {
+            res += num + ' '
+            num--
+          }
+          return out.innerHTML = res
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить <u>число и степень</u>. Возвести <kbd>число в указанную степень</kbd> и вывести результат</p>
+      <button onclick="while3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function while3() {
+          let num = +prompt('Input number.', '7'),
+              power = +prompt('Input number for power.', '2'),
+              res = num
+
+          while (power > 0) {
+            res = res * num
+            power--
+          }
+          return out.textContent = 'Our result is - ' + res
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить 2 числа и найти все <kbd>общие делители</kbd></p>
+      <button onclick="while4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function while4() {
+          let num1 = +prompt('Input first number', '210'),
+              num2 = +prompt('Input second number', '15'),
+              divisor = num1>num2 ? num1 : num2,
+              res = ''
+
+          while(divisor >= 1){
+            if (divisor === 1) return out.textContent = res += divisor
+            if (num1 % divisor === 0 && num2 % divisor === 0) res += divisor + ', '
+            divisor--
+          }
+        }
+      </script>
+    </li>
+    <li>
+      <p>Посчитать <kbd>факториал</kbd> введенного пользователем числа.</p>
+      <button onclick="while5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function while5() {
+          let num = +prompt('Input num for get factorial.', '7'),
+              res = 1
+          while(num >= 1){
+              res *= num
+              num--
+          }
+          return out.textContent = res
+        }
+      </script>
+    </li>
+  </ol>
+  <hr>
+  <h2>Задания, в которых необходимо использовать  <i>DO WHILE</i>.</h2>
+  <ol class="task-list">
+    <li>
+      <p>Предлагать пользователю решить пример <kbd>2 + 2 * 2</kbd> до тех пор, пока он не решит его правильно.</p>
+      <button onclick="doWhile1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function doWhile1() {
+          let num;
+          do{
+            num = +prompt("Enter result of 2+2*2")
+          } while(num != 6);
+          return out.textContent = 'Your answer is correct! 2+2*2 is 6.'
+        }
+      </script>
+    </li>
+    <li>
+      <p>Делить число <u>1000 на 2</u> до тех пор, пока не получится число <u>меньше 50</u>. <br>Вывести это число и сколько делений произвели.</p>
+      <button onclick="doWhile2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function doWhile2() {
+          let num = 1000,
+              count = 0
+          do{
+            num /= 2
+            count++
+          } while(num>=50)
+
+          return  out.textContent = "Number: " + num + " Count: " + count
+        }
+      </script>
+    </li>
+    <li>
+      <br>
+      <button onclick="switch3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function switch3() {
+          return  out.textContent = 'Empty function';
+        }
+      </script>
+    </li>
+  </ol>
+  <h2>Задания, в которых необходимо использовать <i>FOR</i>.</h2>
+  <ol class="task-list">
+    <li>
+      <p>Вывести все <kbd>числа от 1 до 100</kbd>, которые <u>кратные указанному пользователем числу</u>.</p>
+      <button onclick="for1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function for1() {
+          let num = prompt("Enter number"),
+              res = ''
+              for (let i=0; i <= 100; i++){
+                  if (i%num==0)  res += i + ', '
+              }
+          return out.textContent = res
+        }
+      </script>
+    </li>
+    <li>
+      <p>Вывести <u>каждый 4-й элемент</u> из указанного пользователем диапазона. <br>
+        Пользователь указывает <kbd>минимальное</kbd> и <kbd>максимальное</kbd> значения диапазона</p>
+      <button onclick="for2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function for2() {
+          let min = +prompt("Enter min number", '2'),
+              max = +prompt("Enter max number", '27'),
+              count = 1,
+              res = ''
+
+          if (max < min) {
+              return out.textContent = "Invalid input"
+          } else {
+            // while (min <= max) {
+            //   if (count === 4) {
+            //     count = 1
+            //     res += min + ', '
+            //   }
+            //   count++
+            //   min++
+            // }
+            for (min-1; min <= max; min += 4) {
+                if (res === '') {
+                  res += min
+                  continue
+                }
+                res += ', ' + (min-1)
+            }
+          }
+          return out.textContent = res
+        }
+      </script>
+    </li>
+      <li>
+        <p>Запросить число и проверить, <u>простое ли оно</u>. <br>Простое число <u>делится без остатка</u> только <kbd>на себя</kbd> и <kbd>на единицу</kbd>.</p>
+        <button onclick="for3()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+          'use strict'
+
+          function for3() {
+            let num = +prompt('Enter number for check prime or not".', '167')
+            if (num < 1) {return NaN;}
+            if (num === 1) {return num;}
+
+            let divisor = 2;
+
+            // Try this variant with WHILE
+            // while (num % divisor !== 0) {
+            //   divisor = divisor + 1
+            // }
+
+            // or this - with FOR
+            // for (  ; num % divisor !== 0 ; divisor++) {
+            //   // nothing needed
+            // }
+            // if (num === divisor) {
+            //   return out.textContent = num + ' - is prime number'
+            // } else {
+            //   return out.textContent = num + ' - is NOT prime number'
+            // }
+
+            // You also can try next variant
+            let counter = 0;
+            for ( ; divisor <= num; divisor++) {
+              console.log(divisor, counter);
+              if (num % divisor === 0) {
+                counter++
+                if (counter > 1) break
+              }
+            }
+            if (counter == 1){
+              return out.textContent = num + ' - is prime number'
+            } else {
+              return out.textContent = num + ' - is NOT prime number'
+            }
+          }
+        </script>
+      </li>
+  </ol>
+
+</body>
+
+</html>

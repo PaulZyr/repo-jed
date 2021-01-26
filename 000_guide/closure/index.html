@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Closure - Замыкание(одалживание)</title>
+  <link rel="stylesheet" href="/css/links.css">
+  <script src="/js/target.js" defer></script>
+</head>
+<body>
+  <h1>Closure - Замыкание(одалживание)</h1>
+  <ul class="links">
+    <li>
+      <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Closures">Замыкания</a>
+    </li>
+    <li>
+      <a href="https://learn.javascript.ru/functions-closures"> Замыкания, область видимости</a>
+    </li>
+    <li>
+      <a href="https://htmlacademy.ru/blog/195-lets-learn-javascript-closures">Давайте выучим замыкания в JavaScript</a>
+    </li>
+    <li>
+      <a href="https://habr.com/ru/post/459166/">Что ты такое, замыкания в JavaScript?</a>
+    </li>
+    <li>
+      <a href="https://habr.com/ru/company/hexlet/blog/266443/">Как работают замыкания (под капотом) в JavaScript</a>
+    </li>
+  </ul>
+  <hr>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/8cV4ZvHXQL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <a href="http://latentflip.com/loupe">latentflip.com - Визуализация процесса</a>
+  <hr>
+  <a href="https://habr.com/ru/company/ruvds/blog/340194/">Хитрый вопрос по JavaScript, который задают на собеседованиях в Google и Amazon</a>
+  <script>
+    "use strict"
+    function Count(){
+      let c = 0
+      return function () {
+        c++
+        return c
+      }
+    }
+    let count = Count()
+
+    console.log(count());
+    console.log(count());
+    console.log(count());
+    console.log(count);
+
+    const c = 5;
+    let i = 0;
+
+    let count2 = Count()
+
+    while (i < c) {
+      console.log(count2());
+      i++
+    }
+
+
+  </script>
+</body>
+</html>

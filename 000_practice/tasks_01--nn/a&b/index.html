@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>a&b</title>
+</head>
+<body>
+<h1>a & b</h1>
+  <script>
+    console.group("a&b with c");
+      var a=7, b=9, c;
+      console.log('Start data: a = ' + a + ', b = ' + b);
+      c = a;
+      console.log('c = ' + c);
+      a = b;
+      console.log('a = b = ' + a);
+      b = c;
+      console.log('b = c = ' + b);
+      console.log('Final data: a = ' + a,', b = ' + b);
+    console.groupEnd("a&b with c");
+
+    console.info('divider');
+
+    console.group("a&b without c");
+      var a = 7, b = 9;
+      console.log('Start data: a = ' + a + ', b = ' + b);
+      a = a + b;
+      console.log('a = a + b = ' + a);
+      b = a - b;
+      console.log('b = a - b = ' + b);
+      a = a - b;
+      console.log('a = a - b = ' + a);
+      console.log('Final data: a = ' + a + ', b = ' + b);
+    console.groupEnd("a&b without c");
+  </script>
+</body>
+</html>

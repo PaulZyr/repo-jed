@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework 2. Условия.</title>
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+</head>
+
+<body>
+<div class="heading">
+  <h1>Homework 2. Условия.</h1>
+  <p>Вам необходимо самостоятельно решить, для какого задания какой оператор ветвления лучше использовать: <b>if</b>, <b>switch</b> или <b>тернарный</b>.</p>
+  <div class="out">All results will be here after click match button.</div>
+</div>
+  <ol class="task-list">
+    <li>
+      <p>Запросить у пользователя его <b>возраст</b> и определить, кем он является:<kbd> ребенком (0–2), подростком (12–18), взрослым (18-60) или пенсионером (60– ...)</kbd>.</p>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let userAge = +prompt('Input your age', '20')
+
+          if ( userAge < 0 || userAge > 150) return out.textContent = 'Age is wrong!'
+          if ( userAge >= 0 && userAge < 12) return out.textContent = 'Children!'
+          if ( userAge >= 12 && userAge <= 18) return out.textContent = 'Teenager!'
+          if ( userAge > 18 && userAge < 60) return out.textContent = 'Adult!'
+          if ( userAge >= 60 ) return out.textContent = 'Pensioner!'
+        }
+      </script>
+    </li>
+
+    <li>
+      <p>Запросить у пользователя число от <kbd>0 до 9</kbd> и вывести ему спецсимвол, который расположен на этой клавише <kbd>(1–!, 2–@, 3–# и т. д)</kbd>.</p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          let num = +prompt('Input number 0-9', '2'),
+              res
+
+          switch (num) {
+            case 0:
+              res = ')'
+              break;
+            case 1:
+              res = '!'
+              break;
+            case 2:
+              res = '@'
+              break;
+            case 3:
+              res = '#'
+              break;
+            case 4:
+              res = '$'
+              break;
+            case 5:
+              res = '%'
+              break;
+            case 6:
+              res = '^'
+              break;
+            case 7:
+              res = '&'
+              break;
+            case 8:
+              res = '*'
+              break;
+            case 9:
+              res = '('
+              break;
+            default:
+              res = 'Default message!'
+          }
+
+          return out.textContent = 'Shift+' + num + ' print - ' + res
+        }
+      </script>
+    </li>
+
+    <li>
+      <p>Запросить у пользователя <u>трехзначное число</u> и проверить, есть ли в нем <b>одинаковые цифры</b>.</p>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let n = Math.abs(prompt('Enter number with length 3', '') || 747 ),
+              first = parseInt(n/100),
+              second = parseInt(n/10%10),
+              last = n%10
+
+          if ( n <100 || n > 999 ) return out.textContent = "Вы ввели неверное число. Число должно быть трехзначным.";
+          if (first === second && second === last )  return out.textContent = "Все цифры введенного трехзначного числа " + n +" одинаковые";
+          if (first === second || first === last || second === last )  {
+            return out.textContent = "Среди цифр введенного трехзначного числа " + n +" есть одинаковые";
+          } else {
+            return out.textContent = "Среди цифр введенного трехзначного числа " + n + " нет одинаковых";
+          }
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить у пользователя <u>год и проверить</u>, <b>високосный он или нет</b>. Високосный год либо кратен <kbd>400</kbd>, либо кратен <kbd>4</kbd> и при этом не кратен <kbd>100</kbd>.</p>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4() {
+          let yearForCheck = +prompt('Enter full year for leap check', '') || new Date("1998").getFullYear()
+
+          return ( (yearForCheck % 100 !== 0) && (yearForCheck % 4 === 0) || yearForCheck % 400 === 0 ) ? out.textContent = yearForCheck + " - Leap year" : out.textContent = yearForCheck +" - Not leap year "
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить у пользователя <u>пятиразрядное число</u> и определить, является ли оно <kbd>палиндромом (12321, 75757)</kbd>.</p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f5() {
+          let a, no, b, temp=0
+
+          no = +prompt('Enter  number with length 5.', '77577')
+          b=no;
+          while(no>0){
+            a=no%10;
+            no=parseInt(no/10);
+            temp=temp*10+a;
+          }
+          if(temp == b){
+            return out.textContent = "Palindrome number"
+          } else {
+            return out.textContent = "Not Palindrome number"
+          }
+          // return out.textContent = 'You must move with ' + distance/time + ' km/hour!'
+        }
+      </script>
+    </li>
+    <li>
+      <p>Написать конвертор валют. Пользователь вводит количество <kbd>USD</kbd>, выбирает, в какую валюту хочет перевести: <kbd>EUR</kbd>, <kbd>CNY</kbd> или <kbd>UAH</kbd>, и получает в ответ соответствующую сумму.</p>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f6() {
+        	let currencyForExchange = +prompt('Input how much mony you need for exchange','100')
+        	let currencyCountry = prompt("Choose which country currency you need!\n1 - if you need 'EUR'\n2 - if you need 'CNY'\n3 - if you need 'UAH'" , 'UAH')
+        	let usd_eur = 0.89
+        	let usd_cny = 14.49
+        	let usd_uah = 26.95
+        	currencyCountry = currencyCountry.toLowerCase()
+
+        	switch(currencyCountry) {
+        		case '1':
+        		case 'eur':
+        			return out.innerHTML = 'You pay - ' + currencyForExchange + ' dollars.<br> You get - ' + currencyForExchange*usd_eur + ' euro'
+        			break
+        		case '2':
+        		case 'cny':
+        			return out.innerHTML = 'You pay - ' + currencyForExchange + ' dollars.<br> You get - ' + currencyForExchange*usd_cny + ' CNY'
+        			break
+        		case '3':
+        		case 'uah':
+        			return out.innerHTML = 'You pay - ' + currencyForExchange + ' dollars.<br> You get - ' + currencyForExchange*usd_uah + ' UAH'
+        			break
+				default:
+				    return out.innerHTML = 'Sorry this currency missing at this time!'
+        	}
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить у пользователя <u>сумму покупки</u> и <u>вывести сумму к оплате со скидкой</u>: <kbd>от 200 до 300 – скидка будет 3%</kbd>, <kbd>от 300 до 500 – 5%</kbd>, <kbd>от 500 и выше – 7%</kbd>.</p>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7() {
+          let total = +prompt('Enter the total amount of purchases.', '1000')
+
+          if (total >= 500)                    return out.textContent = `Your discount is 7% and you must pay - ${parseFloat((total*0.93).toFixed(2))} coins`
+          if (total >= 300 /*&& total < 500*/) return out.textContent = `Your discount is 5% and you must pay - ${(total*0.95).toFixed(2)} coins`
+          if (total >= 200 /*&& total < 300*/) return out.textContent = `Your discount is 3% and you must pay - ${(total*0.97).toFixed(2)} coins`
+          if (total < 200)                     return out.textContent = `You havn't any discount and must pay - ${total.toFixed(2)} coins`
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить у пользователя <u>длину окружности</u> и <u>периметр квадрата</u>. Определить, может ли такая <kbd>окружность поместиться в такой квадрат</kbd>.</p>
+        <button onclick="f8()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+          'use strict'
+
+          function f8() {
+            let circleLength = +prompt('How much circle length?', '100') // C = pi * d  => d = C / pi
+            let squareLength = +prompt('How much square length?', '200') // P = 4 * h   => h = p / 4
+            const PI = 3.14
+            if (circleLength / PI < squareLength / 4) {
+              return out.innerHTML = "We can do it!"
+            } else {
+              return out.innerHTML = "Is impossible!"
+            }
+          }
+        </script></>
+    </li>
+    <li>
+      <p>Задать пользователю <kbd>3 вопроса</kbd>, в каждом вопросе по <kbd>3 варианта ответа</kbd>. За каждый правильный ответ начисляется <kbd>2 балла</kbd>. После вопросов выведите пользователю количество набранных баллов.</p>
+      <button onclick="f9()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        function f9() {
+        	let q1 = prompt("Kiev is a capital of - ...\n1 - Ukraine\n2 - Poland\n3 - Germany" , '1').toLowerCase()
+        	let q2 = prompt("Berlin is a capital of - ...\n1 - Ukraine\n2 - Poland\n3 - Germany" , 'Germany').toLowerCase()
+        	let q3 = prompt("Warshava is a capital of - ...\n1 - Ukraine\n2 - Poland\n3 - Germany" , 'POLAND').toLowerCase()
+          let count = 0
+          console.log(q1, q2, q3)
+          if(q1 === '1' || q1 === "ukraine") count +=2
+            // console.log(q1 === 1 ) // false
+            // console.log(q1 === '1' ) // true
+            // console.log(q1 === "ukraine") // true
+          if(q2 === '3' || q2 === "germany") count +=2
+          if(q3 === '2' || q3 === "poland") count +=2
+          return out.textContent = `Your result is ${count}`
+        }
+      </script>
+    </li>
+    <li>
+      <p>Запросить <kbd>дату (день, месяц, год) и вывести следующую за ней дату</kbd>. Учтите возможность перехода на следующий месяц, год, а также високосный год.</p>
+      <button onclick="f10()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10() {
+          const year = +prompt("Input year", 2019);
+          const month = +prompt("Input month", 12);
+          const day = +prompt("Input day", 31);
+          if(month > 12 || month <= 0 || day > 31 || day <= 0) return out.textContent = "Missing data."
+          if( ((year % 100 !== 0) && (year % 4 === 0) || year % 400 === 0 ) && month === 2 && day === 28 ) return out.textContent = `Next date is -  ${day + 1} / ${month} / ${year}`
+          if( month === 12 && day === 31 ) return out.textContent = `Next date is - 01 / 01 / ${year+1}`
+          if( month === 12 && day === 30 ) return out.textContent = `Next date is - ${day + 1} / ${month} / ${year}`
+
+          if( (month === 4 || month === 6 || month === 9 || month === 11 ) && day === 30)  return out.textContent = `Next date is - 01 / ${month + 1} / ${year}`
+          if( (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 ) && day === 31)  return out.textContent = `Next date is - 01 / ${month + 1} / ${year}`
+          return out.textContent = `Next date is - ${day + 1} / ${month} / ${year}`
+        }
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

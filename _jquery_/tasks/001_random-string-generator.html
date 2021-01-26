@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Random string generator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <!--
+  http://qaru.site/questions/311251/how-to-generate-an-array-of-alphabet-in-jquery
+  http://jquerybook.ru/api/Events-c9.html
+  https://basicweb.ru/jquery/jquery_method_prop.php
+-->
+  <div class="container my-4 ">
+  	<div class="row">
+  		<div class="col-sm-8 offset-sm-2 jumbotron py-3">
+  			<h1>Random string generator</h1>
+  			<label class='form-inline'><span class="mr-2">Max length of string is</span> <input type="number" class="form-control" style="width: 5rem;" min="8" max="20" value="10"></label>
+  			<p>Which characters are allowed to occur in the strings?</p>
+  			<div class="custom-control custom-checkbox">
+  				<input type="checkbox" class="custom-control-input" id="numChar" checked>
+  				<label class="custom-control-label" for="numChar">Numeric digits (0-9) </label>
+  			</div>
+  			<div class="custom-control custom-checkbox">
+  				<input type="checkbox" class="custom-control-input" id="upperChar" >
+  				<label class="custom-control-label" for="upperChar">Uppercase letters (A-Z) </label>
+  			</div>
+  			<div class="custom-control custom-checkbox">
+  				<input type="checkbox" class="custom-control-input" id="lowerChar" checked>
+  				<label class="custom-control-label" for="lowerChar">Lowercase letters (a-z)</label>
+  			</div>
+  			<div class="custom-control custom-checkbox d-none">
+  				<input type="checkbox" class="custom-control-input" id="simbolChar">
+  				<label class="custom-control-label" for="simbolChar">Simbols - [~!@#...]</label>
+  			</div>
+  			<button id="btnGenerate" type="button" class="btn btn-info mt-3">Generate!</button>
+  			<hr>
+  			<p class='form-inline'><big><b>Result:</b> </big> <input type="text" class="form-control mx-sm-2" readonly placeholder="Result"></p>
+  		</div>
+  	</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" ></script> -->
+  <script>
+    'use strict'
+
+    const charObj = {
+      "numbers"  : "0123456789",
+      "lowerLtr" : "abcdefghijklmnopqrstuvwxyz",
+      "upperLtr" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "simbols"  : "~!@#$%^&*()_-+=/\;:|{}[]"
+    }
+    let lenInp = $('input[type="number"]')
+    let valNum = parseInt(lenInp.val())
+    let maxNum = parseInt(lenInp.attr('max'))
+    let minNum = parseInt(lenInp.attr('min'))
+
+    // checkboxes
+    let allCheckBox = $('input[type="checkbox"]')
+
+    let btnGenerate = $('#btnGenerate')
+    let resField = $('input[readonly]')
+
+    function checkMinMax(){
+      valNum = parseInt(lenInp.val())
+      if( valNum > maxNum ) $(this).val(maxNum)
+      if( valNum < minNum ) $(this).val(minNum)
+    }
+    lenInp.on('keyup', checkMinMax)
+
+    function generateStr() {
+      let numChar = $('#numChar').is(':checked')
+      let upperChar = $('#upperChar').is(':checked')
+      let lowerChar = $('#lowerChar').is(':checked')
+      let simbolChar = $('#simbolChar').is(':checked')
+      valNum = parseInt(lenInp.val())
+
+      // console.log(allCheckBox, numChar, upperChar, lowerChar, simbolChar);
+      let data = ''
+
+      function random() {
+        let randomString = ''
+        resField.empty()
+        while (randomString.length < valNum) randomString += data[Math.floor(Math.random() * data.length)]
+        return resField.val(randomString)
+      }
+
+      if(numChar && lowerChar && upperChar) {
+        data = charObj.numbers + charObj.lowerLtr + charObj.upperLtr
+        return random()
+      }
+      if(numChar) {
+        data = charObj.numbers
+        if (lowerChar) data += charObj.lowerLtr
+        if (upperChar) data += charObj.upperLtr
+        return random()
+      }
+      if(lowerChar) {
+        data = charObj.lowerLtr
+        return random()
+      }
+      if(upperChar) {
+        data = charObj.upperLtr
+        return random()
+      }
+      // if(numChar && lowerChar && upperChar && simbolChar) {
+      //   data = charObj.numbers + charObj.lowerLtr + charObj.upperLtr + charObj.simbols
+      //   random()
+      // }
+    }
+    btnGenerate.on('click', generateStr)
+
+  </script>
+</body>
+</html>

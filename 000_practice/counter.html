@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Counter. Closure. Enviroment</title>
+</head>
+<body>
+  <h1>Counter. Closure. Enviroment</h1>
+
+  <script>
+    let y
+    function out(){
+      let x = 0
+      return function(){x++; console.log(x)}
+    }
+    y = out()
+    out()()
+    // console.log(out()());
+    y()
+    y()
+  </script>
+</body>
+</html>

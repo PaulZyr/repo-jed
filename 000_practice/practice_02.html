@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 2. Условия.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Practice 2. Условия.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <h2>Задания, в которых необходимо использовать <i>IF</i>.</h2>
+  <ol class="task-list">
+    <li>
+      Запросить у пользователя число и определить, оно <kbd>положительное</kbd>, <kbd>отрицательное</kbd> или <kbd>ноль</kbd>.<br>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let num = +prompt('Input number', '7'),
+              msg = "You enter "
+
+          console.log(0);
+          if (num === 0) return out.textContent = msg + num
+
+          console.log(!(num%2));
+          if (!(num%2)) return out.textContent = msg + num + ". It's Even number"
+
+          console.log(Boolean(num%2));
+          if (num%2) return out.textContent = msg + num + ". It's Odd number"
+        }
+      </script>
+    </li>
+    <li>
+      Запросить у пользователя его <kbd>возраст</kbd> и проверить корректность введенных данных <u>(0–120 лет)</u>. <br>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          let userAge = +prompt('Input number', '7'),
+          msg = 'userAge is '
+          if ((userAge < 0) || (userAge > 120)) return out.innerHTML = msg + userAge + ' and it\'s <u>not allowed(correct)</u>! '
+          return out.innerHTML = msg + userAge + ' and it\'s <u>allowed(correct)</u>! '
+        }
+      </script>
+    </li>
+    <li>
+      Запросить у пользователя число и вывести его <kbd>модуль</kbd> (|7| = 7, |-7| = 7) <br>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let num = prompt('Input positive or negative number for get his module(absolute value). ', '7')
+          if (num <= 0 ) num = Math.abs(num)
+          else num
+          return out.textContent = 'Module of your number is ' + num
+        }
+      </script>
+    </li>
+    <li>
+      Запросить у пользователя <kbd>время</kbd> (часы, минуты, секунды) и проверить корректность введенных данных. <br>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4() {
+          let h, m, s,
+              date = new Date(),
+              errorMsg = 'Your time not valid! ',
+              successMsg = 'Your time is valid! '
+
+          h = +prompt('Input hours.', '') || date.getHours()
+          if ( h < 0 || h > 24 ) return out.textContent = errorMsg
+
+          m = +prompt('Input minutes.', '') || date.getMinutes()
+          if ( m < 0 || m > 60 ) return out.textContent = errorMsg
+
+          s = +prompt('Input seconds.', '') || date.getSeconds()
+          if ( s < 0 || h > 60 ) return out.textContent = errorMsg
+
+          return out.textContent = successMsg + h + ':' + ((m<10) ? '0' + m : m) + ':' + ((s<10) ? '0' + s : s)
+        }
+      </script>
+    </li>
+    <li>
+      Запросить <kbd>координаты точки (x, y)</kbd> и определить номер четверти, в которую попала эта точка. Необходимо учесть случаи попадания точки на <kbd>оси X или Y или в начало координат</kbd>.<br>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        // window.onload = f5;
+        function f5() {
+          let coordX = +prompt('Input X coordinate.', '7'),
+              coordY = +prompt('Input Y coordinate.', '17'),
+              first = 'First quarter',
+              second = 'Second quarter',
+              third = 'Third quarter',
+              fourth = 'Fourth quarter',
+              zero = "Your are in start of coordnates: X = 0, Y = 0",
+              pointOnX = "The X coordinate of your point is 0",
+              pointOnY = "The Y coordinate of your point is 0"
+
+          if ( !coordX && !coordY ) return out.textContent = zero
+          if ( !coordX ) return out.textContent = pointOnX
+          if ( !coordY ) return out.textContent = pointOnY
+
+          if ( coordX > 0 && coordY > 0 ) return out.textContent = first
+          if ( coordX > 0 && coordY < 0 ) return out.textContent = second
+          if ( coordX < 0 && coordY < 0 ) return out.textContent = third
+          if ( coordX < 0 && coordY > 0 ) return out.textContent = fourth
+        }
+      </script>
+    </li>
+  </ol>
+  <hr>
+  <h2>Задания, в которых необходимо использовать <i>SWITCH</i>.</h2>
+  <ol class="task-list">
+    <li>
+      Запросить у пользователя <kbd>номер месяца</kbd> и вывести на экран его <kbd>название</kbd>. <br>
+      <button onclick="switch1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function switch1() {
+          let month = +prompt('Enter the number of the month, note January will be 0, December - 11', '1'),
+              output
+          console.log(month);
+          switch (month) {
+            case 0:
+              output =  "January";
+              break;
+            case 1:
+              output =  "Feb";
+              break;
+            case 2:
+              output =  "March";
+              break;
+            case 3:
+              output =  "Apr";
+              break;
+            case 4:
+              output =  "May";
+              break;
+            case 5:
+              output =  "Jun";
+              break;
+            case 6:
+              output =  "Jul";
+              break;
+            case 7:
+              output =  "Aug";
+              break;
+            case 8:
+              output =  "Sep";
+              break;
+            case 9:
+              output =  "Okt";
+              break;
+            case 10:
+              output =  "Nov";
+              break;
+            case 11:
+              output =  "Dec";
+              break;
+            default:
+              output = "not a month number. Try again."
+          }
+          return out.textContent = 'You are enter ' + month +' and it\'s ' + output
+        }
+      </script>
+    </li>
+    <li>
+      Реализовать калькулятор. <br>
+      Пользователь вводит <kbd>2 числа и знак (+ - * /)</kbd>. В зависимости от введенного знака решить пример и вывести результат. <br>
+      <button onclick="switch2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function switch2() {
+          let a = +prompt('Enter value for "a".', '7'),
+              b = +prompt('Enter value for "b".', '17'),
+              sign = prompt('Enter sign between "a" and "b".', '+'),
+              res
+
+          switch (sign) {
+            case '+':
+              res = a+b;
+              break;
+            case '-':
+              res = a-b;
+              break;
+            case '*':
+              res = a*b;
+              break;
+            case '/':
+              res = a/b;
+              break;
+            default:
+              res = 'Incorrect data. Try again.';
+          }
+          return  out.textContent = res;
+        }
+      </script>
+    </li>
+    <li>
+      <br>
+      <button onclick="switch3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function switch3() {
+          return  out.textContent = 'Empty function';
+        }
+      </script>
+    </li>
+  </ol>
+  <h2>Задания, в которых необходимо использовать <i>тернарный оператор</i>.</h2>
+  <ol class="task-list">
+    <li>
+      Запросить 2 числа и <kbd>вывести большее</kbd> из них. <br>
+      <button onclick="tern1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function tern1() {
+          let num1 = +prompt('Enter value for "num1".', '7'),
+              num2 = +prompt('Enter value for "num2".', '17')
+
+          return out.textContent = (num1 > num2) ? num1 : num2
+        }
+      </script>
+    </li>
+    <li>
+      Запросить 1 число и проверить, оно <kbd>кратно 5 или нет</kbd>.  <br>
+      <button onclick="tern2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function tern2() {
+          let num = +prompt('Enter value for "num".', '7')
+
+          return out.textContent = ( num%5 === 0 ) ? 'multiple 5' : 'not multiple 5'
+        }
+      </script>
+    </li>
+      <li>
+        Запросить у пользователя название планеты. Если пользователь ввел <kbd>'Earth'</kbd> или <kbd>'earth'</kbd>, то вывести <kbd>'Hello Earthman!'</kbd>, в остальных случаях вывести <kbd>'Hello alien!'</kbd>. <br>
+        <button onclick="tern3()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+          'use strict'
+
+          function tern3() {
+            let val = prompt('Enter text "Earth" or "earth".', 'earth'),
+                msg
+
+            (val === 'Earth' || val === 'earth') ? msg = 'Hello Earthman!' : msg = 'Hello alien!'
+            // switch (val) {
+            //   case 'Earth':
+            //   case 'earth':
+            //     msg = 'Hello Earthman!'
+            //     break;
+            //   default:
+            //     msg = 'Hello alien!'
+            // }
+
+            return out.textContent = msg
+          }
+        </script>
+      </li>
+  </ol>
+
+</body>
+
+</html>

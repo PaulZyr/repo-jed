@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- some -->
+  <meta charset="UTF-8">
+  <title>DOM navigation</title>
+
+</head>
+<Body style="background: rgb(247, 225, 127);">
+  <noscript>
+    <p><a href="https://demjanua.github.io/JavaScript/lessons/Unit_1.html">JavaScript/lessons/Unit_1</a></p>
+  </noscript>
+    <h1 class="cls-h1">h1 title</h1>
+    <main id="mainMy">
+      <!-- article -->
+      <article class="cls-article">article</article>
+		  <ul class="cls-list">
+            ul
+            <!-- <li class="item"></li> -->
+        </ul>
+    </main>
+    <section class="cls-sect">sect</section>
+
+    <img src="https://demjanua.github.io/JavaScript/lessons/images/lesson_13(real_dom_prototype_tree).png" alt="">
+
+    <ul class="parentNode parentElement">
+      <!-- all li and this comment inside this UL it's childNodes as Nodes BUT children as elements -->
+      <li class="cls-firstChild cls-firstElementChild">
+        <a href="">list link1</a>
+      </li>
+      <li class="cls-previousSibling cls-previousElementSibling">
+        <a href="">list link2</a>
+      </li>
+      <li class="cls-target">
+        <a href="">list link3</a>
+      </li>
+      <li class="cls-nextSibling cls-nextElementSibling">
+        <a href="">list link4</a>
+      </li>
+      <li class="cls-lastChild  cls-lastElementChild">
+        <a href="">list link5</a>
+      </li>
+1
+      ...
+    </ul>
+
+    <!-- scripts -->
+    <script>
+        console.log(mainMy);
+        console.dir(mainMy.parentNode);
+        console.dir(mainMy.parentElement);
+        console.dir(mainMy.previousSibling);
+        console.dir(mainMy.previousElementSibling);
+        console.dir(mainMy.children);
+        console.dir(mainMy.childNodes);
+        var a = document.getElementById('mainMy');
+        console.log(a);
+        console.dir(a);
+        var aa = document.getElementsByClassName('h1');
+        console.log(aa);
+        console.dir(aa);
+        var aaa = document.getElementsByTagName('list');
+        console.log(aaa);
+        console.dir(aaa);
+        var b = document.querySelector('*');
+        console.log(b);
+        console.dir(b);
+        var bb = document.querySelectorAll('*');
+        console.log(bb);
+        console.dir(bb);
+
+        document.querySelectorAll('[id]');
+        document.querySelectorAll('section:nth-child(even)');
+        setTimeout(function(){
+          document.title = 'fffhghghgh';
+        }, 2000);
+
+      </script>
+      <script>
+        console.log('test');
+        var lst = document.querySelector('.parentNode');
+        console.dir(lst.childNodes);
+      </script>
+</body>
+</html>

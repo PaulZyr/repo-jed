@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Practice DOM</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="jumbotron  p-3">
+      <h1 class="display-4">Practice DOM</h1>
+       <!-- // card -->
+      <!-- <div class="card bg-warning">
+        <div class="card-header">
+          <h5 class="card-title">Special title treatment</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div> <!-- // card -->
+      <div class="card bg-warning mt-3">
+        <div class="card-header">
+          <h5 class="card-title">Special title treatment</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </d2iv>
+    </div>
+  </div>
+
+  <script>
+    'use strict'
+    let c = document.querySelector('.card')
+    let b = document.querySelector('.btn')
+    console.log(c.childNodes);
+    console.log(c.children);
+    console.log("***");
+    console.log(c.firstChild);
+    console.log(c.firstElementChild);
+    console.log("***");
+    console.log(b.previousSibling);
+    console.log(b.previousElementSibling);
+    console.log(b.nextSibling);
+    console.log(b.nextElementSibling);
+    console.log("***");
+    console.log(b.parentNode);
+    console.log(b.parentElement);
+    console.log(b.nodeType);
+    let el = document.createElement('mark')
+    el.innerText = 'test'
+    c.append(el)
+    el.innerText = 'test2'
+    c.insertBefore(el, c.firstElementChild)
+  </script>
+</body>
+</html>

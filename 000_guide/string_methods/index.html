@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://www.w3schools.com/jsref/jsref_obj_string.asp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>String methods</title>
+  <style>
+    h2{margin-bottom: 7px;}
+    p{
+      background: #e6d1a3;
+      margin-top: 0;
+      padding: 7px;
+    }
+    pre{
+      background: #eee;
+      display: inline-block;
+      border: 1px dashed #777;
+      padding: 17px 57px 0 0;
+      font-family: ;
+    }
+  </style>
+</head>
+<body>
+  <h1>Примеры строковых функций JavaScript в действии</h1>
+  <ol>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/charAt" target="blank">charAt (x)</a> </h2>
+      <p>Возвращает символ в позиции «x» в строке.</p>
+      <pre>
+        var myString = 'Javascript is AWESOME!!!'
+        console.log(myString.charAt(14))
+      </pre>
+      <script>
+        var myString = 'Javascript is AWESOME!!!'
+        console.log('charAt', myString.charAt(14))
+        console.log('-------')
+      </script>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt" target="blank">charCodeAt (x)</a> </h2>
+      <p>Возвращает значение Unicode символа в позиции «x» в строке.</p>
+      <pre>
+        //charAt(position)
+        var message="I am Groot"
+        // get "G"
+        console.log(message.charAt(5))
+        console.log(message.charCodeAt(5))
+      </pre>
+      <script>
+        //charAt(position)
+        var message="I am Gruut"
+        // get "G"
+        console.log(message.charAt(5))
+        console.log('charCodeAt', message.charCodeAt(5))
+        console.log('-------')
+      </script>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" target="blank">concat (v1, v2,…)</a> </h2>
+      <p>Объединяет одну или несколько строк (аргументы v1, v2 и т. Д.) В существующую и возвращает объединенную строку. Исходная строка не изменяется.</p>
+      <pre>
+        //concat(v1, v2,..)
+        var message="Sam"
+        var final=message.concat(" is a"," hopeless romantic.")
+        // alerts "Sam is a hopeless romantic."
+        console.log(final)
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode" target="blank">fromCharCode (c1, c2,…)</a></h2>
+      <p> Возвращает строку, созданную с использованием указанной последовательности значений Unicode (аргументы c1, c2 и т. Д.). Метод объекта String, а не экземпляр String. Например: String.fromCharCode ().</p>
+      <pre>
+        //fromCharCode(c1, c2,...)
+        console.log(String.fromCharCode(97,98,99,120,121,122))
+        //output: abcxyz
+        console.log(String.fromCharCode(72,69,76,76,79))
+        //output: HELLO
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf" target="blank">indexOf (substr, [start])</a> </h2>
+      <p>Выполняет поиск и (если найден) возвращает номер индекса искомого символа или подстроки в строке. Если не найдено, возвращается -1. «Старт» - это необязательный аргумент, определяющий позицию в строке для начала поиска. По умолчанию 0.</p>
+      <pre>
+        //indexOf(char/substring)
+        var sentence="Hi, my name is Sam Rotshild!"
+        if (sentence.indexOf("Sam")!=-1)
+        console.log("Sam is in there!")
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf" target="blank">lastIndexOf (substr, [start])</a></h2>
+      <p>Выполняет поиск и (если найден) возвращает номер индекса искомого символа или подстроки в строке. Поиск строки от конца до начала. Если не найдено, возвращается -1. «Старт» - это необязательный аргумент, определяющий позицию в строке для начала поиска. По умолчанию это string.length-1.</p>
+      <pre>
+        //lastIndexOf(substr, [start])
+        var myString = 'javascript rox';
+        console.log(myString.lastIndexOf('r'));
+        //output: 11
+      </pre>
+    </li>
+    <li>
+      <h2><a href="" target="blank">match (regexp) </a></h2>
+      <p>Выполняет поиск совпадения в строке на основе<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Regular_Expressions" target="blank"> регулярного выражения</a>. Возвращает массив информации или ноль, если совпадение не найдено.</p>
+      <pre>
+        //match(regexp) //select integers only
+        var intRegex = /[0-9 -()+]+$/;
+
+        var myNumber = '999';
+        var myInt = myNumber.match(intRegex);
+        console.log(isInt);
+        //output: 999
+
+        var myString = '999 JS Coders';
+        var myInt = myString.match(intRegex);
+        console.log(isInt);
+        //output: null
+      </pre>
+      <a href="https://www.sitepoint.com/jquery-basic-regex-selector-examples/" target='blank'>Примеры RegEx для использования с .match ()</a>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/replace" target="blank">replace (regexp / substr, replacetext)</a></h2>
+      <p>Поиск и замена части (соответствия) регулярного выражения (или подстроки) замененным текстом.</p>
+      <pre>
+        //replace(substr, replacetext)
+        var myString = '999 JavaScript Coders';
+        console.log(myString.replace(/JavaScript/i, "jQuery"));
+        //output: 999 jQuery Coders
+
+        //replace(regexp, replacetext)
+        var myString = '999 JavaScript Coders';
+        console.log(myString.replace(new RegExp( "999", "gi" ), "The"));
+        //output: The JavaScript Coders
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/search" target="blank">search (regexp)</a></h2>
+      <p>Проверяет совпадение в строке. Возвращает индекс совпадения или -1, если не найден.</p>
+      <pre>
+        //search(regexp)
+        var intRegex = /[0-9 -()+]+$/;
+
+        var myNumber = '999';
+        var isInt = myNumber.search(intRegex);
+        console.log(isInt);
+        //output: 0
+
+        var myString = '999 JS Coders';
+        var isInt = myString.search(intRegex);
+        console.log(isInt);
+        //output: -1
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/slice" target="blank">slice (start, [end])</a></h2>
+      <p>Возвращает подстроку строки, основанную на аргументах индекса «start» и «end», НЕ включая сам индекс «end». «Конец» является необязательным, и если ничего не указано, фрагмент включает все символы от «начала» до конца строки.</p>
+      <pre>
+        //slice(start, end)
+        var text="excellent"
+        text.slice(0,4) //returns "exce"
+        text.slice(2,4) //returns "ce"
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/split" target="blank">split (разделитель, [лимит])</a></h2>
+      <p>Разбивает строку на множество в соответствии с указанным разделителем и возвращает массив, содержащий каждый элемент. Необязательный «limit» - это целое число, которое позволяет вам указать максимальное количество возвращаемых элементов.</p>
+      <pre>
+        //split(delimiter)
+        var message="Welcome to Khmelnitskiy"
+        //word[0] contains "We"
+        //word[1] contains "come to Khme"
+        //word[2] contains "nitskiy"
+        var word=message.split("l")
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/substr" target="blank">substr (start, [length])</a></h2>
+      <p>Возвращает символы в строке, начинающейся с «start» и через указанное количество символов «length». «Длина» является необязательной, и если она опущена, предполагается, что она до конца строки.</p>
+      <pre>
+        //substring(from, to)
+        var text="excellent"
+        text.substring(0,4) //returns "exce"
+        text.substring(2,4) //returns "ce"
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/substring" target="blank">substring (from, [to])</a></h2>
+      <p>Возвращает символы в строке между индексами «from» и «to», НЕ включая сам «to». «Кому» является необязательным, и если оно опущено, предполагается до конца строки.</p>
+      <pre>
+        //substring(from, [to])
+        var myString = 'javascript rox';
+        myString = myString.substring(0,10);
+        console.log(myString)
+        //output: javascript
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase" target="blank">toLowerCase ()</a></h2>
+      <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase" target="blank">toLocaleLowerCase()</a>
+      <p>Возвращает строку со всеми ее символами, преобразованными в нижний регистр.</p>
+      <pre>
+        //toLowerCase()
+        var myString = 'JAVASCRIPT ROX';
+        myString = myString.toLowerCase();
+        console.log(myString)
+        //output: javascript rox
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase" target="blank">toUpperCase ()</a></h2>
+      <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase" target="blank">toLocaleUpperCase()</a>
+      <p>Возвращает строку со всеми ее символами, преобразованными в верхний регистр.</p>
+      <pre>
+        //toUpperCase()
+        var myString = 'javascript rox';
+        myString = myString.toUpperCase();
+        console.log(myString)
+        //output: JAVASCRIPT ROX
+      </pre>
+    </li>
+    <li>
+      <!-- https://appdividend.com/2018/10/12/javascript-trim-example-tutorial/ -->
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/Trim" target="blank">trim ()</a></h2>
+      <p>Метод удаляет пробельные символы с начала и конца строки. Пробельными символами в этом контексте считаются все собственно пробельные символы (пробел, табуляция, неразрывный пробел и прочие) и все символы конца строки (LF, CR и прочие).</p>
+      <pre>
+        let string = "     AppDividend       ";
+        console.debug(string.trim());
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/valueOf" target="blank">valueOf ()</a></h2>
+      <p>Метод valueOf() возвращает примитивное значение объекта String в виде строкового типа данных.</p>
+      <pre>
+        var stringObj = new String("foo");
+
+        console.log(stringObj);
+        // expected output: String { "foo" }
+
+        console.log(stringObj.valueOf());
+        // expected output: "foo"
+      </pre>
+    </li>
+    <li>
+      <h2><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/repeat" target="blank">repeat()</a></h2>
+      <p>Метод конструирует и возвращает новую строку, содержащую указанное количество соединённых вместе копий строки, на которой он был вызван.</p>
+      <pre>
+        var str = "Hello world!";
+        str.repeat(2);
+      </pre>
+    </li>
+  </ol>
+</body>
+</html>

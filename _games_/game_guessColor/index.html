@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>game_guessNumber</title>
+</head>
+
+
+<body onload="doGame()">
+
+  <h1>game_guessColor</h1>
+
+  <script>
+    "use strict"
+		var colorsArr = ["green", "khaki", "blue", "brown", "gold", "gray", "lime", "navy", "pink", "red", "aqua", "black", "tomato", "yellow"];
+		var myColor;
+		var playerColorInput;
+		var playerColor;
+		var finished = false;
+		var quesses = 0;
+
+		function doGame() {
+
+			var alphabetColorsArr = colorsArr.sort();
+			console.log([alphabetColorsArr] + " show array sort on alphabet"); // show array sort on alphabet
+
+			var randomColor = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+			myColor = randomColor.toLowerCase();
+			console.log(myColor + " this is a target random color"); // show target color
+
+			while(!finished) {
+				playerColorInput = prompt("I am thinking of a color one from this: \n\n"+
+				alphabetColorsArr.join(", ") +
+				"\n\nWhat is the color?");
+				playerColor = playerColorInput.toLowerCase();
+				console.log(playerColor + " - you enter this color");
+				quesses += 1;
+				finished = check_guess();
+			}
+		};
+
+	    function check_guess(){
+
+//			var targetColorIndex = myColor.toString();
+//		    console.log(myColor + " as number"); // show index of target color
+
+//			var playerColorIndex = alfabetColorsArr.indexOf(playerColor);
+//			console.log(playerColorIndex + " as number"); // show index of player color as num
+
+		    if ((!isNaN(playerColor)) || (colorsArr.indexOf(playerColor) === -1)) {
+			    alert("Sorry, I don't recognize your color. \n\n"+
+			    "Please try again.");
+			    return false;
+		    }
+		    console.log(playerColor + " playerColor show as a text"); // show index of player color as num
+		    console.log(myColor + " targetColor show as a text becouse colorsArr[Math...] giv text from Arr[index]"); // show index of player color as num
+		    if ( playerColor < myColor ) {
+		        alert("Sorry, your guess is not correct! \n\n"+
+		                "Hint your color is alphabetically higher than mine. \n\n"+
+		                "Please try again.");
+		        return false;
+		    }
+		    if ( playerColor > myColor ){
+		        alert("Sorry, your guess is not correct! \n\n"+
+		                "Hint your color is alphabetically lower than mine. \n\n"+
+		                "Please try again.");
+		        return false;
+		    }
+		    if ( playerColor == myColor ){
+
+				var myBody=document.getElementsByTagName("body")[0];
+				myBody.style.background = myColor;
+
+				alert("You got it! The color it's " + myColor.toUpperCase() +
+				".\n\nIt took you " + quesses +
+				" guesses to get the color!");
+				return true;
+		    }
+	    };
+  </script>
+</body>
+
+</html>

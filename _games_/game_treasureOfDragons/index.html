@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Play - treasure of dragons</title>
+</head>
+<body>
+    <h1>Treasure of dragons </h1>
+    <!-- <h2>Open console for play. Press <code>Ctrl + Shift + J</code> </h2> -->
+    <script>
+      'use strict';
+      var x = 10, y = 10, position = '';
+      alert('Введите \'end\' для выхода...');
+      while (true) {
+        alert('Ваши координаты: ' + x + ',' + y);
+        position = prompt('Выберите направление (n, s, e, w): ', '');
+
+        if (position == 'end') break;
+
+        if (position == 'n') { // движение на север
+            y--;
+            console.log('go north');
+        } else if (position == 's') { // движение на юг
+            y++;
+            console.log('go south');
+        } else if (position == 'e') { // движение на восток
+            x++;
+            console.log('go east');
+        } else if (position == 'w') {  // движение на запад
+            x--;
+            console.log('go west');
+        }
+
+        if (x == 7 && y == 11) {
+            alert('Вы нашли сокровище');
+        }
+        if (x <= 5 ||  x >= 15) {
+            alert('Осторожно - драконы!');
+        }
+      }
+    </script>
+
+</body>
+</html>

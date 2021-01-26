@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>keyboard</title>
+</head>
+<body>
+  <h1>Работа с ключевыми событиями</h1>
+  <p>В течение многих лет это было кошмарным кошмаром, поскольку разные браузеры по-разному обрабатывали ключевые события и коды клавиш ( <a href="http://unixpapa.com/js/key.html">прочитайте это</a>, если вы любите археологию JavaScript). К счастью, сегодня все намного лучше, и мы можем положиться на методы, которые должны работать в любом браузере.</p>
+  <p>Когда вы слушаете события, связанные с клавиатурой ( keydown, keyup  или  keypressed ),   параметр события, передаваемый в функцию слушателя, будет содержать код клавиши, вызвавшей событие. Затем можно проверить, какая клавиша была нажата или отпущена, например:</p>
+  <pre>
+    window.addEventListener('keydown', function(event) {
+       if (event.keyCode === 37) {
+         console.log('left arrow was pressed')
+       }
+    });
+  </pre>
+  <script>
+    window.addEventListener('keydown', function(event) {
+      console.log(event, event.keyCode, event.charCode, event.which, event.key, event.code);
+       if (event.keyCode === 37) {
+         console.log('left arrow was pressed')
+       }
+    });
+  </script>
+  <p>В строке 2 значение «37» - это код клавиши, соответствующий левой стрелке. Может быть трудно узнать, какие коды представляют какие реальные клавиши клавиатуры, поэтому вот несколько полезных указателей:</p>
+  <ul>
+    <li>Попробуйте коды клавиш с этим интерактивным примером:  <a href="http://www.asquare.net/javascript/tests/KeyCode.html">http://www.asquare.net/javascript/tests/KeyCode.html</a></li>
+    <li>И найдите список ключевых кодов (взят из:  <a href="http://css-tricks.com/snippets/javascript/javascript-keycodes/">http://css-tricks.com/snippets/javascript/javascript-keycodes/</a> )</li>
+  </ul>
+  <h2>Различные ключевые события</h2>
+  <p>Типы событий, связанные с клавиатурой</p>
+  <table border=1>
+    <tr>
+      <th>KeyDown</th>
+      <td>Событие происходит, когда пользователь нажимает клавишу.</td>
+    </tr>
+    <tr>
+      <th>KeyUp</th>
+      <td>Событие происходит, когда пользователь отпускает ключ.</td>
+    </tr>
+    <tr>
+      <th>keypress (now deprecated)</th>
+      <td>Событие происходит, когда пользователь нажимает клавишу (KeyDown и KeyUp).</td>
+    </tr>
+  </table>
+  <h2>свойства клавиатуры Event </h2>
+  <p>Это устаревшие свойства, которые до сих пор используются многими кодами JavaScript по всему миру. Однако мы не рекомендуем использовать их, если вы ориентируетесь на современные браузеры. keyCode имеет более мощную / простую в использовании замену, называемую кодом (еще не поддерживается всеми браузерами), которая поставляется с новым свойством ключа.</p>
+  <table border=1>
+    <tr>
+      <th>keyCode</th>
+      <td>Возвращает код символа Unicode ключа, который вызвал события onkeypress, onkeydown или onkeyup.</td>
+    </tr>
+    <tr>
+      <th>shiftKey</th>
+      <td>Возвращает, была ли нажата клавиша «Shift», когда было вызвано событие клавиши.</td>
+    </tr>
+    <tr>
+      <th>ctrlKey</th>
+      <td>Возвращает, была ли нажата клавиша ctrl, когда было вызвано событие клавиши.</td>
+    </tr>
+    <tr>
+      <th>altKey</th>
+      <td>Возвращает, была ли нажата клавиша «alt», когда было вызвано событие клавиши</td>
+    </tr>
+  </table>
+  <p>
+    <b><a href="https://codepen.io/MOgorodnik/pen/mZbQNx">Пример : использовать keyup и keydown для объекта окна</a></b>
+  </p>
+  <p>
+    <b><a href="https://codepen.io/MOgorodnik/pen/MMWQVO">Пример : использовать keypress  для объекта окна</a></b>
+  </p>
+  <p>
+    <b><a href="https://codepen.io/MOgorodnik/pen/EBYGxg">Пример : опрееделение нажатий клавиш shift alt meta keys</a></b>
+  </p>
+  <p>
+    <b><a href="https://codepen.io/MOgorodnik/pen/LKPMGj">Пример : определение key and keyCode</a></b>
+  </p>
+  <hr>
+  <h2>Работа с различными раскладками клавиатуры</h2>
+  <p>Не думайте, что каждая клавиша находится в одном и том же месте на клавиатуре в каждой стране!</p>
+  <p>Мы показали, как обнаруживать события keyup, keydown и keypress с помощью DOM API, и как использовать свойство keyCode события DOM.</p>
+  <p>Будьте осторожны, когда используете ключевые события в своем приложении, так как раскладки клавиатуры варьируются в зависимости от страны. В большинстве шутеров от первого лица (FPS) для перемещения персонажа используются три клавиши, расположенные в левом верхнем углу клавиатуры. Французские клавиатуры AZERTY для этого будут использовать ZQSD (Z = вверх / двигаться вперед, Q и D - влево / вправо, а S - вниз / двигаться назад), в то время как американские клавиатуры будут использовать, например, WASD. Имейте в виду, что клавиши не расположены в одном месте на клавиатурах из разных стран.</p>
+  <p>Подробнее в </p>
+  <p>Подробнее в статье " <a href="https://hacks.mozilla.org/2017/03/internationalize-your-keyboard-controls/">Интернационализация управления с помощью клавиатуры</a> " на MDN, автор Julien Wajsberg</p>
+  <blockquote cite="https://hacks.mozilla.org/2017/03/internationalize-your-keyboard-controls/">
+    Новый API привносит в KeyboardEvent событие два новых очень полезных свойства : key и code. Они заменяют ранее существующие (и до сих пор существует) charCode, keyCode и which.
+  </blockquote>
+  <p></p>
+</body>
+</html>

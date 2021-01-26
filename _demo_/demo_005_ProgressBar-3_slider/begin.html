@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title>ProgressBar-3_slider</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    h1{text-align: center;}
+    .box {
+      width: 70%;
+      margin: 50px auto;
+      outline: 2px dotted green;
+      outline-offset: 14px;
+    }
+
+    .box-line {
+      height: 6px;
+      background: #ddd;
+      margin: 0 0 20px;
+    }
+
+    .box-progress {
+      width: 0;
+      height: 2px;
+      background: red;
+      float: left;
+      margin-top: 2px;
+    }
+
+    .slide-img {
+      display: block;
+      /* width: 200px;
+    height: 101px; */
+      background: gold;
+    }
+
+    .img-l {
+      float: left;
+      margin: 0 16px 16px;
+    }
+
+    .img-r {
+      float: right;
+      margin: 0 16px 16px;
+    }
+
+    cite {
+      text-transform: capitalize;
+      color: blue;
+    }
+
+    .slides {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;right: 0;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>ProgressBar-3 Slider</h1>
+  <div class="box">
+    <div class="box-line"><span class="box-progress" id="progress" style="awidth: 21%;"></span></div>
+
+    <div class="slides">
+      <div class="slide">
+          <img class="slide-img img-r" src="https://placeimg.com/300/150/any" alt="descr">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorem animi obcaecati quaerat enim inventore repellat iusto possimus modi dolor.</p>
+          <cite>&mdash; 1 pino caruso</cite>
+      </div>
+      <div class="slide active">
+          <img class="slide-img img-r" src="https://placeimg.com/300/200/any" alt="descr">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorem animi obcaecati quaerat enim inventore repellat iusto possimus modi dolor.</p>
+          <cite>&mdash; 2  pino via caruso</cite>
+      </div>
+      <div class="slide">
+          <img class="slide-img img-l" src="https://placeimg.com/200/300/any" alt="descr">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorem animi obcaecati quaerat enim inventore repellat iusto possimus modi dolor.</p>
+          <cite>&mdash; 3 pino caruso</cite>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    "use strict"
+
+    // Your code here
+
+  </script>
+</body>
+</html>

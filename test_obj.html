@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name='url' content='https://professorweb.ru/my/javascript/js_theory/level2/2_4.php'>
+  <meta name="viewport" content="width=device-width">
+  <title>object</title>
+</head>
+<body>
+
+    <script>
+      /*----------Traffic lights-----------*/
+      let txt = "Lorem ipsum dolor sit ae voluptatem impedit dolor, iure quam, aliquid!"
+      // arr for first var
+      let arrStyle = [{
+          cssProp :'font-size',
+          cssValue : '42px'
+        },
+        {
+          'cssProp':'color',
+          'cssValue': 'green'
+        },
+        {
+          'cssProp':'background-color',
+          'cssValue':'gold',
+        },
+        {
+          'cssProp':'text-indent',
+          'cssValue':'220px',
+        },
+        {
+          'cssProp':'text-align',
+          'cssValue':'center',
+        },
+        {
+          'cssProp':'text-decoration',
+          'cssValue':'overline',
+        },
+        {
+          'cssProp':'padding',
+          'cssValue':'17px',
+        }
+      ];
+      // arr for second var
+      let arrStyle2 = [{
+          cssProp :'fontSize',
+          cssValue : '42px'
+        },
+        {
+          'cssProp':'color',
+          'cssValue': 'gray'
+        },
+        {
+          'cssProp':'backgroundColor',
+          'cssValue':'pink',
+        },
+        {
+          'cssProp':'textIndent',
+          'cssValue':'220px',
+        },
+        {
+          'cssProp':'textAlign',
+          'cssValue':'center',
+        },
+        {
+          'cssProp':'textDecoration',
+          'cssValue':'underline',
+        }
+      ];
+
+      function task3(argArr, argTxt){
+          console.log(argArr[0]['cssProp'], '\n', argTxt)
+          var myP= document.createElement("p")
+
+          myP.innerText = argTxt
+
+          // myP.style[argArr[0].cssProp] = argArr[0]['cssValue']
+
+          // First variant
+          for(let i = 0, s = ''; i < argArr.length; i++){
+            console.log(i);
+            let prop, val
+            for (var key in argArr[i]) {
+              // console.log(key);
+              // console.log(argArr[i][key]);
+              // if(key === 'cssProp') s += argArr[i][key] + ':'
+              // if(key === 'cssValue') s += argArr[i][key] + ';'
+              if(key === 'cssProp')  prop = argArr[i][key]
+              if(key === 'cssValue')  val = argArr[i][key]
+            }
+            console.log(myP, s)
+            console.log("prop - ", prop )
+            console.log("val - ", val )
+
+            // working all
+            myP.style[prop] = val
+            // myP.setAttribute("style", s)
+            // myP.style.cssText = s
+          }
+
+          // Second variant
+          // for(let i=0; i < argArr.length; i++){
+          //   console.log(i)
+          //   myP.style[argArr[i].cssProp] = argArr[i]['cssValue']
+          //
+          //   // or step by step
+          //   // let cssProp = argArr[i].cssProp
+          //   // let cssValue = argArr[i].cssValue
+          //   // console.log(cssProp , '---', cssValue)
+          //   // myP.style[cssProp] = cssValue
+          //
+          // }
+
+          document.body.append(myP);
+      }
+      task3(arrStyle, txt)
+    </script>
+  </body>
+</html>

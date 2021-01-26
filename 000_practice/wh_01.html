@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework 1. Переменные</title>
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Homework 1. Переменные.</h1>
+    <p>Запрашивать данные у пользователя необходимо с помощью <b>prompt()</b>, а выводить результат с помощью <b>console.log()</b> или  <b>.textContent()</b>.</p>
+    <div class="out">All results will be here after click match button.</div>
+  </div>
+  <ol class="task-list">
+    <li>
+      Запросите у пользователя его <b>имя</b> и выведите в ответ: <i>«Привет, <kbd>имя пользователя</kbd>!»</i>. <br>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let name = prompt('Input your name', 'Bob')
+          return out.textContent = 'Hello, ' + name + '!'
+        }
+      </script>
+    </li>
+
+    <li>
+      Запросите у пользователя <b>год его рождения</b>, посчитайте, сколько ему лет и выведите результат. Текущий год укажите в коде как константу которую можно получить через <kbd>prompt()</kbd> или объект <kbd>new Date</kbd>. <br>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          const currentYear = +prompt('Input current year', '') || (new Date()).getFullYear()
+          let userBirth = +prompt('Input your year of birth', '1990')
+          console.log(currentYear, userBirth);
+          return out.textContent = 'Your age is  = ' + (currentYear - userBirth)
+        }
+      </script>
+    </li>
+
+    <li>
+      Запросите у пользователя <b>длину стороны</b> квадрата и выведите его периметр. <br>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let perimeterOfSq = prompt('Input length side of squere', '7')
+          return out.textContent = 'Sq. perimeter = ' + 4*perimeterOfSq
+        }
+      </script>
+    </li>
+    <li>
+      Запросите у пользователя <b>радиус окружности</b> и выведите ее площадь. <br>
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4() {
+          const PI = 3.1415
+          let radOfCircle = +prompt('Input radius of circle', '10')
+          return out.textContent = 'Radius of circle = ' + (PI*radOfCircle*radOfCircle).toFixed(2)
+        }
+      </script>
+    </li>
+    <li>
+      Запросите у пользователя <b>расстояние в км между двумя городами и за сколько часов он хочет добраться</b>. <b>Посчитайте скорость</b>, с которой необходимо двигаться, чтобы успеть вовремя.<br>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f5() {
+          let distance = +prompt('Input distance from A to B city.', '77'),
+              time = +prompt('Input duration time.', '10')
+          return out.textContent = 'You must move with ' + distance/time + ' km/hour!'
+        }
+      </script>
+    </li>
+    <li>
+      Реализуйте конвертор валют. Пользователь вводит доллары, программа переводит в евро. Курс валюты храните в константе (0.88).<br>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f6() {
+          const x = 0.88
+          let usd = +prompt('Input how much USD you change to EUR.', '100')
+            return out.innerHTML = 'You pay - ' + usd + ' dollars.<br> You get - ' + usd*x + ' euro'
+        }
+      </script>
+    </li>
+    <li>
+      Пользователь указывает <b>объем флешки</b> в Гб (1Gb = 1024Mb). Программа должна посчитать сколько файлов размером в 820 Мб помещается на флешку.<br>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7() {
+          let maxGb = +prompt('Input count of flash memory in Gb.', '32'),
+              fileSize = 820
+          return out.textContent = 'You can write ' + parseInt(maxGb*1024/fileSize) + ' files (820 Mb each) on this flash.'
+          // return out.textContent = 'You can write ' + (maxGb*1024/fileSize).toFixed() + ' files (820 Mb each) on this flash.'
+        }
+      </script>
+    </li>
+    <li>
+      Пользователь вводит <b>сумму денег в кошельке</b> и <b>цену одной шоколадки</b>. Программа выводит <b>сколько шоколадок</b> можно купить и <b>сколько сдачи останется</b>.<br>
+        <button onclick="f8()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+          'use strict'
+
+          function f8() {
+            let balance = +prompt('How much money do you have?', '100'),
+                chocolateBarPrice = +prompt('How much cost one bar of chocolate?', '21.55'),
+                chocolateBarCount
+            chocolateBarCount = Math.floor(balance/chocolateBarPrice)
+            console.log(balance,chocolateBarPrice, chocolateBarCount);
+            balance -= (chocolateBarPrice*chocolateBarCount)
+            return out.innerHTML = "You can buy "+ chocolateBarCount + ' bar of chocolate <br>and you will remain ' + balance.toFixed(2) + ' money!'
+          }
+        </script></>
+    </li>
+    <li>
+      Запросите у пользователя <b>трехзначное число</b> и выведите его <b>задом наперед</b>. Для решения задачи вам понадобится оператор <kbd>% (остаток от деления)</kbd>. <br>
+      <button onclick="f9()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        function f9() {
+          let num = +prompt('Type 3 numeral.', '123'), temp
+          temp = num%10
+          console.log(temp);
+
+          temp += (num/10%10).toFixed()
+          console.log(temp);
+
+          temp += parseInt(num/100)
+          console.log(temp);
+          return out.textContent = temp
+        }
+      </script>
+    </li>
+    <li>
+      Запросите у пользователя <b>целое число</b> и выведите в ответ, <b>четное число или нет</b>. <mark>В задании используйте логические операторы</mark>.
+      <s>В задании не надо использовать if или switch</s><br>
+      <button onclick="f10()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10() {
+          const rateEmployee = 250
+          let num = +prompt('Type integer num.', '77')
+
+          // using bitwise operator
+          // https://www.w3schools.com/jsref/jsref_operators.asp
+          // return out.textContent = 'This number is ' + (( num & 1 ) ? 'odd' : 'even')
+          // using ternary operator
+          // return out.textContent = 'This number is ' + ((num%2 === 1) ? 'odd' : 'even')
+          // using logick operator
+          return out.textContent = 'This number is ' + ( (num % 2 == 0 && "even") || "odd")
+        }
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

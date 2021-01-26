@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Integration of JS - inside &amp; external </title>
+</head>
+<body>
+  <!--
+    Интегрировать JavaScvript в страницу можно 2-мя способами,
+    первый - использовать тег <script>...</script>.
+    Тег рекомендуется разместить как можно ниже на странице.
+    Внутри элемента <script> размещается код JavaScript,
+    который будет выполняться при загрузке страницы.
+  -->
+  Document is started!
+  <h1>This html upper in code then first "alert" script. This script is integrated.</h1>
+
+  <script>
+    alert('This message from integrated script!');
+  </script>
+
+  <p>This html below in code then first "alert" script.</p>
+
+  <!--
+    второй - использовать тег <script src="путь/к/файлу/script1.js"> .
+   -->
+  <script src="script1.js">
+    alert('Code wasn"t work inside script with src attribute!!!') // код не выполнится т.к. есть атрибут src="..."
+  </script>
+
+  Document is finished!
+
+</body>
+</html>

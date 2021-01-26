@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<style type="text/css">
+p{
+    margin-top: 0;
+}
+    .controller{
+        border: 2px solid black;
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        border-radius: 50%;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .wrapper,
+    .section{
+        display: flex;
+        justify-content: space-between;
+    }
+    .aside,
+    .section{
+        padding: 10px;
+        border: 1px solid red;
+        flex: 3 3 70%;
+    }
+    .section{
+
+        flex-wrap: wrap;
+    }
+    .section ul:nth-child(even){
+        padding: 0;
+        list-style: none;
+        /* width: 30%; */
+    }
+    .section a{text-decoration: none;}
+    .aside{
+        flex: 1 1 25%;
+        margin-left: 20px;
+    }
+    button.btn:disabled{
+        opacity: 0.5;
+        background: #dddddd;
+    }
+    .active{
+        outline: 2px dotted rgb(238, 119, 7);
+        outline-offset: -1px;
+    }
+</style>
+    <div class="wrapper">
+
+    <section class="section" id="tree">
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span></span>1&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span></span>1&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span class="active">1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span></span>1&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span></span>1&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+                <li><a href="#"><span>1</span>&nbsp;<span>2</span></a></li>
+            </ul>
+        </section>
+        <section class="aside">
+              <ul class="childrenList" id="childrenList">
+                  <!-- <li>span</li>
+                  <li>span</li>
+                  <li>span</li> -->
+              </ul>
+        </section>
+
+    </div>
+
+    <div class="controller">
+        <p><button id='upBtn' class="btn">up</button></p>
+        <p>
+            <button id='leftBtn' class="btn" >left</button>
+            <button id='rightBtn' class="btn">right</button>
+        </p>
+        <p><button id='downBtn' class="btn">down</button></p>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+</html>

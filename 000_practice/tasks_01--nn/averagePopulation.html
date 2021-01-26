@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Given an array of countries with their population. <br>Calculate average population of the countries.</h1>
+
+  <script>
+    'use strict'
+
+    const data = [{
+        name: 'Ukraine',
+        population: '42000000'
+      },
+      {
+        name: 'Belarus',
+        population: '9500000'
+      },
+      {
+        name: 'Moldova',
+        population: '3500000'
+      },
+      {
+        name: 'Switzerland',
+        population: '8400000'
+      }
+    ]
+
+    let avrg = function(args){
+      let avrgPopulation = 0;
+      for (let i = 0; i < args.length; i++) {
+        avrgPopulation = avrgPopulation + parseInt(args[i].population);
+      }
+      return avrgPopulation/args.length ;
+    }
+    console.log(avrg(data))
+
+  </script>
+</body>
+
+</html>

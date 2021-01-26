@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Slider</title>
+  <style>
+    #slides {
+      position: relative;
+      height: 200px;
+      width: 300px;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .slide {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 1;
+      -webkit-transition: opacity 1s;
+      -moz-transition: opacity 1s;
+      -o-transition: opacity 1s;
+      transition: opacity 1s;
+    }
+
+    .showing {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .slide {
+      text-align: center;
+      line-height: 120px;
+      font-size: 40px;
+      padding: 40px;
+      box-sizing: border-dox;
+      background: #333;
+      color: #fff;
+    }
+
+    .slide:nth-of-type(1) {
+      background: red;
+    }
+
+    .slide:nth-of-type(2) {
+      background: orange;
+    }
+
+    .slide:nth-of-type(3) {
+      background: green;
+    }
+
+    .slide:nth-of-type(4) {
+      background: blue;
+    }
+
+    .slide:nth-of-type(5) {
+      background: purple;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Slider-1</h1>
+  <ul id="slides">
+    <li class="slide showing">Slide 1</li>
+    <li class="slide">Slide 2</li>
+    <li class="slide">Slide 3</li>
+    <li class="slide">Slide 4</li>
+    <li class="slide">Slide 5</li>
+  </ul>
+  <button class="controls" id="prev">Попередній слайд</button>
+  <button class="controls" id="pause">Пауза</button>
+  <button class="controls" id="next">Наступний слайд</button>
+
+  <script>
+    // browser-sync start --server --files "*.html, *.js, *.css"
+    var slides = document.querySelectorAll('#slides .slide');
+    console.log(slides);
+
+    var currentSlide = 0;
+    var slideInterval = setInterval(nextSlide, 2000);
+
+    // function nextSlide() {
+    //     slides[currentSlide].className = "slide";
+    //     currentSlide = (currentSlide+1)%slides.length;
+    //     slides[currentSlide].className = "slide showing";
+    // }
+
+    // ######################
+    // ## Controls buttons ##
+    // ######################
+    var playing = true;
+    var pauseBtn = document.getElementById('pause');
+
+    function pauseSlideshow() {
+      pauseBtn.innerHTML = 'Play';
+      playing = false;
+      clearInterval(slideInterval);
+    }
+
+    function playSlideshow() {
+      pauseBtn.innerHTML = 'Pause';
+      playing = true;
+      slideInterval = setInterval(nextSlide, 2000);
+    }
+    pauseBtn.onclick = function() {
+      if (playing) {
+        pauseSlideshow();
+      } else {
+        playSlideshow();
+      }
+    }
+
+
+    function goToSlide(n) {
+      slides[currentSlide].className = "slide";
+      currentSlide = (n + slides.length) % slides.length;
+      slides[currentSlide].className = "slide showing";
+    }
+    // #######################
+    // ## Prev*Next buttons ##
+    // #######################
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+
+    next.onclick = function() {
+      pauseSlideshow();
+      nextSlide();
+    }
+    prev.onclick = function() {
+      pauseSlideshow();
+      prevSlide();
+    }
+  </script>
+</body>
+
+</html>

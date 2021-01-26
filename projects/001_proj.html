@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>visilitca</title>
+</head>
+
+<body>
+  aaa
+  <script>
+    // var name= prompt('What is your name?', '');
+    // console.log('Hello, ' + name + '.');
+    var words  =   [ "program", "monkey", "beautiful", "step"];
+    var word = words[Math.floor(Math.random() * words.length)];
+    var answerArray = [];
+    console.log(words, word, answerArray);
+    for(var i=0; i < word.length; i++) {
+      answerArray[i] = "_" ;
+    }
+
+    var remainingLetters = word.length;
+    while (remainingLetters > 0) {
+      alert(answerArray.join(" "));
+      var guess = prompt("Guess the letter, or click Cancel to exit the game.");
+      if (guess == null) {
+        break;
+      } else if (guess.length !== 1 ) {
+        alert("Please enter a single letter.");
+      } else {
+        //Update  the  state   of  the  game
+        for (var j = 0; j < word.length; j++) {
+          if (word[j] === guess) {
+            answerArray[j] = guess;
+            remainingLetters--;
+          }
+      }
+    }
+  }
+    alert(answerArray.join(" "));
+    alert('The word is ' + word);
+
+    console.log(words, word, answerArray);
+
+  </script>
+</body>
+
+</html>

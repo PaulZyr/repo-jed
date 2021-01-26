@@ -1,0 +1,201 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Object</title>
+  <link rel="stylesheet" href="/css/links.css">
+  <script src="/js/target.js" defer></script>
+</head>
+<body>
+  <h1>Object</h1>
+  <ul class="links">
+    <li>
+      <a href="https://habr.com/ru/post/119391/">Создание объектов в Javascript</a>
+    </li>
+    <li>
+      <a href="https://habr.com/ru/company/ruvds/blog/438794/">Подробности о JavaScript-объектах</a>
+    </li>
+    <li>
+      <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">Object.defineProperty()</a>
+    </li>
+    <li>
+      <a href="https://zellwk.com/blog/looping-through-js-objects/?ck_subscriber_id=137791240">Лучший способ перебирать объекты</a>
+    </li>
+    <li>
+      <a href="https://sdras.github.io/object-explorer">|object-explorer|</a>
+    </li>
+    <li>
+      <a href="https://sdras.github.io/array-explorer/">|array-explorer|</a>
+      <hr>
+    </li>
+    <li>
+      <a href="hw.html"># Object Homework 1</a>
+    </li>
+  </ul>
+  <script>
+  "use strict"
+    /* create empty object */
+    var obj_new = new Object();
+    console.log(obj_new);
+
+    var obj = {};
+    console.log(obj);
+
+    /* object with keys & values */
+    console.groupCollapsed('object with keys & values');
+      var tweet = {
+        'createDate': '20 Nov 18',
+        'id': '00203018',
+        'title': 'Lorem ipsum dolor sit amet.',
+        'text': 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
+        'user': {
+          'id': '00301881',
+          'name': 'Maxim',
+          'screenName': 'MOgorodnik',
+          'followeCount': 1881
+        },
+        'likes': 211,
+        'setLike': function(){
+          return 'One like added else.';
+        },
+        // 'hashTag': 'happy'
+      }
+      console.log(tweet);
+    console.groupEnd('object with keys & values');
+
+    /* writable, enumerable, configurable */
+    console.groupCollapsed('writable, enumerable, configurable');
+      Object.defineProperty(tweet, 'text', {
+        value: '!!! Lorem ipsum dolor.',
+        writable: false,
+        enumerable: false,
+        configurable: false
+      });
+      // writable
+      // console.info('writable');
+      // console.log(Object.getOwnPropertyDescriptor(tweet, 'text'));
+      // console.log(tweet.text);
+      // console.log(tweet.text = "1111");
+      // console.log(Object.getOwnPropertyDescriptor(tweet, 'text'));
+
+      // enumerable
+      // console.info('enumerable');
+      // console.log(Object.keys(tweet));
+
+      // configurable
+      // console.info('configurable');
+      // console.log(tweet);
+      // console.log(delete tweet.text);
+      // console.log(tweet);
+
+
+    console.groupEnd('writable, enumerable, configurable');
+
+
+    /* add in object */
+    console.groupCollapsed('adding ');
+      var key1;
+      obj.key1 = 123; // point notation
+      obj[key1] = 'value1'; // construction notation
+      console.log(obj);
+    console.groupEnd('adding ');
+
+    /* delete from object */
+    console.groupCollapsed('delete');
+      delete obj.key1;
+      delete obj[key1];
+      console.log(obj);
+    console.groupEnd('delete');
+
+    /* getting property value through brackets */
+    console.groupCollapsed('getting property value through brackets');
+      console.log(tweet['i'+'d']);
+      var ourStorage = {
+        "desk": {
+          "drawer": "stapler"
+        },
+        "cabinet": {
+          "top drawer": {
+            "folder1": "a file",
+            "folder2": "secrets"
+          },
+          "bottom drawer": "soda"
+        }
+      };
+      /* nested properties */
+      console.log('tweet.user.id - '+tweet.user.id);
+      console.log(ourStorage.cabinet["top drawer"].folder2); // "secrets"
+      console.log(ourStorage.desk.drawer); // "stapler"
+      console.groupEnd('getting property value through brackets');
+
+      /* get all properties*/
+      console.groupCollapsed('get all properties');
+      var keys = Object.keys(tweet);
+      console.log(keys);
+    console.groupEnd('get all properties');
+
+    /* check whether the object property */
+    console.groupCollapsed('.hasOwnProperty');
+      console.log(tweet.hasOwnProperty('text'));
+      // console.log(tweet.hasOwnProperty(text));
+      console.log(tweet.hasOwnProperty(tweet.text));
+    console.groupEnd('.hasOwnProperty');
+
+    // ES2015 .create
+    // console.groupCollapsed('.create');
+    console.groupCollapsed('.create');
+      var object = Object.create({a: 10, b: 20});
+      console.log(object);
+      console.log(object.hasOwnProperty('a')); // false ?????????? WTF
+
+      object.a = 11;
+
+      console.log(object);
+      console.log(object.a);
+      console.log(object.hasOwnProperty('a')); // true ?????????? WTF
+      delete object.a;
+      console.log(object);
+    console.groupEnd('.create');
+
+    /* be cearful with in  */
+    console.groupCollapsed('work with in');
+      console.log(object.z);
+      console.log('z' in object);
+
+      object.z = undefined;
+      console.log(object.z);
+      console.log('z' in object);
+    console.groupEnd('work with in');
+
+    /* Double object */
+    console.groupCollapsed('Double object');
+      obj.a = 1;
+      obj.b = 2;
+      var objDouble = obj;
+      console.log(objDouble);
+      obj.a = 3;
+      obj.c = 'c';
+      console.log(obj);
+      console.log(objDouble);
+    console.groupEnd('Double object');
+
+    /* Clone object */
+    console.groupCollapsed('Clone object ');
+      var objClone = {};
+      console.log(objClone);
+
+      for (var k in obj){
+        objClone[k] = obj[k];
+      }
+      console.log(objClone);
+
+      // objClone.3 = 333;
+      objClone['a'] = 0.1;
+      console.log('change "a"');
+      console.log(obj);
+      console.log(objDouble);
+      console.log(objClone);
+    console.groupEnd('Clone object ');
+
+  </script>
+</body>
+</html>

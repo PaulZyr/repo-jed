@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZugZwang</title>
+</head>
+<body>
+<h1>ZugZwang</h1>
+  <script>
+    for (let n = 1; n <= 100; n++) {
+    let output = "";
+    if (n % 3 == 0) output += "Zug";
+    if (n % 5 == 0) output += "Zwang";
+    console.log(output || n);
+    }
+  </script>
+</body>
+</html>

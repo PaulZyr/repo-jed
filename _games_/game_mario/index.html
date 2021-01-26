@@ -1,0 +1,77 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<title>Hero</title>
+<style>
+  #theDiv {
+    width: 105px;
+    height: 33px;
+    color: tomato;
+  }
+</style>
+
+<body onload="init();">
+  <p>Here is a div. Click the button below to change its style!</p>
+  <button onclick="animateMario();">Animate Hero (click multiple times)</button> </p>
+  <div id="theDiv"> This is a div! </div>
+  <p>Here is the Hero(Mario, Swordsman) sprite sheet image used in this example:</p>
+  <img src="https://mainline.i3s.unice.fr/mooc/marioSprite.png" alt="mario picture here">
+  <img src="/img/swordsman-sprite-sheet-2.png" alt="swordsman picture here">
+
+  <script>
+    "use strict"
+    var divElem;
+
+    function init() {
+      console.log("page loaded and DOM is ready");
+
+      // use the selection API to select the div
+      divElem = document.querySelector("#theDiv");
+    }
+
+    var currentImage = 0;
+    var leftPos = 0;
+
+    setInterval(animateMario, 500);
+
+    function animateMario() {
+      drawMario(currentImage);
+      // next time, show next sprite/subimage
+      // currentImage = (currentImage + 1) % 3;
+      currentImage = (currentImage + 1) % 8;
+      // next time, move mario 5 pixels to the right
+      leftPos += 5;
+      // And if he moved 100 pixels, start back from the left
+      if (leftPos >= 300)
+        leftPos = 0;
+    }
+
+    function drawMario(indexImage) {
+      // set the left pos of the div using the left margin
+      divElem.style.marginLeft = leftPos + "px";
+      // change the width and height of the div for Mario
+      divElem.style.width = "22px";
+      divElem.style.height = "32px";
+      // change the width and height of the div for Swordsman
+      divElem.style.width = "54px";
+      divElem.style.height = "94px";
+      // remove the text inside the div
+      divElem.innerHTML = "";
+      // set the background image Mario
+      divElem.style.backgroundImage = "url(https://mainline.i3s.unice.fr/mooc/marioSprite.png)";
+      // set the background image Swordsman
+      divElem.style.backgroundImage = "url(/img/swordsman-sprite-sheet-2.png)";
+      // remove the background color
+      divElem.style.backgroundColor = "transparent";
+      // select the starting pos in the background image Mario
+      // var offset = indexImage * 24;
+      // select the starting pos in the background image Swordsman
+      var offset = -indexImage * 54;
+      divElem.style.backgroundPosition = offset + "px 50%";
+    }
+  </script>
+</body>
+
+</html>

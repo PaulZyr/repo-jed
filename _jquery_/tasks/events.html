@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://basicweb.ru/jquery/jquery_effect_toggle.php">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Events</title>
+  <style type="text/css">
+    #code{
+      background-color:#fffDBD;
+      margin:10px;
+      padding:5px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> -->
+</head>
+<body>
+<h2>Обработчики событий jQuery</h2>
+<h3>1. После одинарного нажатия на кнопку с <kbd>id="but1"</kbd> цвет текста абзаца с <kbd>id="par1"</kbd> должен измениться на зеленый, а размер его шрифта должен стать равным 20px. При двойном нажатии на кнопку с <kbd>id="but1"</kbd> оформление абзаца с <kbd>id="par1"</kbd> должно
+    сбрасываться на стандартное.</h3>
+<div id="code">
+  <h3 id="par1">Я первый заголовок на странице.</h3>
+  <p id="par1">Я первый абзац на странице.</p>
+  <input id="but1" type="button" value="Нажмите на меня" />
+  <script>
+    'use strict'
+
+    $("#but1").on('click', function(){
+      $("p#par1").css("color","green"); $("p#par1").css("font-size","20px")
+    })
+    $("#but1").on('dblclick', function(){
+      $("p#par1").css("color","black"); $("p#par1").css("font-size","1em")
+    })
+  </script>
+</div>
+<h3>2. При наведении указателя мыши на ссылку c <kbd>id="href1"</kbd> ее цвет должен измениться на оранжевый. При выведении указателя мыши за ее пределы оформление должно сбросится на стандартное.</h3>
+<div id="code">
+  <a id="href1" href="https://jquery.com/">https://jquery.com/</a>
+  <script>
+    'use strict'
+
+    $("#href1").on('mouseover', function(){
+      $("#href1").css("color","orange")
+    })
+    $("#href1").on('mouseout', function(){
+      $("#href1").css({"color":"pink", "background":"blue"})
+    })
+    // $("#href1").on('mouse', function(){
+    //   function(){ $("#href1").css("color","orange")
+    // })
+  </script>
+</div>
+
+<h3>3. При выделении текста элемента с id="text1" его цвет должен измениться на красный, а размер шрифта должен стать равным 20px.</h3>
+<div id="code">
+  <input type="text" id="text1" value="Выделите мой текст" />
+  <script>
+    'use strict'
+
+    $("#text1").on('select', function(){
+      $("#text1").css("color","red")
+      $("#text1").css("font-size","20px")
+    })
+    $("#text1").on('blur', function(){
+      $("#text1").css("color","inherit")
+      $("#text1").css("font-size","inherit")
+    })
+  </script>
+</div>
+
+<h3>4. При каждом щелчке по кнопке с <kbd>id=but2</kbd> оформление абзаца с <kbd>id=par2</kbd> должно меняться следующим образом:</h3>
+<ul>
+  <li>Текст должен быть отображен шрифтом Times New Roman красного цвета;</li>
+  <li>Текст должен быть отображен шрифтом Arial синего цвета;</li>
+  <li>Текст должен быть отображен жирным шрифтом Verdana, с рамкой толщиной 1 пиксель (<i>используйте свойство font-weight:bold для того, чтобы сделать текст
+      жирным и свойство border-style для задания толщины границы</i>)</li>
+</ul>
+<div id="code">
+  <p id="par2">Мое оформление будет меняться после каждого нажатия на кнопку ниже.</p>
+  <input id="but2" type="button" value="Изменить оформление абзаца" />
+  <script>
+    'use strict'
+/*
+WARNING WORK ONLY WITH old jQuery v 1.5
+http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"
+*/
+
+      $("#but2").toggles(function(){
+         $("#par2").css("color","green");
+         $("#par2").css("font-size","10px");},function(){
+         $("#par2").css("color","red");
+         $("#par2").css("font-size","20px");},function(){
+         $("#par2").css("color","blue");
+         $("#par2").css("font-size","30px");},function(){
+         $("#par2").css("color","black");
+         $("#par2").css("font-size","1em");
+      });
+
+    // $("#but2").on('toggle', function(){
+    //   $("#par2").css("color","red")
+    //   $("#par2").css("font-family","Times New Roman")
+    //   $("#par2").css("border-style","none")
+    // },
+    // function(){
+    //   $("#par2").css("color","blue")
+    //   $("#par2").css("font-family","Arial")
+    // },
+    // function(){
+    //   $("#par2").css("color","black")
+    //   $("#par2").css("font-family","Verdana")
+    //   $("#par2").css("font-weight","bold")
+    //   $("#par2").css("border","1px")
+    //   $("#par2").css("border-style","dotted")
+    // })
+    // })
+  </script>
+</div>
+</body>
+</html>

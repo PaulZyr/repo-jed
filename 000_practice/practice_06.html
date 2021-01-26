@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Practice 6.  Объекты.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Practice 6.  Объекты.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <ol class="task-list">
+  <!-- Task 1 -->
+    <li>
+      <p>Создать объект, описывающий <u>прямоугольник</u> (хранит координаты левой верхней и правой нижней точек), и написать следующие функции для работы с таким объектом.</p>
+      <div class="fig-holder">
+        <div class="fig">xyz</div>
+      </div>
+      <style>
+        .fig-holder{border: 2px dashed red;margin: 0 auto 10px;text-align: center;font-family: monospace; line-height: 2;font-size: 20px;
+          max-width: 400px;
+          min-height: 1px;
+          position: relative;
+          box-sizing: border-box;
+        }
+        .fig{
+          box-sizing: border-box;
+          height:  100%;
+          min-height: calc(inherit - 4px);
+          background: #ccc;
+          position: relative;
+        }
+      </style>
+      <mark>Функция принимает объект-прямоугольник и выводит: </mark> <br>
+      <button onclick="infoPoints.call(figureObj)">Информацию о нем.</button> (где какая точка расположена),
+      <button onclick="getW.call(figureObj)">Ширину</button>
+      <button onclick="getH.call(figureObj)">Высоту</button>
+      <button onclick="getSq.call(figureObj)">Площадь</button>
+      <button onclick="getL.call(figureObj)">Периметр</button> <br>
+      <mark>Функции изменения:</mark> <br>
+      Принимают объект-прямоугольник и на сколько единиц изменить: <br>
+       <button onclick="changeW.call(figureObj )">Ширину прямоугольника.</button>
+       <button onclick="changeH.call(figureObj)">Высоту прямоугольника.</button> <br>
+       <button onclick="changeWidthHeight.call(figureObj, 10, 20)">Ширину и высоту прямоугольника. </button> <br>
+      <mark>Функции смещения прямоугольника: </mark> - принимают объект-прямоугольник и значения сдвигов <br>
+       На сколько единиц сдвинуть - <button onclick="moveX.call(figureObj)">по оси X.</button><br>
+       На сколько единиц сдвинуть - <button onclick="moveY.call(figureObj)">по оси Y.</button><br>
+       На сколько единиц сдвинуть - <button onclick="moveXY.call(figureObj)">По оси X и по оси Y.</button><br>
+      <mark>Функция для проверки</mark> <br>
+      <button onclick="checkPoint.call(figureObj)">Находится ли точка внутри прямоугольника.</button> ( Принимает объект-прямоугольник и координаты точки.) <br>
+      <button onclick="newFig.call(figureObj)">Ввести новые координаты.</button>,
+      <button onclick="drawFig.call(figureObj)">Нарисовать фигуру.</button> <br>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        // 'use strict'
+        const fig = document.querySelector('.fig')
+
+        console.log(1);
+        let figureObj = {
+          plt : { x: 10, y: 100 },
+          prb : { x: 410, y: 20 }
+          // prt : {x: , y: },
+          // plb : {x: , y: },
+        }
+        function Dot(x,y){
+          this.x = x
+          this.y = y
+        }
+        function infoPoints() {
+          console.log('infoPoints')
+          this.prt = {}
+          this.plb = {}
+          this.prt.x = this.prb.x
+          this.prt.y = this.plt.y
+          this.plb.x = this.plt.x
+          this.plb.y = this.prb.y
+          // console.log(this, event)
+          fig.innerHTML = `Point LT coordinates - ${this.plt.x}:${this.plt.y}<br>
+                           Point RT coordinates - ${this.prt.x}:${this.prt.y}<br>
+                           Point RB coordinates - ${this.prb.x}:${this.prb.y}<br>
+                           Point LB coordinates - ${this.plb.x}:${this.plb.y}`
+        }
+        function getW(figureObj) {
+          console.log('getW')
+          fig.innerHTML = `Width = ${ Math.abs(this.prb.x - this.plt.x)}`
+          console.log(Math.abs(this.prb.x - this.plt.x));
+          return Math.abs(this.prb.x - this.plt.x)
+        }
+        function getH(figureObj) {
+          console.log('getH')
+          fig.innerHTML = `Height = ${Math.abs(this.plt.y - this.prb.y)}`
+          return Math.abs(this.plt.y - this.prb.y)
+        }
+        function getSq() {
+          console.log('getSq')
+          fig.innerHTML = `Square = ${ Math.abs((this.prb.x - this.plt.x) * (this.plt.y - this.prb.y))}`
+        }
+        function getL() {
+          console.log('getL');
+          fig.innerHTML = `Perimeter = ${ Math.abs((this.prb.x - this.plt.x + this.plt.y - this.prb.y)) * 2}`
+        }
+        function changeW( w) {
+          console.log('changeW:');
+          if (w === undefined) {
+            w = +prompt('How much to change the width?','-50')
+          }
+          console.log(this);
+          let nw = (parseInt(fig.style.width) || (this.prb.x - this.plt.x )) + w
+          console.log(w, nw);
+
+          if( !fig.hasAttribute('style')) clear()
+          fig.style.width = nw + 'px'
+          fig.innerHTML += `Width now is = ${nw} <br>`
+        }
+        function changeH (h) {
+          console.log('changeH')
+          if (h === undefined) {
+            h = +prompt('How much to change the height?','50')
+          }
+          let nh = (parseInt(fig.style.minHeight) || (this.plt.y - this.prb.y )) + h
+
+          if( !fig.hasAttribute('style')) clear()
+          fig.style.minHeight = nh + 'px'
+          fig.innerHTML += `Height now is = ${nh}<br>`
+        }
+        function changeWidthHeight ( w, h) {
+          console.log('changeWidthHeight')
+          changeW.call(figureObj, w)
+          changeH.call(figureObj, h)
+        }
+        function moveX (x) {
+          console.log('moveX', this)
+          let valX = +prompt('How move to X?','50')
+          this.plt.x += valX
+          this.prb.x += valX
+          fig.style.left = this.plt.x + 'px'
+          console.log('moveX', this.plt.x)
+        }
+        function moveY (y) {
+          console.log('moveY')
+          let valY = +prompt('How move to Y?','50')
+          this.plt.y += valY
+          this.prb.y += valY
+          fig.style.top = this.plt.y + 'px'
+          console.log('moveX', this.plt.y)
+        }
+        function moveXY (x, y) {
+          console.log('moveXY')
+          moveX.call(figureObj, x)
+          moveY.call(figureObj, y)
+        }
+        function checkPoint () {
+          console.log('checkPoint')
+        }
+        function clear () {
+          fig.innerHTML = ''
+        }
+        function drawFig () {
+          console.log('drawFig')
+          fig.style.left = this.plt.x+'px'
+          fig.style.top = this.plt.y+'px'
+          fig.style.width = getW.call(figureObj)+'px'
+          fig.style.minHeight = getH.call(figureObj)+'px'
+          fig.style.background = 'gold'
+        }
+        function newFig(){
+          console.log('newFig')
+          // this.plt = Object.create(Dot)
+          // this.prb = Object.create(Dot)
+
+          let points = prompt("Enter Top left point","45,65").split(',')
+          this.plt.x = parseInt(points[0])
+          this.plt.y = parseInt(points[1])
+
+          points = prompt("Enter Bottom right point","300,200").split(',')
+          this.prb.x = parseInt(points[0])
+          this.prb.y = parseInt(points[1])
+
+          console.log(figureObj)
+          // this.setPoints(this.plt, this.prb)
+        }
+        function setPoints(topLeft, botRight){
+          console.log('setNewPoints')
+          this.plt.x = topLeft.x
+          this.plt.y = topLeft.y
+
+          this.prb.x = botRight.x
+          this.prb.y = botRight.y
+          console.log(figureObj)
+        }
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <!-- <li>
+      <p></p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          console.log(2);
+        }
+        f2()
+      </script>
+    </li> -->
+  </ol>
+
+</body>
+
+</html>

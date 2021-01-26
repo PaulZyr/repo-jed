@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Invert Case</title>
+  <link rel="stylesheet" href="../../css/practice.css">
+  <script src="../../js/spoiler.js" ></script>
+</head>
+<body>
+  <!-- <p><mark>Look results in console!</mark></p> -->
+  <div class="heading">
+    <h1>Инвертированный регистр</h1>
+    <div class="out">All results will be here after click match button.</div>
+  </div>
+    <ol class="task-list">
+      <li>
+        Реализуйте и экспортируйте по умолчанию функцию <kbd>invertCase</kbd>, которая меняет в строке регистр каждой буквы на противоположный.
+        <pre>
+          invertCase('Hello, World!'); // hELLO, wORLD!
+          invertCase('I loVe JS');     // i LOvE js
+        </pre>
+        <button onclick="inv()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+        'use strict'
+        const out = document.querySelector('.out')
+        function inv() {
+          const arg = prompt('Enter any text!', 'Hello, mY fRiendS!')
+          let ns = ''
+          for (var i = 0; i < arg.length; i++) {
+            if(arg[i].toLowerCase() === arg[i]){
+              ns += arg[i].toUpperCase()
+            } else {
+              ns += arg[i].toLowerCase()
+            }
+          }
+          out.textContent = ns
+          console.log(ns);
+        }
+        // inv('Hello, mY fRiendS!')
+        </script>
+      </li>
+    </ol>
+</body>
+</html>

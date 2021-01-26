@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX IP</title>
+  </head>
+  <body>
+
+    <input id="btnIp" type="submit" name="ip" value="My IP ?"><br><br>
+    <textarea id="fieldIp" cols="33" rows="4" disabled></textarea>
+
+    <script>
+      window.onload = function (){
+        document.querySelector('#btnIp').onclick = function () {
+          ajaxGet();
+        }
+      }
+
+      function ajaxGet() {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange =function () {
+          console.log(xhr.readyState);
+          if (xhr.readyState === 4 && xhr.status === 200 ) {
+            console.log(1);
+            document.querySelector('#fieldIp').textContent = xhr.responseText;
+            document.querySelector('#fieldIp').innerHTML = xhr.responseText;
+          }
+        }
+
+        xhr.open('get', 'ip.php');
+        xhr.send();
+      }
+
+
+// with callback
+      // window.onload = function (){
+      //   document.querySelector('#btnIp').onclick = function () {
+      //     ajaxGet('ip.php', function(data) {
+      //       console.log(data);
+      //     });
+      //
+      //     ajaxGet('ip.php?id=12&x=y', function(data) {
+      //       document.querySelector('#fieldIp').innerHTML = data;
+      //     });
+      //
+      //     ajaxGet('ip.php');
+      //   }
+      // }
+      //
+      // function ajaxGet(url, callback) {
+      //
+      //   var cb = callback || function(data){console.log(1);};
+      //
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.onreadystatechange =function () {
+      //     if (xhr.readyState === 4 && xhr.status === 200 ) {
+      //       cb(xhr.responseText);
+      //     }
+      //   }
+      //
+      //   xhr.open('get', url);
+      //   xhr.send();
+      // }
+    </script>
+  </body>
+</html>

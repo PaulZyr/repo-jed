@@ -1,0 +1,983 @@
+#
+Справочное руководство
+
+Краткий справочник по часто используемым методам JavaScript и API-интерфейсам браузера.
+
+**Если не указано иное, они работают во всех современных браузерах и IE9 +. **И могут быть расширены с помощью [полифилов](https://vanillajstoolkit.com/polyfills).
+
+## Оглавление
+
+* [Селекторы\(Selectors\)](#селекторыselectors)
+* [Циклы\(Loops\)](#циклыloops)
+* [Классы\(Classes\)](#классыclasses)
+* [Стили\(Styles\)](#стилиstyles)
+* [Атрибуты\(Attributes\)](#атрибутыattributes)
+* [Слушатели событий\(Event Listeners\)](#слушатели-событийevent-listeners)
+* [Строки\(Strings\)](#строкиstrings)
+* [Массивы\(Arrays\)](#массивыarrays)
+* [Объекты\(Objects\)](/objects)
+* [HTML и текст\(HTML & Text\)](#html-и-текстhtml--text\)
+* [DOM Инъекция\(DOM Injection\)](#dom-инъекцияdom-injection\)
+* [Обход DOM\(Traversing the DOM\)](#обход-domtraversing-the-dom\)
+* [Окно просмотра\(The Viewport\)](#окно-просмотраthe-viewport\)
+* [Расстояния\(Distances\)](#расстоянияdistances\)
+* [Хранение браузера\(Browser Storage\)](#хранение-браузераbrowser-storage\)
+* [JSON\](#json\)
+* [Ajax и API](#ajax-и-api)
+
+## Селекторы\(Selectors\)
+
+### querySelectorAll\(\)
+
+Найти все совпадающие элементы на странице.
+Можно использовать любой допустимый селектор CSS.
+
+```
+// Получить все элементы с классом "bg-red"
+var elemsRed = document.querySelectorAll('.bg-red');
+
+// Получить все элементы с атрибутом "[data-sale]"
+var elemsSnacks = document.querySelectorAll('[data-sale]');
+```
+
+### querySelector\(\)
+
+Найти первый соответствующий элемент на странице.
+
+```
+// Первый div
+var elem = document.querySelector('div');
+
+// Первый div с классом .bg-red
+var elemRed = document.querySelector('.bg-red');
+
+// Первый div с атрибутом data-sale с значением "appartment"
+var elemCarrots = document.querySelector('[data-sale="appartment"]');
+
+// Элемент, который не существует
+var elemNone = document.querySelector('.bg-orange');
+```
+
+### matches\(\)
+
+Метод `.matches()` вернёт `true` или `false`, в зависимости от того, соответствует ли элемент указанному css-селектору.
+
+```
+var elem = document.querySelector('#apartment');
+if (elem.matches('.swimpool')) {
+console.log('It matches!');
+} else {
+console.log('Not a match... =(');
+}
+```
+
+---
+
+## Циклы\(Loops\)
+
+### `for` цикл
+
+Циклически перебирайте массивы и `NodeList` списки, похожие на массивы \(например \).
+
+```
+var apartment = [
+'saloon',
+'kitchen',
+'bath',
+'bedroom'
+];
+
+for (var i = 0; i < apartment.length; i++) {
+console.log(i) // index
+console.log(apartment[i]) // value
+}
+
+// returns 0, saloon, 1, kitchen, 2, bath, 3, bedroom
+```
+
+### `for ... in` цикл
+
+Похож на `for` цикл, но используется для циклического прохождения объектов.
+
+```
+var apartment = {
+'saloon': 'rest',
+'kitchen': 'eat',
+'bath': 'washing',
+'bedroom': 'sleep'
+};
+
+var arr = []
+for (var key in apartment ) {
+if (apartment.hasOwnProperty(key)) {
+arr.push(key + ' for ' + apartment[key])
+}
+}
+console.log(arr.join(", ")); // value
+
+// return saloon for rest, kitchen for eat, bath for washing, bedroom for sleep
+```
+
+### Array.forEach\(\)
+
+```
+var apartment = [
+'saloon',
+'kitchen',
+'bath',
+'bedroom'
+];
+apartment.forEach(function (sandwich, index) {
+console.log(index) // index
+console.log(sandwich) // value
+});
+
+// return 0, saloon, 1, kitchen, 2, bath, 3, bedroom
+```
+
+---
+
+## Классы\(Classes\)
+
+### classList
+
+Добавить, удалить, переключать и проверять наличие класса.
+
+```
+var elem = document.querySelector('#apartment');
+
+// Добавляем указанное имя класса
+elem.classList.add('swimpool');
+
+// Удаляем указанное имя класса
+elem.classList.remove('swimpool');
+
+// Переключаем указанное имя класса
+// (Добавляет класс, если его еще нет в элементе, удаляет его, если он есть.)
+elem.classList.toggle('rent');
+
+// Проверяет, есть ли у элемента определенный класс
+if (elem.classList.contains('flat')) {
+console.log('add flat!');
+}
+```
+
+### className {#classname}
+
+Получить все классы элемента в виде строки, добавить класс или классы или полностью заменить или удалить все классы.
+
+```
+var elem = document.querySelector('div');
+
+// Получить все классы элемента
+var elemClasses = elem.className;
+
+// Добавить класс к элементу
+elem.className += ' vanilla-js';
+
+// Полностью заменить все классы на элементе
+elem.className = 'new-class';
+```
+
+---
+
+## Стили\(Styles\)
+
+### Inline Styles {#inline-styles}
+
+Получить и установить встроенные стили для элемента.
+
+```
+// Получить стиль
+
+// Если этот стиль не задан как встроенный стиль непосредственно на элементе, он возвращает пустую строку
+// например. <div id="apartment" style="background-color: gold;">apartment</div>
+
+document.getElementById('apartment').style.backgroundColor; // return "gold"
+document.getElementById('apartment').style.fontWeight; // return ""
+
+// Установить стиль
+document.getElementById('apartment').style.backgroundColor = 'purple';
+```
+
+### Computed Styles {#computed-styles}
+
+Получить фактический вычисленный стиль элемента. Это учитывается в таблицах стилей по умолчанию в браузере, а также в указанных вами внешних стилях.
+
+```
+// Получить фон html
+window.getComputedStyle(document.documentElement).backgroundColor // return "rgb(255, 255, 255)"
+
+// Получить фон some-elem
+window.getComputedStyle(some-elem).backgroundColor;
+```
+
+---
+
+## Атрибуты\(Attributes\)
+
+**Получить**, **установить**, **удалить** и **проверить** наличие атрибутов \(включая атрибуты данных\) для элемента. Эти методы также могут быть использованы для манипулирования других типов атрибутов-вещи , как `id`, `tabindex`, `name` и так далее.
+
+```
+var elem = document.querySelector('#apartment');
+
+// Установить значение атрибута
+elem.setAttribute('data-apartment', 'rent');
+
+// Получить значение атрибута
+var apartment = elem.getAttribute('data-apartment');
+
+// Удалить атрибут
+elem.removeAttribute('data-apartment');
+
+// Проверить есть ли указанный атрибут у элемента
+if (elem.hasAttribute('data-info')) {
+console.log('Add a info!');
+}
+```
+
+---
+
+## Слушатели событий\(Event Listeners\)
+
+Слушайте события на элементе. [Вы можете найти полный список доступных событий в Mozilla Developer Network.](https://developer.mozilla.org/en-US/docs/Web/Events)
+
+```
+var btn = document.querySelector('#click-me');
+
+btn.addEventListener('click', function (event) {
+console.log(event); // The event details
+console.log(event.target); // The clicked element
+}, false);
+```
+
+---
+
+## Строки\(Strings\)
+
+### String.indexOf\(\)
+
+Определяем, содержит ли строка подстроку. Он возвращает **индекс**, где подстрока начинается в строке, или **-1** если подстрока не найдена. Регистр учитывается .
+
+```
+var str = 'I love Cape Cod potato chips.';
+
+// Returns 7
+str.indexOf('Cape Cod');
+
+// Returns 7
+str.indexOf('Cape C');
+
+// Returns -1
+str.indexOf('cape cod');
+```
+
+Если вам просто нужен логический **true / false** тест, вы можете сделать так:
+
+```
+if (str.indexOf('Cape Cod') > -1) {
+console.log('It contains the string');
+}
+```
+
+### replace\(\)
+
+Заменит часть текста в строке чем-то другим.
+
+```
+var text = 'I love Cape Cod potato chips!';
+var lays = text.replace('Cape Cod', 'Lays');
+var soda = text.replace('Cape Cod potato chips', 'soda');
+var extend = text.replace('Cape Cod', 'Cape Cod salt and vinegar');
+
+// lays: 'I love Lays potato chips!'
+// soda: 'I love soda!'
+// extend: 'I love Cape Cod salt and vinegar potato chips!'
+```
+
+По умолчанию **replace\(\)** метод заменяет первое совпадение. Чтобы заменить все совпадения, вам нужно передать регулярное выражение с глобальным флагом \( g\).
+
+### toLowerCase\(\)
+
+Преобразует весь текст в строку в нижний регистр.
+
+```
+var text = 'This sentence has some MIXED CASE LeTTeRs in it.';
+var lower = text.toLowerCase();
+// returns 'this sentence has some mixed case letters in it.'
+```
+
+### toUpperCase\(\)
+
+Преобразует весь текст в строку в верхний регистр.
+
+```
+var text = 'This sentence has some MIXED CASE LeTTeRs in it.';
+var upper = text.toUpperCase();
+// returns 'THIS SENTENCE HAS SOME MIXED CASE LETTERS IN IT.'
+```
+
+### parseInt\(\)
+
+Преобразуем строку в целое число \(целое число\). Второй аргумент, 10 называется **radix**. Это базовое число, используемое в математических системах. Для нашего использования так должно быть всегда 10.
+
+```
+// returns 42
+parseInt('42', 10);
+
+// also returns 42
+parseInt('42px', 10);
+```
+
+### parseFloat\(\)
+
+Преобразовать строку в число точек \(число с десятичными точками\).
+
+```
+// returns 3.14
+parseFloat('3.14');
+
+// also returns 3.14
+parseFloat('3.14someRandomStuff');
+
+// returns 3
+console.log(parseFloat('3'));
+```
+
+### Number\(\)
+
+Преобразует строку в число.
+
+Иногда возвращает целое число. В других случаях он возвращает плавающее значение. И если вы передадите строку со случайным текстом, вы получите `NaN` аббревиатуру **«Не число»**.
+
+```
+// returns 123
+Number('123');
+
+// returns 12.3
+Number('12.3');
+
+// returns NaN
+Number('3.14someRandomStuff');
+```
+
+### slice\(\)
+
+Получить часть строки, начинающуюся \(и, возможно, заканчивающуюся\) с определенного символа.
+
+Первый аргумент - с чего начать. Используйте 0для включения первого символа. Второй аргумент - это конец \(и необязательный\). Если какой-либо аргумент является отрицательным целым числом, он начинается с конца строки и работает в обратном направлении.
+
+```
+var text = 'Cape Cod potato chips';
+var startAtFive = text.slice(5);
+var startAndEnd = text.slice(5, 8);
+var sliceFromTheEnd = text.slice(0, -6);
+
+// startAtFive: 'Cod potato chips'
+// startAndEnd: 'Cod'
+// sliceFromTheEnd: 'Cape Cod potato'
+```
+
+### split\(\)
+
+Преобразует строку в массив, разделив ее после определенного символа \(или символов\).
+
+Первый аргумент `delimiter`, символ или символы для разделения. В качестве необязательного второго аргумента вы можете прекратить разбивать строку после того, как будет найдено определенное количество совпадений.
+
+```
+var shoppingList = 'Table, sofa, lamp, TV';
+var menu = shoppingList.split(', ');
+var limitedMenu = shoppingList.split(', ', 2);
+
+// menu: ["Table", "sofa", "lamp", "TV"]
+// limitedMenu: ["Table", "sofa"]
+```
+
+### Combing Strings \(Объединение строк\)
+
+Вы можете использовать _конкатенацию строк_ для объединения двух или более строк вместе. Объединим строки, используя оператор сложения \( +\).
+
+```
+/**
+* Строки как переменные
+*/
+
+var str1 = 'I love study JavaScript language.';
+var str2 = 'What about you?';
+var concat = str1 + ' ' + str2;
+
+// Logs "I love study JavaScript language. What about you?"
+console.log(concat);
+
+
+/**
+* Создание новой переменной из двух строк
+*/
+
+var concat2 = 'I love study JavaScript language. ' + 'What about you?';
+
+// Logs "I love study JavaScript language. What about you?"
+console.log(concat2);
+```
+
+### Template Literals\(Шаблонные литералы\)
+
+Представленные в ES6, литералы шаблонов дают более простой способ создания многострочных строк.
+
+Запишите литерал шаблона с помощью **backtick \( \`\)** в начале и конце. Вы можете использовать переменные-заполнители \(часто называемые выражениями \), заключив имя переменной в фигурные скобки с начальным знаком доллара \( `${VARIABLE_NAME}` \).
+
+// Базовый шаблонный литерал
+var concat =
+`I love study JavaScript language.
+What about you?`;
+
+console.log(concat);
+
+// Шаблонный литерал с переменными-заполнителями
+var brand = 'JavaScript';
+var person = 'you';
+var concat2 =
+`I love study ${brand} language.
+What about ${person}?`;
+
+console.log(concat2);
+
+---
+
+## Массивы\(Arrays\)
+
+### push\(\)
+
+Добавить элементы в массив.
+
+```
+var apartment = ['saloon', 'kitchen', 'bath'];
+apartment.push('bedroom', 'bath');
+// apartment: ['saloon', 'kitchen', 'bath', 'bedroom', 'bath']
+```
+
+### Array.concat\(\)
+
+Объединить два или более массивов вместе. Возвращает новый массив.
+
+```
+var apartment1 = ['saloon', 'kitchen', 'bath'];
+var apartment2 = ['bedroom', 'hall'];
+var allApartment = apartment1.concat(apartment2);
+// apartment1: ['saloon', 'kitchen', 'bath']
+// apartment2: ['bedroom', 'hall']
+// allApartment: ['saloon', 'kitchen', 'bath', 'bedroom', 'hall']
+```
+
+### Array.slice\(\)
+
+Скопирует элементы в новый массив.
+
+Первый аргумент - это индекс массива, с которого нужно начинать, а второй - индекс, на котором заканчивается. Оба являются необязательными. Если вы опустите стартовый индекс, он начнется в начале. Если вы опустите индекс конца, он будет идти до конца.
+
+```
+var apartment = ['saloon', 'kitchen', 'bath', 'bedroom'];
+
+// ['bath', 'bedroom']
+var fewerSandwiches = sandwiches.slice(2);
+
+// ['kitchen', 'bath', 'bedroom']
+var fewerSandwiches2 = sandwiches.slice(1, 3);
+
+// Clone an array
+var sandwichesCopy = sandwiches.slice();
+```
+
+### Array.from\(\)
+
+Создайте новый массив из массива или подобного массиву объекта \(такого как `NodeList` \).
+
+```
+var apartment = Array.from(document.querySelectorAll('.apartment'));
+```
+
+### Array.filter\(\)
+
+Создайте новый массив только с элементами, которые проходят тест, который вы включаете в качестве функции обратного вызова. Обратный вызов принимает три аргумента: текущий элемент в значении цикла, его индекс и сам массив.
+
+```
+// Create a new array with only numbers greater than 10
+var newArray = [1, 2, 7, 42, 99, 101].filter(function (item) {
+return item > 10;
+});
+
+// Logs [42, 99, 101]
+console.log(newArray);
+```
+
+### Array.map\(\)
+
+Перебирайте каждый элемент массива, трансформируйте его и возвращайте новый массив. Обратный вызов принимает три аргумента: текущий элемент в значении цикла, его индекс и сам массив.
+
+```
+/**
+* Double each number in an array
+*/
+
+var numbers = [1, 4, 9];
+var doubles = numbers.map(function(num) {
+return num * 2;
+});
+
+// Logs [2, 8, 18]
+console.log(doubles);
+
+
+/**
+* Get an array of just names
+*/
+var data = [
+{
+name: 'Kyle',
+occupation: 'Fashion Designer'
+},
+{
+name: 'Liza',
+occupation: 'Web Developer'
+},
+{
+name: 'Emily',
+occupation: 'Web Designer'
+},
+{
+name: 'Melissa',
+occupation: 'Fashion Designer'
+},
+{
+name: 'Tom',
+occupation: 'Web Developer'
+}
+];
+
+var names = data.map(function (item) {
+return item.name;
+});
+
+// Logs ["Kyle", "Liza", "Emily", "Melissa", "Tom"]
+console.log(names);
+```
+
+### Array.find\(\)
+
+`Array.find()` Метод возвращает первый элемент массива , который удовлетворяет условия, заданные в функции обратного вызова. Если совпадений не найдено, возвращается `undefined`.
+
+```
+/**
+* Get the first item greater than 10
+*/
+
+// Returns 12
+var greaterThanTen = [1, 12, 25, 42, 99, 101].find(function (item) {
+return item > 10;
+});
+
+// Returns undefined
+var greaterThanTen = [1, 2, 4, 7, 8].find(function (item) {
+return item > 10;
+});
+```
+
+Обратный вызов принимает аргумент для представления текущего элемента в цикле массива.
+
+### Array.reverse\(\)
+
+Обратный порядок элементов в массиве.
+
+```
+var count = [1, 2, 3, 4, 5];
+
+// Reverse the array order
+count.reverse();
+
+// Logs [5, 4, 3, 2, 1]
+console.log(count);
+```
+
+### Array.join\(\)
+
+Объедините все элементы в массиве в строку, разделенную разделителем, который вы можете передать в качестве аргумента. По умолчанию он использует запятую `( ,)` в качестве разделителя, если он не указан.
+
+```
+var strings = [
+'I love Cape Cod potato chips.',
+'What about you?'
+];
+
+var concat = strings.join();
+var concatWithSpace = strings.join(' ');
+var concatWithSmiley = strings.join(' =) ');
+
+// Logs "I love Cape Cod potato chips.,What about you?"
+console.log(concat);
+
+// Logs "I love Cape Cod potato chips. What about you?"
+console.log(concatWithSpace);
+
+// Logs "I love Cape Cod potato chips. =) What about you?"
+console.log(concatWithSmiley);
+```
+
+---
+
+## Объекты\(Objects\)
+
+### Object.assign\(\)
+
+Выполнит поверхностное объединение двух или более объектов. Передайте каждый объект для объединения в качестве аргумента.
+
+_**Примечание:** при мелком слиянии вложенные объекты полностью перезаписываются, а не объединяются вместе._
+
+```
+// Example objects
+var object1 = {
+apple: 0,
+banana: {
+weight: 52,
+price: 100
+},
+cherry: 97
+};
+
+var object2 = {
+banana: {
+price: 200
+},
+durian: 100
+};
+
+var object3 = {
+apple: 'yum',
+pie: 3.214,
+applePie: true
+};
+
+// В этом примере "banana" будет содержать только {price: 200}
+// В глубоком слиянии он будет содержать {price: 200, weight: 52}
+var mergedObjs = Object.assign(object1, object2, object3);
+```
+
+### Deep Merges
+
+```
+// Example objects
+var object1 = {
+apple: 0,
+banana: {
+weight: 52,
+price: 100
+},
+cherry: 97
+};
+var object2 = {
+banana: {
+price: 200
+},
+durian: 100
+};
+var object3 = {
+apple: 'yum',
+pie: 3.214,
+applePie: true
+};
+
+// Создайте новый объект, комбинируя два или более объектов
+var mergedShallow = extend(object1, object2, object3);
+var mergedDeep = extend(true, object1, object2, object3);
+var clonedObj = extend(object1);
+```
+
+Для поддержки глубоких слияний можно использовать вспомогательный метод ниже.
+
+```
+/*!
+* Merge two or more objects together.
+* (c) 2017 Chris Ferdinandi, MIT License, https://gomakethings.com
+* @param {Boolean} deep If true, do a deep (or recursive) merge [optional]
+* @param {Object} objects The objects to merge together
+* @returns {Object} Merged values of defaults and options
+*/
+var extend = function () {
+
+// Variables
+var extended = {};
+var deep = false;
+var i = 0;
+
+// Check if a deep merge
+if ( Object.prototype.toString.call( arguments[0] ) === '[object Boolean]' ) {
+deep = arguments[0];
+i++;
+}
+
+// Merge the object into the extended object
+var merge = function (obj) {
+for (var prop in obj) {
+if (obj.hasOwnProperty(prop)) {
+// If property is an object, merge properties
+if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+extended[prop] = extend(extended[prop], obj[prop]);
+} else {
+extended[prop] = obj[prop];
+}
+}
+}
+};
+
+// Loop through each object and conduct a merge
+for (; i < arguments.length; i++) {
+merge(arguments[i]);
+}
+
+return extended;
+
+};
+```
+
+### Удалить элемент из объекта
+
+Используйте **delete** оператор, чтобы удалить элемент из объекта.
+
+```
+var lunch = {
+sandwich: 'turkey',
+chips: 'cape cod',
+drink: 'soda'
+};
+
+// Remove the chips key from the lunch object
+delete lunch.chips;
+
+// Logs {sandwich: 'turkey', drink: 'soda'}
+console.log(lunch);
+```
+
+### Object.keys\(\)
+
+Вернет массив ключей от объекта. Передайте объект в качестве аргумента.
+
+```
+var lunch = {
+sandwich: 'turkey',
+chips: 'cape cod',
+drink: 'soda'
+};
+
+// Logs ['sandwich', 'chips', 'drink']
+console.log(Object.keys(lunch));
+
+// Logs "sandwich", "turkey", "chips", "cape cod", "drink", "soda"
+Object.keys(lunch).forEach(function (key) {
+console.log(key); // The key
+console.log(lunch[key]); // The value
+});
+```
+
+---
+
+## HTML и текст\(HTML & Text\)
+
+### innerHTML
+
+Получит и установит HTML-контент для элемента.
+
+_**Примечание.** Использование **innerHTML** стороннего или пользовательского контента может подвергнуть вас атакам межсайтового скриптинга \(XSS\)._
+
+```
+var elem = document.querySelector('#some-elem');
+
+// Get HTML content
+var html = elem.innerHTML;
+
+// Set HTML content
+elem.innerHTML = 'We can dynamically change the HTML. We can even include HTML elements like <a href="#">this link</a>.';
+
+// Add HTML to the end of an element's existing content
+elem.innerHTML += ' Add this after what is already there.';
+
+// Add HTML to the beginning of an element's existing content
+elem.innerHTML = 'We can add this to the beginning. ' + elem.innerHTML;
+
+// You can inject entire elements into other ones, too
+elem.innerHTML += '<p>A new paragraph</p>';
+```
+
+### textContent
+
+Получит текст элемента без его разметки.
+
+```
+var elem = document.querySelector('#some-elem');
+
+// Get text content
+var text = elem.textContent;
+
+// Set text content
+elem.textContent = 'We can dynamically change the content.';
+
+// Add text to the end of an element's existing content
+elem.textContent += ' Add this after what is already there.';
+
+// Add text to the beginning of an element's existing content
+elem.textContent = 'We can add this to the beginning. ' + elem.textContent;
+```
+
+---
+
+## DOM Инъекция\(DOM Injection\)
+
+### createElement\(\)
+
+### insertBefore\(\)
+
+### before\(\)
+
+### after\(\)
+
+### prepend\(\)
+
+### append\(\)
+
+### appendChild\(\)
+
+Вставляет элемент в конце набора элементов внутри общего родителя. Вызовите **appendChild\(\)** метод на ссылочном узле и передайте новый узел в качестве аргумента.
+
+```
+// Create a new element
+var newNode = document.createElement('div');
+
+
+// Get the reference node
+var referenceNode = document.querySelector('#some-element');
+
+// Insert the new node after the last element in the parent node
+referenceNode.appendChild(newNode);
+```
+
+_Работает как минимум до IE6._
+
+### removeChild\(\)
+
+Удалить элемент из DOM. Этот метод вызывается для родителя целевого элемента, который вы можете получить **parentNode**.
+
+```
+var elem = document.querySelector('#some-element');
+
+elem.parentNode.removeChild(elem);
+```
+
+_Работает как минимум до IE6._
+
+### remove\(\)
+
+Удаляет элемент из DOM. Вызовите **remove\(\) **метод для элемента, который вы хотите удалить.
+
+```
+var elem = document.querySelector('#some-element');
+elem.remove();
+```
+
+_Работает во всех современных браузерах, включая Edge, но не IE. Используйте с полифилом._
+
+---
+
+## Обход DOM\(Traversing the DOM\)
+
+---
+
+## Окно просмотра\(The Viewport\)
+
+---
+
+## Расстояния\(Distances\)
+
+---
+
+## Хранение браузера\(Browser Storage\)
+
+---
+
+## JSON
+
+### JSON.stringify\(\)
+
+Преобразует объекты и массивы в строки.
+
+```
+// A lunch order
+var lunch = {
+sandwich: 'turkey',
+chips: 'Cape Cod',
+drink: 'Pepsi'
+};
+
+// Save data to local storage
+localStorage.setItem('lunchOrder', JSON.stringify(lunch));
+
+// Drink options
+var drinks = ['Pepsi', 'water', 'lemonade'];
+
+// Save data to local storage
+localStorage.setItem('drinkOptions', JSON.stringify(drinks));
+```
+
+### JSON.parse\(\)
+
+Преобразует строковый JSON обратно в объект или массив.
+
+```
+// Get data from local storage
+var savedLunch = JSON.parse(localStorage.getItem('lunchOrder'));
+var savedDrinks = JSON.parse(localStorage.getItem('drinkOptions'));
+```
+
+---
+
+## Ajax и API
+
+### XMLHttpRequest\(\) \(XHR\)
+
+XHR-запросы состоят из трех этапов:
+
+1. Настройка нашего запроса, создав новый XMLHttpRequest\(\).
+2. Создайте `onreadystatechange` обратный вызов для запуска при изменении состояния запроса.
+3. Откройте и отправьте наш запрос.
+
+```
+// Set up our HTTP request
+var xhr = new XMLHttpRequest();
+
+// Setup our listener to process request state changes
+xhr.onreadystatechange = function () {
+
+// Only run if the request is complete
+if (xhr.readyState !== 4) return;
+
+// Process our return data
+if (xhr.status >= 200 && xhr.status < 300) {
+// This will run when the request is successful
+// It checks to make sure the status code is in the 200 range
+console.log('success!', xhr);
+} else {
+// This will run when it's not
+console.log('The request failed!');
+}
+
+// This will run either way
+// All three of these are optional, depending on what you're trying to do
+console.log('This always runs...');
+
+};
+
+// Create and send a GET request
+// The first argument is the post type (GET, POST, PUT, DELETE, etc.)
+// The second argument is the endpoint URL
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts');
+xhr.send();
+```
+
+[resource eng](https://vanillajstoolkit.com/reference/)

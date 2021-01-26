@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Image gallery</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="display-4">Image gallery</h1>
+    <!--
+		   These are the thumbnail images.
+		   They are laid out using the
+		   bootstrap grid.
+		   I have given them all the class
+		   "crop-image" which I use in the
+		   css and the javascript code.
+		-->
+    <div class="row mb-3 mt-4">
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb' src="https://picsum.photos/600/401/?random" alt="descr image 1" />
+      </div>
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb' src="https://picsum.photos/600/402/?random" alt="descr image 2" />
+      </div>
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb' src="https://picsum.photos/600/403/?random" alt="descr image 3" />
+      </div>
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb' src="https://picsum.photos/600/404/?random" alt="descr image 4" />
+      </div>
+    </div>
+    <!--
+			this is the large image which is
+			on a row of its own.
+			I will change it source in the
+			javascript
+		-->
+    <div class="row">
+      <div class="col-6 offset-3 jumbotron">
+        <img id="bigImage" class="img-fluid w-100" src="https://picsum.photos/600/401/?random" alt="graffittied building" />
+      </div>
+    </div>
+
+    <h2 class="lead">Second thumbs</h2>
+    <div class="row mb-3 mt-4">
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb2' src="https://picsum.photos/600/400/?random" alt="descr image 21" />
+      </div>
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb2' src="https://picsum.photos/600/399/?random" alt="descr image 22" />
+      </div>
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb2' src="https://picsum.photos/600/398/?random" alt="descr image 23" />
+      </div>
+      <div class="col-3">
+        <img class="img-fluid" data-thumb='thumb2' src="https://picsum.photos/600/397/?random" alt="descr image 24" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bigImg = document.querySelector('#bigImage');
+    let arrImg = document.querySelectorAll('[data-thumb="thumb"]');
+    let arrImg2 = document.querySelectorAll('[data-thumb="thumb2"]');
+    // console.log(bigImg, arrImg);
+
+    function chng(el) {
+      console.log(this.src, this.alt, el);
+      bigImg.src = this.src;
+      bigImg.alt = this.alt;
+
+    }
+    arrImg.forEach(function(cur, ind, arr){
+      // console.log(cur, ind, arr);
+      cur.addEventListener('click', chng);
+    });
+  </script>
+</body>
+
+</html>

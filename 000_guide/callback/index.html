@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Callback finish</title>
+  <style>
+  .boxes{font-size: 2em;line-height: 3;text-align: center;}
+  .box{width: 100px;height: 100px;background: #3c6;display: inline-block;}
+  .active{background: #63c;color: #fff;}
+  </style>
+</head>
+<body>
+  <div class="boxes">
+    <div class="box">01</div>
+    <!-- second -->
+    <div class="box">02</div>
+    <div class="box">03</div>
+    <div class="box">04</div>
+    <div class="box">05</div>
+    <div class="box">06</div>
+    <div class="box">07</div>
+  </div>
+
+  <script>
+    window.onload = function(){
+      var boxes = document.querySelectorAll('.boxes .box');
+      for(var i = 0; i < boxes.length; i++){
+        boxes[i].onclick = function(){
+          fade(this, 2000, function(){
+            this.style.display = "none";
+          });
+        };
+      }
+    }
+
+    function fade (el, t, f) {
+      var fps = 50;
+      var time = t || 500;
+      var steps = time / fps;  //  500/50 = 10
+      var op = 1;
+      var d0 = op/ steps;  // 1/10 = 0.1
+
+      var callback = f || function(){};
+
+      var timer = setInterval(function(){
+        op -= d0;
+        el.style.opacity = op;
+        steps--;
+
+        if( steps === 0){
+          clearInterval(timer);
+          callback.call(el);
+        }
+      },(1000/fps));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Number's smallestDivider</title>
+</head>
+
+<body>
+  <h1>Number's smallestDivider</h1>
+  <p>Напишите функцию <kbd>smallestDivisor</kbd>. Она должна находить наименьший целый делитель числа. Реализуйте императивный итеративный процесс, что означает:</p>
+  <ul>
+    <li>не используйте рекурсию</li>
+    <li>используйте переменные</li>
+    <li>используйте цикл <kbd>while</kbd></li>
+  </ul>
+  <p>Например, наименьший делитель числа 15 это 3.</p>
+  <kbd><mark>smallestDivisor(15); // 3 <br>
+      smallestDivisor(17); // 17 <br><br>
+
+      smallestDivisor(0); // NaN <br>
+      smallestDivisor(-3); // NaN</mark></kbd>
+  <p><b><u>Замечание:</u></b> Если переданное в <kbd>smallestDivisor</kbd> число меньше единицы, возвращайте <kbd><mark>NaN</mark></kbd>.</p>
+
+<h2>Идея алгоритма:</h2>
+<ol>
+  <li>Попробуйте разделить число на 2.</li>
+  <li>Если число делится без остатка, то это наименьший делитель.</li>
+  <li>Если нет, то попробуйте следующий делитель.</li>
+  <li>Если ничего не делит число без остатка, то переданное число является простым, так что его наименьший делитель — оно само (не считая 1)</li>
+</ol>
+
+<h3>Подсказка</h3>
+<p>Вспомните про оператор % (modulus, остаток от деления). Он вычисляет остаток от деления одного операнда на другой. <br>
+   Например, <u>11 % 5</u> это <b><u>1</u></b>, а <u>10 % 2</u> это <b><u>0</u></b>.</p>
+<p>Так что если <u>x % y</u> это <u>0</u>, то Y делит X без остатка.</p>
+
+
+  <script>
+    // Find smallest divider
+    console.group('function smallestDivider()');
+
+    function smallestDivider(num) {
+      if (num < 1) {
+        return NaN;
+      }
+      if (num === 1) {
+        return num;
+      }
+      // Write your code here
+    };
+    console.log(smallestDivider(0));
+    console.log(smallestDivider(1));
+    console.log(smallestDivider(2));
+    console.log(smallestDivider(3));
+    console.log(smallestDivider(4));
+    console.log(smallestDivider(5));
+    console.log(smallestDivider(167));
+    console.log(smallestDivider(169));
+    console.groupEnd('function smallestDivider()');
+  </script>
+</body>
+
+</html>

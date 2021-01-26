@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Encode & Decode</title>
+</head>
+<body>
+  <h1>Encode & Decode</h1>
+  Текст для кодирования <input id="forEncode" /><input id="encodeBtn" type="button" value="Кодировать" />
+  <p id="encodedOutput"></p>
+
+  Текст для декодирования <input id="forDecode" /><input id="decodeBtn" type="button" value="Декодировать" />
+  <p id="decodedOutput"></p>
+  <script>
+    // 'use strict'
+    window.onload = function () {
+      console.log('loaded');
+        // name=a;b;c; max-age=1000;
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        encodeBtn.onclick = function () {
+          console.log(1);
+            // URL кодирование данных
+            var res = encodeURIComponent(forEncode.value);
+            encodedOutput.innerHTML = res;
+        }
+
+        decodeBtn.onclick = function () {
+          console.log(2);
+            // URL декодирование данных
+            var res = decodeURIComponent(forDecode.value);
+            decodedOutput.innerHTML = res;
+        }
+    }
+  </script>
+</body>
+</html>

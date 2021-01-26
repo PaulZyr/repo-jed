@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://habr.com/ru/post/337030/">
+  <meta name="url" content="https://habr.com/ru/post/275813/">
+  <meta name="url" content="https://www.youtube.com/watch?v=4_HkJN8qto4&feature=youtu.be">
+  <meta name="url" content="http://www.forum.softweb.ru/showthread.php?t=14813">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+  <title>Homework 5. Recursion.</title>
+</head>
+
+<body>
+  <div class="heading">
+    <h1>Homework 5. Recursion.</h1>
+    <div class="out out1">All results will be here after click match button.</div>
+  </div>
+  <h2>* Во всех заданиях обязательно использовать рекурсию. <br><a href="http://pythontutor.com/javascript.html#mode=display">Визуализация процесса тут.</a></h2>
+  <ol class="task-list">
+  <!-- Task 1 -->
+    <li>
+      <p>Написать функцию <kbd>возведения числа в степень</kbd>.</p>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=function%20pow%28num,%20n%29%20%7B%0A%20%20if%28n%20%3D%3D%201%29%7B%20%20//%20base%20case%0A%20%20%20%20return%20num%0A%20%20%7D%20else%20%7B%20%20//%20recursive%20case%0A%20%20%20%20return%20num%20*%20pow%28num,%20n-1%29%20%20//%20%D0%BF%D0%BE%D0%BA%D0%B0%20n%20!%3D%201%20%D1%81%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D1%8C%20%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20pow%28num,%20n%29%20%D0%BA%20pow%28num,%20n-1%29%0A%20%20%7D%0A%7D%0Apow%282,%203%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let num = +prompt('Enter num', '2'),
+              n = +prompt('Enter pow', '4')
+
+          function pow(num, n) {
+            if(n == 1){  // base case
+              return num
+            } else {  // recursive case
+              return num * pow(num, n-1)  // пока n != 1 сводить вычисление pow(num, n) к pow(num, n-1)
+            }
+          }
+          out.innerHTML = `Task #1 result is -  <kbd>${pow(num, n)}</kbd>`
+        }
+        window.onload = function () {
+          f1()
+        }
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Написать функцию <kbd>поиска наибольшего общего делителя (НОД)</kbd> .</p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=function%20nod%28max,%20min%29%20%7B%0A%20%20if%28%20max%20%3D%3D%3D%20min%29%20return%20max%0A%20%20%0A%20%20if%28%20!min%29%7B%20%20//%20base%20case%0A%20%20%20%20return%20max%0A%20%20%7D%20else%20%7B%20%20//%20recursive%20case%0A%20%20%20%20return%20nod%28min,%20max%20%25%20min%29%0A%20%20%7D%0A%7D%0Anod%281071,%20462%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+        //  Алгоритм Евклида
+        function f2() {
+          console.log(2)
+          let n1 = +prompt('Enter num', '1071'),
+              n2 = +prompt('Enter pow', '462')
+
+          function nod(max, min) {
+            if( max === min) return max
+            console.log('start nod() again- ', max, min);
+            if( !min){  // base case
+              return max
+            } else {  // recursive case
+              console.log('else - ', max, min);
+              return nod(min, max % min)
+            }
+          }
+          out.innerHTML = `Task #2 result is -  <kbd>${nod(n1, n2)}</kbd>`
+        }
+        window.onload = function () {
+          // f2()
+        }
+      </script>
+    </li>
+    <!-- Task 3 -->
+    <li>
+      <p>Написать функцию для <kbd>поиска максимальной цифры в числе</kbd>.</p>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=var%20remainder%0Afunction%20maxDigit%28arg%29%20%7B%0A%20%20if%28arg%20%3D%3D%200%29%7B%0A%20%20%20%20return%200%0A%20%20%7D%20else%20%7B%0A%20%20%20%20remainder%20%3D%20arg%20%25%2010%3B%0A%20%20%20%20return%20Math.max%28remainder,%20maxDigit%28Math.floor%28arg/10%29%29%29%0A%20%20%7D%0A%7D%0AmaxDigit%281792%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+
+        function f3() {
+          console.log(3)
+          let n = +prompt('Enter num', '1073') || 10739,
+              remainder
+
+          function maxDigit(arg) {
+            if(arg == 0){
+              console.log('base case: ', arg); return 0
+            } else {
+              console.log('Else: ', arg)
+              remainder = arg % 10
+              console.log('arg & remainder: ', arg, remainder)
+              return Math.max(remainder, maxDigit(Math.floor(arg/10)))
+            }
+          }
+          out.innerHTML = `Task #3 result is - <kbd>${maxDigit(n)}</kbd>`
+        }
+        // window.onload = function (){
+          // f3()
+        // }
+      </script>
+    </li>
+    <!-- Task 4 -->
+    <li>
+      <p>Написать функцию, которая определяет <kbd>простое ли переданное число</kbd>.</p>
+      <p><b>Просто́е число́</b> — натуральное (целое положительное) число, имеющее ровно два различных натуральных делителя — единицу и самого себя</p>
+      <p>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97</p>
+
+      <button onclick="f4()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=function%20isPrime%28argN,%20argI%29%20%7B%0A%20%20//%20argI%20-%20%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80.%20%D0%9F%D1%80%D0%B8%20%D0%B2%D1%8B%D0%B7%D0%BE%D0%B2%D0%B5%20%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD%20%D0%B1%D1%8B%D1%82%D1%8C%20%D1%80%D0%B0%D0%B2%D0%B5%D0%BD%202%0A%0A%20%20if%20%28argN%20%3C%202%29%20return%20%22%20isn't%20Prime%22%20//%20%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9%20%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%0A%20%20if%20%28argN%20%3D%3D%202%29%20return%20%22%20is%20Prime%22%20//%20%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9%20%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%0A%20%20if%20%28argN%20%25%20argI%20%3D%3D%200%29%20return%20%22%20isn't%20Prime%22%20//%20%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9%20%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%0A%0A%20%20if%20%28argI%20%3C%20argN%20/%202%29%20%7B%0A%20%20%20%20%20%20return%20isPrime%28argN,%20argI%20%2B%201%29%20//%20%D0%A8%D0%B0%D0%B3%20%D1%80%D0%B5%D0%BA%D1%83%D1%80%D1%81%D0%B8%D0%B8%20/%20%D1%80%D0%B5%D0%BA%D1%83%D1%80%D1%81%D0%B8%D0%B2%D0%BD%D0%BE%D0%B5%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D0%B5%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20return%20%22%20is%20Prime%22%0A%20%20%7D%0A%7D%0AisPrime%287,%202%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+
+        function f4() {
+          console.log(4)
+          let n = +prompt('Enter num', '7') || 8
+
+          function isPrime(argN, argDivider) {
+            // argDivider - дополнительный параметр. При вызове должен быть равен 2
+
+            if (argN == 2) return " is Prime" // Базовый случай
+            if (argN < 2 || argN % argDivider == 0) return " isn't Prime" // Базовый случай
+
+            if (argDivider < argN / 2) {
+                return isPrime(argN, argDivider + 1) // Шаг рекурсии / рекурсивное условие
+            } else {
+                return " is Prime"
+            }
+          }
+          out.innerHTML = `Task #4 result is -  <kbd>number ${n} ${isPrime(n, 2)}</kbd>`
+        }
+        // window.onload = function () {
+        //   f4()
+        // }
+      </script>
+    </li>
+    <!-- Task 5 -->
+    <li>
+      <p>Написать функцию <kbd>вывода всех множителей переданного числа в возрастающем порядке</kbd>. <br>
+        Например: число 18 – множители 2 * 3 * 3. <br>
+        200 = 2 * 2 * 2 * 5 * 5, <br>
+        256 = 2 * 2* 2 * 2 * 2 * 2 * 2 * 2, <br>
+        346 = 2 * 173, <br>
+        8100 = 2 * 2 * 3 * 3 * 3 * 3 * 5 * 5, <br>
+        2500 = 2 * 2 * 5 * 5 * 5 * 5, <br>
+        2525 = 5 * 5 * 101
+      </p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=var%20res%20%3D%20''%0Afunction%20allMultipliers%28argN,%20argDivider%29%20%7B%0A%20%20if%28%20argDivider%20%3D%3D%20argN%29%20%7B%0A%20%20%20%20return%20res%20%2B%3D%20%20argDivider%20%20//%20%20base%20case%0A%20%20%7D%0A%0A%20%20if%20%28argN%20%25%20argDivider%20%3D%3D%3D%200%29%20%7B%0A%20%20%20%20res%20%2B%3D%20argDivider%20%2B%20'%20*%20'%0A%20%20%20%20return%20allMultipliers%28argN%20/%20argDivider,%20argDivider%29%20%20//%20recursive%20case%0A%20%20%7D%0A%20%20return%20allMultipliers%28argN,%20%2B%2BargDivider%29%20//%20recursive%20case%0A%7D%0AallMultipliers%2818,%202%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+
+        function f5() {
+          // console.log(5)
+          let n = +prompt('Enter number for get his prime multipliers. Ex. [200, 256, 346, 8100, 2500, 2525]','18'),
+              res = ''
+          function allMultipliers(argN, argDivider) {
+            if( argDivider == argN) {
+              console.log('base case', argDivider)
+              return res +=  argDivider
+            }
+
+            if (argN % argDivider === 0) {
+              console.log('*', argDivider);
+              res += argDivider + ' * '
+              return allMultipliers(argN / argDivider, argDivider)
+            }
+            return allMultipliers(argN, ++argDivider)
+          }
+
+          out.innerHTML = `Task #5 result is - <kbd>${allMultipliers(n, 2)}</kbd>`
+        }
+        // window.onload = function () {
+        //   f5()
+        // }
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      <p>Написать функцию, <kbd>возвращающую число Фибоначчи по переданному порядковому номеру</kbd>. <br>
+        Числа Фибоначчи: 0, 1, 1, 2, 3, 5, 8, 13… Ряд основывается на том, что каждое число равно сумме двух предыдущих чисел. <br>
+        Например: порядковый номер 4 – число 2, порядковый номер 7 – число 8.</p>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <a target='blank' href="http://pythontutor.com/javascript.html#code=function%20fibo%28argN%29%20%7B%0A%20%20if%20%28argN%20%3C%3D%201%20%29%20return%200%0A%20%20if%20%28argN%20%3D%3D%3D%202%20%7C%7C%20argN%20%3D%3D%3D%203%29%20return%201%0A%0A%20%20if%28argN%20%3E%201%29%20return%20fibo%28argN%20-%202%29%20%2B%20fibo%28argN%20-%201%29%0A%20%20return%20'Not%20fibo%20num'%0A%7D%0Afibo%286%29&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D">Visualize</a>
+      <script>
+        'use strict'
+
+        function f6() {
+          console.log(6)
+          let  n = +prompt("Input order number for get fibonachi number.","7")
+
+          function fibo(argN) {
+            if (argN <= 1 ) return 0
+            if (argN === 2 || argN === 3) return 1
+
+            if(argN > 1) return fibo(argN - 2) + fibo(argN - 1)
+            return 'Not fibo num'
+          }
+          out.innerHTML = `Task #6 result is - <kbd>${fibo(n)}</kbd>`
+        }
+        // window.onload = function () {
+        //   f6()
+        // }
+      </script>
+    </li>
+    <!-- Task 7 -->
+    <li>
+      <p></p>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7() {
+          console.log(7);
+        }
+        // window.onload = function () {
+        //   f7()
+        // }
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

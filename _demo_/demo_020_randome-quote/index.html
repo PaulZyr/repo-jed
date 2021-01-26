@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Randome qoute</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2 jumbotron p-3">
+        <h1 class="display-4 text-center mb-3">Randome qoute</h1>
+        <p><img alt="" src="http://i0.kym-cdn.com/entries/icons/original/000/023/463/6360103332924270401274957217_Ron.jpg" class="img-fluid img-thumbnail"></p>
+
+        <blockquote id="ron-quote" class="blockquote text-center border border-info text-secondary p-3">Lorem ipsum dolor sit amet.</blockquote>
+
+        <button class="btn btn-info" data-more-ron>More Ron</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    //
+		// Variables
+		//
+		const quoteWrapper = document.querySelector('#ron-quote');
+
+		//
+		// Methods
+		//
+
+		/**
+		 * Render a "request failed" message on failed API call
+		 */
+		const renderFailJoke = function () {
+			quoteWrapper.textContent = '[Something went wrong, sorry!] I have a joke for you... The government in this town is excellent, and uses your tax dollars efficiently.';
+		};
+
+		/**
+		 * Render the quote in the DOM
+		 * @param  {Object} data The API data
+		 */
+		let renderRon = function (data) {
+			// Convert the response text into JSON
+			let quote = JSON.parse(data.responseText);
+			// Inject it into the DOM
+			quoteWrapper.textContent = quote;
+
+			// Excercise - 2
+			// console.log(quote[0].author);
+			// const min = 0, max = 1084
+			// const i = Math.floor(Math.random() * (max - min + 1) ) + min
+			// const img = document.querySelector('img')
+			// console.log(i, quote[i].id);
+			// img.src = 'https://picsum.photos/1200/400?image=' + quote[i].id
+			// quoteWrapper.textContent = quote[i].author;
+		};
+
+		/**
+		 * Make an API request
+		 */
+		let getRon = function () {
+
+			// Set up our HTTP request
+			let xhr = new XMLHttpRequest();
+
+			// Setup our listener to process compeleted requests
+			xhr.onreadystatechange = function () {
+				// Only run if the request is complete
+				if (xhr.readyState !== 4) return;
+
+				// Process our return data
+				if (xhr.status === 200) {
+					console.log(xhr);
+					// Success!
+					renderRon(xhr);
+				} else {
+					// Request failed
+					renderFailJoke();
+				}
+			};
+
+			// Create and send a GET request
+			// The first argument is the post type (GET, POST, PUT, DELETE, etc.)
+			// The second argument is the endpoint URL
+			xhr.open('GET', 'https://ron-swanson-quotes.herokuapp.com/v2/quotes');
+			// Excercise - 2
+			// xhr.open('GET', 'https://picsum.photos/list');
+			xhr.send();
+		};
+
+		/**
+		 * Handle "More Ron" click events
+		 * @param  {Event} event The click event
+		 */
+		const handleClicks = function (event) {
+
+			// Make sure it's the "More Ron" button
+			if (!event.target.matches('[data-more-ron]')) return;
+
+			// Get a quote from the API
+			getRon();
+		};
+
+		//
+		// Inits & Event Listeners
+		//
+		getRon();
+		document.addEventListener('click', handleClicks, false);
+  </script>
+</body>
+</html>

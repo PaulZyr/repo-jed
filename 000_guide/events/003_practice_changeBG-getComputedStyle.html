@@ -1,0 +1,73 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Change box BG</title>
+  <style>
+    .box{display: inline-block;width: 100px;height: 100px;border: 2px solid #000;}
+    .red{background: #f00;}
+    .orange{background: orange;}
+    .yellow{background: yellow;}
+    .green{background: green;}
+    .l-blue{background: blueviolet;}
+    .blue{background: blue;}
+    .violet{background: violet;}
+  </style>
+</head>
+<body>
+  <h1>Change BG on click using <mark>&nbsp;<small><code>.getComputedStyle() & .contains()</code></small></mark></h1>
+  <div class="box red" style="background: red;"></div>
+  <div class="box orange"></div>
+  <div class="box yellow"></div>
+  <div class="box green"></div>
+  <div class="box l-blue"></div>
+  <div class="box blue"></div>
+  <div class="box violet"></div>
+
+<!-- script -->
+<script>
+  function changeBG(){
+    var first = this;
+    var sec = first.nextElementSibling;
+    if(sec.classList.contains('box')){
+      sec = sec;
+      // console.log(sec);
+    } else {
+      sec = collection[0];
+      // console.log(sec);
+    }
+    var color1 = getComputedStyle(first).backgroundColor;
+    var color2 = getComputedStyle(sec).backgroundColor;
+    first.style.backgroundColor = color2;
+    sec.style.backgroundColor = color1;
+  }
+  var  collection = document.getElementsByClassName('box');
+  // console.log(collection);
+  for(var  i = 0; i < collection.length; i++ ){
+      collection[i].addEventListener('click', changeBG, false);
+  }
+</script>
+
+  <!-- <script>
+    function changeBG(){
+      var  first = this;
+      if(this.nextElementSibling.classList.contains('box')){
+        var target = first.nextElementSibling;
+        console.log(target);
+      } else {
+        var target = collection[0];
+        console.log(target);
+      }
+      var color1 = getComputedStyle(this).background;
+      // var color2 = getComputedStyle(this.nextElementSibling).background;
+      var color2 = getComputedStyle(target).background;
+      this.style.background = color2;
+      this.nextElementSibling.style.background = color1;
+    }
+    var  collection = document.getElementsByClassName('box');
+    console.log(collection);
+    for(var  i = 0; i < collection.length; i++ ){
+        collection[i].addEventListener('click', changeBG, false);
+    }
+  </script> -->
+</body>
+</html>

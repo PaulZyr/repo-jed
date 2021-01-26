@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>textReverse</title>
+</head>
+<body>
+<h1>'Hello, world!'</h1>
+  <script>
+    'use strict';
+    function reverse(str) {
+      var arr = [];
+      for (var i = str.length - 1, j = 0; i >= 0; i--, j++) {
+        arr[j] = str[i];
+      }
+      return arr.join('');
+    };
+    // const reverse = (str) => {
+    //   let arr = [];
+    //   for (let i = str.length - 1, j = 0; i >= 0; i--, j++) {
+    //     arr[j] = str[i];
+    //   }
+    //   return arr.join('');
+    // }
+    console.log(reverse('Hello, world!'));
+
+    document.write('<h1>'+ reverse('hello, world!') +'</h1>');
+  </script>
+</body>
+</html>

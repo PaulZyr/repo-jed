@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>job_interview_tasks.html</title>
+</head>
+<body>
+  <ul>
+    <li>
+      <a href="http://jsfiddle.net/x9xwug8x/">jsfiddle</a>
+      <p>Почему результат функции вывел => 12 </p>
+      <pre>
+        function sum(a, b) {
+          return a + b;
+        };
+
+        document.body.innerHTML = sum(1, '2'); // => 12
+      </pre>
+    </li>
+    <li>
+      <a href="http://jsfiddle.net/z2bvxu9b/1/">jsfiddle</a>
+      <p>Что выведет код ниже и почему</p>
+      <pre>document.body.innerHTML = typeof (1 / []);</pre>
+    </li>
+    <li>
+      <a href="http://jsfiddle.net/kwvzhq77/92/">jsfiddle</a>
+      <p>Только если аргумент не передан должен выводиться null <br> что нужно исправить в коде ниже</p>
+      <pre>
+        function getAHalf(arg) {
+        	if (!arg) { <mark>// arg == undefined || arguments.length == 0</mark>
+                return null;
+            }
+
+            return arg / 2;
+        }
+
+        document.body.innerHTML += getAHalf(2);
+        document.body.innerHTML += '&lt;br>';
+        document.body.innerHTML += getAHalf(0);
+        document.body.innerHTML += '&lt;br>';
+        document.body.innerHTML += getAHalf();
+      </pre>
+    </li>
+    <li>
+      <a href="https://jsfiddle.net/x2ejpmkn/">jsfiddle</a>
+      <p>Что не так в коде и как исправить</p>
+      <pre>
+        class SuperClass {}
+
+        class MyClass extends SuperClass {
+         constructor(data) {
+          <!-- super() -->
+          this._data = data;
+         }
+
+         get data() {
+           <!-- return --> this._data;
+         }
+        }
+
+        document.body.innerHTML += (new MyClass('hello!')).data;
+      </pre>
+    </li>
+    <li>
+      <a href="https://jsfiddle.net/1abfv0xb/1/">jsfiddle</a>
+      <p>Что не так в коде и как исправить</p>
+      <pre>
+        <div>
+        Кликни сюда!
+        </div>
+        <mark> let t = document.querySelector(`div`)</mark>
+        (function () {
+          document.querySelector(`div`).onclick = (evt) => {
+           this.innerHTML = 'Привет!';
+          };
+        })();
+      </pre>
+
+        <div id='test' style="background: #ff0;">        Кликни сюда!        </div>
+        <script>
+          (function () {
+            let t = document.querySelector(`div#test`);
+            t.onclick = (event) => {
+               console.log(this);
+               t.innerHTML = 'Привет!';
+            };
+            console.log(document.querySelector(`div#test`));
+          })();
+        </script>
+    </li>
+    <li>
+      <a href="https://jsfiddle.net/5a0xnsgL/5/">jsfiddle</a>
+      <p>Как улучшить код? Реализовать такое же поведение функции swap не используя переменную tmp </p>
+      <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring_assignment</a>
+      <pre>
+        const array = [1, 2, 3, 4];
+        document.body.innerHTML += `[${array}] <\/br>`;
+
+        const swap = (first, second) => {
+          const tmp = array[first];
+          array[first] = array[second];
+          array[second] = tmp;
+          <!-- //[array[first], array[second]] = [array[second], array[first]] -->
+        }
+
+        swap(0, 3);
+        document.body.innerHTML += `[${array}]&lt;/br>`;
+
+        swap(1, 2);
+        document.body.innerHTML += `[${array}]&lt;/br>`;
+
+        swap(0, 1);
+        document.body.innerHTML += `[${array}]&lt;/br>`;
+      </pre>
+    </li>
+    <li>
+      <a href="http://jsfiddle.net/s7tq3un8/">jsfiddle</a>
+      <p>Почему onblur / onfocus не работают как задумано</p>
+        <form id="formElement">
+            One: <input type="text"><br>
+            Two: <input type="text">
+        </form>
+        <style media="screen">
+          .focused {
+              outline: solid 2px red;
+          }
+        </style>
+      <pre>
+        <form id="formElement">
+            One: <input type="text"><br>
+            Two: <input type="text">
+        </form>
+        &lt;style media="screen">
+          .focused {
+              outline: solid 2px red;
+          }
+        &lt;/style>
+
+        &lt;script>
+          const formElement = document.querySelector('#formElement');
+          console.log(formElement)
+
+          formElement.onfocus = (evt) => {
+            const activeElement = formElement.querySelector('.focused');
+          	console.log(activeElement)
+          	if (activeElement) {
+              activeElement.classList.remove('focused');
+            }
+            evt.target.classList.add('focused');
+          };
+
+          formElement.onblur = (evt) => {
+          	const activeElement = formElement.querySelector('.focused');
+            if (activeElement) {
+              activeElement.classList.remove('focused');
+            }
+          };
+        &lt;/script>
+        <script>
+          const formElement = document.querySelector('#formElement');
+          console.log(formElement)
+
+          formElement.addEventListener("focus", (evt) => {
+            console.log(2);
+            const activeElement = formElement.querySelector('.focused');
+            console.log(activeElement)
+            if (activeElement) {
+              activeElement.classList.remove('focused');
+            }
+            evt.target.classList.add('focused');
+          }, true);
+
+          formElement.addEventListener('blur', (evt) => {
+            const activeElement = formElement.querySelector('.focused');
+            if (activeElement) {
+              activeElement.classList.remove('focused');
+            }
+          }, true);
+        </script>
+      </pre>
+    </li>
+    <li>
+      <a href="http://jsfiddle.net/pq28aqys/1/">jsfiddle</a>
+      <p>Почему ничего не выводится и как исправить? (две ошибки)</p>
+      <pre>
+        function myextends(child, parent) {
+            var emptyCtor = function() {};
+            emptyCtor.prototype = parent.prototype;
+            child.prototype = new emptyCtor;
+            child._super = parent;
+            return child;
+        };
+
+        var ParentClass = function() {
+        	this.a = 1;
+        };
+
+        var ChildClass = myextends(function() {
+        	ChildClass._super.call(this)// тут строка
+        }, ParentClass);
+
+        document.body.innerHTML = (new ChildClass).a; // тут()
+      </pre>
+    </li>
+    <li>
+      <a href="http://jsfiddle.net/antonov_i/Lme529s8/">jsfiddle</a>
+      <p>Какие результаты вернут функции ниже</p>
+      <pre>
+        var simpleObject = {
+          property: 4,
+          method: function () {
+            console.log(this.property);
+          }
+        };
+
+        var simpleFunction = function() {
+         this.property = 5;
+         (function() {
+           this.property = 3;
+         })();
+         console.log(this.property);
+        };
+
+        simpleFunction(); // ? - 3
+        new simpleFunction(); // ? - 5
+        simpleObject.method(); // ? - 4
+        new simpleObject.method(); // ? - undefined
+        simpleFunction.call(simpleFunction); // ? - 5
+        simpleObject.method.call(simpleFunction); // ? - 5
+      </pre>
+    </li>
+    <li>
+      <a href="https://jsfiddle.net/antonov_i/9xLrgzmL/">jsfiddle</a>
+      <p>"Ты нажал на кнопку с номером: 10" - при клике на любую кнопку. Как исправит два способа.</p>
+      <pre>
+        &lt;ul class="buttons"> &lt;/ul>
+
+        &lt;p class="result"> &lt;/p>
+
+        var ulElement = document.querySelector('.buttons');
+        var resultElement = document.querySelector('.result');
+
+        for (var i = 0; i < 10; i++) {
+        	var element = document.createElement('button');
+          element.textContent = 'Я номер ' + i;
+          ulElement.appendChild(element);
+
+          element.onclick = () => {
+           resultElement.textContent = 'Ты нажал на кнопку с номером: ' + i;
+          }
+
+
+          <!--
+          ((i)=>{
+          var element = document.createElement('button');
+          element.textContent = 'Я номер ' + i;
+          ulElement.appendChild(element);
+
+          element.onclick = () => {
+           resultElement.textContent = 'Ты нажал на кнопку с номером: ' + i;
+          }
+          })(i) -->
+        }
+      </pre>
+    </li>
+    <li>
+      <a href="https://jsfiddle.net/antonov_i/owhpfd6a/">jsfiddle</a>
+      <p>В каком порядке выведутся console.log() и почему</p>
+      <pre>
+        (() => {
+            console.log(1);
+            setTimeout(() => {console.log(2)}, 1000);
+            setTimeout(() => {console.log(3)}, 0);
+            console.log(4);
+        })();
+      </pre>
+    </li>
+    <li>
+      <!-- http://qaru.site/questions/88888/performance-datenow-vs-dategettime -->
+      <a href="https://jsfiddle.net/antonov_i/ynh6vtec/">jsfiddle</a>
+      <p>В чем разница этих способов создания даты? В чем преимущества и недостатки?</p>
+      <pre>
+        &lt;ul&gt;
+         &lt;li class="first"&gt; &lt;/li&gt;
+         &lt;li class="second"&gt; &lt;/li&gt;
+        &lt;/ul&gt;
+
+        const first = document.querySelector(".first");
+        const second = document.querySelector(".second");
+
+        first.textContent = +new Date();
+        second.textContent = Date.now(); // какой это метод?
+      </pre>
+    </li>
+    <li>
+      <p></p>
+      <pre></pre>
+    </li>
+  </ul>
+</body>
+</html>

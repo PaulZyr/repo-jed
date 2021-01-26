@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Set & Get cookie</title>
+</head>
+<body>
+  <h1>Set & Get cookie</h1>
+  <button onclick="setCookie()">Set cookie</button> <br>
+  <button onclick="getCookie()">Get cookie</button>
+  <script>
+    'use strict'
+    function setCookie() {
+        // Для связывания временного значение cookie файла с текущим документом достаточно выполнить следующее выражение
+        document.cookie = "greet=Hello"
+
+        // Значение Cookie не могут содержать точку с запятой, запятые или символы разделители.
+        // Перед сохранением значение в cookie желательно вызвать функцию encodeURIComponent()
+        // При чтении значения надо вызвать decodeURIComponent()
+        // записанный таким способом cookie сохраняются в текущем сеансе браузера но удаляются после его закрытия.
+    }
+
+    function getCookie() {
+        console.log(document.cookie);
+    }
+  </script>
+</body>
+</html>

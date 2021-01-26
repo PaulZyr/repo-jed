@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="https://ru.stackoverflow.com/questions/109266/%d0%94%d0%b2%d0%b8%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5-%d0%ba%d0%b0%d1%80%d1%82%d0%b8%d0%bd%d0%ba%d0%b8">
+  <meta name="url" content="https://learn.javascript.ru/task/move-ball-field">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>footbal_field</title>
+  <style>
+    body {
+      margin: 0;
+      padding-left: 20px;
+      background: repeating-linear-gradient(to bottom, red 0 100px, orange 100px 200px);
+    }
+
+    .back {
+      color: gold;
+      line-height: 1.75;
+      margin-left: 10px;
+    }
+
+    #footbal_field {
+      background: #048005 url('https://images6.alphacoders.com/539/539185.jpg') no-repeat 50% / cover;
+      background-attachment: fixed;
+      height: 100vh;
+      position: relative;
+    }
+
+    #ball {
+      position: absolute;
+      left: 100px;
+      bottom: 100px;
+      outline: 1px solid gold;
+      width: 100px;
+      height: 100px;
+      background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Soccerball_England.svg/100px-Soccerball_England.svg.png");
+      transition: 1s all; /* CSS-анимация для значений left/top делает передвижение мяча плавным */
+    }
+
+    #out {
+      position: absolute;
+      left: 100px;
+      bottom: 100px;
+      outline: 2px solid gold;
+      width: 0;
+      height: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="footbal_field">
+    <a href="wh_11.html" class="back">Back to task</a>
+    <div id="ball"></div>
+    <div id="out"></div>
+  </div>
+  <br><br>
+  <script>
+    var field = document.getElementById('footbal_field');
+    var ball = document.getElementById('ball');
+
+    console.log(field, ball)
+
+    field.onclick = function(event) {
+
+      // координаты поля относительно окна
+      var fieldCoords = this.getBoundingClientRect();
+
+      // координаты левого-верхнего внутреннего угла поля
+      var fieldInnerCoords = {
+        top: fieldCoords.top + field.clientTop,
+        left: fieldCoords.left + field.clientLeft
+      };
+
+      console.log(fieldCoords, fieldInnerCoords)
+
+
+      // разместить по клику,
+      // но сдвинув относительно поля (т.к. position:relative)
+      // и сдвинув на половину ширины/высоты
+      // (!) используются координаты относительно окна clientX/Y, как и в fieldCoords
+      var ballCoords = {
+        top: event.clientY - fieldInnerCoords.top - ball.clientHeight / 2,
+        left: event.clientX - fieldInnerCoords.left - ball.clientWidth / 2
+      };
+
+      // вылезает за верхнюю границу - разместить по ней
+      if (ballCoords.top < 0) ballCoords.top = 0;
+
+      // вылезает за левую границу - разместить по ней
+      if (ballCoords.left < 0) ballCoords.left = 0;
+
+
+      // вылезает за правую границу - разместить по ней
+      if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+        ballCoords.left = field.clientWidth - ball.clientWidth;
+      }
+
+      // вылезает за нижнюю границу - разместить по ней
+      if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+        ballCoords.top = field.clientHeight - ball.clientHeight;
+      }
+
+      ball.style.left = ballCoords.left + 'px';
+      ball.style.top = ballCoords.top + 'px';
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <script src="#">
+    'use strict'
+    const field = document.getElementById('footbal_field')
+    const ball = document.querySelector('.ball')
+    const fieldData = field.getBoundingClientRect()
+    const ballData = ball.getBoundingClientRect()
+    console.log(field.id, ball.className, '\n', fieldData, ballData);
+
+    const startPointX = ballData.x - fieldData.x - ballData.width / 2
+    const startPointY = fieldData.height - ballData.y - ballData.height - ballData.height / 2
+    console.log(startPointX, startPointY);
+
+    ball.style.left = startPointX + 'px'
+    ball.style.bottom = startPointY + 'px'
+
+    let moveX = startPointX
+    let moveY = startPointY
+
+    field.addEventListener('click', moveBall, false)
+
+    function moveBall(ev) {
+      console.log(ev)
+      // console.log(this)
+      // console.log('client')
+      // console.log(ev.clientX, ev.clientY)
+      console.log('page')
+      console.log(ev.pageX, ev.pageY)
+      // console.log('screen')
+      // console.log(ev.screenX, ev.screenY)
+      let clickX = ev.pageX
+      let clickY = ev.pageY
+      let endPointX = clickX - fieldData.x - 50
+      let endPointY = fieldData.height - (fieldData.height - clickY) - 50
+      console.log('Start', startPointX, startPointY, 'Click coords ', clickX, clickY, 'Finish', endPointX, endPointY);
+
+
+      // while(moveX !== endPointX || moveY !== endPointY) {
+      //   console.log('while');
+      //   moveX += 1
+      //   moveY += 1
+      //   ball.style.left = moveX + 'px'
+      //   ball.style.bottom = moveY + 'px'
+      // }
+      let move = setInterval(moveFunc(endPointX, endPointY), 40)
+    }
+
+
+    function moveFunc(argX, argY) {
+      console.log('moveFunc');
+      console.log(argX, argY, moveX, moveY);
+      if (moveX <= argX) {
+        moveX += 1
+        ball.style.left = moveX + 'px'
+      }
+      if (moveY <= argY) {
+        moveY += 1
+        ball.style.bottom = moveY + 'px'
+      }
+      // field.removeEventListener('click', moveBall, false)
+    }
+  </script>
+</body>
+
+</html>

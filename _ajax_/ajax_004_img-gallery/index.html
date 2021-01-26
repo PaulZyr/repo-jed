@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="url" content="https://www.youtube.com/watch?v=IyCnbyWZkRU&list=WL&t=0s&index=28">
+    <title>Img-gallery jQuery AJAX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container jumbotron text-center">
+      <div class="card bg-info text-white mb-3">
+        <img class="card-img-top img-fluid" src="https://picsum.photos/1200/400?image=10" alt="capture1">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some caption content.</p>
+        </div>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-outline-primary">Primary</button>
+        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+        <button type="button" class="btn btn-outline-success">Success</button>
+        <button type="button" class="btn btn-outline-danger">Danger</button>
+        <button type="button" class="btn btn-outline-warning">Warning</button>
+        <button type="button" class="btn btn-outline-info">Info</button>
+        <button type="button" class="btn btn-link">Link</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+      </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        console.log('ready');
+        let pictures,
+            btns    = $('button'),
+            title   = $('.card-title'),
+            caption = $('.card-text'),
+            image   = $('.card-img-top')
+            // console.log($pictures, $btns, $title, $caption, $image);
+
+
+////////////////////////////
+////   Data from XML    ////
+////////////////////////////
+
+        // $.ajax({
+        //   url: 'pictures.xml',
+        //   success: function(data) {
+        //     pictures = $('picture', data);
+        //   }
+        // })
+        // console.log(pictures, 1);
+        //
+        // btns.click(function () {
+        //   let index = btns.index(this);
+        //   console.log(index, pictures);
+        //   let picture = pictures.filter(":eq(" + index + ")");
+        //   console.log(index, pictures, picture);
+        //   caption.text(picture.attr('caption'));
+        //   image.attr('src',  picture.attr('source'));
+        //   title.text('Gallery - ' + picture.attr('caption'));
+        //   return false;
+        // })
+
+////////////////////////////
+////   Data from JSON   ////
+////////////////////////////
+
+        $.ajax({
+          url: 'pictures.json',
+          success: function(data) {
+            pictures = data;
+          }
+        })
+        // console.log($pictures, $btns, $title, $caption, $image);
+
+        btns.click(function () {
+          console.log(pictures, 1);
+          let index = btns.index(this);
+          let picture = pictures[index].picture;
+
+          caption.text(picture.caption);
+          image.attr('src',  picture.source);
+          title.text('Gallery - ' + picture.caption);
+          return false;
+        })
+
+      });
+    </script>
+  </body>
+</html>

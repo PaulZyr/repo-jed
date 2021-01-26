@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Read cookie</title>
+</head>
+<h1>Read cookie</h1>
+<body>
+  <button onclick="setCookie()">Set cookie</button> ||
+  <button onclick="getCookie()">Get cookie</button>
+
+  <script>
+    'use strict'
+    function setCookie() {
+        // Что бы связать временное значение cookie файла с текущим документом. достаточно выполнить следующую операцию
+        document.cookie = "version=" + encodeURIComponent(document.lastModified);
+        document.cookie = "greet= Hello"
+        document.cookie = "test= someData"
+        // Cookie не могут содержать точку с запятой, запятые или символы разделители. Перед сохранением значение в cookie желательно вызвать
+        // функцию encodeURIComponent() при чтении значения надо вызвать decodeURIComponent()
+        // записанный таким способом cookie сохраняются в текущем сеансе браузера но удаляются после его закрытия.
+    }
+
+    function getCookie() {
+        alert(findCookieValue("test"));
+    }
+    // получим строку вида - version=123; test=a1; test2=a2
+    function findCookieValue(cookieName) {
+        var allcookies = document.cookie;
+        var pos = allcookies.indexOf(cookieName + "="); // version=
+
+        // Если cookie с указанным именем найден, извлечь его значения.
+        if (pos != -1) {
+            var start = pos + cookieName.length + 1;
+            var end = allcookies.indexOf(";", start);
+
+            if (end == -1) {
+                end = allcookies.length;
+            }
+
+            var value = allcookies.substring(start, end);
+
+            return decodeURIComponent(value);
+        }
+    }
+  </script>
+</body>
+</html>

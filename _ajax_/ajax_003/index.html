@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AJAX 3</title>
+    <style media="screen">
+      #resp{
+        outline: 2px solid red; margin-bottom: 10px;padding: 7px;max-width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>AJAX 3</h1>
+    <div id="resp" contenteditable="true">resp</div>
+    <form id="myForm">
+      <input type="text" id="myInp" value='val1' placeholder="your text ">
+      <input type="submit" id="myBtn" value="Send">
+    </form>
+
+    <script>
+    let resp = document.getElementById('resp');
+    let form = document.getElementById('myForm');
+    let txt = document.getElementById('myInp');
+    let btn = document.getElementById('myBtn');
+    // console.log(form, btn, txt, resp);
+
+    document.forms.myForm.onsubmit = function(ev) {
+      ev.preventDefault();
+
+      let userTxt = txt.value;
+      userTxt = encodeURIComponent(userTxt);
+
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'form.php?' + 'myInp=' + userTxt);
+      // xhr.open('POST', 'form.php');
+
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+        resp.textContent = xhr.responseText;
+        }
+      };
+
+      xhr.send('myInp=' + userTxt);
+      console.log(userTxt, xhr);
+    }
+
+    </script>
+  </body>
+</html>

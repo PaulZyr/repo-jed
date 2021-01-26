@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="url" content="http://icndb.com/api/">
+  <title>Chuck Norris Joke Generator / ajax_008_data-from-an-external-api</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <form action="">
+      <div>
+        <label for="num">Num of jokes</label>
+        <input type="number" name="num" id="num" value="7">
+      </div>
+      <div>
+        <button class="btn btn-info get-jokes">Get jokes</button>
+      </div>
+    </form>
+
+    <ul class="jokes mt-3"></ul>
+
+  </div>
+  <script>
+  document.querySelector('.get-jokes').addEventListener('click', getJokes)
+
+    function getJokes(e) {
+      console.log(1);
+      e.preventDefault()
+      const number = document.querySelector('input[type="number"]').value
+
+      // create XHR Object
+      const xhr = new XMLHttpRequest()
+
+      // OPEN
+      xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true)
+
+      xhr.onload = function () {
+        if (this.status === 200) {
+          const response = JSON.parse(this.responseText)
+          console.log(response)
+
+          let output = ''
+
+          if (response.type === 'success') {
+            response.value.forEach(function (joke) {
+              output += `<li>${joke.joke}</li>`
+            })
+          } else {
+            output += '<li>Something went wrong...</li>'
+          }
+
+          document.querySelector('.jokes').innerHTML = output;
+        }
+      }
+
+
+
+
+
+      // xhr.onreadystatechange = function () {
+      //   console.log('READYSTATE', xhr.readyState)
+      //   if (this.status === 200 && this.readyState === 4) {
+      //     console.log(this.responseText)
+      //     document.getElementById('output').innerHTML += `<h1> ${this.responseText} </h1>`
+      //   }
+      // }
+
+      xhr.send()
+
+      // readyState Values
+      // 0: request not initialized
+      // 1: server connection established
+      // 2: request received
+      // 3: processing request
+      // 4: request finished and response is ready
+
+      // HTTP Status
+      // 200: "OK"
+      // 403: "Forbidden"
+      // 404: "Not found"
+
+      // Optional - Used for spinners/loaders
+      // xhr.onprogress = function(){
+      //   console.log('READYSTATE', xhr.readyState)
+      // }
+      xhr.onerror = function(){
+        console.log('Error request ')
+      }
+    }
+  </script>
+</body>
+</html>

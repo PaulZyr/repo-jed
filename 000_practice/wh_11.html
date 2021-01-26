@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeWork 11</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 offset-1">
+        <h1 class="text-center my-3 display-4">Homework 11</h1>
+        <!-- Task 1 -->
+        <div class="card mb-3" id="task_1">
+          <h2 class="card-header bg-info text-light">Task 1</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу для ввода имени пользователя. <br>Необходимо проверять каждый символ, который вводит пользователь. <br>Если он ввел <ins>цифру</ins>, то не отображать ее в <kbd>input</kbd>.</h4>
+            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+            <form class="col-6 offset-3">
+              <div class="form-group">
+                <label for="formGroupExampleInput">Enter your name (name can't contain digits)</label>
+                <input id="formGroupExampleInput" class="form-control form-control-sm" placeholder="Jhon Dow" autofocus>
+                <p id="result" class="text-danger">Info</p>
+              </div>
+            </form>
+          </div>
+          <script>
+            'use strict'
+            const $ = document;
+            const tsk1 = document.getElementById('task_1')
+            const tsk1TextInput = tsk1.querySelector('.form-control')
+            let result = document.getElementById('result')
+            // console.log($, tsk1TextInput, result);
+
+            tsk1TextInput.addEventListener('input', control, false)
+            tsk1TextInput.addEventListener('keypress', func, false)
+
+            function control(ev){
+              // console.log(ev.data === '1' || ev.data === '2' || ev.data === '3' || ev.data === '4' || ev.data === '5' || ev.data === '6' || ev.data === '7' || ev.data === '8' || ev.data === '9' || ev.data === '0' );
+              if (ev.data === '1' || ev.data === '2' || ev.data === '3' || ev.data === '4' || ev.data === '5' || ev.data === '6' || ev.data === '7' || ev.data === '8' || ev.data === '9' || ev.data === '0' ) {
+                // 1 var with slice
+                let arr = Array.from(tsk1TextInput.value).slice(0, -1)
+
+                // 2 var with splice(-1,1) or pop()
+                // let arr = Array.from(tsk1TextInput.value)
+                // arr.splice(-1,1)
+                // or
+                // arr.pop()
+
+                // 3 var with length
+                // let arr = Array.from(tsk1TextInput.value)
+                // arr.length = arr.length-1
+
+                tsk1TextInput.value = arr.join('')
+                console.log(tsk1TextInput.value)
+
+                result.innerHTML = `You enter ${ev.data}. <br> Name can't contain digits!`
+              }
+            }
+            function func(event) {
+              console.log(event)
+              let code = String.fromCharCode(event.keyCode);
+              let key = String.fromCharCode(event.keyCode);
+              result.innerHTML = ''
+              result.innerHTML += 'Код: '+code + ', клавиша: ' + key;
+            }
+            </script>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="card mb-3" id="task_2">
+          <h2 class="card-header bg-info text-light">Task 2</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу с кнопкой <button class="btn btn-success btn-sm" disabled>Открыть</button> и модальным окном.</h4>
+            <p class="card-text">На модальном окне должен быть <ins>текст</ins> и кнопка <button class="btn btn-danger btn-sm" disabled>Закрыть</button>. Изначально модальное окно не отображается.</p>
+            <p class="card-text">При клике на кнопку <button class="btn btn-success btn-sm" disabled>Открыть</button> появляется модальное окно, на кнопку <button class="btn btn-danger btn-sm" disabled>Закрыть</button> – исчезает.</p>
+            <hr>
+            <!-- Button trigger modal -->
+            <div class="text-center">
+              <button id="task_2-open-btn" class="btn btn-lg btn-success my-4">Открыть</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal" id="exampleModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus suscipit ea id aliquam libero cum, perferendis distinctio soluta voluptatibus porro illum error officia molestiae repudiandae, architecto, explicabo earum
+                      eius repellat!</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+            'use strict'
+            document.addEventListener("DOMContentLoaded", function(event) {
+              console.log("DOM fully loaded and parsed");
+              const task2 = $.querySelector('#task_2')
+              const task2Modal = task2.querySelector('#task_2 .modal')
+              const task2ModalOverlay = document.querySelector('.modal-backdrop')
+              const task2ModalOpenBtn = task2.querySelector('#task_2-open-btn')
+
+              console.log(task2, '\n', task2Modal, task2ModalOpenBtn, task2ModalOverlay);
+
+              task2ModalOpenBtn.addEventListener('click', myModalOpen, false)
+
+
+              function myModalOpen(event) {
+                let task2ModalCloseBtns = $.querySelectorAll('.modal .close, .modal [data-dismiss=modal]')
+                console.log(task2ModalCloseBtns);
+                // open modal styles
+                task2ModalOverlay.style.display = 'block'
+                task2ModalOverlay.classList.add('show')
+                task2Modal.style.display = 'block'
+
+                task2ModalCloseBtns.forEach(function cb(curEl, index, arry) {
+                  console.log(index);
+                  console.log(curEl, arry);
+                  curEl.addEventListener('click', myModalClose, false)
+                })
+
+                // close modal function
+                function hideModal() {
+                  task2ModalOverlay.style.display = 'none'
+                  task2ModalOverlay.classList.remove('show')
+                  task2Modal.style.display = 'none'
+                  console.log('hideModal complited');
+                }
+
+                let closeModalTimeout = setTimeout(hideModal, 5000)
+
+                function myModalClose(event) {
+                  console.log(event);
+                  console.log('close start')
+                  console.log(event.target, event.currentTarget)
+                  if (event.target.matches('.modal .close') || event.currentTarget.matches('.modal [data-dismiss=modal]')) {
+                    clearTimeout(closeModalTimeout)
+                    hideModal()
+                    task2ModalCloseBtns.forEach(function cb(curEl, index, arry) {
+                      curEl.removeEventListener('click', myModalClose, false)
+                    })
+                    console.log('close end')
+                  }
+                }
+              } // end of function myModalOpen
+            });
+          </script>
+        </div> <!-- END #task_2 -->
+
+        <!-- Task 3 -->
+        <div class="card mb-3" id="task_3">
+          <h2 class="card-header bg-info text-light">Task 3</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу с футбольным полем, которое занимает всю ширину и высоту экрана, и мячом размером 100 на 100 пикселей. </h4>
+            <p class="card-text">Сделать так, чтобы при клике мышкой по полю, мяч плавно перемещался на место клика. Учтите: необходимо, чтобы центр мяча останавливался именно там, где был совершен клик мышкой. Также предусмотрите, чтобы мяч не
+              выходил за границы поля.</p>
+            <hr>
+            <div class="text-center">
+              <a href="footbal_field.html" class="btn btn-lg btn-success my-2">Открыть</a>
+            </div>
+          </div>
+          <script>
+          </script>
+        </div> <!-- END #task_3 -->
+
+        <!-- Task 4 -->
+        <div class="card mb-3" id="task_4">
+          <h2 class="card-header bg-info text-light">Task 4</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу со светофором и кнопкой, которая переключает светофор на следующий цвет. </h4>
+            <p class="card-text">Сделать так, по возможности, чтоб цвет шел как в реальном светофоре( Ж - З - Ж - К - Ж - З и т.д.)</p>
+            <hr>
+            <div class="text-center d-flex justify-content-center">
+              <!-- Traffic lights ----------->
+              <style>
+                .traffic-light {
+                  background: #888;
+                  border-style: solid;
+                  border-radius: 20px;
+                  padding: 7px;
+                  line-height: 0;
+                }
+
+                .t-circle {
+                  width: 70px;
+                  height: 70px;
+                  float: left;
+                  border-style: solid;
+                  border-radius: 50px;
+                  margin: 7px;
+                  background: #000;
+                }
+
+                .l-red.active {
+                  background: red;
+                }
+
+                .l-yellow.active {
+                  background: yellow;
+                }
+
+                .l-green.active {
+                  background: green;
+                }
+
+                #btn-light {
+                  font: 20px/1 Impact;
+                  border-style: groove;
+                  margin: 0px 0px 0px 14px;
+                }
+              </style>
+
+              <div class="traffic-light d-flex">
+                <span class="t-circle l-red"></span>
+                <span class="t-circle l-yellow active"></span>
+                <span class="t-circle l-green"></span>
+              </div>
+              <button id="btn-light">Next</button>
+            </div>
+          </div>
+          <script>
+            'use strict'
+            let btn = document.getElementById('btn-light'),
+              active = document.querySelector('.active'),
+              circles = document.querySelectorAll('.t-circle'),
+              flag = 'leftToRight'
+
+            btn.onclick = function() {
+              if (flag === 'leftToRight') {
+                next()
+              } else {
+                prev()
+              }
+            }
+
+            function next() {
+              console.log('next')
+              let active = document.querySelector('.active')
+              if (active.nextElementSibling !== null) {
+                active.classList.remove('active')
+                active.nextElementSibling.classList.add('active')
+              }
+              if (active.nextElementSibling === null) {
+                flag = 'rightToLeft';
+                prev()
+              }
+            }
+
+            function prev() {
+              console.log('prev');
+              active = document.querySelector('.active')
+              if (active.previousElementSibling !== null) {
+                active.classList.remove('active')
+                active.previousElementSibling.classList.add('active')
+              }
+              if (active.previousElementSibling.previousElementSibling === null) {
+                flag = 'leftToRight'
+              }
+            }
+            console.log(btn, active, circles)
+          </script>
+        </div> <!-- END #task_4 -->
+
+        <!-- Task 5 -->
+        <div class="card mb-3" id="task_5">
+          <h2 class="card-header bg-info text-light">Task 5</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу со списком книг.</h4>
+            <p class="card-text">При щелчке на книгу, цвет фона должен меняться на оранжевый. <br>
+              Учтите, что при повторном щелчке на другую книгу, предыдущей – необходимо возвращать прежний цвет.</p>
+            <hr>
+            <div class="text-center">
+            </div>
+            <style>
+              .list-group {
+                list-style: decimal inside;
+              }
+
+              .list-group-item {
+                display: list-item;
+              }
+            </style>
+            <ol class="list-group">
+              <li class="list-group-item bg-warning">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+              <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias!</li>
+            </ol>
+          </div>
+          <script>
+            'use strict'
+            let task_5_list = $.querySelector('#task_5 .list-group')
+
+            task_5_list.addEventListener('click', chooseBook)
+
+            function chooseBook(el) {
+              if (el.target.matches('.list-group-item')) {
+                if (el.target.matches('.bg-warning')) {
+                  return el.target.classList.toggle('bg-warning')
+                }
+                if (task_5_list.querySelector('.bg-warning') !== null) {
+                  task_5_list.querySelector('.bg-warning').classList.remove('bg-warning')
+                }
+                el.target.classList.add('bg-warning')
+              }
+            }
+          </script>
+        </div> <!-- END #task_5 -->
+
+        <!-- Task 6 -->
+        <div class="card mb-3" id="task_6">
+          <h2 class="card-header bg-info text-light">Task 6</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу с несколькими кнопками.</h4>
+            <p class="card-text">При наведении на кнопку, должна появляться подсказка с текстом. <br>
+              По умолчанию – подсказка появляется сверху от кнопки. <br>
+              Но если она не помещается сверху от кнопки, тогда отображается снизу.</p>
+            <hr>
+            <!-- <div class="text-left"> -->
+            <button id="task_6-ttp-btn" class="btn btn-lg btn-success my-4 mx-2">Hover me </button>
+            <button id="task_6-ttp-btn" class="btn btn-lg btn-info my-4 mx-2">Hover me </button>
+            <!-- </div> -->
+          </div>
+          <script>
+          </script>
+        </div> <!-- END #task_6 -->
+
+        <!-- Task 7 -->
+        <div class="card mb-3" id="task_7">
+          <h2 class="card-header bg-info text-light">Task 7</h2>
+          <div class="card-body">
+            <h4 class="card-title text-center px-5 py-3">Создать html-страницу с формой для логина пользователя и галочкой «Запомнить меня».</h4>
+            <p class="card-text">После заполнения формы вывести на экран: «Привет, Имя! Я тебя запомнил/не запомнил».</p>
+            <hr>
+            <form class="col-6 offset-3">
+              <div class="form-group">
+                <label for="inputLogin1">Your login:</label>
+                <input type="text" class="form-control" id="inputLogin1">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword1">Your password:</label>
+                <input type="password" class="form-control" id="inputPassword1">
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="inputCheck1">
+                <label class="form-check-label" for="inputCheck1">Check me out</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="alert alert-info mt-3" role="alert" hidden>
+                A simple info alert—check it out!
+              </div>
+            </form>
+          </div>
+          <script>
+            'use strict'
+            let task_7_handler = $.querySelector('#task_7 .btn');
+            console.log(task_7_handler);
+
+            let runMsg = function() {
+              let task_7_container = document.querySelector('#task_7 form');
+
+              task_7_container.addEventListener('submit', function(evt) {
+                evt.preventDefault();
+              })
+
+              let loginValue = task_7_container.querySelector('#inputLogin1').value;
+              let passwordValue = task_7_container.querySelector('#inputPassword1').value;
+              let checkboxValue = task_7_container.querySelector('#inputCheck1').checked;
+              let alertBox = task_7_container.querySelector('.alert');
+              console.log(task_7_container, loginValue, passwordValue, checkboxValue, alertBox);
+              if (checkboxValue) {
+                alertBox.removeAttribute('hidden');
+                alertBox.innerHTML = `Hello, ${loginValue}! I'm remamber you.`
+              } else {
+                alertBox.removeAttribute('hidden');
+                if (loginValue) {
+                  alertBox.innerHTML = `Hello, ${loginValue}! I'm NOT remamber you.`
+                } else {
+                  alertBox.innerHTML = `Hello, Anonimus! I'm NOT remamber you.`
+                }
+              }
+            }
+
+            task_7_handler.addEventListener('click', runMsg);
+          </script>
+        </div> <!-- END #task_7 -->
+
+        <!-- Task event.target vs. event.currentTarget -->
+        <div class="card mb-3">
+          <h2 class="card-header bg-info text-light">Task <a class="text-light" href="https://medium.com/@florenceliang/javascript-event-delegation-and-event-target-vs-event-currenttarget-c9680c3a46d1">event.target vs. event.currentTarget</a></h2>
+          <div class="card-body">
+            <p class="card-text">Делегирование событий-популярная методология в JavaScript. Это позволяет нам добавить прослушиватель событий к одному родителю и избежать добавления многих прослушивателей событий к определенным узлам. Мы можем
+              продемонстрировать эту технику на простом примере.</p>
+            <hr>
+            <ul id="list">
+              <li><a href="#">Item 1</a></li>
+              <li><a href="#">Item 2</a></li>
+              <li><a href="#">Item 3</a></li>
+              <li><a href="#">Item 4</a></li>
+              ...............................
+              <li><a href="#">Item 1000</a></li>
+            </ul>
+            <pre class="alert alert-primary">
+                &lt;ul id="list">
+                  &lt;li>&lt;a href="#">Item 1</a></li>
+                  &lt;li>&lt;a href="#">Item 2</a></li>
+                  &lt;li>&lt;a href="#">Item 3</a></li>
+                  &lt;li>&lt;a href="#">Item 4</a></li>
+                  ...............................
+                  &lt;li>&lt;a href="#">Item 1000</a></li>
+                &lt;/ul>
+              </pre>
+            <pre class="alert alert-primary">
+                document.addEventListener("click", function(e) {
+                  if(e.target && e.target.nodeName == "A") {
+                    console.log("List item ", e.target.textContent, " was clicked!");
+                  }
+                });
+              </pre>
+            <pre class="alert alert-primary my-3">
+                document.addEventListener('click', function(e) {
+                  if(e.target && e.target.nodeName == 'A') {
+                    console.log('List item ', e.target.textContent, ' was clicked!');  // "List item Item 2 was clicked!"
+                  }
+                  console.log(e.currentTarget);  // #document
+                })
+              </pre>
+            <pre class="alert alert-primary">
+                document.getElementById('list').addEventListener('click', function(e) {
+                  console.log(e.currentTarget);  //&lt;ul>&lt;li>...&lt;/li>&lt;/ul>
+                  console.log(e.target);         //&lt;a href="#">Item 2&lt;/a>
+                })
+              </pre>
+          </div>
+          <script>
+            // document.addEventListener("click", function(e) {
+            //    if(e.target && e.target.nodeName == "A") {
+            //      console.log("List item ", e.target.textContent, " was clicked!");
+            //    }
+            //  });
+            //  document.body.addEventListener('click', function(e) {
+            //    if(e.target && e.target.nodeName == 'A') {
+            //      console.log('List item ', e.target.textContent, ' was clicked!');  // "List item Item 2 was clicked!"
+            //    }
+            //    console.log(e.currentTarget);  // #document
+            //  })
+            document.getElementById('list').addEventListener('click', function(e) {
+              console.log(e.currentTarget); //<ul><li>...</li><ul>
+              console.log(e.target); //<a href="#">Item 2</a>
+            })
+          </script>
+        </div> <!-- END #task_? -->
+
+      </div> <!-- END col-10 offset-1 -->
+    </div> <!-- row -->
+  </div> <!-- <container>-->
+  <div class="modal-backdrop" style="display: none;"></div>
+</body>
+
+</html>

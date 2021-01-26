@@ -1,0 +1,94 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="http://jsraccoon.ru/fn-array-methods">
+  <title>array</title>
+  <link rel="stylesheet" href="../../css/links.css">
+  <script src="../../js/target.js" defer></script>
+</head>
+
+<body>
+  <h1>Array</h1>
+  <ul class="links">
+    <li>
+      <a href="https://www.sitepoint.com/a-collection-is-not-an-array/">Коллекция не является массивом</a>
+    </li>
+    <li>
+      <a href="http://jsraccoon.ru/fn-array-methods">Перебирающие методы массивов изнутри</a>
+    </li>
+    <li>
+      <a href="https://medium.com/@kanby/htmlcollection-nodelist-%D0%B8-%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BE%D0%B2-582cbd9ae1fc">HTMLCollection, NodeList и массив объектов </a>
+      <a href="https://www.kanby.ru/htmlcollection-nodelist-i-massiv-obektov.html">JavaScript: HTMLCollection, NodeList и массив объектов (перевод) </a>
+    </li>
+    <li>
+      <a href="#"> ... </a>
+    </li>
+    <li><hr></li>
+    <li>
+      <a href="hw.html">Array homework</a>
+    </li>
+  </ul>
+
+  <h2>Collection into array / Коллекция(nodeList, псевдомассив) в массив</h2>
+  <p><b>Псевдомассив</b> - это объект, который похож на массив. У него есть числовые свойства, как у массивов. А также свойство <kbd>length</kbd>.</p>
+  <h3>Воспользоваться методами массива можно несколькими способами. </h3>
+  <ol>
+    <li>
+      <h4>Присвоить метод массива в свойство псевдомассива</h4>
+      <pre>
+        var childs = document.documentElement.children;
+        childs.join = [].join;
+        console.log(childs)
+      </pre>
+    </li>
+    <li>
+      <h4>С помощью метода <kbd>call</kbd> и метода <kbd>slice</kbd> псевдомассив превращается в полноценный массив со всеми методами. А также <kbd>Array.from()</kbd> или <kbd>spred operator</kbd></h4>
+      <pre>
+        var childs = document.documentElement.children;
+
+        childs = Array.prototype.slice.call(childs);
+
+        // <i>or</i>
+        childs = [].slice.call(childs);
+
+        // <i>or Since ECMAScript 2015 (ed 6) there is also <a href="http://ecma-international.org/ecma-262/8.0/#sec-array.from">Array.from</a>:</i>
+        childs = Array.from(childs);
+
+        // or <i>ECMAScript 2015 also provides the <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread operator</a>, which is functionally equivalent to Array.from (although note that Array.from supports a mapping function as the second argument).</i>
+        childs = (...childs);
+
+        console.log(childs)
+      </pre>
+    </li>
+    <li>
+      <h4>Создав новый массив, и скопировав в него все свойства псевдомассива</h4>
+      <pre>
+        var childs = document.documentElement.children;
+        var childsArr = [];
+
+        for (var i = 0; i < childs.length; i++) {
+          childsArr[i] = childs[i];
+
+          // or
+          childsArr.push(childs[i]);
+        }
+        console.log(childs)
+      </pre>
+    </li>
+    <li>
+      <h4></h4>
+      <pre>
+
+      </pre>
+    </li>
+    <li>
+      <h4></h4>
+      <pre>
+
+      </pre>
+    </li>
+  </ol>
+</body>
+
+</html>

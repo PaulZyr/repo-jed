@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework 3. Циклы.</title>
+  <link rel="stylesheet" href="../css/practice.css">
+  <script src="../js/spoiler.js" ></script>
+</head>
+
+<body>
+<div class="heading">
+  <h1>Homework 3. Циклы.</h1>
+  <p>Вам необходимо самостоятельно решить, для какого задания какой цикл лучше использовать: <kbd>WHILE</kbd> , <kbd>DO ... WHILE</kbd> или <kbd>FOR</kbd>.</p>
+  <div class="out">All results will be here after click match button.</div>
+</div>
+  <ol class="task-list">
+    <!-- Task 1 -->
+    <li>
+      <p>Подсчитать <kbd>сумму всех чисел</kbd> в заданном пользователем диапазоне. <b>Включая числа</b></p>
+      <button onclick="f1()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        const out = document.querySelector('.out')
+
+        function f1() {
+          let start = +prompt('Enter start num.', 1) || 1,
+              end   = +prompt('Enter end num.', 3) || 5,
+              res   = 0
+              for( let i = start; i <= end; i++ ){
+                res += start
+                start++
+              }
+              out.textContent =  "Task #1 result is - " + res
+        }
+        // f1()
+      </script>
+    </li>
+    <!-- Task 2 -->
+    <li>
+      <p>Запросить <u>2 числа</u> и найти только <kbd>наибольший общий делитель</kbd>.</p>
+      <button onclick="f2()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f2() {
+          let num1 = +prompt('Enter num1.', 2500),
+              num2 = +prompt('Enter num2.', 1100),
+              divider
+
+          if ( num2 === num1) ) return out.textContent = num1
+          if (num1 > num2) {
+            let temp = num1
+            num1 = num2
+            num2 = temp
+            console.log('Replace num1 <==> num2 ');
+          }
+          if ( !(num2 % num1) ) return out.textContent = num1
+          divider = num1-1
+          // var. 1
+          // for (; divider > 1 ; divider--) {
+          //   if ( num1%divider === 0 && num2%divider === 0 ) {
+          //     return out.textContent = divider
+          //   }
+          // }
+          // var. 2
+          while (true) {
+              if ( num1%divider === 0 && num2%divider === 0 ) {
+                console.log('f2() - is complited');
+                return out.textContent = 'Task #2 result is - ' + divider
+              }
+              divider--
+          }
+        }
+        // f2()
+      </script>
+    </li>
+
+    <!-- Task 3 -->
+    <li>
+      <p><u>Запросить число</u> у пользователя и <kbd>вывести все делители</kbd> этого числа</p>
+      <button onclick="f3()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f3() {
+          let num1 = +prompt('Enter number.' , 75),
+              dividers = ''
+
+          for (let i = 1; i <= num1; i++) {
+            if (num1 === i)  return out.textContent = 'Task #3 result is - ' + dividers + i
+            if(num1%i === 0){
+              dividers += i + ', '
+            }
+          }
+        }
+      </script>
+    </li>
+
+    <!-- Task 4 -->
+    <li>
+      <p>Определить <kbd>количество цифр</kbd> в введенном числе.</p>
+      <button onclick="f4(12345)">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f4(x) {
+          // out.textContent = x.toString().length
+          let c = 0
+          console.log(x, typeof x, x.length)
+          for (let i = 0; 1 < x; i++) {
+            c++
+            x /= 10
+          }
+          out.textContent = 'Task #4 result is - ' + c
+        }
+      </script>
+    </li>
+    <!-- Task 5 -->
+    <li>
+      <p><u>Запросить 10 чисел</u> у пользователя и подсчитать, сколько он ввел <kbd>положительных, отрицательных и нулей</kbd>. <br>
+        При этом также посчитать, <kbd>сколько четных и нечетных</kbd>. <br>
+        Вывести статистику на экран. Учтите, что достаточно одной переменной (не 10) для ввода чисел пользователем.</p>
+      <button onclick="f5()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f5() {
+          let numCount = 0,
+              posCount = 0,
+              negCount = 0,
+              zeroCount = 0,
+              oddCount = 0,
+              evenCount = 0
+          do {
+            //  Учтите, что достаточно одной переменной (не 10) для ввода чисел пользователем.
+            let t = +prompt('Enter positive, negative number or zero.', 0)
+            numCount++
+          	if(t > 0) posCount++
+            if(t < 0) negCount++
+            if(t === 0) zeroCount++
+            if( !!(t%2) ) oddCount++
+            if( !(t%2) ) evenCount++
+          } while (numCount < 10 )
+          out.innerHTML = 'Task #5 result.<br> User enter ' + posCount + ' positive numbers <br>'
+          out.innerHTML += 'and ' + negCount + ' negative numbers <br>'
+          out.innerHTML += 'and ' + zeroCount + ' zero! Even - ' + evenCount + ' & odd - ' + oddCount
+        }
+      </script>
+    </li>
+    <!-- Task 6 -->
+    <li>
+      <p>Зациклить калькулятор. <u>Запросить 2 числа и знак</u> у пользователя, решить пример, вывести результат и спросить, хочет ли он решить еще один пример. <br>
+        И так до тех пор, пока пользователь не откажется.</p>
+      <button onclick="f6()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f6() {
+          let flag
+          do {
+            let n1 = +prompt('Enter first num.', 7),
+                n2 = +prompt('Enter second num.', 27),
+                symbol = prompt('Enter symbol.', 's')
+
+            if(symbol !== '+' && symbol !== '-' && symbol !== '*' && symbol !== '/' ) {
+              out.textContent = 'Wrong data'
+              flag = confirm('Try again?')
+            } else {
+              out.textContent = 'Task #6 result is - ' + eval(n1 + symbol + n2)
+              flag = confirm('Try again?')
+            }
+          } while (flag);
+        }
+        // f6()
+      </script>
+    </li>
+    <!-- Task 7 -->
+    <li>
+      <p>Запросить у пользователя <u>число и на сколько цифр его сдвинуть</u>. <br>
+        <kbd>Сдвинуть цифры числа и вывести результат</kbd> (если число 123456 сдвинуть на 2 цифры, то получится 345612).</p>
+      <button onclick="f7()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f7() {
+          let str = prompt('Enter long number.', 756123),
+              n = prompt('how many numbers to move.', 2),
+              strToArr = str.split(''),
+              arr=[]
+
+          // console.log(str.substring(n), str.substring(0, n));
+          // var. 1
+          for (let i = 0; i < n; i++) {
+            // using shift
+            // strToArr.shift()
+            // or using splice
+            strToArr.splice(0, 1)
+            // or using slice
+            // strToArr = strToArr.slice(1)
+            arr.push(str[i])
+            console.log( arr, strToArr);
+            console.log('---');
+          }
+          out.textContent = 'Task #7 result is - ' + strToArr.join('') + arr.join('')
+
+          // var. 2
+          // out.textContent = str.substring(n) + str.substring(0, n)
+          // var. 3
+          // out.textContent = str.slice(n) + str.slice(0, n)
+          // var. 4
+          // out.textContent = str.replace(RegExp("(\\d{" + n + "})(\\d*)$"), "$2$1")
+        }
+        // f7()
+      </script>
+    </li>
+    <!-- Task 8 -->
+    <li>
+      <p><u>Зациклить вывод дней недели</u> таким образом: <kbd>«День недели. Хотите увидеть следующий день?»</kbd> и так до тех пор, пока пользователь нажимает <b>OK</b>. </p>
+        <button onclick="f8()">button</button>
+        <button class="spoiler-btn">Spoiler open</button>
+        <script>
+          'use strict'
+
+          function f8() {
+            let date = new Date(),
+                daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                i = date.getDay()
+
+            while (confirm('Today is a '+ daysOfWeek[i] + '. Do you want to see the next day?')){
+              i++
+              if (i === 7) { i = 0 }
+            }
+            out.textContent = 'Your choise is a ' + daysOfWeek[i]
+          }
+          // f8()
+        </script></>
+    </li>
+    <!-- Task 9 -->
+    <li>
+      <p>Вывести таблицу умножения для всех чисел <u>от 2 до 9</u>. <br>
+        Каждое число необходимо <kbd>умножить на числа от 1 до 10</kbd>.</p>
+      <button onclick="f9()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+        function f9() {
+          for (let i = 2; i < 10; i++){
+            console.log('Multiply by - '+ i)
+            out.innerHTML += '<br><br>Multiply by - '+ i
+            for (let j = 1; j < 10; j++){
+              console.log( i + "*" + j + " = " + ( i*j ))
+              out.innerText += '\n' + i + "*" + j + " = " + i * j
+            }
+          }
+          out.style.textAlign = "left"
+          out.style.height = "400px"
+          out.style.overflowY = "scroll"
+          // out.textContent = "Open console for see result!"
+        }
+        // f9()
+      </script>
+    </li>
+    <!-- Task 10 -->
+    <li>
+      <p>Игра «Угадай число». Предложить пользователю загадать число от 0 до 100 и отгадать его следующим способом: <br>
+        каждую итерацию цикла делите диапазон чисел пополам, записываете результат в <kbd>N</kbd> и спрашиваете у пользователя <kbd>«Ваше число > N, < N или == N?»</kbd>. <br>
+        В зависимости от того, что указал пользователь, уменьшать диапазон. <br>
+        Начальный диапазон от 0 до 100, поделили пополам и получили 50. <br>
+        Если пользователь указал, что его число > 50, то изменили диапазон на от 51 до 100. <br>
+        И так до тех пор, пока пользователь не выберет == N.</p>
+      <button onclick="f10()">button</button>
+      <button class="spoiler-btn">Spoiler open</button>
+      <script>
+        'use strict'
+
+        function f10() {
+          let randomNum = Math.floor(Math.random() * 101),
+              targetNum = +prompt(" Input target number between 0 & 100 for start game", '55'),
+              max = 100,
+              min = 0,
+              temp = max / 2 // 50
+          do {
+            var userAnswer = prompt('Ваше число > '+ temp + ', <'+ temp + ' или == ' + temp + '?', '>')
+            if(userAnswer === '>'){
+              console.log('more');
+              min = max/2 + 1
+              temp = +((temp + max)/2).toFixed(1)
+              console.log(temp, min, max);
+            }
+            if(userAnswer === '<'){
+              console.log('less');
+              max = temp
+              temp = +((min + max)/2).toFixed(1)
+              console.log(temp, min, max);
+            }
+            if(userAnswer == '=='){
+              console.log('You win');
+              out.textContent = 'You got it!'
+              break
+            }
+            if(userAnswer === '') break
+          } while (userAnswer !== temp);
+        }
+        // f10()
+      </script>
+    </li>
+  </ol>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>max-age=''. Set & Get cookie</title>
+</head>
+<body>
+  <h1>max-age=''. Set & Get cookie</h1>
+  <button onclick="setCookie()">Set cookie</button> <br>
+  <button onclick="getCookie()">Get cookie</button>
+  <script>
+    'use strict'
+    function setCookie() {
+        // cookie будет хранится браузером на проятжении 30 сек
+        document.cookie = "greet=Hello"
+        document.cookie = "max-age=30000"
+
+        // Существует возможность указать время жизни cookie через устаревшее свойство expires
+        // var nextYear = new Date();
+        // nextYear.setFullYear(nextYear.getFullYear() + 1)
+        // console.log(nextYear, nextYear.toGMTString());
+        // document.cookie = "name=Bob Lee; expires=" + nextYear.toGMTString();
+    }
+
+    function getCookie() {
+        console.log(document.cookie);
+    }
+  </script>
+</body>
+</html>

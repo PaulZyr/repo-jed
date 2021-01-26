@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LocalStorage</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <div id="main" class="card">
+          <div class="card-content">
+            <h1>LocalStorage</h1>
+            <h2 class="card-title">Tasks List</h2>
+            <div class="row">
+              <form action="" id="task-form">
+                <div class="input-field col s12">
+                  <input type="text" name="task" id="task" value="one">
+                  <label for="task">New Task</label>
+                  <br><br>
+                  <button id="add" class="btn" type="submit" name="button">ADD</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // set LocalStorage item
+    // localStorage.setItem('name','Bob')
+    // localStorage.setItem('age','30')
+
+    // set SessionStorage item
+    // write comment, close and open browser again for see results
+    // sessionStorage.setItem('name','Bob Li')
+
+    // remove LocalStorage item
+    // localStorage.removeItem('name')
+
+    // get LocalStorage item
+    // let name = localStorage.getItem('name')
+    // let age = localStorage.getItem('age')
+    // document.forms[0].innerHTML += '<br><br>'+name + age
+
+    // clear localStorage
+    // localStorage.clear()
+
+    // App
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault()
+      const task = document.getElementById('task').value
+      if (task === '') return void 0
+      let tasks
+      if (localStorage.getItem('tasks') === null) {
+        tasks = []
+      } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+      }
+
+      tasks.push(task)
+      localStorage.setItem('tasks', JSON.stringify(tasks))
+      console.log('Task saved!');
+
+      document.getElementById('task').value += " two"
+    })
+
+    const tasks = JSON.parse(localStorage.getItem('tasks'))
+    tasks.forEach(function (task) {
+      console.log(task);
+    })
+
+  </script>
+</body>
+</html>

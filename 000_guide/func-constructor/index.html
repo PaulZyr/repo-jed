@@ -1,0 +1,189 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="url" content="http://jsraccoon.ru/oop-constructors">
+  <meta name="url" content="http://xn--80adth0aefm3i.xn--j1amh/%D1%84%D1%83%D0%BD%D0%BA%D1%86%D1%96%D1%8F-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80">
+</head>
+<title>Объектно-ориентированный JavaScript: функции конструкторы</title>
+<body>
+  <h1>Объектно-ориентированный JavaScript: функции конструкторы</h1>
+  <p>Представьте, у вас есть небольшой магазин. В магазине есть два менеджера, занимающихся продажей ваших товаров. И вы решаете организовать их работу. Для каждого менеджера создаётся отдельный объект:</p>
+
+<pre>
+  const john = {
+    name: 'John',
+    sales: 10,
+    sell: function(thing) {
+      this.sales += 1;
+      return 'Manager ' + this.name + ' sold ' + thing;
+    }
+  };
+</pre>
+
+<p>Итак, один менеджер готов. Джон умеет продавать вещи, знает своё имя и количество продаж.</p>
+
+<pre>
+  console.log(john.sales); // 10
+  john.sell('Apple');      // Manager John sold Apple
+  john.sell('Pomegrade');  // Manager John sold Pomegrade
+  console.log(john.sales); // 12
+</pre>
+
+<p>Остался ещё один:</p>
+
+<pre>
+  const mary = {
+    name: 'Mary',
+    sales: 120,
+    sell: function(thing) {
+      this.sales += 1;
+      return 'Manager ' + this.name + ' sold ' + thing;
+    }
+  };
+</pre>
+
+<p>Это было просто и всё работает хорошо. Или нет? У каждого менеджера есть свой метод <code class="highlighter-rouge">sell</code>. В том, что он у всех будет разным можно убедиться с помощью сравнения:</p>
+
+<pre>john.sell === mary.sell; // false</pre>
+
+<p>Это означает, что каждый объект содержит свою собственную копию функции. Под каждую подобную функцию выделяется место в памяти. Представьте, что будет, когда ваш магазин вырастет и пополнится парой сотен менеджеров, для каждого из которых будет необходимо создать отдельный метод. А если и методов будет много? Очевидно, что создавать объекты подобным способом — не самая лучшая затея. Чтобы решить подобную проблему существуют функции конструкторы.</p>
+
+<p>Как и следует из названия функции конструкторы являются не более чем обычными функциями. Отличие только одно — конструкторы, вызванные с помощью оператора <code class="highlighter-rouge">new</code> <strong>всегда возвращают объект</strong>.</p>
+
+<p>Для начала разберёмся, что мы хотим сделать: написать функцию, которая будет возвращать объект со всеми указанными нами свойствами и методами. Написать подобную функцию очень просто:</p>
+
+<pre>
+  const manager = function(name, sales) {
+    return {
+      name: name,
+      sales: sales,
+      sell: function(thing) {
+        this.sales += 1;
+        return 'Manager ' + this.name + ' sold ' + thing;
+      }
+    };
+  };
+</pre>
+
+<p>Теперь мы можем создать объекты для двух наших менеджеров с помощью этой функции:</p>
+
+<pre>
+  const john = manager('John', 10);
+  const mary = manager('Mary', 120);
+
+  console.log(john.sales, mary.sales); // 10 120
+  john.sell('Apple');      // Manager John sold Apple
+  mary.sell('Pomegrade');  // Manager Mary sold Pomegrade
+  console.log(john.sales, mary.sales); // 11 121
+</pre>
+<p>Таким же образом будет работать и функция конструктор:</p>
+
+<pre>
+  const Manager = function(name, sales) {
+    this.name = name;
+    this.sales = sales;
+    this.sell = function(thing) {
+      this.sales += 1;
+      return 'Manager ' + this.name + ' sold ' + thing;
+    };
+  };
+
+  const john = new Manager('John', 10);
+  const mary = new Manager('Mary', 120);
+</pre>
+
+<p>Приведённые выше функции <code class="highlighter-rouge">manager</code> и <code class="highlighter-rouge">Manager</code> делают одно и то же, но разными способами. Но функция <code class="highlighter-rouge">Manager</code> является конструктором, а <code class="highlighter-rouge">manager</code> — нет. Что это значит? То, что внутри функции <code class="highlighter-rouge">Manager</code> мы можем пользоваться ключевым словом <code class="highlighter-rouge">this</code>, которое содержит ссылку на <strong>новый</strong> объект. Другими словами, каждый раз, когда вы вызываете любую функцию с оператором <code class="highlighter-rouge">new</code>, вы подразумеваете, что будет создан новый объект, к которому можно обратиться с помощью ключевого слова <code class="highlighter-rouge">this</code> внутри функции.</p>
+
+<p>Как вы могли заметить, при создании функции-конструктора <code class="highlighter-rouge">Manager</code> мы не использовали <code class="highlighter-rouge">return</code>, для того, чтобы вернуть созданный функцией объект. Но в переменных <code class="highlighter-rouge">john</code> и <code class="highlighter-rouge">mary</code> всё равно есть объекты. Это значит, что при использовании оператора <code class="highlighter-rouge">new</code> возвращать что-либо из функции необязательно. Хотя вы можете вернуть <strong>любой</strong> объект, если в этом есть смысл:</p>
+
+<pre>
+  const Manager = function(name, sales) {
+    this.name = name;
+    this.sales = sales;
+    this.sell = function(thing) {
+      this.sales += 1;
+      return 'Manager ' + this.name + ' sold ' + thing;
+    };
+    return {prop: 'Prop of new object'};
+  };
+
+  const john = new Manager('John', 10);
+  console.log(john); // {"prop":"Prop of new object"}
+</pre>
+<p>Создавая объект с помощью функции-конструктора, вы автоматически присваиваете объекту свойство: <code class="highlighter-rouge">constructor</code>, которое содержит ссылку на функцию-конструктор, с помощью которой был создан объект:</p>
+
+<pre>
+  const john = new Manager('John', 10);
+
+  console.log(john.constructor); // function Manager(name, sales) { ... };
+  console.log(john.constructor.name); // Manager
+  console.log(john instanceof Manager); // true
+</pre>
+<p>Таким образом, с помощью свойства <code class="highlighter-rouge">constructor</code> можно получить, как саму функцию-конструктор, так и её имя.</p>
+
+<p>Итак, мы выяснили, что с помощью функций-конструкторов и оператора <code class="highlighter-rouge">new</code> можно создать объект. Но нашу проблему всё равно не решили. Для каждого нового объекта будет создаваться новая функция, которая будет записываться в метод <code class="highlighter-rouge">sell</code>. И здесь нам поможет прототип функции <code class="highlighter-rouge">Manager</code>. Перейдём сразу к делу:</p>
+
+<pre>
+  const Manager = function(name, sales) {
+    this.name = name;
+    this.sales = sales;
+  };
+
+  Manager.prototype.sell = function(thing) {
+    this.sales += 1;
+    return 'Manager ' + this.name + ' sold ' + thing;
+  };
+
+  const john = new Manager('John', 10);
+  const mary = new Manager('Mary', 120);
+
+  console.log(john.sales, mary.sales); // 10 120
+  john.sell('Apple');      // Manager John sold Apple
+  mary.sell('Pomegrade');  // Manager Mary sold Pomegrade
+  console.log(john.sales, mary.sales); // 11 121
+</pre>
+
+<p>Что вообще происходит? Каждый объект в JavaScript обладает прототипом. Чтобы в этом убедиться, откройте консоль и введите <code class="highlighter-rouge">console.dir([]);</code>. Открыв свойство <code class="highlighter-rouge">__proto__</code> вы сможете увидеть все методы для работы с массивами, которые предусмотрены в вашем браузере. Очевидно, что каждый массив по-отдельности не снабжается всеми данными методами. Но, тем не менее, мы без проблем можем их использовать, например, <code class="highlighter-rouge">[1, 2, 3].map((n) =&gt; n * 2)</code>. Когда вы используете какой-либо метод массивов, например, <code class="highlighter-rouge">map</code> или <code class="highlighter-rouge">forEach</code>, то вы подразумеваете, что этот метод будет взят из прототипа функции-конструктора <code class="highlighter-rouge">Array</code>. Любой массив может использовать все методы, записанные в прототип конструктора <code class="highlighter-rouge">Array</code>, хотя у самого массива нет ни одного метода. Таким образом, любой объект получает возможность использовать все методы, записанные в прототипе его функции-конструктора.</p>
+
+<p>Само свойство <code class="highlighter-rouge">prototype</code> является не более чем обычным объектом, поэтому, если вы хотите сразу же записать несколько методов в прототип, то пример выше можно переписать следующим образом:</p>
+
+<pre>
+  const Manager = function(name, sales) {
+    this.name = name;
+    this.sales = sales;
+  };
+
+  Manager.prototype = {
+    sell: function(thing) {
+      this.sales += 1;
+      return 'Manager ' + this.name + ' sold ' + thing;
+    },
+    speak: function(word) {
+      return this.name + ' says ' + word;
+    }
+  };
+
+  const john = new Manager('John', 10);
+  const mary = new Manager('Mary', 120);
+
+  john.sell('Apple'); // Manager John sold Apple
+  mary.speak('Hello!'); // Mary says Hello!
+</pre>
+
+<p>Как и при работе внутри функции-конструктора <code class="highlighter-rouge">this</code> содержит ссылку на текущий экземпляр объекта, поэтому им можно пользоваться во всех объявляемых в прототипе методах.</p>
+
+<p>Теперь мы решили проблему: теперь все методы находятся в прототипе и могут быть использованы каждый созданным объектом, но при этом объявляются всего один раз.</p>
+
+<pre>
+  console.log(john.sell === mary.sell); // true
+  console.log(john.speak === mary.speak); // true
+</pre>
+
+<p>Подобным образом мы можем создать любое количество объектов с помощью функции конструктора <code class="highlighter-rouge">Manager</code> и оператора <code class="highlighter-rouge">new</code> и всем им будут доступны методы из прототипа <code class="highlighter-rouge">Manager</code>.</p>
+  <script>
+  "use strict"
+
+
+  </script>
+</body>
+</html>

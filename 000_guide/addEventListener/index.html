@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>addEventListener</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<!-- Ex 2 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>First example of an event listener</title>
+  <meta charset="utf-8">
+  <script>
+    addEventListener('click', function(evt) {
+        document.body.innerHTML += "Button clicked!<br>";
+    });
+</script>
+</head>
+<body>
+  <p>Click anywhere on this page</p>
+</body>
+</html>
+
+<!-- Ex 3 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Second example of an event listener</title>
+    <meta charset="utf-8">
+</head>
+<body>
+  <button id="myButton">Click me!</button>
+  <p></p>
+  <script>
+    var b = document.querySelector("#myButton");
+    b.addEventListener('click', function(evt) {
+      alert("Button clicked");
+    });
+  </script>
+</body>
+</html>
+
+<!-- Ex 4 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Third example of an event listener</title>
+    <meta charset="utf-8">
+      <script>
+         function processClick(evt) {
+          alert("Button clicked");
+        };
+  </script>
+</head>
+<body>
+  <button id="myButton" onclick="processClick(event);">Click me!</button>
+</body>
+</html>
+
+<!-- Ex 5 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Removing an event listener</title>
+    <meta charset="utf-8">
+</head>
+<body>
+  <button id="myButton">Click me, this will work only once!</button>
+  <p></p>
+  <script>
+    var b = document.querySelector("#myButton");
+    b.addEventListener('click', processClick);
+
+    function processClick(evt) {
+     alert("Button clicked, event listener removed, try to click on the button again: nothing will happen anymore!");
+      b.removeEventListener('click', processClick);
+    }
+  </script>
+</body>
+</html>
